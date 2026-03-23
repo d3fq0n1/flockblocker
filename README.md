@@ -43,6 +43,7 @@ This approach builds on published academic research in adversarial machine learn
 /adversarial     Adversarial patch research for OCR/neural net misclassification
 /legal           FOIA templates, open records requests, municipal contract analysis
 /distribution    Bumper sticker designs, organic spread strategy, print specs
+/hardware        Raspberry Pi hardware catalog, public accountability station specs
 /tools           Working code and scripts
 ```
 
