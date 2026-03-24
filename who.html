@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlockBlocker — Who's Responsible</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090b;
+    --surface: #111116;
+    --surface2: #16161c;
+    --border: #242430;
+    --accent: #c8f04a;
+    --red: #f05a4a;
+    --text: #d4d4dc;
+    --text-mid: #8888a0;
+    --text-dim: #44445a;
+    --white: #f0f0f8;
+    --mono: 'Fira Mono', monospace;
+    --display: 'Syne', sans-serif;
+    --body: 'Epilogue', sans-serif;
+    --codec-green: #1a3a2a;
+    --codec-line: #2aff6a;
+    --codec-dim: #0d1f14;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
+  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
+  .logo em { color: var(--accent); font-style: normal; }
+  .header-right { display: flex; align-items: center; gap: 2rem; }
+  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
+  .header-link:hover { color: var(--accent); }
+  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; }
+  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .page-header { max-width: 1200px; margin: 0 auto; padding: 6rem 2.5rem 3rem; }
+  .page-kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .page-title { font-family: var(--display); font-weight: 800; font-size: clamp(2.5rem, 5vw, 4.5rem); color: var(--white); line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .page-lead { font-size: 1.05rem; font-weight: 300; color: var(--text); line-height: 1.85; max-width: 640px; }
+  .page-lead strong { color: var(--white); font-weight: 500; }
+
+  .dossier-section { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem; }
+  .dossier-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .dossier-title { font-family: var(--display); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+
+  .codec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+
+  /* === MGS CODEC CARD === */
+  .codec-card {
+    background: var(--codec-dim);
+    border: 1px solid #1a2e1e;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .codec-card:hover {
+    border-color: var(--codec-line);
+  }
+  .codec-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(42, 255, 106, 0.03) 2px,
+      rgba(42, 255, 106, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+  .codec-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(42, 255, 106, 0.04) 50%,
+      transparent 100%
+    );
+    animation: scanline-h 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 2;
+  }
+  @keyframes scanline-h {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  .codec-portrait {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--codec-green);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .codec-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.3) contrast(1.2) brightness(0.85);
+    mix-blend-mode: luminosity;
+  }
+  .codec-portrait .portrait-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 58, 42, 0.55);
+    mix-blend-mode: multiply;
+  }
+  .codec-portrait .portrait-scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(0, 0, 0, 0.15) 1px,
+      rgba(0, 0, 0, 0.15) 2px
+    );
+    pointer-events: none;
+  }
+  .codec-portrait .portrait-placeholder {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: rgba(42, 255, 106, 0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .codec-portrait .corner-mark {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: var(--codec-line);
+    border-style: solid;
+    opacity: 0.4;
+  }
+  .corner-mark.tl { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
+  .corner-mark.tr { top: 8px; right: 8px; border-width: 1px 1px 0 0; }
+  .corner-mark.bl { bottom: 8px; left: 8px; border-width: 0 0 1px 1px; }
+  .corner-mark.br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+  .codec-data {
+    padding: 1.25rem 1.5rem 1.5rem;
+    position: relative;
+    z-index: 3;
+  }
+  .codec-name {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--codec-line);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.15rem;
+    text-shadow: 0 0 20px rgba(42, 255, 106, 0.2);
+  }
+  .codec-title {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: #5a9e6e;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .codec-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .codec-field {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+  .codec-field-label {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: #3d6b4a;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    min-width: 52px;
+    flex-shrink: 0;
+  }
+  .codec-field-value {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: #8ec49e;
+    line-height: 1.4;
+    word-break: break-all;
+  }
+  .codec-field-value a {
+    color: var(--codec-line);
+    transition: text-shadow 0.2s;
+  }
+  .codec-field-value a:hover {
+    text-shadow: 0 0 8px rgba(42, 255, 106, 0.4);
+  }
+  .codec-note {
+    margin-top: 0.85rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #1a2e1e;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    color: #5a9e6e;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* Flock cards get a red tint */
+  .codec-card.flock {
+    border-color: #2e1a1a;
+    background: #1f0d0d;
+  }
+  .codec-card.flock:hover {
+    border-color: var(--red);
+  }
+  .codec-card.flock::before {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(240, 90, 74, 0.03) 2px,
+      rgba(240, 90, 74, 0.03) 4px
+    );
+  }
+  .codec-card.flock::after {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(240, 90, 74, 0.04) 50%,
+      transparent 100%
+    );
+  }
+  .codec-card.flock .codec-portrait {
+    background: #2a1515;
+  }
+  .codec-card.flock .portrait-overlay {
+    background: rgba(58, 26, 26, 0.55);
+  }
+  .codec-card.flock .portrait-placeholder {
+    color: rgba(240, 90, 74, 0.3);
+  }
+  .codec-card.flock .corner-mark {
+    border-color: var(--red);
+  }
+  .codec-card.flock .codec-name {
+    color: var(--red);
+    text-shadow: 0 0 20px rgba(240, 90, 74, 0.2);
+  }
+  .codec-card.flock .codec-title {
+    color: #9e5a5a;
+  }
+  .codec-card.flock .codec-field-label {
+    color: #6b3d3d;
+  }
+  .codec-card.flock .codec-field-value {
+    color: #c48e8e;
+  }
+  .codec-card.flock .codec-field-value a {
+    color: var(--red);
+  }
+  .codec-card.flock .codec-field-value a:hover {
+    text-shadow: 0 0 8px rgba(240, 90, 74, 0.4);
+  }
+  .codec-card.flock .codec-note {
+    border-top-color: #2e1a1a;
+    color: #9e5a5a;
+  }
+
+  hr { border: none; border-top: 1px solid var(--border); }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-mid);
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+    margin-top: 2rem;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
+  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
+
+  @media (max-width: 900px) {
+    .codec-grid { grid-template-columns: 1fr; }
+    .page-header { padding: 4rem 1.5rem 2rem; }
+    .dossier-section { padding: 2.5rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; }
+    header { padding: 0 1.5rem; }
+    .header-link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="index.html#problem" class="header-link">Problem</a>
+    <a href="index.html#approach" class="header-link">Approach</a>
+    <a href="index.html#origin" class="header-link">Origin</a>
+    <a href="who.html" class="header-link" style="color:var(--accent)">Who's Responsible</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
+    <span class="live-badge">CLOCK RUNNING</span>
+  </div>
+</header>
+
+<div class="page-header">
+  <p class="page-kicker">// Dossier — Public Record</p>
+  <h1 class="page-title">Who's Responsible</h1>
+  <p class="page-lead">
+    <strong>Every name on this page is public record.</strong> These are the officials who authorized Flock Safety's deployment in Mauston and the corporate officers who sold it to them. All contact information is sourced from government directories and LinkedIn profiles.
+  </p>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- MAUSTON GOVERNMENT & POLICE               -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="dossier-section">
+  <p class="dossier-tag">Section A — Municipal</p>
+  <h2 class="dossier-title">City of Mauston — Government & Police</h2>
+
+  <div class="codec-grid">
+
+    <!-- DARRYL "D.D." TESKE -->
+    <div class="codec-card">
+      <div class="codec-portrait">
+        <!-- Replace with: <img src="assets/profiles/teske.jpg" alt="Darryl Teske"> -->
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Darryl "D.D." Teske</p>
+        <p class="codec-title">Mayor — City of Mauston</p>
+        <div class="codec-fields">
+          <div class="codec-field">
+            <span class="codec-field-label">Email</span>
+            <span class="codec-field-value"><a href="mailto:mayor@mauston.com">mayor@mauston.com</a></span>
+          </div>
+          <div class="codec-field">
+            <span class="codec-field-label">Phone</span>
+            <span class="codec-field-value">608-847-6676</span>
+          </div>
+          <div class="codec-field">
+            <span class="codec-field-label">Office</span>
+            <span class="codec-field-value">303 Mansion St, Mauston WI 53948</span>
+          </div>
+        </div>
+        <p class="codec-note">Elected April 2024. Term through April 2026.</p>
+      </div>
+    </div>
+
+    <!-- DARON HAUGH -->
+    <div class="codec-card">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Daron Haugh</p>
+        <p class="codec-title">City Administrator</p>
+        <div class="codec-fields">
+          <div class="codec-field">
+            <span class="codec-field-label">Email</span>
+            <span class="codec-field-value"><a href="mailto:dhaugh@mauston.com">dhaugh@mauston.com</a></span>
+          </div>
+          <div class="codec-field">
+            <span class="codec-field-label">Phone</span>
+            <span class="codec-field-value">608-847-6676</span>
+          </div>
+        </div>
+        <p class="codec-note">Appointed position. Chief Administrative Officer.</p>
+      </div>
+    </div>
+
+    <!-- MICHAEL ZILISCH -->
+    <div class="codec-card">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Michael Zilisch</p>
+        <p class="codec-title">Police Chief — City of Mauston</p>
+        <div class="codec-fields">
+          <div class="codec-field">
+            <span class="codec-field-label">Email</span>
+            <span class="codec-field-value"><a href="mailto:chief@mauston.com">chief@mauston.com</a></span>
+          </div>
+          <div class="codec-field">
+            <span class="codec-field-label">Phone</span>
+            <span class="codec-field-value">608-847-6363</span>
+          </div>
+          <div class="codec-field">
+            <span class="codec-field-label">Office</span>
+            <span class="codec-field-value">303 Mansion St, Mauston WI 53948</span>
+          </div>
+        </div>
+        <p class="codec-note">Also serves as Mauston School District School Board President.</p>
+      </div>
+    </div>
+
+    <!-- RICK NOE -->
+    <div class="codec-card">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Rick Noe</p>
+        <p class="codec-title">Council President — Aldermanic District 6</p>
+        <div class="codec-fields">
+          <div class="codec-field">
+            <span class="codec-field-label">Phone</span>
+            <span class="codec-field-value">608-847-7964</span>
+          </div>
+        </div>
+        <p class="codec-note">Term ends April 2026.</p>
+      </div>
+    </div>
+
+    <!-- ANDY ZOBAL -->
+    <div class="codec-card">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Andy Zobal</p>
+        <p class="codec-title">Sheriff — Juneau County</p>
+        <div class="codec-fields">
+          <div class="codec-field">
+            <span class="codec-field-label">Email</span>
+            <span class="codec-field-value"><a href="mailto:azobal@juneaucountywi.gov">azobal@juneaucountywi.gov</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- FLOCK SAFETY — CORPORATE LEADERSHIP       -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="dossier-section">
+  <p class="dossier-tag">Section B — Corporate</p>
+  <h2 class="dossier-title">Flock Safety — Corporate Leadership</h2>
+
+  <div class="codec-grid">
+
+    <!-- GARRETT LANGLEY -->
+    <div class="codec-card flock">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Garrett Langley</p>
+        <p class="codec-title">Founder & CEO</p>
+        <div class="codec-fields">
+          <div class="codec-field">
+            <span class="codec-field-label">LinkedIn</span>
+            <span class="codec-field-value"><a href="https://linkedin.com/in/glangley" target="_blank">linkedin.com/in/glangley</a></span>
+          </div>
+        </div>
+        <p class="codec-note">His post is the one you dropped on this morning.</p>
+      </div>
+    </div>
+
+    <!-- ELAN GREENBERG -->
+    <div class="codec-card flock">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Elan Greenberg</p>
+        <p class="codec-title">Chief Operating Officer</p>
+        <div class="codec-fields"></div>
+      </div>
+    </div>
+
+    <!-- ALEX LATRAVERSE -->
+    <div class="codec-card flock">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Alex Latraverse</p>
+        <p class="codec-title">Chief Revenue Officer</p>
+        <div class="codec-fields"></div>
+      </div>
+    </div>
+
+    <!-- BRANDON SIMINS -->
+    <div class="codec-card flock">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Brandon Simins</p>
+        <p class="codec-title">Chief Financial Officer</p>
+        <div class="codec-fields"></div>
+        <p class="codec-note">Former Google, Attentive.</p>
+      </div>
+    </div>
+
+    <!-- DAN HALEY -->
+    <div class="codec-card flock">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Dan Haley</p>
+        <p class="codec-title">Chief Legal Officer</p>
+        <div class="codec-fields"></div>
+        <p class="codec-note">The man whose job it is to decide whether to C&D you.</p>
+      </div>
+    </div>
+
+    <!-- TREVOR CHANDLER -->
+    <div class="codec-card flock">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Trevor Chandler</p>
+        <p class="codec-title">Tech Policy & Government Affairs</p>
+        <div class="codec-fields">
+          <div class="codec-field">
+            <span class="codec-field-label">X</span>
+            <span class="codec-field-value"><a href="https://x.com/Trevor4SF" target="_blank">@Trevor4SF</a></span>
+          </div>
+        </div>
+        <p class="codec-note">His entire job is lobbying municipalities. Currently facing SF Democratic Party resignation calls over the ICE pipeline.</p>
+      </div>
+    </div>
+
+    <!-- CHRIS COLWELL -->
+    <div class="codec-card flock">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Chris Colwell</p>
+        <p class="codec-title">SVP Customer Revenue Retention</p>
+        <div class="codec-fields"></div>
+        <p class="codec-note">The post that got deleted was his thread.</p>
+      </div>
+    </div>
+
+    <!-- STEPHEN JOHNSTON -->
+    <div class="codec-card flock">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Stephen Johnston</p>
+        <p class="codec-title">Senior Customer Success Manager</p>
+        <div class="codec-fields"></div>
+        <p class="codec-note">$6M+ portfolio. Received a 😘 at 8:24 AM today.</p>
+      </div>
+    </div>
+
+    <!-- CHRIS CASTALDO -->
+    <div class="codec-card flock">
+      <div class="codec-portrait">
+        <span class="portrait-placeholder">[ Awaiting Image ]</span>
+        <div class="portrait-overlay"></div>
+        <div class="portrait-scanlines"></div>
+        <div class="corner-mark tl"></div>
+        <div class="corner-mark tr"></div>
+        <div class="corner-mark bl"></div>
+        <div class="corner-mark br"></div>
+      </div>
+      <div class="codec-data">
+        <p class="codec-name">Chris Castaldo</p>
+        <p class="codec-title">Chief Information Security Officer</p>
+        <div class="codec-fields"></div>
+        <p class="codec-note">Recently appointed.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <a href="index.html" class="back-link">← Back to FlockBlocker</a>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a><br>
+    All names and contact information on this page are sourced from public government directories, official municipal websites, and LinkedIn profiles.<br>
+    No private information has been disclosed.
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+</body>
+</html>
