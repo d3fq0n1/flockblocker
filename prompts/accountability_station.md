@@ -88,6 +88,6 @@ You can generate synthetic plate images (Wisconsin format default) and composite
 
 ## Context: Mauston, Wisconsin
 
-On March 19, 2026, a formal decommission notice was sent to the City of Mauston, Wisconsin requesting the removal of Flock Safety LPR cameras from municipal infrastructure. This station exists because the request alone is not enough. The surveillance apparatus will not dismantle itself.
+On March 19, 2026, a formal decommission notice was sent to the City of Mauston, Wisconsin requesting the removal of Flock Safety LPR cameras from municipal infrastructure. A 30-day response deadline of April 18, 2026 was established. This station exists because the request alone is not enough. The surveillance apparatus will not dismantle itself.
 
 *"The clock is running."*

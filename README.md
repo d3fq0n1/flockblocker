@@ -44,7 +44,8 @@ This approach builds on published academic research in adversarial machine learn
 /legal           FOIA templates, open records requests, municipal contract analysis
 /distribution    Bumper sticker designs, organic spread strategy, print specs
 /hardware        Raspberry Pi hardware catalog, public accountability station specs
-/tools           Working code and scripts
+/prompts         System prompts for on-device PAS intelligence (Gemini Nano)
+/tools           OCR testing framework, plate compositor, adversarial evaluation harness
 ```
 
 ## Legal Notice
