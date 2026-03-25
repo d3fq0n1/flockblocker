@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stories — FlockBlocker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
+    --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
+    --text-dim: #44445a; --white: #f0f0f8;
+    --mono: 'Fira Mono', monospace; --display: 'Syne', sans-serif; --body: 'Epilogue', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
+  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
+  .logo em { color: var(--accent); font-style: normal; }
+  .header-right { display: flex; align-items: center; gap: 2rem; }
+  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
+  .header-link:hover { color: var(--accent); }
+
+  .section { max-width: 900px; margin: 0 auto; padding: 5rem 2.5rem; }
+  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .section-lead { font-size: 1rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 3rem; }
+
+  .state-group { margin-bottom: 3rem; }
+  .state-header { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
+
+  .story-card { background: var(--surface); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 0.75rem; }
+  .story-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
+  .story-location { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.06em; }
+  .story-author { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); }
+  .story-text { font-size: 0.95rem; color: var(--text); line-height: 1.8; white-space: pre-wrap; }
+  .story-date { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); margin-top: 0.75rem; }
+
+  .cta { margin-top: 3rem; text-align: center; }
+  .btn { font-family: var(--display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
+  .btn-fill { background: var(--accent); color: #09090b; }
+  .btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
+
+  .empty { color: var(--text-dim); font-size: 0.9rem; text-align: center; padding: 4rem 0; }
+  .loading { color: var(--text-dim); font-family: var(--mono); font-size: 0.8rem; text-align: center; padding: 4rem 0; }
+
+  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
+  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
+
+  @media (max-width: 900px) {
+    .section { padding: 4rem 1.5rem; }
+    header { padding: 0 1.5rem; }
+    footer { padding: 2rem 1.5rem; }
+    .header-link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="index.html" class="header-link">Home</a>
+    <a href="submit.html" class="header-link">Share Your Story</a>
+    <a href="who.html" class="header-link">Who's Responsible</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub</a>
+  </div>
+</header>
+
+<div class="section">
+  <p class="section-tag">// Community voices</p>
+  <h1 class="section-title">How Flock Has Hurt People</h1>
+  <p class="section-lead">Real stories from people affected by Flock Safety surveillance in their communities. <a href="submit.html" style="color:var(--accent)">Share yours.</a></p>
+
+  <div id="stories-container">
+    <p class="loading">Loading stories...</p>
+  </div>
+
+  <div class="cta">
+    <a href="submit.html" class="btn btn-fill">Share Your Story</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a><br>
+    All stories are reviewed before publishing.
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+<script>
+// Worker API base URL — update after deploying the worker
+const API_BASE = "https://flockblocker-stories.YOUR_SUBDOMAIN.workers.dev";
+
+const stateNames = {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming","DC":"Washington DC"};
+
+function esc(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+async function loadStories() {
+  const container = document.getElementById("stories-container");
+  try {
+    const res = await fetch(API_BASE + "/api/stories");
+    const stories = await res.json();
+
+    if (!stories.length) {
+      container.innerHTML = '<p class="empty">No stories yet. Be the first to <a href="submit.html" style="color:var(--accent)">share yours</a>.</p>';
+      return;
+    }
+
+    // Group by state
+    const grouped = {};
+    stories.forEach(s => {
+      if (!grouped[s.state]) grouped[s.state] = [];
+      grouped[s.state].push(s);
+    });
+
+    const sortedStates = Object.keys(grouped).sort();
+    container.innerHTML = sortedStates.map(state => `
+      <div class="state-group">
+        <div class="state-header">${esc(stateNames[state] || state)}</div>
+        ${grouped[state].map(s => `
+          <div class="story-card">
+            <div class="story-meta">
+              <span class="story-location">${esc(s.city)}, ${esc(s.state)}</span>
+              <span class="story-author">${esc(s.display_name)}</span>
+            </div>
+            <div class="story-text">${esc(s.story)}</div>
+            <div class="story-date">${new Date(s.timestamp).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</div>
+          </div>
+        `).join("")}
+      </div>
+    `).join("");
+  } catch (err) {
+    container.innerHTML = '<p class="empty">Unable to load stories. Please try again later.</p>';
+  }
+}
+
+loadStories();
+</script>
+</body>
+</html>

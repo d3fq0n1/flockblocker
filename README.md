@@ -46,7 +46,84 @@ This approach builds on published academic research in adversarial machine learn
 /hardware        Raspberry Pi hardware catalog, public accountability station specs
 /prompts         System prompts for on-device PAS intelligence (Gemini Nano)
 /tools           OCR testing framework, plate compositor, adversarial evaluation harness
+/worker          Cloudflare Worker for story submissions + moderation
 ```
+
+## Stories Feature — Deployment
+
+The site includes a "How has Flock hurt you?" submission system powered by Cloudflare Workers + KV.
+
+### Files
+
+| File | Purpose |
+|------|---------|
+| `submit.html` | Public submission form |
+| `stories.html` | Public display of approved stories, grouped by state |
+| `worker/worker.js` | Cloudflare Worker handling API routes |
+| `worker/wrangler.toml` | Wrangler deployment configuration |
+
+### Architecture
+
+- `POST /api/submit` — Public submission endpoint
+- `GET /api/stories` — Returns approved stories (public)
+- `GET /admin` — Password-protected moderation UI
+- `GET /api/admin/pending` — List pending submissions (auth required)
+- `POST /api/admin/moderate` — Approve/reject a submission (auth required)
+
+Submissions go into a moderation queue. Nothing is auto-published. Admin uses HTTP Basic Auth with a password stored as a Cloudflare Worker secret.
+
+### Deployment Steps
+
+1. **Install Wrangler** (if not already):
+   ```bash
+   npm install -g wrangler
+   wrangler login
+   ```
+
+2. **Create KV namespace**:
+   ```bash
+   cd worker
+   wrangler kv namespace create SUBMISSIONS
+   ```
+   Copy the `id` from the output into `wrangler.toml`.
+
+   For local dev, also create a preview namespace:
+   ```bash
+   wrangler kv namespace create SUBMISSIONS --preview
+   ```
+   Copy the `preview_id` into `wrangler.toml`.
+
+3. **Set the admin password**:
+   ```bash
+   wrangler secret put ADMIN_PASSWORD
+   ```
+   Enter a strong password when prompted.
+
+4. **Deploy the Worker**:
+   ```bash
+   wrangler deploy
+   ```
+   Note the deployed URL (e.g., `https://flockblocker-stories.YOUR_SUBDOMAIN.workers.dev`).
+
+5. **Update the API_BASE URL** in both `submit.html` and `stories.html`:
+   Replace `https://flockblocker-stories.YOUR_SUBDOMAIN.workers.dev` with your actual Worker URL.
+
+6. **Optional: Custom domain** — In the Cloudflare dashboard, add a custom domain route (e.g., `api.flockblocker.org`) pointing to the Worker.
+
+### Admin Access
+
+Navigate to `https://YOUR_WORKER_URL/admin` and authenticate with:
+- **Username:** `admin`
+- **Password:** the value you set via `wrangler secret put ADMIN_PASSWORD`
+
+### Data Storage
+
+All data lives in Cloudflare KV:
+- `submission:{uuid}` — Individual submission JSON
+- `index:pending` — Array of pending submission IDs
+- `index:approved` — Array of approved submission IDs
+
+IP addresses are SHA-256 hashed (truncated) for abuse detection. Raw IPs are never stored.
 
 ## Legal Notice
 
