@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flock's Censorship — FlockBlocker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
+    --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
+    --text-dim: #44445a; --white: #f0f0f8;
+    --mono: 'Fira Mono', monospace; --display: 'Syne', sans-serif; --body: 'Epilogue', sans-serif;
+    --amber: #f0a84a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
+  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
+  .logo em { color: var(--accent); font-style: normal; }
+  .header-right { display: flex; align-items: center; gap: 2rem; }
+  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
+  .header-link:hover { color: var(--accent); }
+  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; }
+  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .page-hero { padding: 6rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+  .page-hero-kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--amber); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .page-hero-title { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.95; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2rem; }
+  .page-hero-title .accent { color: var(--amber); }
+  .page-hero-lead { font-size: 1.1rem; font-weight: 300; color: var(--text); line-height: 1.85; max-width: 720px; }
+  .page-hero-lead strong { color: var(--white); font-weight: 500; }
+
+  hr { border: none; border-top: 1px solid var(--border); }
+
+  .section { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
+  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+
+  /* Evidence timeline */
+  .evidence-grid { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem; }
+
+  .evidence-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .evidence-card:hover { border-color: var(--amber); }
+
+  .evidence-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .evidence-number { font-family: var(--mono); font-size: 0.6rem; color: var(--amber); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .evidence-headline { font-family: var(--display); font-weight: 800; font-size: 1.4rem; color: var(--white); line-height: 1.15; letter-spacing: -0.01em; }
+  .evidence-date { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.08em; white-space: nowrap; padding-top: 0.3rem; }
+
+  .evidence-body { font-size: 0.92rem; color: var(--text); line-height: 1.85; margin-bottom: 1.5rem; }
+  .evidence-body strong { color: var(--white); font-weight: 500; }
+
+  .evidence-quote {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--amber);
+    line-height: 1.7;
+    margin: 1.2rem 0;
+    padding: 1rem 1.5rem;
+    background: rgba(240,168,74,0.06);
+    border-left: 3px solid var(--amber);
+  }
+
+  .evidence-screenshots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .screenshot-slot {
+    aspect-ratio: 16/10;
+    background: var(--surface2);
+    border: 1px dashed var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .screenshot-slot:hover { border-color: var(--amber); }
+  .screenshot-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+  }
+  .screenshot-slot .slot-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    z-index: 1;
+  }
+  .screenshot-slot .slot-desc {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .evidence-source { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.08em; margin-top: 1.2rem; }
+
+  /* Pattern callout */
+  .pattern-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    padding: 2rem 2.5rem;
+    margin-top: 3rem;
+  }
+  .pattern-box-title {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--amber);
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .pattern-box p {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--text-mid);
+    line-height: 1.9;
+  }
+  .pattern-box strong { color: var(--white); font-weight: 500; }
+
+  /* Stat row */
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
+  .stat-cell { background: var(--surface); padding: 2rem; text-align: center; }
+  .stat-cell-value { font-family: var(--display); font-weight: 800; font-size: 2.8rem; color: var(--white); line-height: 1; margin-bottom: 0.5rem; }
+  .stat-cell-value.warn { color: var(--amber); }
+  .stat-cell-label { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.6; }
+
+  .bottom-cta { text-align: center; padding: 4rem 2.5rem; max-width: 680px; margin: 0 auto; }
+  .bottom-cta-text { font-size: 1.05rem; color: var(--text); line-height: 1.85; margin-bottom: 2rem; }
+  .bottom-cta-text strong { color: var(--white); font-weight: 500; }
+  .btn { font-family: var(--display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
+  .btn-fill { background: var(--accent); color: #09090b; }
+  .btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--text-mid); color: var(--white); }
+  .btn-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
+  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
+
+  @media (max-width: 900px) {
+    .page-hero { padding: 4rem 1.5rem 3rem; }
+    .section { padding: 4rem 1.5rem; }
+    .evidence-header { flex-direction: column; gap: 0.5rem; }
+    .evidence-screenshots { grid-template-columns: 1fr; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    footer { padding: 2rem 1.5rem; }
+    header { padding: 0 1.5rem; }
+    .header-link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="index.html" class="header-link">Home</a>
+    <a href="harms.html" class="header-link">How Flock Hurts</a>
+    <a href="stories.html" class="header-link">Stories</a>
+    <a href="who.html" class="header-link">Who's Responsible</a>
+    <a href="censorship.html" class="header-link" style="color:var(--amber)">Censorship</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub</a>
+    <span class="live-badge">CLOCK RUNNING</span>
+  </div>
+</header>
+
+<div class="page-hero">
+  <p class="page-hero-kicker">// Suppression log — documented with screenshots</p>
+  <h1 class="page-hero-title">They Tried To <span class="accent">Silence</span> This</h1>
+  <p class="page-hero-lead">
+    When you can't win the argument, you delete it. Flock Safety and its employees have <strong>repeatedly attempted to suppress public criticism</strong> — deleting LinkedIn threads, removing comments, lying about post removal, and pressuring platforms to censor documented facts. Every attempt is logged here with screenshots. <strong>The internet remembers.</strong>
+  </p>
+</div>
+
+<hr>
+
+<div class="section">
+  <p class="section-tag">// 01 — The Record</p>
+  <h2 class="section-title">Suppression Timeline</h2>
+
+  <div class="evidence-grid">
+
+    <!-- INCIDENT 01 -->
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 01 — Post Deletion</p>
+          <p class="evidence-headline">Chris Colwell's LinkedIn Thread Deleted After Public Criticism</p>
+        </div>
+        <span class="evidence-date">Date: See Screenshot</span>
+      </div>
+      <p class="evidence-body">
+        Chris Colwell, Flock Safety's SVP of Customer Revenue Retention, posted a thread on LinkedIn. Public comments were added documenting Flock's surveillance harms — sourced, factual, and on the record. <strong>The entire thread was deleted.</strong> Not the comments. Not a single reply. The entire post — because the replies couldn't be controlled.
+      </p>
+      <div class="evidence-quote">
+        If your product can't survive public comments, the product is the problem.
+      </div>
+      <div class="evidence-screenshots">
+        <div class="screenshot-slot">
+          <span class="slot-label">[ Screenshot ]</span>
+          <span class="slot-desc">Original post before deletion</span>
+        </div>
+        <div class="screenshot-slot">
+          <span class="slot-label">[ Screenshot ]</span>
+          <span class="slot-desc">Comments that triggered deletion</span>
+        </div>
+      </div>
+      <p class="evidence-source">Source: LinkedIn, archived screenshots</p>
+    </div>
+
+    <!-- INCIDENT 02 -->
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 02 — Garrett Langley's Post</p>
+          <p class="evidence-headline">CEO's LinkedIn Post Hit With Documented Criticism — Comments Scrubbed</p>
+        </div>
+        <span class="evidence-date">Date: See Screenshot</span>
+      </div>
+      <p class="evidence-body">
+        Flock Safety CEO Garrett Langley posted on LinkedIn. Comments were added citing <strong>documented harms — the Texas abortion surveillance case, ICE data pipeline access, the lack of any opt-out mechanism</strong>. Rather than respond to the substance, the comments were removed. The post stayed up. The criticism disappeared. That's not moderation. That's suppression.
+      </p>
+      <div class="evidence-screenshots">
+        <div class="screenshot-slot">
+          <span class="slot-label">[ Screenshot ]</span>
+          <span class="slot-desc">Langley's original post</span>
+        </div>
+        <div class="screenshot-slot">
+          <span class="slot-label">[ Screenshot ]</span>
+          <span class="slot-desc">Comments before removal</span>
+        </div>
+        <div class="screenshot-slot">
+          <span class="slot-label">[ Screenshot ]</span>
+          <span class="slot-desc">Post after comments scrubbed</span>
+        </div>
+      </div>
+      <p class="evidence-source">Source: LinkedIn, archived screenshots</p>
+    </div>
+
+    <!-- INCIDENT 03 -->
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 03 — The Lie</p>
+          <p class="evidence-headline">Flock Claimed Posts Were Deleted — They Weren't</p>
+        </div>
+        <span class="evidence-date">Date: See Screenshot</span>
+      </div>
+      <p class="evidence-body">
+        When confronted about deleting critical comments, the response was a lie: <strong>claims that the posts had been removed</strong> when screenshots prove they were still live, or claims that no deletion occurred when cached versions show the original content is gone. The pattern is consistent — deny, deflect, and hope no one has receipts. <strong>We have receipts.</strong>
+      </p>
+      <div class="evidence-quote">
+        They said the posts were deleted. The screenshots say otherwise.
+      </div>
+      <div class="evidence-screenshots">
+        <div class="screenshot-slot">
+          <span class="slot-label">[ Screenshot ]</span>
+          <span class="slot-desc">Claim that posts were deleted</span>
+        </div>
+        <div class="screenshot-slot">
+          <span class="slot-label">[ Screenshot ]</span>
+          <span class="slot-desc">Proof posts were still live / previously existed</span>
+        </div>
+      </div>
+      <p class="evidence-source">Source: Direct communications, archived screenshots</p>
+    </div>
+
+    <!-- INCIDENT 04 -->
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 04 — Pattern of Suppression</p>
+          <p class="evidence-headline">Systematic Removal of Public Criticism Across Multiple Posts</p>
+        </div>
+        <span class="evidence-date">Ongoing</span>
+      </div>
+      <p class="evidence-body">
+        This is not a one-off. Across multiple LinkedIn posts by multiple Flock Safety employees, the same pattern repeats: <strong>public comment with sourced facts → comment disappears → post remains sanitized</strong>. The comments don't violate any platform policy. They cite public records, published reporting, and documented system behavior. They get removed because they're effective.
+      </p>
+      <p class="evidence-body">
+        A company that deletes criticism instead of addressing it is telling you everything you need to know about whether that criticism is accurate.
+      </p>
+      <div class="evidence-screenshots">
+        <div class="screenshot-slot">
+          <span class="slot-label">[ Screenshot ]</span>
+          <span class="slot-desc">Additional evidence of comment removal</span>
+        </div>
+        <div class="screenshot-slot">
+          <span class="slot-label">[ Screenshot ]</span>
+          <span class="slot-desc">Additional evidence of comment removal</span>
+        </div>
+      </div>
+      <p class="evidence-source">Source: LinkedIn, archived screenshots</p>
+    </div>
+
+  </div>
+
+  <div class="pattern-box">
+    <p class="pattern-box-title">The Playbook</p>
+    <p>
+      <strong>Step 1:</strong> Employee posts promotional content on LinkedIn.<br>
+      <strong>Step 2:</strong> Public comments cite documented harms — abortion surveillance, ICE pipeline, no opt-out.<br>
+      <strong>Step 3:</strong> Comments are deleted. Sometimes the entire post is deleted.<br>
+      <strong>Step 4:</strong> When confronted, the deletion is denied or blamed on the platform.<br>
+      <strong>Step 5:</strong> The cycle repeats on the next post.
+    </p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-cell">
+      <p class="stat-cell-value warn">0</p>
+      <p class="stat-cell-label">Substantive<br>responses</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value warn">0</p>
+      <p class="stat-cell-label">Facts<br>disputed</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value">100%</p>
+      <p class="stat-cell-label">Critical comments<br>removed</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value">100%</p>
+      <p class="stat-cell-label">Incidents<br>screenshotted</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section">
+  <p class="section-tag">// 02 — Why This Matters</p>
+  <h2 class="section-title">Censorship Is Confession</h2>
+
+  <div style="max-width:720px;">
+    <p style="font-size:0.95rem; color:var(--text); line-height:1.85; margin-bottom:1.5rem;">
+      A company confident in its product responds to criticism with data. A company confident in its mission engages with hard questions publicly. <strong>Flock Safety does neither.</strong>
+    </p>
+    <p style="font-size:0.95rem; color:var(--text); line-height:1.85; margin-bottom:1.5rem;">
+      Instead, they delete. They scrub. They lie about deleting. They remove sourced, factual comments that cite public records and published reporting. Not because the comments violate any policy — but because they <strong>document what Flock cannot defend</strong>.
+    </p>
+    <p style="font-size:0.95rem; color:var(--text); line-height:1.85; margin-bottom:1.5rem;">
+      Every deletion is an admission. Every scrubbed comment is a concession. Every lie about a removed post confirms that the facts in that post were accurate enough to be threatening.
+    </p>
+  </div>
+
+  <div style="margin-top:2.5rem; background:var(--surface2); border-left:3px solid var(--amber); padding:1.5rem 2rem; max-width:680px;">
+    <p style="font-family:var(--mono); font-size:0.82rem; color:var(--text-mid); line-height:1.9;">
+      <strong style="color:var(--amber);">This page exists because they deleted.</strong> Every screenshot on this page was taken before the deletion occurred. This is a permanent, public, version-controlled record. It cannot be scrubbed. It cannot be moderated away. It lives in a git repository. The commit history is the evidence chain.
+    </p>
+  </div>
+</div>
+
+<hr>
+
+<div class="bottom-cta">
+  <p class="bottom-cta-text">
+    <strong>If Flock Safety deletes your comment, screenshot it first.</strong> Public criticism of a surveillance company is not harassment — it's accountability. If you have evidence of Flock suppressing public discourse, submit it.
+  </p>
+  <div class="btn-row">
+    <a href="harms.html" class="btn btn-fill">See Documented Harms</a>
+    <a href="who.html" class="btn btn-outline">Who's Responsible</a>
+    <a href="submit.html" class="btn btn-outline">Share Your Story</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a><br>
+    Every item on this page is documented with screenshots taken before deletion occurred.<br>
+    This page is version-controlled. The git history <em>is</em> the evidence chain.
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+</body>
+</html>
