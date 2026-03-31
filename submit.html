@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share Your Story — FlockBlocker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
+    --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
+    --text-dim: #44445a; --white: #f0f0f8;
+    --mono: 'Fira Mono', monospace; --display: 'Syne', sans-serif; --body: 'Epilogue', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
+  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
+  .logo em { color: var(--accent); font-style: normal; }
+  .header-right { display: flex; align-items: center; gap: 2rem; }
+  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
+  .header-link:hover { color: var(--accent); }
+
+  .section { max-width: 700px; margin: 0 auto; padding: 5rem 2.5rem; }
+  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .section-lead { font-size: 1rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 3rem; }
+
+  .form-group { margin-bottom: 1.5rem; }
+  .form-label { display: block; font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .form-input, .form-select, .form-textarea {
+    width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text);
+    font-family: var(--body); font-size: 0.95rem; padding: 0.85rem 1rem; outline: none; transition: border-color 0.2s;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238888a0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; cursor: pointer; }
+  .form-select option { background: var(--surface); color: var(--text); }
+  .form-textarea { resize: vertical; min-height: 140px; line-height: 1.7; }
+  .char-count { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); text-align: right; margin-top: 0.3rem; }
+  .char-count.warn { color: var(--red); }
+  .form-hint { font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 0.3rem; }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .btn { font-family: var(--display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
+  .btn-fill { background: var(--accent); color: #09090b; }
+  .btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
+  .btn-fill:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .msg { padding: 1rem 1.5rem; margin-top: 1.5rem; font-family: var(--mono); font-size: 0.82rem; line-height: 1.6; }
+  .msg-success { background: var(--surface2); border-left: 3px solid var(--accent); color: var(--accent); }
+  .msg-error { background: var(--surface2); border-left: 3px solid var(--red); color: var(--red); }
+
+  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
+  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
+
+  @media (max-width: 900px) {
+    .section { padding: 4rem 1.5rem; }
+    .row { grid-template-columns: 1fr; }
+    header { padding: 0 1.5rem; }
+    footer { padding: 2rem 1.5rem; }
+    .header-link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="index.html" class="header-link">Home</a>
+    <a href="harms.html" class="header-link">How Flock Hurts</a>
+    <a href="stories.html" class="header-link">Stories</a>
+    <a href="who.html" class="header-link">Who's Responsible</a>
+    <a href="censorship.html" class="header-link">Censorship</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub</a>
+  </div>
+</header>
+
+<div class="section">
+  <p class="section-tag">// Share your experience</p>
+  <h1 class="section-title">How Has Flock Hurt You?</h1>
+  <p class="section-lead">Your story matters. Submissions are reviewed before publishing. Your email will never be displayed publicly.</p>
+
+  <form id="story-form">
+    <div class="row">
+      <div class="form-group">
+        <label class="form-label" for="state">State</label>
+        <select class="form-select" id="state" name="state" required>
+          <option value="">Select your state</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="city">City</label>
+        <input class="form-input" type="text" id="city" name="city" required maxlength="100" placeholder="Your city">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="story">Your Story</label>
+      <textarea class="form-textarea" id="story" name="story" required maxlength="1000" placeholder="How has Flock Safety surveillance affected you or your community?"></textarea>
+      <div class="char-count" id="char-count">0 / 1000</div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label class="form-label" for="display_name">Display Name <span style="color:var(--text-dim)">(optional)</span></label>
+        <input class="form-input" type="text" id="display_name" name="display_name" maxlength="50" placeholder="Anonymous">
+        <p class="form-hint">Leave blank to post as "Anonymous"</p>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="email">Email <span style="color:var(--text-dim)">(optional, never shown)</span></label>
+        <input class="form-input" type="email" id="email" name="email" maxlength="200" placeholder="you@example.com">
+        <p class="form-hint">Only used if we need to contact you</p>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill" id="submit-btn">Submit Your Story</button>
+    <div id="form-msg"></div>
+  </form>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a><br>
+    All submissions are reviewed before publishing.
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+<script>
+// Worker API base URL — update after deploying the worker
+const API_BASE = "https://flockblocker-stories.YOUR_SUBDOMAIN.workers.dev";
+
+const states = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY","DC"];
+const stateNames = {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming","DC":"Washington DC"};
+const sel = document.getElementById("state");
+states.forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = stateNames[s]; sel.appendChild(o); });
+
+const storyEl = document.getElementById("story");
+const countEl = document.getElementById("char-count");
+storyEl.addEventListener("input", () => {
+  const len = storyEl.value.length;
+  countEl.textContent = len + " / 1000";
+  countEl.classList.toggle("warn", len > 900);
+});
+
+document.getElementById("story-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById("submit-btn");
+  const msg = document.getElementById("form-msg");
+  btn.disabled = true;
+  btn.textContent = "Submitting...";
+  msg.innerHTML = "";
+
+  const body = {
+    state: document.getElementById("state").value,
+    city: document.getElementById("city").value,
+    story: storyEl.value,
+    display_name: document.getElementById("display_name").value,
+    email: document.getElementById("email").value,
+  };
+
+  try {
+    const res = await fetch(API_BASE + "/api/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (data.success) {
+      msg.innerHTML = '<div class="msg msg-success">' + data.message + '</div>';
+      document.getElementById("story-form").reset();
+      countEl.textContent = "0 / 1000";
+    } else {
+      msg.innerHTML = '<div class="msg msg-error">' + (data.error || "Submission failed.") + '</div>';
+    }
+  } catch (err) {
+    msg.innerHTML = '<div class="msg msg-error">Network error. Please try again.</div>';
+  }
+  btn.disabled = false;
+  btn.textContent = "Submit Your Story";
+});
+</script>
+</body>
+</html>
