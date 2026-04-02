@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Rebellion — Cities Rejecting Flock Safety — FlockBlocker</title>
+<meta name="description" content="A running record of municipalities canceling, pausing, or rejecting Flock Safety ALPR contracts. 30+ cities and counting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
+    --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
+    --text-dim: #44445a; --white: #f0f0f8;
+    --mono: 'Fira Mono', monospace; --display: 'Syne', sans-serif; --body: 'Epilogue', sans-serif;
+    --green: #4af0a0; --amber: #f0a84a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
+  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
+  .logo em { color: var(--accent); font-style: normal; }
+  .header-right { display: flex; align-items: center; gap: 2rem; }
+  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
+  .header-link:hover { color: var(--accent); }
+  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; }
+  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  hr { border: none; border-top: 1px solid var(--border); }
+
+  /* Hero */
+  .page-hero { padding: 6rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+  .page-hero-kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--green); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .page-hero-title { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.95; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2rem; }
+  .page-hero-title .accent { color: var(--green); }
+  .page-hero-lead { font-size: 1.1rem; font-weight: 300; color: var(--text); line-height: 1.85; max-width: 720px; }
+  .page-hero-lead strong { color: var(--white); font-weight: 500; }
+  .page-hero-lead em { color: var(--green); font-style: normal; }
+
+  /* Counter */
+  .counter-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin: 3rem 0; }
+  .counter-cell { background: var(--surface); padding: 2rem; text-align: center; }
+  .counter-value { font-family: var(--display); font-weight: 800; font-size: 3.2rem; color: var(--white); line-height: 1; margin-bottom: 0.5rem; }
+  .counter-value.green { color: var(--green); }
+  .counter-value.red { color: var(--red); }
+  .counter-value.amber { color: var(--amber); }
+  .counter-label { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.6; }
+
+  /* Sections */
+  .section { max-width: 1200px; margin: 0 auto; padding: 4rem 2.5rem; }
+  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+
+  /* City table */
+  .city-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+  .city-table th {
+    font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.15em;
+    text-transform: uppercase; text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+    position: sticky; top: 56px; background: var(--bg); z-index: 10;
+  }
+  .city-table td {
+    padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top;
+  }
+  .city-table tr:hover td { background: var(--surface); }
+  .city-name { font-family: var(--display); font-weight: 700; font-size: 0.95rem; color: var(--white); }
+  .city-state { font-family: var(--mono); font-size: 0.68rem; color: var(--text-mid); }
+  .city-date { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); white-space: nowrap; }
+  .city-detail { font-size: 0.85rem; color: var(--text); line-height: 1.7; }
+  .city-detail strong { color: var(--white); font-weight: 500; }
+  .city-source { font-family: var(--mono); font-size: 0.58rem; color: var(--text-dim); letter-spacing: 0.06em; margin-top: 0.3rem; }
+  .city-source a { color: var(--text-mid); transition: color 0.2s; }
+  .city-source a:hover { color: var(--accent); }
+
+  /* Status badges */
+  .status {
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.25rem 0.6rem; display: inline-block; white-space: nowrap;
+  }
+  .status-canceled { background: rgba(74,240,160,0.1); color: var(--green); border: 1px solid rgba(74,240,160,0.2); }
+  .status-paused { background: rgba(240,168,74,0.1); color: var(--amber); border: 1px solid rgba(240,168,74,0.2); }
+  .status-challenged { background: rgba(240,90,74,0.1); color: var(--red); border: 1px solid rgba(240,90,74,0.2); }
+  .status-lawsuit { background: rgba(200,240,74,0.1); color: var(--accent); border: 1px solid rgba(200,240,74,0.2); }
+
+  /* Legal / regulatory section */
+  .legal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-bottom: 2rem; }
+  .legal-card { background: var(--surface); padding: 2rem; }
+  .legal-card.full { grid-column: 1 / -1; }
+  .legal-tag { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.8rem; }
+  .legal-headline { font-family: var(--display); font-weight: 800; font-size: 1.2rem; color: var(--white); line-height: 1.15; margin-bottom: 0.8rem; }
+  .legal-body { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
+  .legal-body strong { color: var(--white); font-weight: 500; }
+  .legal-body em { color: var(--accent); font-style: normal; }
+
+  /* Quote callout */
+  .quote-block {
+    background: var(--surface2); border-left: 3px solid var(--red); padding: 1.5rem 2rem;
+    margin: 2rem 0; max-width: 720px;
+  }
+  .quote-block p { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); line-height: 1.8; }
+  .quote-block strong { color: var(--red); font-weight: 500; }
+  .quote-block .attribution { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.5rem; }
+
+  /* Insight box */
+  .insight-block { background: var(--surface2); border-left: 3px solid var(--accent); padding: 1.5rem 2rem; margin: 2.5rem 0; max-width: 720px; }
+  .insight-block p { font-family: var(--mono); font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; }
+  .insight-block strong { color: var(--accent); font-weight: 500; }
+
+  /* CTA */
+  .bottom-cta { text-align: center; padding: 4rem 2.5rem; max-width: 680px; margin: 0 auto; }
+  .bottom-cta-text { font-size: 1.05rem; color: var(--text); line-height: 1.85; margin-bottom: 2rem; }
+  .bottom-cta-text strong { color: var(--white); font-weight: 500; }
+  .btn { font-family: var(--display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
+  .btn-fill { background: var(--accent); color: #09090b; }
+  .btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--text-mid); color: var(--white); }
+  .btn-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
+  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
+
+  @media (max-width: 900px) {
+    .page-hero { padding: 4rem 1.5rem 3rem; }
+    .section { padding: 3rem 1.5rem; }
+    .counter-row { grid-template-columns: 1fr 1fr; }
+    .legal-grid { grid-template-columns: 1fr; }
+    .city-table { font-size: 0.85rem; }
+    .city-table th:nth-child(3), .city-table td:nth-child(3) { display: none; }
+    footer { padding: 2rem 1.5rem; }
+    header { padding: 0 1.5rem; }
+    .header-link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="index.html" class="header-link">Home</a>
+    <a href="harms.html" class="header-link">How Flock Hurts</a>
+    <a href="rebellion.html" class="header-link" style="color:var(--green)">The Rebellion</a>
+    <a href="who.html" class="header-link">Who's Responsible</a>
+    <a href="censorship.html" class="header-link">Censorship</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub</a>
+    <span class="live-badge">CLOCK RUNNING</span>
+  </div>
+</header>
+
+<div class="page-hero">
+  <p class="page-hero-kicker">// Municipal defections — running count</p>
+  <h1 class="page-hero-title">The <span class="accent">Rebellion</span></h1>
+  <p class="page-hero-lead">
+    Cities are canceling Flock Safety contracts faster than Flock can sign new ones. This page tracks every municipality that has <em>canceled</em>, <em>paused</em>, <em>rejected</em>, or <em>challenged</em> a Flock deployment — plus the lawsuits and regulatory actions closing in. <strong>All public record. All sourced.</strong>
+  </p>
+
+  <div class="counter-row">
+    <div class="counter-cell">
+      <p class="counter-value green">32+</p>
+      <p class="counter-label">Cities canceled<br>or paused</p>
+    </div>
+    <div class="counter-cell">
+      <p class="counter-value red">1.6M</p>
+      <p class="counter-label">Unauthorized<br>searches (SF alone)</p>
+    </div>
+    <div class="counter-cell">
+      <p class="counter-value amber">$2,500+</p>
+      <p class="counter-label">Per-violation<br>damages sought</p>
+    </div>
+    <div class="counter-cell">
+      <p class="counter-value">67</p>
+      <p class="counter-label">Cameras found<br>streaming unprotected</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 1: LEGAL & REGULATORY ACTIONS          -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-tag">01 — Legal & Regulatory</p>
+  <h2 class="section-title">The Lawsuits Are Here</h2>
+
+  <div class="legal-grid">
+    <div class="legal-card full">
+      <p class="legal-tag">Class Action — Filed Feb 26, 2026</p>
+      <p class="legal-headline">Gibbs Mura + Milberg v. Flock Safety — San Francisco Superior Court</p>
+      <p class="legal-body">
+        SFPD's Flock cameras were searched by <strong>out-of-state agencies 1.6 million times in just 7 months</strong>. Los Altos: over 1 million times. The lawsuit alleges systematic violation of data sharing restrictions. Plaintiffs seek <em>$2,500+ per violation</em>. At 1.6 million violations, do the math.
+      </p>
+    </div>
+    <div class="legal-card">
+      <p class="legal-tag">State AG Action</p>
+      <p class="legal-headline">California Attorney General Sues El Cajon</p>
+      <p class="legal-body">
+        The California AG sued the City of El Cajon for <strong>Flock data sharing violations</strong> — sharing ALPR data without proper agreements, oversight, or resident notification. This is the state's top law enforcement officer saying Flock's data sharing model breaks the law.
+      </p>
+    </div>
+    <div class="legal-card">
+      <p class="legal-tag">Federal — U.S. Senate</p>
+      <p class="legal-headline">Senator Wyden Calls for FTC Investigation</p>
+      <p class="legal-body">
+        After <strong>67 Flock cameras were found streaming live video without passwords</strong> (January 2026), Senator Ron Wyden formally called for an FTC investigation into Flock Safety's security practices. These are cameras deployed on public streets, capturing every passing vehicle, with zero authentication.
+      </p>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <p><strong>"Coordinated attack"</strong> ... <strong>"lawless"</strong> ... <strong>"terroristic"</strong></p>
+    <p>That's how Flock CEO Garrett Langley described citizens asking their own city councils to cancel surveillance contracts. The Staunton, VA police chief was so alarmed by the email that the city terminated their Flock contract in response.</p>
+    <p class="attribution">— Garrett Langley, CEO, Flock Safety, email to Staunton PD Chief</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 2: MUNICIPAL DEFECTIONS TABLE          -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-tag">02 — Municipal Defections</p>
+  <h2 class="section-title">Cities Walking Away</h2>
+
+  <table class="city-table">
+    <thead>
+      <tr>
+        <th>City</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td>
+          <span class="city-name">Staunton</span><br>
+          <span class="city-state">Virginia</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2026</td>
+        <td>
+          <span class="city-detail">Terminated contract after Flock CEO Langley sent an email calling DeFlock activists <strong>"terroristic"</strong> and their actions <strong>"lawless."</strong> The police chief found the characterization so alarming they pulled the plug.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Mountain View</span><br>
+          <span class="city-state">California</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2026</td>
+        <td>
+          <span class="city-detail">Council voted to end Flock deployment following community opposition over data sharing and ICE access concerns.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Ithaca</span><br>
+          <span class="city-state">New York</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2026</td>
+        <td>
+          <span class="city-detail">Rejected Flock proposal after public pressure campaign highlighting surveillance scope and data retention concerns.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">South Pasadena</span><br>
+          <span class="city-state">California</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2026</td>
+        <td>
+          <span class="city-detail">City council voted to discontinue Flock Safety cameras after residents raised privacy and civil liberties objections.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Austin</span><br>
+          <span class="city-state">Texas</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2025–2026</td>
+        <td>
+          <span class="city-detail">Declined to renew Flock contract amid broader concerns about automated surveillance and data sharing with federal agencies.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Eugene</span><br>
+          <span class="city-state">Oregon</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2025–2026</td>
+        <td>
+          <span class="city-detail">Council rejected Flock proposal following community advocacy against automated license plate surveillance.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Flagstaff</span><br>
+          <span class="city-state">Arizona</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2025–2026</td>
+        <td>
+          <span class="city-detail">Declined Flock Safety deployment after privacy advocates presented data on the surveillance network's national reach.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Cambridge</span><br>
+          <span class="city-state">Massachusetts</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2025–2026</td>
+        <td>
+          <span class="city-detail">Rejected Flock Safety proposal consistent with the city's existing surveillance technology ordinance.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Evanston</span><br>
+          <span class="city-state">Illinois</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2025–2026</td>
+        <td>
+          <span class="city-detail">Canceled contract. <strong>Flock was caught reinstalling cameras after cancellation.</strong> City issued a cease-and-desist to force removal.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Bend</span><br>
+          <span class="city-state">Oregon</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2025–2026</td>
+        <td>
+          <span class="city-detail">Council voted against Flock Safety deployment after community pushback on surveillance infrastructure.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Santa Cruz</span><br>
+          <span class="city-state">California</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2025–2026</td>
+        <td>
+          <span class="city-detail">Declined to proceed with Flock deployment following public comment period dominated by privacy concerns.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Verona</span><br>
+          <span class="city-state">Wisconsin</span>
+        </td>
+        <td><span class="status status-canceled">Canceled</span></td>
+        <td class="city-date">2025</td>
+        <td>
+          <span class="city-detail">Declined to renew after public pressure. <strong>Same state as Mauston.</strong> The precedent is 30 miles away.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Oxnard</span><br>
+          <span class="city-state">California</span>
+        </td>
+        <td><span class="status status-paused">Suspended</span></td>
+        <td class="city-date">2026</td>
+        <td>
+          <span class="city-detail">Suspended Flock deployment pending review of data sharing practices and community input.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Berkeley</span><br>
+          <span class="city-state">California</span>
+        </td>
+        <td><span class="status status-paused">$2M Delayed</span></td>
+        <td class="city-date">2026</td>
+        <td>
+          <span class="city-detail">$2 million Flock contract delayed following council concerns about surveillance scope, data retention, and federal access.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Troy</span><br>
+          <span class="city-state">Michigan</span>
+        </td>
+        <td><span class="status status-challenged">Disputed</span></td>
+        <td class="city-date">Apr 2026</td>
+        <td>
+          <span class="city-detail">Flock contract challenged at council meeting. Outcome pending.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Chesterfield</span><br>
+          <span class="city-state">Missouri</span>
+        </td>
+        <td><span class="status status-challenged">Challenged</span></td>
+        <td class="city-date">Apr 2026</td>
+        <td>
+          <span class="city-detail">Flock deployment challenged at city council. Residents citing national pattern of data misuse.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="city-name">Mauston</span><br>
+          <span class="city-state">Wisconsin</span>
+        </td>
+        <td><span class="status status-challenged">Challenged</span></td>
+        <td class="city-date">Mar 19, 2026</td>
+        <td>
+          <span class="city-detail"><strong>This campaign.</strong> Formal demand letter sent March 19. 30-day deadline expires April 18. No substantive response from any city official. You're reading the result.</span>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div class="insight-block">
+    <p>
+      <strong>This list is incomplete.</strong> New cancellations are being reported weekly. If your city has canceled, paused, or challenged a Flock Safety contract, submit it. Every documented defection makes the next one easier.
+    </p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 3: NATIONAL COVERAGE                   -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-tag">03 — National Coverage</p>
+  <h2 class="section-title">Who's Watching Flock</h2>
+
+  <div class="legal-grid">
+    <div class="legal-card">
+      <p class="legal-tag">Electronic Frontier Foundation</p>
+      <p class="legal-headline">EFF</p>
+      <p class="legal-body">
+        The EFF has published extensive documentation of Flock Safety's surveillance network, data sharing practices, and the absence of meaningful oversight. They are actively tracking the municipal rebellion.
+      </p>
+    </div>
+    <div class="legal-card">
+      <p class="legal-tag">American Civil Liberties Union</p>
+      <p class="legal-headline">ACLU</p>
+      <p class="legal-body">
+        The ACLU has raised alarms about ALPR networks — including Flock's — functioning as mass surveillance infrastructure with no individual consent, inadequate data retention limits, and open federal access vectors.
+      </p>
+    </div>
+    <div class="legal-card">
+      <p class="legal-tag">National Public Radio</p>
+      <p class="legal-headline">NPR</p>
+      <p class="legal-body">
+        NPR has covered the growing backlash against Flock Safety's ALPR network, including the wave of municipal cancellations and the class action lawsuit over unauthorized data sharing.
+      </p>
+    </div>
+    <div class="legal-card">
+      <p class="legal-tag">U.S. Senate</p>
+      <p class="legal-headline">Senator Ron Wyden (D-OR)</p>
+      <p class="legal-body">
+        Called for FTC investigation after 67 Flock cameras were found streaming without authentication. A sitting U.S. Senator is on record calling Flock's security practices into question.
+      </p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 4: THE PATTERN                         -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-tag">04 — The Pattern</p>
+  <h2 class="section-title">How Every Flock Contract Dies</h2>
+
+  <div style="max-width:720px;">
+    <p style="font-size:0.95rem; color:var(--text); line-height:1.85; margin-bottom:1.5rem;">
+      It's the same sequence everywhere. A resident asks a question. The city ignores it. The resident documents the silence. The documentation reaches the council. The council realizes they signed a contract they didn't read for a system they don't control that feeds data to agencies they can't name. The contract dies.
+    </p>
+    <p style="font-size:0.95rem; color:var(--text); line-height:1.85; margin-bottom:1.5rem;">
+      <strong>Flock's business model depends on city councils not paying attention.</strong> The moment attention arrives, the contract becomes indefensible. That's why 32+ cities have walked away. That's why Flock calls the attention "terroristic."
+    </p>
+    <p style="font-size:0.95rem; color:var(--text); line-height:1.85; margin-bottom:1.5rem;">
+      Mauston signed the same contract all these cities signed. The same data sharing architecture. The same ICE access vector. The same absent oversight. The only difference is that Mauston hasn't canceled yet.
+    </p>
+  </div>
+
+  <div class="insight-block">
+    <p>
+      <strong>To Mauston's city officials:</strong> You are not the first city to face this question. You will not be the last. But you are running out of time to answer it on your own terms. The deadline is April 18, 2026. After that, the answer becomes part of the public record whether you provide it or not.
+    </p>
+  </div>
+</div>
+
+<hr>
+
+<div class="bottom-cta">
+  <p class="bottom-cta-text">
+    <strong>Is your city on this list?</strong> If your municipality has canceled, paused, or is debating a Flock Safety contract, we want to document it. Every city that walks away makes it easier for the next one.
+  </p>
+  <div class="btn-row">
+    <a href="submit.html" class="btn btn-fill">Submit Your City</a>
+    <a href="index.html" class="btn btn-outline">Back to FlockBlocker</a>
+    <a href="who.html" class="btn btn-outline">Who's Responsible</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a><br>
+    All information on this page is sourced from public reporting, city council records, and court filings.<br>
+    Page last updated: April 2, 2026.
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+</body>
+</html>
