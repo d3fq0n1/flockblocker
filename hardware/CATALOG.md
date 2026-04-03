@@ -1,6 +1,6 @@
 # Raspberry Pi 5 Hardware Catalog
 
-Recommended hardware from CanaKit and Raspberry Pi Foundation for Public Accountability Station builds.
+Hardware catalog for Public Accountability Station builds. Components sourced from CanaKit and Raspberry Pi Foundation.
 
 ---
 

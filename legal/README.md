@@ -5,19 +5,27 @@ FOIA templates, open records request frameworks, and municipal contract analysis
 ## Scope
 
 - FOIA / open records request templates for Flock Safety contracts and data sharing agreements
-- Analysis of municipal contracts with Flock Safety (terms, duration, data retention, access)
-- Legal landscape around adversarial examples and plate-adjacent visual modifications
-- State-by-state plate obstruction statutes and what they actually cover
-- Case law on automated surveillance, Fourth Amendment implications, and data collection
+- Municipal contract analysis: terms, duration, data retention, inter-agency access provisions, auto-renewal clauses
+- Legal landscape of adversarial examples and plate-adjacent visual modifications
+- State-by-state plate obstruction statutes and what they actually prohibit
+- Case law on automated surveillance, Fourth Amendment implications, and warrantless mass data collection
 
 ## Resources
 
-- Municipal contract databases (many Flock contracts are public record)
+- Municipal contract databases (Flock contracts are public record in most jurisdictions)
 - EFF and ACLU surveillance technology analyses
+- Georgetown Law Center on Privacy & Technology — ALPR documentation
 - State open records request procedures and response timelines
 
 ## Key Legal Distinctions
 
-- Physically obscuring or altering a license plate: illegal in all 50 states
-- Placing legal visual elements (stickers, frames, decorations) near but not on a plate: varies by state
-- Adversarial patterns that affect machine perception but not human readability: largely unaddressed in statute
+- **Physically obscuring or altering a license plate:** Illegal in all 50 states.
+- **Placing legal visual elements (stickers, frames, decorations) near but not on a plate:** Varies by state. No blanket prohibition exists.
+- **Adversarial patterns that affect machine perception but not human readability:** Largely unaddressed in statute. No court has ruled on whether a bumper sticker that causes an OCR misread constitutes plate obstruction.
+
+## Relevant Developments
+
+- Multiple ACLU and EFF legal challenges have targeted ALPR programs incorporating Flock technology, typically on Fourth Amendment grounds.
+- Virginia has been a focal point for ALPR litigation given the state's data privacy statutes. A 2023–2024 case challenged Fairfax County Police Department's use of Flock cameras.
+- Flock's standard contracts include automatic renewal clauses requiring 60–90 days written notice to cancel. Multiple municipalities have been locked into renewals they did not intend to authorize. This is a contractual mechanism, not an oversight.
+- Several municipalities have rejected or removed Flock cameras after public pressure: Norfolk, VA; San Francisco, CA; Indian Harbour Beach, FL among documented cases.
