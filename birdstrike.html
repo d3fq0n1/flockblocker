@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BirdStrike Template — Fight Flock in Your City — FlockBlocker</title>
+<meta name="description" content="A step-by-step field manual for challenging Flock Safety ALPR deployments in your municipality. Templates, evidence, and strategy — ready to deploy.">
+<meta property="og:title" content="BirdStrike Template — Fight Flock in Your City">
+<meta property="og:description" content="The field manual for challenging Flock Safety surveillance in your municipality. FOIA templates, demand letters, council scripts, and documented evidence. Pick it up. Run it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://flockblocker.org/birdstrike.html">
+<meta property="og:image" content="https://flockblocker.org/og-birdstrike.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BirdStrike Template — Fight Flock in Your City">
+<meta name="twitter:description" content="The field manual for challenging Flock Safety surveillance in your municipality. FOIA templates, demand letters, council scripts. Pick it up. Run it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
+    --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
+    --text-dim: #44445a; --white: #f0f0f8;
+    --mono: 'Fira Mono', monospace; --display: 'Black Ops One', cursive; --body: 'Epilogue', sans-serif;
+    --strike: #f0a84a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
+  .logo { font-family: var(--display); font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
+  .logo em { color: var(--accent); font-style: normal; }
+  .header-right { display: flex; align-items: center; gap: 2rem; }
+  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
+  .header-link:hover { color: var(--accent); }
+  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; }
+  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  hr { border: none; border-top: 1px solid var(--border); }
+
+  .page-hero { padding: 6rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+  .page-hero-kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--strike); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .page-hero-title { font-family: var(--display); font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.95; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2rem; }
+  .page-hero-title .accent { color: var(--strike); }
+  .page-hero-lead { font-size: 1.1rem; font-weight: 300; color: var(--text); line-height: 1.85; max-width: 720px; }
+  .page-hero-lead strong { color: var(--white); font-weight: 500; }
+  .page-hero-lead em { color: var(--strike); font-style: normal; }
+
+  .tier-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin: 3rem 0; }
+  .tier-nav-item { background: var(--surface); padding: 1.5rem; text-align: center; transition: background 0.2s; cursor: pointer; display: block; }
+  .tier-nav-item:hover { background: var(--surface2); }
+  .tier-nav-item .tier-num { font-family: var(--display); font-size: 1.8rem; color: var(--white); line-height: 1; margin-bottom: 0.5rem; }
+  .tier-nav-item .tier-label { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.6; }
+  .tier-nav-item .tier-time { font-family: var(--mono); font-size: 0.55rem; color: var(--strike); letter-spacing: 0.08em; margin-top: 0.3rem; }
+
+  .section { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
+  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-family: var(--display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+  .section-body { font-size: 1rem; line-height: 1.9; color: var(--text); max-width: 680px; }
+  .section-body strong { color: var(--white); font-weight: 500; }
+  .section-body em { color: var(--strike); font-style: normal; }
+  .section-body a { color: var(--strike); border-bottom: 1px solid rgba(240,168,74,0.3); transition: border-color 0.2s; }
+  .section-body a:hover { border-color: var(--strike); }
+
+  .step-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 2.5rem; }
+  .step { background: var(--surface); padding: 2rem; }
+  .step-num { font-family: var(--display); font-size: 0.85rem; color: var(--strike); margin-bottom: 0.5rem; }
+  .step-title { font-family: var(--display); font-size: 1.1rem; color: var(--white); margin-bottom: 1rem; }
+  .step-body { font-size: 0.92rem; line-height: 1.85; color: var(--text); }
+  .step-body strong { color: var(--white); font-weight: 500; }
+  .step-body a { color: var(--strike); border-bottom: 1px solid rgba(240,168,74,0.3); }
+  .step-body a:hover { border-color: var(--strike); }
+  .step-body ul { margin: 0.75rem 0 0 1.2rem; }
+  .step-body li { margin-bottom: 0.4rem; }
+
+  .template-block { background: var(--surface2); border-left: 3px solid var(--strike); padding: 2rem; margin: 2rem 0; position: relative; }
+  .template-label { font-family: var(--mono); font-size: 0.62rem; color: var(--strike); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+  .template-text { font-family: var(--mono); font-size: 0.8rem; color: var(--text-mid); line-height: 1.9; white-space: pre-wrap; }
+  .template-text .var { color: var(--strike); font-weight: 500; }
+  .copy-btn { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; background: transparent; border: 1px solid var(--border); color: var(--text-mid); padding: 0.4rem 0.8rem; cursor: pointer; transition: all 0.2s; }
+  .copy-btn:hover { border-color: var(--strike); color: var(--strike); }
+
+  .evidence-callout { background: var(--surface); border: 1px solid var(--border); padding: 1.5rem 2rem; margin: 1.5rem 0; }
+  .evidence-callout .ev-label { font-family: var(--mono); font-size: 0.58rem; color: var(--red); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .evidence-callout .ev-body { font-size: 0.88rem; line-height: 1.8; color: var(--text); }
+  .evidence-callout .ev-body strong { color: var(--white); font-weight: 500; }
+  .evidence-callout .ev-source { font-family: var(--mono); font-size: 0.55rem; color: var(--text-dim); margin-top: 0.5rem; }
+
+  .resource-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--border); margin-top: 2rem; }
+  .resource-card { background: var(--surface); padding: 1.5rem; }
+  .resource-card .rc-name { font-family: var(--display); font-size: 0.95rem; color: var(--white); margin-bottom: 0.5rem; }
+  .resource-card .rc-body { font-size: 0.82rem; color: var(--text-mid); line-height: 1.7; }
+  .resource-card .rc-link { font-family: var(--mono); font-size: 0.65rem; color: var(--strike); margin-top: 0.5rem; display: inline-block; }
+
+  .insight-block { margin-top: 2rem; background: var(--surface2); border-left: 3px solid var(--accent); padding: 1.5rem 2rem; max-width: 680px; }
+  .insight-block p { font-family: var(--mono); font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; }
+  .insight-block p strong { color: var(--accent); font-weight: 500; }
+
+  .btn { font-family: var(--display); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
+  .btn-fill { background: var(--strike); color: #09090b; }
+  .btn-fill:hover { background: #ffbe5a; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--text-mid); color: var(--white); }
+
+  .cancel-wave { margin-top: 2rem; }
+  .cancel-wave .cw-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .cancel-wave .cw-city { font-family: var(--mono); font-size: 0.68rem; color: var(--text-mid); background: var(--surface); border: 1px solid var(--border); padding: 0.3rem 0.7rem; display: inline-block; }
+
+  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
+  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-right { font-family: var(--display); font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
+
+  @media print {
+    header, .tier-nav, .copy-btn, footer, .btn { display: none !important; }
+    body { background: #fff; color: #111; }
+    .page-hero, .section { padding: 1rem 0; }
+    .template-block { border-left: 2px solid #333; background: #f5f5f5; }
+    .template-text { color: #111; }
+    .section-title, .page-hero-title, .step-title { color: #111; }
+    a { color: #111; text-decoration: underline; }
+  }
+
+  @media (max-width: 900px) {
+    .tier-nav { grid-template-columns: repeat(2, 1fr); }
+    .section { padding: 4rem 1.5rem; }
+    .page-hero { padding: 4rem 1.5rem 3rem; }
+    header { padding: 0 1.5rem; }
+    .header-link { display: none; }
+    footer { padding: 2rem 1.5rem; }
+    .resource-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="index.html" class="header-link">Home</a>
+    <a href="harms.html" class="header-link">How Flock Hurts</a>
+    <a href="rebellion.html" class="header-link">The Rebellion</a>
+    <a href="who.html" class="header-link">Who's Responsible</a>
+    <a href="censorship.html" class="header-link">Censorship</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub &#x2197;</a>
+    <span class="live-badge">CLOCK RUNNING</span>
+  </div>
+</header>
+
+<div class="page-hero">
+  <p class="page-hero-kicker">// Field Manual &mdash; v1.0</p>
+  <h1 class="page-hero-title">BIRD<span class="accent">STRIKE</span></h1>
+  <p class="page-hero-lead">
+    <strong>A replicable playbook for challenging Flock Safety in your city.</strong>
+    Proven in Mauston, Wisconsin. Built to scale. Everything you need &mdash; FOIA templates, demand letters, council scripts, documented evidence &mdash; on one page. <em>Pick it up. Run it.</em>
+  </p>
+</div>
+
+<div class="tier-nav">
+  <a href="#tier1" class="tier-nav-item">
+    <div class="tier-num">01</div>
+    <div class="tier-label">Any Citizen</div>
+    <div class="tier-time">15 minutes</div>
+  </a>
+  <a href="#tier2" class="tier-nav-item">
+    <div class="tier-num">02</div>
+    <div class="tier-label">Engaged Citizen</div>
+    <div class="tier-time">1&ndash;2 hours</div>
+  </a>
+  <a href="#tier3" class="tier-nav-item">
+    <div class="tier-num">03</div>
+    <div class="tier-label">Campaign Operator</div>
+    <div class="tier-time">Ongoing</div>
+  </a>
+  <a href="#tier4" class="tier-nav-item">
+    <div class="tier-num">04</div>
+    <div class="tier-label">Technical Contributor</div>
+    <div class="tier-time">Variable</div>
+  </a>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- TIER 1: ANY CITIZEN (15 minutes) -->
+<!-- ============================================================ -->
+<div class="section" id="tier1">
+  <p class="section-tag">Tier 01 &mdash; Any Citizen &mdash; 15 Minutes</p>
+  <h2 class="section-title">Learn. Check. File.</h2>
+  <p class="section-body">
+    You do not need technical skills. You do not need a lawyer. You need a browser, fifteen minutes, and a willingness to ask your government a question it does not want to answer.
+  </p>
+
+  <div class="step-grid">
+    <div class="step">
+      <p class="step-num">Step 1</p>
+      <p class="step-title">Understand What Flock Is</p>
+      <div class="step-body">
+        Flock Safety sells automated license plate readers (ALPRs) to police departments. Every camera captures your plate, vehicle description, and timestamp &mdash; every time you pass. This data feeds a <strong>centralized national database</strong> controlled by a private corporation in Atlanta. It is not a local camera network. It is a mass surveillance system with documented ICE access, no warrant requirement, and audit logs that show queries justified by a single word.
+      </div>
+      <div class="evidence-callout">
+        <p class="ev-label">Documented</p>
+        <p class="ev-body">A Texas sheriff queried the Flock database with the justification <strong>"had an abortion, search for female"</strong> &mdash; an actual logged query in the system.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">Step 2</p>
+      <p class="step-title">Check If Your City Has Flock</p>
+      <div class="step-body">
+        <a href="https://deflock.me" target="_blank">DeFlock.me</a> maintains a crowdsourced map of <strong>76,000+ license plate reader locations</strong> nationwide, including Flock cameras. Search your city. Check your city council minutes and police department press releases for mentions of "Flock Safety," "ALPR," or "license plate reader." Check budget line items for Flock payments. If your city has them, you have standing to act.
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">Step 3</p>
+      <p class="step-title">File a Public Records Request</p>
+      <div class="step-body">
+        Every U.S. state has a public records law (FOIA at the federal level, state equivalents everywhere else). You have a statutory right to request government documents. File the following request with your city clerk, police department, and city administrator. This is the single most important action you can take &mdash; it creates a legal paper trail and forces the city to respond on the record.
+      </div>
+    </div>
+  </div>
+
+  <div class="template-block">
+    <div class="template-label">
+      <span>FOIA / Open Records Request Template</span>
+      <button class="copy-btn" onclick="copyTemplate(this)">Copy</button>
+    </div>
+    <div class="template-text">Subject: Public Records Request &mdash; Flock Safety / ALPR Deployment
+
+To: <span class="var">[CITY CLERK / RECORDS CUSTODIAN]</span>
+    <span class="var">[CITY/TOWN NAME]</span>, <span class="var">[STATE]</span>
+
+Dear <span class="var">[NAME OR TITLE]</span>,
+
+Pursuant to <span class="var">[YOUR STATE'S PUBLIC RECORDS STATUTE &mdash; e.g., Wisconsin Public Records Law, Wis. Stat. &sect; 19.31-19.39]</span>, I am requesting copies of the following records related to any automated license plate reader (ALPR) system operated by or on behalf of <span class="var">[CITY/TOWN NAME]</span>, including but not limited to systems provided by Flock Safety, Inc.:
+
+1. The complete contract or agreement between <span class="var">[CITY/TOWN NAME]</span> and Flock Safety, Inc. (or any ALPR vendor), including all exhibits, amendments, data retention schedules, and data-sharing provisions.
+
+2. The authorizing ordinance, resolution, or official action approving the deployment of ALPR technology, including any public notice or hearing records.
+
+3. Audit logs or access records showing which law enforcement agencies (local, state, federal, or out-of-state) have queried or accessed ALPR data collected within <span class="var">[CITY/TOWN NAME]</span> jurisdiction.
+
+4. Any correspondence between <span class="var">[CITY/TOWN NAME]</span> officials and Flock Safety, Inc. regarding the deployment, renewal, data sharing, or data retention policies.
+
+5. Budget documents, invoices, or grant applications related to ALPR procurement and operation, including any GIVE, COPS, or other federal/state grant funding used.
+
+I request that responsive records be provided in electronic format where available. If any records are withheld, I request a written explanation citing the specific statutory exemption relied upon.
+
+Please respond within the timeframe required by <span class="var">[YOUR STATE'S STATUTE]</span>. If you have questions regarding this request, I can be reached at <span class="var">[YOUR EMAIL]</span>.
+
+Thank you for your attention to this matter.
+
+<span class="var">[YOUR FULL NAME]</span>
+<span class="var">[YOUR ADDRESS]</span>
+<span class="var">[DATE]</span></div>
+  </div>
+
+  <div class="insight-block">
+    <p><strong>Tip:</strong> Many states require a response within 5&ndash;10 business days. If you receive no response, that itself becomes evidence of non-compliance. Document every deadline and every silence. The paper trail is the weapon.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- TIER 2: ENGAGED CITIZEN (1-2 hours) -->
+<!-- ============================================================ -->
+<div class="section" id="tier2">
+  <p class="section-tag">Tier 02 &mdash; Engaged Citizen &mdash; 1&ndash;2 Hours</p>
+  <h2 class="section-title">Demand. Testify. Notify.</h2>
+  <p class="section-body">
+    You filed the records request. Now put your name on it. A formal demand letter to every relevant official, public testimony at a council meeting, and a tip to local media. This is where one concerned resident becomes a problem they cannot ignore.
+  </p>
+
+  <div class="step-grid">
+    <div class="step">
+      <p class="step-num">Step 4</p>
+      <p class="step-title">Send the Demand Letter</p>
+      <div class="step-body">
+        One email. Every relevant official. CC your state legislator. You are a constituent exercising your First Amendment right to petition for redress of grievances. Include your name and address &mdash; you are not an anonymous complaint, you are a voter with standing. Set a 30-day response deadline. State that you will document both response and non-response publicly.
+      </div>
+    </div>
+  </div>
+
+  <div class="template-block">
+    <div class="template-label">
+      <span>Formal Demand Letter Template</span>
+      <button class="copy-btn" onclick="copyTemplate(this)">Copy</button>
+    </div>
+    <div class="template-text">Subject: Formal Inquiry &mdash; Flock Safety ALPR Deployment in <span class="var">[CITY NAME]</span>
+
+To: <span class="var">[MAYOR NAME]</span>, Mayor of <span class="var">[CITY NAME]</span>
+    <span class="var">[CITY ADMINISTRATOR NAME]</span>, City Administrator
+    <span class="var">[POLICE CHIEF NAME]</span>, Chief of Police
+    <span class="var">[SHERIFF NAME]</span>, <span class="var">[COUNTY]</span> County Sheriff
+CC: <span class="var">[STATE SENATOR/REP NAME]</span>, <span class="var">[DISTRICT]</span>
+
+Dear <span class="var">[MAYOR LAST NAME]</span>, <span class="var">[ADMINISTRATOR LAST NAME]</span>, <span class="var">[CHIEF LAST NAME]</span>, and <span class="var">[SHERIFF LAST NAME]</span>,
+
+I am writing as a resident of <span class="var">[CITY NAME]</span> (<span class="var">[YOUR ADDRESS]</span>) regarding the deployment of Flock Safety automated license plate reader (ALPR) cameras within our jurisdiction.
+
+I have reviewed publicly available information about Flock Safety deployments nationally and have significant concerns about our city's exposure to legal liability, data security risks, and constitutional violations. Specifically:
+
+DATA SHARING VIOLATIONS
+&mdash; San Francisco PD: Flock cameras searched by out-of-state agencies 1.6 million times in 7 months (Gibbs Mura v. Flock Safety, SF Superior Court, Feb 2026).
+&mdash; Mountain View, CA: ATF, Air Force, and GSA Inspector General had unauthorized access. City shut down all cameras Feb 2026.
+&mdash; Oxnard, CA: Police suspended all cameras after a "vendor-based issue" enabled nationwide queries despite California-only settings.
+&mdash; El Cajon, CA: California Attorney General sued the city for sharing Flock data with federal and out-of-state agencies.
+&mdash; Evanston, IL: State audit found Flock violated state law by allowing CBP access. Flock reinstalled cameras after cancellation without city permission.
+
+SECURITY FAILURES
+&mdash; 67 Flock cameras were found streaming to the internet without passwords (Jan 2026). Live footage viewable, archives accessible, data deletable. Senator Wyden called for FTC investigation.
+&mdash; Flock camera credentials appeared on Russian cybercrime forums following the breach.
+
+DOCUMENTED MISUSE
+&mdash; A Texas sheriff queried the Flock database with justification "had an abortion, search for female."
+&mdash; A Wisconsin police chief was criminally charged for using surveillance infrastructure for personal purposes.
+
+These are not hypothetical risks. They are documented incidents from jurisdictions using the same Flock Safety platform deployed in <span class="var">[CITY NAME]</span>.
+
+I respectfully request the following within 30 days of this letter:
+
+1. The full text of <span class="var">[CITY NAME]</span>'s contract with Flock Safety, including data retention, third-party access, and indemnification provisions.
+2. The authorizing ordinance or resolution, including records of any public hearing or vote.
+3. Audit logs showing which agencies have queried ALPR data collected in our jurisdiction.
+4. The city's stated position on contract renewal or decommissioning.
+
+I will document both your response and any non-response as part of a public accountability record at <span class="var">[YOUR CAMPAIGN URL or "a public-facing website"]</span>.
+
+As of April 2026, more than 30 municipalities have canceled, paused, or rejected Flock Safety contracts &mdash; including Mountain View CA, Ithaca NY (unanimous), Evanston IL, Austin TX, Eugene OR, and Berkeley CA. A class action lawsuit (Gibbs Mura v. Flock Safety) is active in San Francisco Superior Court.
+
+I look forward to your response.
+
+Respectfully,
+
+<span class="var">[YOUR FULL NAME]</span>
+<span class="var">[YOUR ADDRESS]</span>
+<span class="var">[YOUR EMAIL]</span>
+<span class="var">[DATE]</span></div>
+  </div>
+
+  <div class="evidence-callout">
+    <p class="ev-label">Why CC your state legislator</p>
+    <p class="ev-body">This creates a legislative record. It puts the municipality on notice that the issue has been escalated beyond local channels. It also gives your state representative visibility into a constituent concern &mdash; several state-level ALPR privacy bills have originated from exactly this kind of constituent outreach.</p>
+  </div>
+
+  <div class="step-grid" style="margin-top:2.5rem;">
+    <div class="step">
+      <p class="step-num">Step 5</p>
+      <p class="step-title">Testify at a City Council Meeting</p>
+      <div class="step-body">
+        Every municipality has a public comment period. Find your city's meeting schedule (usually on the city website or posted at city hall). Show up. Bring printed copies of your demand letter and the documented harms. Speak for three minutes. Be calm, specific, and on the record. This is your First Amendment right &mdash; speech and assembly &mdash; and it creates an official public record that cannot be deleted.
+      </div>
+    </div>
+  </div>
+
+  <div class="template-block">
+    <div class="template-label">
+      <span>City Council Public Comment Script &mdash; 3 Minutes</span>
+      <button class="copy-btn" onclick="copyTemplate(this)">Copy</button>
+    </div>
+    <div class="template-text">Good evening, Mayor <span class="var">[NAME]</span> and members of the council. My name is <span class="var">[YOUR NAME]</span>, and I live at <span class="var">[YOUR ADDRESS/NEIGHBORHOOD]</span>.
+
+I'm here tonight about the Flock Safety cameras deployed in <span class="var">[CITY NAME]</span>. These are automated license plate readers that photograph every vehicle that passes them &mdash; recording the plate number, vehicle description, location, and timestamp. This data feeds a centralized database controlled by a private corporation in Atlanta, Georgia.
+
+I want to share three facts about this system that I believe the council and residents should be aware of.
+
+First &mdash; data sharing. In San Francisco, Flock cameras were searched by out-of-state agencies 1.6 million times in just seven months. In Mountain View, California, the ATF, Air Force, and GSA Inspector General had unauthorized access. That city shut down all its Flock cameras in February of this year. The California Attorney General has sued El Cajon for illegal data sharing through Flock.
+
+Second &mdash; security. In January 2026, security researchers found 67 Flock cameras streaming to the internet without passwords. Live footage was viewable. A month of archives was accessible. Senator Wyden called for an FTC investigation. Flock called it a "limited misconfiguration."
+
+Third &mdash; misuse. A Texas sheriff queried the Flock database with the justification &mdash; and this is a direct quote from the audit log &mdash; "had an abortion, search for female." Right here in Wisconsin, a police chief was criminally charged for using surveillance infrastructure for personal purposes.
+
+More than 30 municipalities have now canceled, paused, or rejected Flock contracts. A class action lawsuit is active in San Francisco.
+
+I have submitted a formal records request and a demand letter to this office. I am asking the council to disclose the full Flock contract, provide audit logs showing who has accessed our data, and state a position on renewal.
+
+I will be documenting both your response and any non-response publicly.
+
+Thank you for your time.</div>
+  </div>
+
+  <div class="step-grid" style="margin-top:2.5rem;">
+    <div class="step">
+      <p class="step-num">Step 6</p>
+      <p class="step-title">Tip Local Media</p>
+      <div class="step-body">
+        One paragraph. Not a press release. Not advocacy. Just the facts and a link. Let journalists do journalism. Send to your local newspaper editor, any local radio stations, and regional TV news tip lines.
+      </div>
+    </div>
+  </div>
+
+  <div class="template-block">
+    <div class="template-label">
+      <span>Local Media Tip Template</span>
+      <button class="copy-btn" onclick="copyTemplate(this)">Copy</button>
+    </div>
+    <div class="template-text">Subject: Tip &mdash; Flock Safety surveillance cameras in <span class="var">[CITY NAME]</span>
+
+Hi,
+
+I wanted to make you aware that <span class="var">[CITY NAME]</span> has deployed Flock Safety automated license plate readers that feed a centralized national database. Nationally, more than 30 cities have canceled or paused their Flock contracts due to unauthorized data sharing with federal agencies, security breaches, and documented misuse. A class action lawsuit was filed in February 2026.
+
+I have filed a formal records request and demand letter with <span class="var">[CITY NAME]</span> officials. Documentation is available at <span class="var">[YOUR URL or flockblocker.org/birdstrike.html]</span>.
+
+Happy to answer questions or provide additional context.
+
+<span class="var">[YOUR NAME]</span>
+<span class="var">[YOUR PHONE/EMAIL]</span></div>
+  </div>
+
+  <div class="template-block">
+    <div class="template-label">
+      <span>State Legislator CC Notification</span>
+      <button class="copy-btn" onclick="copyTemplate(this)">Copy</button>
+    </div>
+    <div class="template-text">Subject: Constituent Concern &mdash; Flock Safety ALPR Deployment in <span class="var">[CITY NAME]</span>
+
+Dear <span class="var">[SENATOR/REPRESENTATIVE LAST NAME]</span>,
+
+I am a constituent in <span class="var">[DISTRICT]</span>. I have submitted a formal inquiry to <span class="var">[CITY NAME]</span> officials regarding the city's deployment of Flock Safety automated license plate reader cameras.
+
+I am CC'ing your office because this issue involves potential violations of state privacy law, questions about federal data sharing (including ICE access), and documented security vulnerabilities that affect your constituents' civil liberties.
+
+Nationally, more than 30 municipalities have canceled or paused Flock contracts. Several states &mdash; including California, Virginia, Montana, and Vermont &mdash; have enacted specific ALPR privacy statutes. I would welcome any guidance from your office on <span class="var">[STATE]</span>'s current legal framework governing ALPR data collection and sharing.
+
+My full demand letter to <span class="var">[CITY NAME]</span> is attached/available at <span class="var">[URL]</span>.
+
+Thank you for your service.
+
+<span class="var">[YOUR FULL NAME]</span>
+<span class="var">[YOUR ADDRESS]</span>
+<span class="var">[YOUR PHONE/EMAIL]</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- TIER 3: CAMPAIGN OPERATOR (Ongoing) -->
+<!-- ============================================================ -->
+<div class="section" id="tier3">
+  <p class="section-tag">Tier 03 &mdash; Campaign Operator &mdash; Ongoing</p>
+  <h2 class="section-title">Sustain. Escalate. Connect.</h2>
+  <p class="section-body">
+    You sent the letter. You testified. Now sustain the pressure. Build a public record that cannot be ignored. Connect with the national movement. <em>Scale is the weapon.</em>
+  </p>
+
+  <div class="step-grid">
+    <div class="step">
+      <p class="step-num">Step 7</p>
+      <p class="step-title">Document the Silence</p>
+      <div class="step-body">
+        If your 30-day deadline passes without response, that itself is the story. "City officials refused to respond to a resident's formal inquiry about surveillance cameras tracking their movements." Document every non-response with dates. Screenshot every ignored email. This becomes evidence of institutional non-accountability.
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">Step 8</p>
+      <p class="step-title">Build a Local Campaign Site</p>
+      <div class="step-body">
+        A single-page static website documenting your city's Flock deployment. <a href="https://pages.github.com" target="_blank">GitHub Pages</a> is free. Include:
+        <ul>
+          <li>Your city's Flock deployment status and known camera locations</li>
+          <li>Your demand letter (redact your home address if desired)</li>
+          <li>Documented national harms (copy from this page)</li>
+          <li>The city's response or documented non-response with dates</li>
+          <li>Links to <a href="https://flockblocker.org" target="_blank">flockblocker.org</a> and <a href="https://deflock.me" target="_blank">DeFlock.me</a></li>
+        </ul>
+        The site does not need to be sophisticated. It needs to exist, be public, and be linkable. When you comment on Flock's LinkedIn posts or email your city council, you link to it. It is your permanent public record.
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">Step 9</p>
+      <p class="step-title">Run the LinkedIn Campaign</p>
+      <div class="step-body">
+        Flock's sales pipeline lives on LinkedIn. Their customers are city officials and police chiefs, all on LinkedIn. Flock's corporate account posts constantly. Comment on their posts with documented criticism and link to your local campaign site. This places counter-narrative directly in front of their prospects.
+        <ul>
+          <li>Be factual. Cite sources. Link evidence.</li>
+          <li>Flock deletes critical comments &mdash; <a href="https://flockblocker.org/censorship.html" target="_blank">documented with screenshots</a>. Screenshot your comments before and after.</li>
+          <li>Every deletion is more evidence of suppression. Document and republish.</li>
+        </ul>
+      </div>
+      <div class="evidence-callout">
+        <p class="ev-label">Documented</p>
+        <p class="ev-body">Flock executive Rahul Sidhu publicly promised critical comments would not be deleted. They were deleted anyway. CEO Garrett Langley called the DeFlock mapping project "terroristic" in a Forbes interview. He sent unsolicited email to a Virginia police chief calling critics part of a "coordinated attack" &mdash; <strong>Staunton terminated their contract in direct response</strong>.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">Step 10</p>
+      <p class="step-title">Target the Leverage Points</p>
+      <div class="step-body">
+        Three moments of maximum leverage in any municipality:
+        <ul>
+          <li><strong>Contract renewal date.</strong> Every Flock contract has one. City councils are most responsive to constituent pressure in the weeks before a renewal vote. Get this date from your FOIA request.</li>
+          <li><strong>Budget season.</strong> When your city's annual budget is being drafted, Flock's line item is vulnerable. Show up to budget hearings.</li>
+          <li><strong>Election cycles.</strong> City council and mayoral races create accountability pressure. Ask candidates their position on Flock. Challenge incumbents who authorized the deployment.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">Step 11</p>
+      <p class="step-title">Escalate and Connect</p>
+      <div class="step-body">
+        You are not alone. At least 30 municipalities have canceled or paused Flock contracts. A class action is active. National organizations are engaged.
+        <ul>
+          <li><strong>File complaints:</strong> State Attorney General consumer protection division. State open records ombudsman if FOIA requests were ignored. FCC if applicable.</li>
+          <li><strong>Contact the <a href="https://www.aclu.org" target="_blank">ACLU</a>:</strong> National ALPR campaign active. State chapters may provide local support.</li>
+          <li><strong>Contact the <a href="https://www.eff.org" target="_blank">EFF</a>:</strong> Already fought and defeated Flock's C&amp;D against DeFlock.me. Active on ALPR issues nationally.</li>
+          <li><strong>Certified mail:</strong> For municipalities that ignore email, a certified letter with return receipt creates an undeniable paper trail.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-block" style="margin-top:2.5rem;">
+    <p><strong>The math:</strong> Flock has 5,000+ contracted municipalities. If 1% face an organized BirdStrike campaign, that is 50 simultaneous pressure points. Flock's legal team cannot respond to 50 campaigns. Their comms team cannot suppress 50 LinkedIn commenters. Their sales team cannot reassure 50 nervous city councils. Scale is the weapon.</p>
+  </div>
+
+  <h3 style="font-family:var(--display);color:var(--white);margin-top:3rem;margin-bottom:1.5rem;font-size:1.3rem;">The Cancellation Wave &mdash; 30+ Cities and Counting</h3>
+  <div class="cancel-wave">
+    <div class="cw-row">
+      <span class="cw-city">Mountain View, CA</span>
+      <span class="cw-city">Ithaca, NY (unanimous)</span>
+      <span class="cw-city">South Pasadena, CA</span>
+      <span class="cw-city">Austin, TX</span>
+      <span class="cw-city">Eugene, OR</span>
+      <span class="cw-city">Springfield, OR</span>
+      <span class="cw-city">Flagstaff, AZ</span>
+      <span class="cw-city">Cambridge, MA</span>
+      <span class="cw-city">Staunton, VA</span>
+      <span class="cw-city">Evanston, IL</span>
+      <span class="cw-city">Bend, OR</span>
+      <span class="cw-city">Santa Cruz, CA</span>
+      <span class="cw-city">Oxnard, CA (suspended)</span>
+      <span class="cw-city">Hillsborough, NC</span>
+      <span class="cw-city">Saranac Lake, NY</span>
+      <span class="cw-city">Troy, NY</span>
+      <span class="cw-city">Berkeley, CA</span>
+      <span class="cw-city">Chesterfield, VA</span>
+      <span class="cw-city">Denver, CO</span>
+      <span class="cw-city">Seattle, WA</span>
+    </div>
+    <p style="font-family:var(--mono);font-size:0.65rem;color:var(--text-dim);margin-top:1rem;letter-spacing:0.08em;">
+      Source: <a href="https://stateofsurveillance.org" target="_blank" style="color:var(--text-mid);">stateofsurveillance.org</a> &mdash; This list grows weekly. <a href="https://flockblocker.org/rebellion.html" style="color:var(--strike);">Full tracker &rarr;</a>
+    </p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- TIER 4: TECHNICAL CONTRIBUTOR -->
+<!-- ============================================================ -->
+<div class="section" id="tier4">
+  <p class="section-tag">Tier 04 &mdash; Technical Contributor &mdash; Variable</p>
+  <h2 class="section-title">Research. Build. Contribute.</h2>
+  <p class="section-body">
+    For those with technical skills. FlockBlocker maintains an open-source adversarial research framework targeting the data layer of ALPR systems. This is published academic security research &mdash; the same discipline presented at NeurIPS, CVPR, USENIX Security, and ICML. No unauthorized access. No vehicle code violations. Legitimate adversarial ML research against deployed surveillance infrastructure.
+  </p>
+
+  <div class="step-grid">
+    <div class="step">
+      <p class="step-num">The Core Thesis</p>
+      <p class="step-title">Target the Data, Not the Camera</p>
+      <div class="step-body">
+        Most LPR countermeasures target optics &mdash; IR LEDs, reflective coatings, plate covers. These fail against modern camera tuning or create legal exposure. FlockBlocker targets the <strong>data layer</strong>: generating confident misreads that enter the database as ground truth and corrupt pattern-of-life analysis. A confident misread is more destructive to system integrity than a failed read, because failed reads get flagged while confident misreads propagate silently.
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">Research Vectors</p>
+      <p class="step-title">Four Active Attack Surfaces</p>
+      <div class="step-body">
+        <ul>
+          <li><strong>Character Confusion:</strong> Exploiting OCR ambiguity (0/O/D, 1/I/L, 8/B, 5/S). Visual modifications that cause the system to confidently read the wrong character.</li>
+          <li><strong>Segmentation Boundary:</strong> Targeting character isolation &mdash; elements that cause the OCR pipeline to merge, split, or miscount characters in the plate string.</li>
+          <li><strong>IR Phantom Injection:</strong> Pigments that appear identical to the human eye but diverge under 850nm/940nm IR illumination. The plate reads one thing to a person and something different to the camera.</li>
+          <li><strong>EOT Adversarial Patch:</strong> Expectation Over Transformation &mdash; PyTorch-optimized adversarial patches with printability constraints, evaluated via composite metric across multiple OCR engines.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">Contribute</p>
+      <p class="step-title">The Repository Is Open</p>
+      <div class="step-body">
+        The codebase is at <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a>. The evaluation pipeline tests against multiple open-source OCR/ALPR engines. PRs welcome for:
+        <ul>
+          <li>New attack vectors and evaluation methodologies</li>
+          <li>Improved transferability testing across OCR engines</li>
+          <li>Printability refinement for real-world deployment</li>
+          <li>Academic citations and literature review</li>
+          <li>Documentation and tooling improvements</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- AMMUNITION: Quick Reference -->
+<!-- ============================================================ -->
+<div class="section" id="ammunition">
+  <p class="section-tag">Reference &mdash; Ammunition</p>
+  <h2 class="section-title">Evidence You Can Cite</h2>
+  <p class="section-body">
+    Every item below is sourced from public reporting, court filings, or government records. Copy directly into your demand letter, council testimony, or media pitch.
+  </p>
+
+  <div class="step-grid" style="margin-top:2rem;">
+    <div class="step">
+      <p class="step-num">Data Sharing</p>
+      <p class="step-title">They Said It Was Local. It Wasn't.</p>
+      <div class="step-body">
+        <ul>
+          <li><strong>San Francisco PD:</strong> Cameras searched by out-of-state agencies 1.6 million times in 7 months. (Gibbs Mura v. Flock Safety, Feb 2026)</li>
+          <li><strong>Los Altos:</strong> Over 1 million out-of-state accesses. (Class action filing)</li>
+          <li><strong>Mountain View:</strong> ATF, Air Force, GSA IG had unauthorized access. City shut down all cameras Feb 2026.</li>
+          <li><strong>Oxnard:</strong> Police suspended all cameras &mdash; "Proper guardrails must not only be in place, but they must work reliably." &mdash; Chief Benites</li>
+          <li><strong>El Cajon:</strong> California AG sued the city for illegal Flock data sharing.</li>
+          <li><strong>Evanston, IL:</strong> State audit found Flock violated law allowing CBP access. Flock reinstalled cameras after cancellation &mdash; city issued cease-and-desist.</li>
+          <li><strong>CHP:</strong> Commissioner warned Flock against federal sharing Nov 2025. Audits later revealed the exact sharing CHP prohibited.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">Security</p>
+      <p class="step-title">67 Cameras. No Passwords.</p>
+      <div class="step-body">
+        <ul>
+          <li><strong>Jan 2026:</strong> 67 unsecured Flock cameras found streaming to the internet without authentication. Live footage viewable. Month of archives accessible. Data deletable. Senator Wyden called for FTC investigation.</li>
+          <li><strong>Russian forums:</strong> Flock camera login credentials appeared on Russian cybercrime forums following the breach.</li>
+          <li>Flock's response: "limited misconfiguration."</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">Litigation</p>
+      <p class="step-title">Active Lawsuits</p>
+      <div class="step-body">
+        <ul>
+          <li><strong>Gibbs Mura v. Flock Safety</strong> (Feb 26, 2026, SF Superior Court): Class action alleging violation of California ALPR Privacy Act. Seeking $2,500+ per violation.</li>
+          <li><strong>ACLU &amp; EFF v. San Jose:</strong> 261,000 warrantless searches in one year.</li>
+          <li><strong>California AG v. El Cajon:</strong> State enforcement action for illegal data sharing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">ICE Pipeline</p>
+      <p class="step-title">The Federal Access Vector</p>
+      <div class="step-body">
+        Sheriff Zobal (Juneau County, WI) confirmed on record: <strong>"My office would assist ICE as we would any other local, state, or federal law enforcement agency."</strong> Any Flock deployment in a jurisdiction with this policy has a direct ICE data pipeline. If your sheriff has made a similar statement, your Flock cameras are feeding federal immigration enforcement.
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- RESOURCES -->
+<!-- ============================================================ -->
+<div class="section" id="resources">
+  <p class="section-tag">Network &mdash; Resources</p>
+  <h2 class="section-title">You Are Not Alone</h2>
+
+  <div class="resource-grid">
+    <div class="resource-card">
+      <p class="rc-name">FlockBlocker</p>
+      <p class="rc-body">Technical countermeasure research and the Mauston case study. The parent framework for BirdStrike campaigns.</p>
+      <a href="https://flockblocker.org" target="_blank" class="rc-link">flockblocker.org &rarr;</a>
+    </div>
+    <div class="resource-card">
+      <p class="rc-name">DeFlock.me</p>
+      <p class="rc-body">Crowdsourced map of 76,000+ LPR locations nationwide. Check if your city has Flock cameras. Start here.</p>
+      <a href="https://deflock.me" target="_blank" class="rc-link">deflock.me &rarr;</a>
+    </div>
+    <div class="resource-card">
+      <p class="rc-name">StopFlock.com</p>
+      <p class="rc-body">Community resource hub for residents challenging Flock deployments in their municipalities.</p>
+      <a href="https://stopflock.com" target="_blank" class="rc-link">stopflock.com &rarr;</a>
+    </div>
+    <div class="resource-card">
+      <p class="rc-name">Electronic Frontier Foundation</p>
+      <p class="rc-body">Fought and defeated Flock's C&amp;D against DeFlock.me. Publishes surveillance oversight guides. Active on ALPR issues nationally.</p>
+      <a href="https://www.eff.org" target="_blank" class="rc-link">eff.org &rarr;</a>
+    </div>
+    <div class="resource-card">
+      <p class="rc-name">ACLU</p>
+      <p class="rc-body">Running a national ALPR campaign. State chapters may provide local support and legal guidance.</p>
+      <a href="https://www.aclu.org" target="_blank" class="rc-link">aclu.org &rarr;</a>
+    </div>
+    <div class="resource-card">
+      <p class="rc-name">State of Surveillance</p>
+      <p class="rc-body">Independent tracker of the Flock cancellation wave with sourced reporting on every municipality.</p>
+      <a href="https://stateofsurveillance.org" target="_blank" class="rc-link">stateofsurveillance.org &rarr;</a>
+    </div>
+    <div class="resource-card">
+      <p class="rc-name">GitHub Repository</p>
+      <p class="rc-body">Open-source codebase for adversarial research, evaluation pipelines, and technical contributions.</p>
+      <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="rc-link">github.com/d3fq0n1/flockblocker &rarr;</a>
+    </div>
+    <div class="resource-card">
+      <p class="rc-name">Gibbs Mura v. Flock Safety</p>
+      <p class="rc-body">Active class action (Feb 2026, SF Superior Court). Alleging violation of California ALPR Privacy Act. Seeking $2,500+ per violation.</p>
+      <span class="rc-link" style="color:var(--text-dim);">SF Superior Court &mdash; Filed Feb 26, 2026</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- CLOSING -->
+<!-- ============================================================ -->
+<div class="section">
+  <p class="section-tag">Directive</p>
+  <h2 class="section-title">Go.</h2>
+  <p class="section-body">
+    Everything you need is on this page. The templates are ready. The evidence is documented. The network exists. The only variable is whether you use it.
+    <br><br>
+    <strong>File the FOIA request today.</strong> It takes fifteen minutes. It creates a legal paper trail. It forces your city to respond on the record. Everything else builds from that.
+    <br><br>
+    One resident in Mauston, Wisconsin started this. <em>Your city is next.</em>
+  </p>
+  <div style="margin-top:2.5rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+    <a href="https://deflock.me" target="_blank" class="btn btn-fill">Check Your City &rarr;</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="btn btn-outline">View Repository &rarr;</a>
+    <a href="https://flockblocker.org" target="_blank" class="btn btn-outline">FlockBlocker Home &rarr;</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a><br>
+    The BirdStrike Template is a civic engagement guide. Every component operates within established U.S. civil rights and legal precedent.<br>
+    First Amendment: petition, speech, assembly, press, association. Use them.
+  </div>
+  <div class="footer-right">FLOCKBLOCKER &mdash; 2026</div>
+</footer>
+
+<script>
+function copyTemplate(btn) {
+  const block = btn.closest('.template-block');
+  const text = block.querySelector('.template-text').innerText;
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied';
+    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
