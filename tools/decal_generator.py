@@ -324,6 +324,19 @@ class IRPhantomConfig:
     Default colors are sweep-optimized (see ir_color_sweep.py) for maximum
     phantom_ratio at 850nm.  Pass ``use_practical_colors=True`` to use
     darker, less conspicuous pairs suitable for real-world stickers.
+
+    Placement controls where phantom characters sit within the decal:
+        "center"    — centered (default, backward-compatible)
+        "top_edge"  — characters hug the top edge (use when decal is below plate)
+        "bottom_edge" — characters hug the bottom edge (decal above plate)
+        "left_edge" — characters hug the left edge (decal right of plate)
+        "right_edge" — characters hug the right edge (decal left of plate)
+        "distributed" — characters spread across the near edge with plate-like
+                        inter-character spacing
+
+    For maximum segmentation bleed, combine edge placement here with a
+    negative ``decal_gap_px`` in CompositeConfig so the decal overlaps the
+    plate boundary.
     """
     width: int = DEFAULT_DECAL_WIDTH
     height: int = DEFAULT_DECAL_HEIGHT
@@ -338,6 +351,10 @@ class IRPhantomConfig:
     # sweep-optimized max-ratio colors
     use_practical_colors: bool = False
     phantom_chars: str | None = None
+    # Where to place phantom characters within the decal
+    placement: str = "center"
+    # Padding from the target edge (px) — only used for edge placements
+    edge_padding: int = 4
 
 
 def generate_ir_phantom_decal(
@@ -388,16 +405,83 @@ def generate_ir_phantom_decal(
     draw = ImageDraw.Draw(img)
 
     font = _load_plate_font(config.font_size)
-    bbox = draw.textbbox((0, 0), chars, font=font)
-    text_w = bbox[2] - bbox[0]
-    text_h = bbox[3] - bbox[1]
-    x = (config.width - text_w) // 2
-    y = (config.height - text_h) // 2
-    draw.text((x, y), chars, fill=text_vis, font=font)
+
+    if config.placement == "distributed":
+        # Spread characters individually with plate-like spacing
+        _draw_distributed_phantom(draw, chars, font, text_vis, config)
+    else:
+        bbox = draw.textbbox((0, 0), chars, font=font)
+        text_w = bbox[2] - bbox[0]
+        text_h = bbox[3] - bbox[1]
+        x, y = _phantom_position(config, text_w, text_h)
+        draw.text((x, y), chars, fill=text_vis, font=font)
 
     if output_path:
         img.save(output_path)
     return img
+
+
+def _phantom_position(
+    config: IRPhantomConfig, text_w: int, text_h: int,
+) -> tuple[int, int]:
+    """Compute (x, y) for phantom text based on placement strategy."""
+    cx = (config.width - text_w) // 2
+    cy = (config.height - text_h) // 2
+    pad = config.edge_padding
+
+    if config.placement == "top_edge":
+        return cx, pad
+    elif config.placement == "bottom_edge":
+        return cx, config.height - text_h - pad
+    elif config.placement == "left_edge":
+        return pad, cy
+    elif config.placement == "right_edge":
+        return config.width - text_w - pad, cy
+    else:  # "center"
+        return cx, cy
+
+
+def _draw_distributed_phantom(
+    draw: "ImageDraw.Draw",
+    chars: str,
+    font: "ImageFont.FreeTypeFont",
+    fill: tuple,
+    config: IRPhantomConfig,
+) -> None:
+    """Draw phantom chars distributed across the near edge with plate-like spacing.
+
+    Characters are evenly spaced horizontally, positioned at the top edge
+    (the most common case — decal below plate). If a different edge is
+    needed, rotate the image after generation.
+    """
+    pad = config.edge_padding
+    n = len(chars)
+    if n == 0:
+        return
+
+    # Measure individual character widths
+    char_widths = []
+    char_height = 0
+    for ch in chars:
+        bb = draw.textbbox((0, 0), ch, font=font)
+        char_widths.append(bb[2] - bb[0])
+        char_height = max(char_height, bb[3] - bb[1])
+
+    total_char_w = sum(char_widths)
+    # Distribute remaining space as gaps
+    remaining = config.width - total_char_w - 2 * pad
+    gap = remaining / max(n - 1, 1) if n > 1 else 0
+    # Cap gap to prevent absurd spacing
+    gap = min(gap, char_widths[0] * 1.5)
+
+    # Center the block horizontally
+    block_w = total_char_w + gap * max(n - 1, 0)
+    x = max(pad, (config.width - block_w) / 2)
+    y = pad  # top edge
+
+    for i, ch in enumerate(chars):
+        draw.text((int(x), int(y)), ch, fill=fill, font=font)
+        x += char_widths[i] + gap
 
 
 def simulate_ir_view(

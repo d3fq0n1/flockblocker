@@ -20,10 +20,17 @@ except ImportError:
 
 @dataclass
 class CompositeConfig:
-    """Configuration for plate + decal composite generation."""
+    """Configuration for plate + decal composite generation.
+
+    Set ``decal_gap_px`` to a negative value to overlap the decal with the
+    plate.  This simulates a bumper sticker partially tucked under or
+    pressed against the plate edge, pushing phantom characters into the
+    plate segmentation zone.  The plate is always composited on top so its
+    text remains unobscured.
+    """
     # Decal placement relative to plate
     decal_position: str = "below"  # above, below, left, right
-    decal_gap_px: int = 10         # gap between plate and decal in pixels
+    decal_gap_px: int = 10         # gap in px; negative = overlap
 
     # Simulated capture conditions
     distance_ft: float = 25.0      # simulated capture distance
@@ -70,40 +77,49 @@ def create_composite(
     decal_height = int(decal.height * (decal_width / decal.width))
     decal = decal.resize((decal_width, decal_height), Image.LANCZOS)
 
-    # Calculate composite canvas size
+    # Calculate composite canvas size.
+    # Negative gap = overlap; canvas shrinks but both images still fit.
+    gap = config.decal_gap_px
     if config.decal_position in ("above", "below"):
         canvas_w = max(plate.width, decal.width)
-        canvas_h = plate.height + config.decal_gap_px + decal.height
+        canvas_h = plate.height + gap + decal.height
     else:
-        canvas_w = plate.width + config.decal_gap_px + decal.width
+        canvas_w = plate.width + gap + decal.width
         canvas_h = max(plate.height, decal.height)
+
+    # Clamp canvas to at least plate size (extreme overlap)
+    canvas_w = max(canvas_w, plate.width)
+    canvas_h = max(canvas_h, plate.height)
 
     canvas = Image.new("RGB", (canvas_w, canvas_h), color=(40, 40, 40))
 
-    # Place plate and decal
+    # Place plate and decal.
+    # With negative gap the decal slides under the plate edge.
+    # Paste decal first, then plate on top — plate text stays unobscured.
     if config.decal_position == "below":
         plate_x = (canvas_w - plate.width) // 2
         plate_y = 0
         decal_x = (canvas_w - decal.width) // 2
-        decal_y = plate.height + config.decal_gap_px
+        decal_y = plate.height + gap
     elif config.decal_position == "above":
         decal_x = (canvas_w - decal.width) // 2
         decal_y = 0
         plate_x = (canvas_w - plate.width) // 2
-        plate_y = decal.height + config.decal_gap_px
+        plate_y = decal.height + gap
     elif config.decal_position == "left":
         decal_x = 0
         decal_y = (canvas_h - decal.height) // 2
-        plate_x = decal.width + config.decal_gap_px
+        plate_x = decal.width + gap
         plate_y = (canvas_h - plate.height) // 2
     else:  # right
         plate_x = 0
         plate_y = (canvas_h - plate.height) // 2
-        decal_x = plate.width + config.decal_gap_px
+        decal_x = plate.width + gap
         decal_y = (canvas_h - decal.height) // 2
 
-    canvas.paste(plate, (plate_x, plate_y))
+    # Decal first (behind), then plate on top
     canvas.paste(decal, (decal_x, decal_y))
+    canvas.paste(plate, (plate_x, plate_y))
 
     # Simulate IR capture
     if config.simulate_ir:
