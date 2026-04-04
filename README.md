@@ -51,7 +51,7 @@ This approach builds on published academic research in adversarial machine learn
 /distribution    Bumper sticker designs, print specifications, distribution strategy
 /hardware        Raspberry Pi hardware catalog, Public Accountability Station specifications
 /prompts         System prompts for on-device PAS intelligence (Gemini Nano)
-/tools           OCR testing framework, plate compositor, adversarial evaluation harness
+/tools           OCR testing framework, plate compositor, IR simulation, color sweep, adversarial evaluation harness
 /worker          Cloudflare Worker for story submissions and moderation
 ```
 
