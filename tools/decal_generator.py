@@ -69,16 +69,38 @@ DEFAULT_DECAL_HEIGHT = 120
 
 # Colors that collapse under 850nm IR (§3.3)
 # Pairs: (visible_color_rgb, ir_equivalent_rgb) — look different to humans, same to IR
+#
+# Sweep-optimized pairs (from ir_color_sweep.py) maximize phantom_ratio
+# (IR_contrast / visible_delta_e).  "Practical" pairs trade some ratio for
+# real-world plausibility (a bright cyan bumper sticker draws attention).
+#
+# Sweep results (step=20, max_dE=5, min_ir=10):
+#   850nm top: (0,240,240)/(20,240,240) — dE=0.51, IR_Δ=10, ratio=19.6
+#   940nm top: (0,240,240)/(40,240,240) — dE=1.54, IR_Δ=16, ratio=10.4
+IR_COLLAPSE_PAIRS_850 = [
+    # Sweep-optimized: cyan with minimal red delta (dE < 1)
+    ((0, 240, 240), (20, 240, 240)),
+    ((0, 240, 220), (20, 240, 220)),
+    # Practical: dark red pairs (plausible bumper sticker)
+    ((180, 20, 20), (200, 40, 30)),
+    ((160, 30, 25), (180, 20, 20)),
+]
+
+IR_COLLAPSE_PAIRS_940 = [
+    # Sweep-optimized: cyan with moderate red delta
+    ((0, 240, 240), (40, 240, 240)),
+    ((0, 220, 240), (40, 220, 240)),
+    # Practical: green/gray pairs (garden-variety sticker)
+    ((40, 140, 40), (55, 130, 45)),
+    ((30, 100, 30), (50, 90, 40)),
+]
+
+# Legacy alias (union of practical pairs) for backward compatibility
 IR_COLLAPSE_PAIRS = [
-    # Red and black look identical under 850nm
     ((180, 20, 20), (30, 30, 30)),
-    # Certain greens and grays converge
     ((40, 140, 40), (110, 110, 110)),
-    # Dark blue and dark purple merge
     ((20, 20, 140), (80, 20, 120)),
-    # Bright red and dark gray
     ((200, 40, 30), (50, 50, 50)),
-    # Forest green and medium gray
     ((30, 100, 30), (90, 90, 90)),
 ]
 
@@ -297,18 +319,24 @@ def _generate_segmentation_extension(plate_text: str) -> str:
 
 @dataclass
 class IRPhantomConfig:
-    """Config for IR phantom character decals."""
+    """Config for IR phantom character decals.
+
+    Default colors are sweep-optimized (see ir_color_sweep.py) for maximum
+    phantom_ratio at 850nm.  Pass ``use_practical_colors=True`` to use
+    darker, less conspicuous pairs suitable for real-world stickers.
+    """
     width: int = DEFAULT_DECAL_WIDTH
     height: int = DEFAULT_DECAL_HEIGHT
     font_size: int = 72
     # The IR wavelength to target
     target_wavelength_nm: int = 850
     # Background color (visible light) — should look like a normal design
-    visible_bg_color: tuple = (180, 20, 20)   # red background (looks normal)
+    visible_bg_color: tuple | None = None
     # Text color (visible light) — should be nearly invisible to humans
-    visible_text_color: tuple = (160, 30, 25)  # slightly different red (hard to see)
-    # Under IR, these collapse: red bg → dark, red text → dark, but contrast emerges
-    # from the slight material/ink differences
+    visible_text_color: tuple | None = None
+    # Use practical (plausible bumper sticker) colors instead of
+    # sweep-optimized max-ratio colors
+    use_practical_colors: bool = False
     phantom_chars: str | None = None
 
 
@@ -341,14 +369,20 @@ def generate_ir_phantom_decal(
             chars = _generate_random_confusion(5)
 
     # Select an IR collapse pair based on target wavelength
-    if config.target_wavelength_nm <= 850:
-        # Use red/black collapse — most dramatic at 850nm
+    if config.visible_bg_color is not None and config.visible_text_color is not None:
+        # Caller specified explicit colors — use as-is
         bg_vis = config.visible_bg_color
         text_vis = config.visible_text_color
     else:
-        # At 940nm, use green/gray collapse
-        bg_vis = (40, 140, 40)
-        text_vis = (55, 130, 45)
+        # Pick from wavelength-specific optimized pairs
+        if config.target_wavelength_nm <= 850:
+            pairs = IR_COLLAPSE_PAIRS_850
+        else:
+            pairs = IR_COLLAPSE_PAIRS_940
+
+        # Index 0-1 = sweep-optimized, 2+ = practical
+        idx = 2 if config.use_practical_colors else 0
+        bg_vis, text_vis = pairs[idx]
 
     img = Image.new("RGB", (config.width, config.height), bg_vis)
     draw = ImageDraw.Draw(img)
