@@ -10,6 +10,8 @@ from pathlib import Path
 
 import numpy as np
 
+from ir_simulation import simulate_ir as _simulate_ir
+
 try:
     from PIL import Image, ImageDraw, ImageFont
 except ImportError:
@@ -126,28 +128,6 @@ def create_composite(
 
     return np.array(canvas)
 
-
-def _simulate_ir(image: "Image.Image", wavelength_nm: int) -> "Image.Image":
-    """
-    Simulate IR camera capture by converting to weighted grayscale.
-
-    Different wavelengths see colors differently:
-    - 850nm: red and black appear similar, greens are mid-gray
-    - 940nm: even less color differentiation
-    """
-    arr = np.array(image, dtype=np.float32)
-
-    if wavelength_nm <= 850:
-        # At 850nm, red channel dominates, blue is nearly invisible
-        weights = np.array([0.15, 0.35, 0.50])  # B, G, R in PIL RGB order
-    else:
-        # At 940nm, very flat response
-        weights = np.array([0.25, 0.35, 0.40])
-
-    # Note: PIL RGB order is R, G, B
-    gray = arr[:, :, 0] * weights[2] + arr[:, :, 1] * weights[1] + arr[:, :, 2] * weights[0]
-    gray = np.clip(gray, 0, 255).astype(np.uint8)
-    return Image.fromarray(np.stack([gray, gray, gray], axis=-1))
 
 
 def _apply_motion_blur(image: "Image.Image", kernel_size: int) -> "Image.Image":

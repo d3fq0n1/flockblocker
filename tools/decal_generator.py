@@ -22,6 +22,8 @@ from typing import Sequence
 
 import numpy as np
 
+from ir_simulation import simulate_ir
+
 try:
     from PIL import Image, ImageDraw, ImageFont, ImageFilter
 except ImportError:
@@ -371,20 +373,10 @@ def simulate_ir_view(
     """
     Show what an IR camera sees — reveals hidden phantom characters.
 
-    This is the same transform as plate_compositor._simulate_ir but exposed
-    as a public utility for decal evaluation.
+    Delegates to :func:`ir_simulation.simulate_ir` (the single source of truth
+    for IR sensor-response weights).
     """
-    arr = np.array(image, dtype=np.float32)
-    if wavelength_nm <= 850:
-        weights = np.array([0.50, 0.35, 0.15])  # R, G, B weights for 850nm
-    else:
-        weights = np.array([0.40, 0.35, 0.25])
-
-    gray = (arr[:, :, 0] * weights[0] +
-            arr[:, :, 1] * weights[1] +
-            arr[:, :, 2] * weights[2])
-    gray = np.clip(gray, 0, 255).astype(np.uint8)
-    return Image.fromarray(np.stack([gray, gray, gray], axis=-1))
+    return simulate_ir(image, wavelength_nm)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
