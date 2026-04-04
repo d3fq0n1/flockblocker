@@ -52,8 +52,22 @@ This approach builds on published academic research in adversarial machine learn
 /hardware        Raspberry Pi hardware catalog, Public Accountability Station specifications
 /prompts         System prompts for on-device PAS intelligence (Gemini Nano)
 /tools           OCR testing framework, plate compositor, IR simulation, color sweep, adversarial evaluation harness
+/sticker_gen     Standalone adversarial research decal generator — print-ready PDF/PNG output for Avery 5163 labels
 /worker          Cloudflare Worker for story submissions and moderation
 ```
+
+## Sticker Generator — Quick Start
+
+The `sticker_gen/` module is a standalone tool for generating print-ready adversarial OCR research decals. No ML expertise required.
+
+```bash
+pip install -r sticker_gen/requirements.txt
+python -m sticker_gen --plate ABC1234 --output ./my_stickers
+```
+
+Outputs print-ready PDFs sized for Avery 5163 label stock (2" x 4", 10 per sheet, available at any office supply store), individual PNGs at 300 DPI, and a JSON manifest with UUIDs for evaluation pipeline integration.
+
+Three strategies: **character ambiguity** (OCR confusion pairs), **retroreflective interference** (geometric patterns for IR interaction research), and **boundary noise** (sub-perceptual perturbation at character edges). See [`sticker_gen/README.md`](sticker_gen/README.md) for full documentation, academic references, and the Project BIRDSTRIKE municipal research template.
 
 ## Stories Feature — Deployment
 
