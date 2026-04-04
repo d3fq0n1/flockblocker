@@ -10,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-from ir_simulation import simulate_ir as _simulate_ir
+from ir_simulation import simulate_ir
 
 try:
     from PIL import Image, ImageDraw, ImageFont
@@ -123,7 +123,7 @@ def create_composite(
 
     # Simulate IR capture
     if config.simulate_ir:
-        canvas = _simulate_ir(canvas, config.ir_wavelength_nm)
+        canvas = simulate_ir(canvas, config.ir_wavelength_nm)
 
     # Simulate distance (downscale then upscale to lose detail)
     if config.distance_ft > 15:

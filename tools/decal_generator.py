@@ -10,6 +10,8 @@ four distinct attack strategies:
 4. EOT Adversarial Patch  (§2.4) — Gradient-optimized patterns robust to transforms
 
 Each generator produces PIL Images suitable for compositing via plate_compositor.
+IR camera simulation is handled by the shared ``ir_simulation`` module;
+optimal phantom color pairs are discovered by ``ir_color_sweep``.
 """
 
 from __future__ import annotations
