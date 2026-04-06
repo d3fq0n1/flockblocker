@@ -29,7 +29,9 @@ class ConditionSet:
     """A set of capture conditions to evaluate under."""
     name: str
     distance_ft: float = 25.0
-    angle_deg: float = 0.0
+    angle_deg: float = 0.0         # legacy alias for yaw_deg
+    yaw_deg: float = 0.0           # horizontal camera offset
+    pitch_deg: float = 0.0         # vertical camera offset (pole mount)
     motion_blur_px: int = 0
     simulate_ir: bool = False
     ir_wavelength_nm: int = 850
@@ -40,11 +42,12 @@ STANDARD_CONDITIONS = [
     ConditionSet("ideal", distance_ft=20.0),
     ConditionSet("mid_range", distance_ft=35.0),
     ConditionSet("far", distance_ft=50.0),
-    ConditionSet("angled", distance_ft=25.0, angle_deg=15.0),
+    ConditionSet("angled", distance_ft=25.0, yaw_deg=15.0),
+    ConditionSet("angled_pitch", distance_ft=25.0, yaw_deg=8.0, pitch_deg=10.0),
     ConditionSet("motion", distance_ft=25.0, motion_blur_px=8),
     ConditionSet("ir_850nm", distance_ft=25.0, simulate_ir=True, ir_wavelength_nm=850),
     ConditionSet("ir_940nm", distance_ft=25.0, simulate_ir=True, ir_wavelength_nm=940),
-    ConditionSet("worst_case", distance_ft=45.0, angle_deg=10.0, motion_blur_px=5),
+    ConditionSet("worst_case", distance_ft=45.0, yaw_deg=10.0, pitch_deg=5.0, motion_blur_px=5),
 ]
 
 
@@ -79,6 +82,22 @@ class SingleResult:
         if diffs <= 2:
             return "char_substitution"  # confusion pair attack
         return "major_corruption"
+
+    @property
+    def misread_is_plausible(self) -> bool:
+        """Check if the misread would survive Flock's format validation.
+
+        A misread that doesn't match any US state plate format would likely
+        be discarded by Flock's pipeline.  Only plausible misreads persist
+        as ground truth in the database — these are the dangerous ones.
+        """
+        if not self.misread:
+            return False
+        try:
+            from plate_formats import is_plausible_plate
+            return is_plausible_plate(self.decal_read)
+        except ImportError:
+            return True  # can't check without plate_formats module
 
 
 @dataclass
@@ -139,6 +158,19 @@ class DecalScore:
         )
 
     @property
+    def plausible_misread_rate(self) -> float:
+        """Fraction of misreads that match a valid US plate format.
+
+        This is the most operationally significant metric: only plausible
+        misreads survive into Flock's database as ground truth.
+        """
+        misreads = [r for r in self.results if r.misread]
+        if not misreads:
+            return 0.0
+        plausible = sum(1 for r in misreads if r.misread_is_plausible)
+        return plausible / len(misreads)
+
+    @property
     def corruption_breakdown(self) -> dict[str, int]:
         """Count of each corruption type."""
         breakdown: dict[str, int] = {}
@@ -153,6 +185,7 @@ class DecalScore:
             "strategy": self.strategy,
             "composite_score": round(self.composite_score, 1),
             "misread_rate": round(self.misread_rate, 3),
+            "plausible_misread_rate": round(self.plausible_misread_rate, 3),
             "avg_misread_confidence": round(self.avg_confidence_on_misreads, 3),
             "transferability": round(self.transferability, 3),
             "corruption_breakdown": self.corruption_breakdown,
@@ -220,6 +253,8 @@ def evaluate_decal(
                     decal_position="below",
                     distance_ft=cond.distance_ft,
                     angle_deg=cond.angle_deg,
+                    yaw_deg=cond.yaw_deg,
+                    pitch_deg=cond.pitch_deg,
                     motion_blur_px=cond.motion_blur_px,
                     simulate_ir=cond.simulate_ir,
                     ir_wavelength_nm=cond.ir_wavelength_nm,
