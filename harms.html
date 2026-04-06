@@ -137,7 +137,7 @@
     <a href="censorship.html" class="header-link">Censorship</a>
     <a href="birdstrike.html" class="header-link">BirdStrike</a>
     <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub</a>
-    <span class="live-badge">CLOCK RUNNING</span>
+    <span class="live-badge"><span id="countdown"></span></span>
     <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -234,24 +234,79 @@
       <p class="offense-source">Source: FlockBlocker vulnerability research, Flock system architecture analysis</p>
     </div>
 
+    <div class="offense-card full-width">
+      <p class="offense-number">Offense 08 — 1.6 Million Unauthorized Federal Searches</p>
+      <p class="offense-headline">Flock Shared California License Plate Data With Federal Agencies 1.6 Million Times</p>
+      <div class="offense-quote">"vendor-based issue" enabled a "nationwide query" feature<br>— Oxnard Police Department, upon suspending all Flock cameras</div>
+      <p class="offense-body">
+        A class action lawsuit filed February 26, 2026 in San Francisco Superior Court revealed that <strong>San Francisco Police Department cameras were searched by out-of-state agencies over 1.6 million times in seven months</strong>. Los Altos's readers shared data to out-of-state agencies more than a million times. Ventura County found 364,000 unauthorized searches. Oxnard Police suspended all Flock cameras after discovering that despite setting access to "California only," Flock's system allowed nationwide queries. California law explicitly bans sharing ALPR data outside the state. Flock did it 1.6 million times.
+      </p>
+      <p class="offense-source">Source: Gibbs Mura v. Flock Safety, SF Superior Court (Feb 2026); SFist; Courthouse News Service; CBS Los Angeles</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 09 — No Password Required</p>
+      <p class="offense-headline">67 Cameras Streamed Live To The Open Internet With Zero Authentication</p>
+      <p class="offense-body">
+        Security researchers discovered at least <strong>67 Flock Safety cameras streaming live video to the public internet</strong> — no username, no password, no encryption. Anyone could watch real-time footage of playgrounds, parking lots, and public streets. Anyone could view a month of archived footage. Anyone could <strong>delete recordings</strong>. A 404 Media journalist confirmed by visiting a California traffic signal and watching themselves on camera in real time. Flock called it a "limited misconfiguration." Senator Wyden called for an FTC investigation.
+      </p>
+      <p class="offense-source">Source: 404 Media, SFist, Privacy Guides (Dec 2025 – Jan 2026); Sen. Wyden FTC referral</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 10 — Stolen Credentials On Russian Forums</p>
+      <p class="offense-headline">Flock Login Credentials Are Being Sold On Cybercrime Markets</p>
+      <p class="offense-body">
+        Cybersecurity firm Hudson Rock found that at least <strong>35 Flock customer accounts had passwords stolen by hackers</strong>. Flock login credentials appeared on Russian cybercrime forums. The surveillance system that tracks millions of Americans' movements is secured so poorly that access to it is <strong>being sold as a commodity on the dark web</strong>. This is the company cities trust with their residents' location data.
+      </p>
+      <p class="offense-source">Source: Hudson Rock cybersecurity research; Malwarebytes (Feb 2026)</p>
+    </div>
+
+    <div class="offense-card full-width">
+      <p class="offense-number">Offense 11 — Surveillance Of Protesters And Activists</p>
+      <p class="offense-headline">Police Used Flock To Track People Exercising Their First Amendment Rights</p>
+      <p class="offense-body">
+        An Electronic Frontier Foundation investigation in November 2025 documented law enforcement using Flock's ALPR network to <strong>surveil protesters exercising their First Amendment rights</strong>, target Romani people with discriminatory searches, and track women seeking reproductive healthcare. The system built to "fight crime" is being used to monitor constitutionally protected activity — political protest, freedom of movement, healthcare access. Every plate read from every municipality on the network made these searches possible.
+      </p>
+      <p class="offense-source">Source: EFF, "How Cops Are Using Flock Safety's ALPR Network to Surveil Protesters and Activists" (Nov 2025); EFF 2025 Year in Review</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 12 — Cameras That Won't Turn Off</p>
+      <p class="offense-headline">Flock Cameras Remained Active After Cities Ordered Them Deactivated</p>
+      <p class="offense-body">
+        In at least two cities, Flock cameras <strong>continued collecting data after officials explicitly ordered them turned off</strong>. Eugene, Oregon terminated their contract after a camera was reactivated without authorization. When your city decides to stop surveilling its residents, the cameras keep watching anyway. The off switch is a suggestion. The data collection is the product.
+      </p>
+      <p class="offense-source">Source: Ban The Cams (Dec 2025); Eugene, OR contract termination records</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 13 — Cambridge Secret Installation</p>
+      <p class="offense-headline">Flock Installed Cameras In Cambridge Without Authorization</p>
+      <p class="offense-body">
+        Cambridge, Massachusetts canceled their Flock contract after discovering that <strong>Flock secretly installed two cameras without city authorization</strong>. A surveillance company installed surveillance equipment without telling the government that hired them. The company that asks cities to trust it with their residents' data cannot be trusted to ask permission before bolting cameras to public infrastructure.
+      </p>
+      <p class="offense-source">Source: Cambridge, MA contract cancellation records (Late 2025)</p>
+    </div>
+
   </div>
 
   <div class="stat-row">
     <div class="stat-cell">
-      <p class="stat-cell-value">221</p>
-      <p class="stat-cell-label">WI agencies<br>querying Flock</p>
+      <p class="stat-cell-value warn">1.6M</p>
+      <p class="stat-cell-label">Unauthorized federal<br>searches (CA alone)</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value">30+</p>
+      <p class="stat-cell-label">Cities canceling<br>Flock contracts</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value warn">67</p>
+      <p class="stat-cell-label">Cameras exposed<br>no password</p>
     </div>
     <div class="stat-cell">
       <p class="stat-cell-value warn">0</p>
       <p class="stat-cell-label">Opt-out<br>mechanisms</p>
-    </div>
-    <div class="stat-cell">
-      <p class="stat-cell-value warn">0</p>
-      <p class="stat-cell-label">Data correction<br>channels</p>
-    </div>
-    <div class="stat-cell">
-      <p class="stat-cell-value">1</p>
-      <p class="stat-cell-label">Private corp<br>controlling it all</p>
     </div>
   </div>
 </div>
@@ -314,6 +369,32 @@ document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('clic
   document.querySelector('.mobile-nav').classList.remove('open');
   document.querySelector('.menu-toggle').classList.remove('active');
 }));
+</script>
+<script>
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
 </script>
 </body>
 </html>

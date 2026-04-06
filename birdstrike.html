@@ -176,7 +176,7 @@
     <a href="who.html" class="header-link">Who's Responsible</a>
     <a href="censorship.html" class="header-link">Censorship</a>
     <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub &#x2197;</a>
-    <span class="live-badge">CLOCK RUNNING</span>
+    <span class="live-badge"><span id="countdown"></span></span>
     <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -808,6 +808,32 @@ document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('clic
   document.querySelector('.mobile-nav').classList.remove('open');
   document.querySelector('.menu-toggle').classList.remove('active');
 }));
+</script>
+<script>
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
 </script>
 
 </body>
