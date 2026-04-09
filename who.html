@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FlockBlocker — Who's Responsible</title>
+<title>FlockBlocker — EXPOSED</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -282,6 +282,191 @@
 
   hr { border: none; border-top: 1px solid var(--border); }
 
+  /* === EXPOSED BANNER === */
+  .exposed-banner {
+    background: linear-gradient(90deg, #1a0000 0%, #2a0505 50%, #1a0000 100%);
+    border-bottom: 2px solid var(--red);
+    padding: 1rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .exposed-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(240,90,74,0.03) 3px, rgba(240,90,74,0.03) 6px);
+    pointer-events: none;
+  }
+  .exposed-banner::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 200%; height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(240,90,74,0.06) 25%, transparent 50%);
+    animation: sweep 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes sweep { 0%{transform:translateX(-50%)} 100%{transform:translateX(50%)} }
+  .exposed-text {
+    font-family: var(--display);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--red);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-shadow: 0 0 30px rgba(240,90,74,0.4), 0 0 60px rgba(240,90,74,0.15);
+    animation: pulse-glow 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse-glow {
+    0%,100% { text-shadow: 0 0 30px rgba(240,90,74,0.4), 0 0 60px rgba(240,90,74,0.15); }
+    50% { text-shadow: 0 0 40px rgba(240,90,74,0.6), 0 0 80px rgba(240,90,74,0.25); }
+  }
+  .exposed-sub {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: #9e5a5a;
+    letter-spacing: 0.15em;
+    margin-top: 0.4rem;
+  }
+
+  /* === EVIDENCE SECTION === */
+  .evidence-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem;
+  }
+  .evidence-card {
+    background: #1f0d0d;
+    border: 1px solid #3a1515;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .evidence-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(240,90,74,0.02) 2px, rgba(240,90,74,0.02) 4px);
+    pointer-events: none;
+  }
+  .evidence-card:hover { border-color: var(--red); }
+  .evidence-stamp {
+    font-family: var(--display);
+    font-size: 0.75rem;
+    color: var(--red);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    border: 2px solid var(--red);
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 1.5rem;
+    transform: rotate(-2deg);
+    opacity: 0.85;
+  }
+  .evidence-title {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .evidence-meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: #9e5a5a;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .evidence-meta strong { color: var(--red); font-weight: 500; }
+  .contract-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .contract-stat {
+    background: rgba(240,90,74,0.05);
+    border: 1px solid #2e1a1a;
+    padding: 1rem 1.25rem;
+  }
+  .contract-stat-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: #6b3d3d;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .contract-stat-value {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    color: var(--red);
+    text-shadow: 0 0 15px rgba(240,90,74,0.2);
+  }
+  .contract-stat-value.money { color: #ff4a4a; }
+  .evidence-dl {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 0.6rem 1.25rem;
+    margin-top: 1rem;
+    transition: all 0.2s;
+    letter-spacing: 0.06em;
+  }
+  .evidence-dl:hover {
+    background: rgba(240,90,74,0.1);
+    text-shadow: 0 0 8px rgba(240,90,74,0.4);
+  }
+  .response-img {
+    max-width: 100%;
+    border: 1px solid #2e1a1a;
+    margin-top: 1rem;
+    filter: contrast(1.05);
+  }
+  .response-placeholder {
+    background: #1a0d0d;
+    border: 1px dashed #3a1515;
+    padding: 2rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: #6b3d3d;
+    margin-top: 1rem;
+  }
+  .demand-status {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--red);
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+  }
+  .demand-status::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: blink 1.8s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .exposed-banner { padding: 0.75rem 1.5rem; }
+    .evidence-section { padding: 2.5rem 1.5rem; }
+    .evidence-card { padding: 1.5rem; }
+    .contract-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .evidence-card { padding: 1.2rem; }
+    .contract-grid { grid-template-columns: 1fr; }
+  }
+
   .back-link {
     display: inline-flex;
     align-items: center;
@@ -367,11 +552,16 @@
   <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
 </nav>
 
+<div class="exposed-banner">
+  <p class="exposed-text">EXPOSED</p>
+  <p class="exposed-sub">Demand letter served // Contract obtained via public records // Response received</p>
+</div>
+
 <div class="page-header">
   <p class="page-kicker">// Dossier — Public Record</p>
   <h1 class="page-title">Who's Responsible</h1>
   <p class="page-lead">
-    <strong>Every name on this page is public record.</strong> These are the officials who authorized Flock Safety's deployment in Mauston and the corporate officers who sold it to them. All contact information is sourced from government directories and LinkedIn profiles.
+    <strong>Every name on this page is public record.</strong> These are the officials who authorized Flock Safety's deployment in Mauston, the corporate officers who sold it to them, and the documents that prove what they agreed to. We have the contract. We have the chief's response. The public deserves to see both.
   </p>
 </div>
 
@@ -719,6 +909,85 @@
       </div>
     </div>
 
+  </div>
+
+  <a href="index.html" class="back-link">← Back to FlockBlocker</a>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION C — DOCUMENTS / EVIDENCE           -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="evidence-section">
+  <p class="dossier-tag">Section C — Evidence</p>
+  <h2 class="dossier-title">Documents Obtained</h2>
+
+  <!-- CONTRACT -->
+  <div class="evidence-card">
+    <div class="evidence-stamp">Obtained — Public Record</div>
+    <h3 class="evidence-title">Flock Safety Master Services Agreement — Mauston PD</h3>
+    <div class="evidence-meta">
+      <strong>Effective Date:</strong> August 17, 2023<br>
+      <strong>Signed By:</strong> Chief Michael D. Ziebell — City of Mauston PD<br>
+      <strong>Flock Contact:</strong> Kyle Whyte — kyle.whyte@flocksafety.com — 651-253-9350<br>
+      <strong>Customer Address:</strong> 303 Mansion St, Mauston, WI 53948<br>
+      <strong>Customer Billing:</strong> ms106@mauston.com<br>
+      <strong>Customer Notices ATTN:</strong> Sergeant Brandon Aronz
+    </div>
+
+    <div class="contract-grid">
+      <div class="contract-stat">
+        <p class="contract-stat-label">Contract Total</p>
+        <p class="contract-stat-value money">$50,200</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Annual Recurring</p>
+        <p class="contract-stat-value money">$24,000/yr</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Falcon Cameras</p>
+        <p class="contract-stat-value">8 units</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Initial Term</p>
+        <p class="contract-stat-value">24 months</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Auto-Renewal</p>
+        <p class="contract-stat-value">24 months</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Data Retention</p>
+        <p class="contract-stat-value">30 days</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Pilot Period</p>
+        <p class="contract-stat-value">45 days</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Implementation</p>
+        <p class="contract-stat-value money">$2,200</p>
+      </div>
+    </div>
+
+    <div class="evidence-meta" style="margin-top:1.5rem;">
+      Includes Flock Safety Platform ($24,000/yr), FlockOS, 8 Flock Safety Falcon cameras, standard and existing-infrastructure implementation services. Full nationwide ALPR network access. NCIC real-time alerts. Unlimited custom hot lists. Vehicle Fingerprint search. 24-month auto-renewal unless 30-day written notice given.
+    </div>
+
+    <a href="Scans_20190408_163339.pdf" target="_blank" class="evidence-dl">&#9660; DOWNLOAD FULL CONTRACT (PDF — 25 pages)</a>
+  </div>
+
+  <!-- CHIEF'S RESPONSE -->
+  <div class="evidence-card">
+    <div class="evidence-stamp">Response Received</div>
+    <h3 class="evidence-title">Police Chief's Response to Demand Letter</h3>
+    <div class="demand-status">DEMAND LETTER SERVED — RESPONSE RECEIVED APRIL 2026</div>
+    <div class="evidence-meta">
+      The Mauston Police Chief was sent a formal demand letter regarding Flock Safety's ALPR surveillance deployment. Below is the chief's response.
+    </div>
+    <img src="Screenshot 2026-04-08 101808.png" alt="Police Chief's response to FlockBlocker demand letter" class="response-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="response-placeholder" style="display:none;">[ Screenshot loading — if this persists, the image may still be syncing ]</div>
   </div>
 
   <a href="index.html" class="back-link">← Back to FlockBlocker</a>
