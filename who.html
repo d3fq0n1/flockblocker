@@ -328,143 +328,8 @@
     margin-top: 0.4rem;
   }
 
-  /* === EVIDENCE SECTION === */
-  .evidence-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 3rem 2.5rem;
-  }
-  .evidence-card {
-    background: #1f0d0d;
-    border: 1px solid #3a1515;
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 2rem;
-  }
-  .evidence-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(240,90,74,0.02) 2px, rgba(240,90,74,0.02) 4px);
-    pointer-events: none;
-  }
-  .evidence-card:hover { border-color: var(--red); }
-  .evidence-stamp {
-    font-family: var(--display);
-    font-size: 0.75rem;
-    color: var(--red);
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    border: 2px solid var(--red);
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    margin-bottom: 1.5rem;
-    transform: rotate(-2deg);
-    opacity: 0.85;
-  }
-  .evidence-title {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-    color: var(--white);
-    margin-bottom: 1rem;
-  }
-  .evidence-meta {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: #9e5a5a;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-  }
-  .evidence-meta strong { color: var(--red); font-weight: 500; }
-  .contract-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0;
-  }
-  .contract-stat {
-    background: rgba(240,90,74,0.05);
-    border: 1px solid #2e1a1a;
-    padding: 1rem 1.25rem;
-  }
-  .contract-stat-label {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: #6b3d3d;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 0.35rem;
-  }
-  .contract-stat-value {
-    font-family: var(--display);
-    font-size: 1.3rem;
-    color: var(--red);
-    text-shadow: 0 0 15px rgba(240,90,74,0.2);
-  }
-  .contract-stat-value.money { color: #ff4a4a; }
-  .evidence-dl {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--red);
-    border: 1px solid var(--red);
-    padding: 0.6rem 1.25rem;
-    margin-top: 1rem;
-    transition: all 0.2s;
-    letter-spacing: 0.06em;
-  }
-  .evidence-dl:hover {
-    background: rgba(240,90,74,0.1);
-    text-shadow: 0 0 8px rgba(240,90,74,0.4);
-  }
-  .response-img {
-    max-width: 100%;
-    border: 1px solid #2e1a1a;
-    margin-top: 1rem;
-    filter: contrast(1.05);
-  }
-  .response-placeholder {
-    background: #1a0d0d;
-    border: 1px dashed #3a1515;
-    padding: 2rem;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: #6b3d3d;
-    margin-top: 1rem;
-  }
-  .demand-status {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--red);
-    letter-spacing: 0.08em;
-    margin-bottom: 1.5rem;
-  }
-  .demand-status::before {
-    content: '';
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--red);
-    animation: blink 1.8s ease-in-out infinite;
-    flex-shrink: 0;
-  }
-
   @media (max-width: 900px) {
     .exposed-banner { padding: 0.75rem 1.5rem; }
-    .evidence-section { padding: 2.5rem 1.5rem; }
-    .evidence-card { padding: 1.5rem; }
-    .contract-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 480px) {
-    .evidence-card { padding: 1.2rem; }
-    .contract-grid { grid-template-columns: 1fr; }
   }
 
   .back-link {
@@ -525,10 +390,10 @@
   <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
   <div class="header-right">
     <a href="index.html" class="header-link">Home</a>
-    <a href="harms.html" class="header-link">How Flock Hurts</a>
-    <a href="stories.html" class="header-link">Stories</a>
-    <a href="rebellion.html" class="header-link">The Rebellion</a>
-    <a href="who.html" class="header-link" style="color:var(--accent)">Who's Responsible</a>
+    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
+    <a href="harms.html" class="header-link">Harms</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="who.html" class="header-link" style="color:var(--accent)">Who</a>
     <a href="censorship.html" class="header-link">Censorship</a>
     <a href="money.html" class="header-link">Money</a>
     <a href="birdstrike.html" class="header-link">BirdStrike</a>
@@ -540,10 +405,9 @@
 
 <nav class="mobile-nav">
   <a href="index.html">Home</a>
-  <a href="harms.html">How Flock Hurts</a>
-  <a href="stories.html">Stories</a>
-  <a href="submit.html">Share Your Story</a>
-  <a href="rebellion.html">The Rebellion</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="harms.html">Harms</a>
+  <a href="rebellion.html">Rebellion</a>
   <a href="who.html">Who's Responsible</a>
   <a href="censorship.html">Censorship</a>
   <a href="money.html">Money</a>
@@ -910,86 +774,10 @@
 
   </div>
 
-  <a href="index.html" class="back-link">← Back to FlockBlocker</a>
-</div>
-
-<hr>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SECTION C — DOCUMENTS / EVIDENCE           -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="evidence-section">
-  <p class="dossier-tag">Section C — Evidence</p>
-  <h2 class="dossier-title">Documents Obtained</h2>
-
-  <!-- CONTRACT -->
-  <div class="evidence-card">
-    <div class="evidence-stamp">Obtained — Public Record</div>
-    <h3 class="evidence-title">Flock Safety Master Services Agreement — Mauston PD</h3>
-    <div class="evidence-meta">
-      <strong>Effective Date:</strong> August 17, 2023<br>
-      <strong>Signed By:</strong> Chief Michael D. Ziebell — City of Mauston PD<br>
-      <strong>Flock Contact:</strong> Kyle Whyte — kyle.whyte@flocksafety.com — 651-253-9350<br>
-      <strong>Customer Address:</strong> 303 Mansion St, Mauston, WI 53948<br>
-      <strong>Customer Billing:</strong> ms106@mauston.com<br>
-      <strong>Customer Notices ATTN:</strong> Sergeant Brandon Aronz
-    </div>
-
-    <div class="contract-grid">
-      <div class="contract-stat">
-        <p class="contract-stat-label">Contract Total</p>
-        <p class="contract-stat-value money">$50,200</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Annual Recurring</p>
-        <p class="contract-stat-value money">$24,000/yr</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Falcon Cameras</p>
-        <p class="contract-stat-value">8 units</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Initial Term</p>
-        <p class="contract-stat-value">24 months</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Auto-Renewal</p>
-        <p class="contract-stat-value">24 months</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Data Retention</p>
-        <p class="contract-stat-value">30 days</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Pilot Period</p>
-        <p class="contract-stat-value">45 days</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Implementation</p>
-        <p class="contract-stat-value money">$2,200</p>
-      </div>
-    </div>
-
-    <div class="evidence-meta" style="margin-top:1.5rem;">
-      Includes Flock Safety Platform ($24,000/yr), FlockOS, 8 Flock Safety Falcon cameras, standard and existing-infrastructure implementation services. Full nationwide ALPR network access. NCIC real-time alerts. Unlimited custom hot lists. Vehicle Fingerprint search. 24-month auto-renewal unless 30-day written notice given.
-    </div>
-
-    <a href="Scans_20190408_163339.pdf" target="_blank" class="evidence-dl">&#9660; DOWNLOAD FULL CONTRACT (PDF — 25 pages)</a>
+  <div style="margin-top:2rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+    <a href="evidence.html" class="back-link" style="color:var(--red); border:1px solid var(--red); padding:0.6rem 1.25rem; margin:0;">View Contract & Chief's Response →</a>
+    <a href="index.html" class="back-link" style="padding:0.6rem 1.25rem; margin:0;">← Back to FlockBlocker</a>
   </div>
-
-  <!-- CHIEF'S RESPONSE -->
-  <div class="evidence-card">
-    <div class="evidence-stamp">Response Received</div>
-    <h3 class="evidence-title">Police Chief's Response to Demand Letter</h3>
-    <div class="demand-status">DEMAND LETTER SERVED — RESPONSE RECEIVED APRIL 2026</div>
-    <div class="evidence-meta">
-      The Mauston Police Chief was sent a formal demand letter regarding Flock Safety's ALPR surveillance deployment. Below is the chief's response.
-    </div>
-    <img src="Screenshot 2026-04-08 101808.png" alt="Police Chief's response to FlockBlocker demand letter" class="response-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-    <div class="response-placeholder" style="display:none;">[ Screenshot loading — if this persists, the image may still be syncing ]</div>
-  </div>
-
-  <a href="index.html" class="back-link">← Back to FlockBlocker</a>
 </div>
 
 <footer>
