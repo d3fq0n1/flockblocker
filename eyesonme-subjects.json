@@ -1,0 +1,203 @@
+{
+  "subjects": [
+    {
+      "id": "zilisch-shawn",
+      "name": "Chief Shawn Zilisch",
+      "title": "Chief of Police",
+      "org": "Mauston Police Department",
+      "org_type": "MUNICIPAL",
+      "role_in_lpr": "Contract authorizing official. Maintained public silence for 30 days following BIRDSTRIKE launch. Broke silence April 7, 2026.",
+      "status": "RESPONDED",
+      "last_activity": "2026-04-07",
+      "silence_start": "2026-03-19",
+      "silence_broken": "2026-04-07",
+      "station_id": "EYESONME-001",
+      "timeline": [
+        {
+          "date": "2026-03-19",
+          "type": "FOIA",
+          "description": "Formal decommission notice served. 30-day response window established."
+        },
+        {
+          "date": "2026-03-19",
+          "type": "SILENCE",
+          "description": "Silence period begins. No public acknowledgment of demand letter."
+        },
+        {
+          "date": "2026-04-07",
+          "type": "STATEMENT",
+          "description": "Broke silence. First documented response to BIRDSTRIKE demand."
+        }
+      ],
+      "foia_requests": [
+        {
+          "id": "FOIA-MAUSTON-001",
+          "filed": "2026-03-19",
+          "target": "Mauston Police Department",
+          "subject": "Flock Safety contract, data retention policy, third-party access terms",
+          "statutory_deadline": "2026-04-02",
+          "status": "FULFILLED"
+        }
+      ],
+      "documents": [
+        {
+          "title": "Flock Safety Contract — City of Mauston",
+          "type": "CONTRACT",
+          "status": "OBTAINED",
+          "url": "mauston-contract.pdf"
+        },
+        {
+          "title": "Chief's Response Letter",
+          "type": "CORRESPONDENCE",
+          "status": "OBTAINED",
+          "url": "evidence.html"
+        }
+      ]
+    },
+    {
+      "id": "teske-todd",
+      "name": "Mayor Todd Teske",
+      "title": "Mayor",
+      "org": "City of Mauston",
+      "org_type": "MUNICIPAL",
+      "role_in_lpr": "Municipal executive authority. Received formal decommission notice. No public response documented.",
+      "status": "UNRESPONSIVE",
+      "last_activity": null,
+      "silence_start": "2026-03-19",
+      "silence_broken": null,
+      "station_id": "EYESONME-002",
+      "timeline": [
+        {
+          "date": "2026-03-19",
+          "type": "FOIA",
+          "description": "Formal decommission notice served via CC."
+        },
+        {
+          "date": "2026-03-19",
+          "type": "SILENCE",
+          "description": "Silence period begins. No response to date."
+        }
+      ],
+      "foia_requests": [],
+      "documents": []
+    },
+    {
+      "id": "haugh-kelly",
+      "name": "City Administrator Kelly Haugh",
+      "title": "City Administrator",
+      "org": "City of Mauston",
+      "org_type": "MUNICIPAL",
+      "role_in_lpr": "Administrative authority over municipal contracts. Received formal decommission notice. No public response documented.",
+      "status": "UNRESPONSIVE",
+      "last_activity": null,
+      "silence_start": "2026-03-19",
+      "silence_broken": null,
+      "station_id": "EYESONME-002",
+      "timeline": [
+        {
+          "date": "2026-03-19",
+          "type": "FOIA",
+          "description": "Formal decommission notice served via CC."
+        },
+        {
+          "date": "2026-03-19",
+          "type": "SILENCE",
+          "description": "Silence period begins. No response to date."
+        }
+      ],
+      "foia_requests": [],
+      "documents": []
+    },
+    {
+      "id": "zobal-jason",
+      "name": "Sheriff Jason Zobal",
+      "title": "Sheriff",
+      "org": "Juneau County Sheriff's Office",
+      "org_type": "COUNTY",
+      "role_in_lpr": "County-level Flock Safety network access authority. Received formal decommission notice. No public response documented.",
+      "status": "UNRESPONSIVE",
+      "last_activity": null,
+      "silence_start": "2026-03-19",
+      "silence_broken": null,
+      "station_id": "EYESONME-003",
+      "timeline": [
+        {
+          "date": "2026-03-19",
+          "type": "FOIA",
+          "description": "Formal decommission notice served."
+        },
+        {
+          "date": "2026-03-19",
+          "type": "SILENCE",
+          "description": "Silence period begins. No response to date."
+        }
+      ],
+      "foia_requests": [],
+      "documents": []
+    },
+    {
+      "id": "langley-garrett",
+      "name": "Garrett Langley",
+      "title": "Chief Executive Officer",
+      "org": "Flock Safety",
+      "org_type": "CORPORATE",
+      "role_in_lpr": "CEO of Flock Safety. Ultimate executive authority over nationwide ALPR surveillance network. Presides over commercialization of citizen movement data.",
+      "status": "UNDER REVIEW",
+      "last_activity": null,
+      "silence_start": "2026-03-19",
+      "silence_broken": null,
+      "station_id": null,
+      "timeline": [],
+      "foia_requests": [],
+      "documents": []
+    },
+    {
+      "id": "thomas-joshua",
+      "name": "Joshua Thomas",
+      "title": "Chief Commercial Officer",
+      "org": "Flock Safety",
+      "org_type": "CORPORATE",
+      "role_in_lpr": "Oversees commercial sales pipeline. Responsible for municipal contract acquisition strategy nationwide.",
+      "status": "UNDER REVIEW",
+      "last_activity": null,
+      "silence_start": "2026-03-19",
+      "silence_broken": null,
+      "station_id": null,
+      "timeline": [],
+      "foia_requests": [],
+      "documents": []
+    },
+    {
+      "id": "haley-dan",
+      "name": "Dan Haley",
+      "title": "Chief Legal Officer",
+      "org": "Flock Safety",
+      "org_type": "CORPORATE",
+      "role_in_lpr": "Legal authority for Flock Safety. Oversees contract language, data retention policy, law enforcement access frameworks, and legal response strategy.",
+      "status": "UNDER REVIEW",
+      "last_activity": null,
+      "silence_start": "2026-03-19",
+      "silence_broken": null,
+      "station_id": null,
+      "timeline": [],
+      "foia_requests": [],
+      "documents": []
+    },
+    {
+      "id": "johnston-stephen",
+      "name": "Stephen Johnston",
+      "title": "Customer Success Manager",
+      "org": "Flock Safety",
+      "org_type": "CORPORATE",
+      "role_in_lpr": "Direct municipal account liaison. Manages Flock Safety relationship with deploying agencies including Mauston PD.",
+      "status": "UNDER REVIEW",
+      "last_activity": null,
+      "silence_start": "2026-03-19",
+      "silence_broken": null,
+      "station_id": null,
+      "timeline": [],
+      "foia_requests": [],
+      "documents": []
+    }
+  ]
+}
