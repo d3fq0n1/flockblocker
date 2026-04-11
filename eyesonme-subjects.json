@@ -1,8 +1,8 @@
 {
   "subjects": [
     {
-      "id": "zilisch-shawn",
-      "name": "Chief Shawn Zilisch",
+      "id": "zilisch-michael",
+      "name": "Chief Michael Zilisch",
       "title": "Chief of Police",
       "org": "Mauston Police Department",
       "org_type": "MUNICIPAL",
@@ -55,8 +55,8 @@
       ]
     },
     {
-      "id": "teske-todd",
-      "name": "Mayor Todd Teske",
+      "id": "teske-darryl",
+      "name": "Mayor Darryl \"D.D.\" Teske",
       "title": "Mayor",
       "org": "City of Mauston",
       "org_type": "MUNICIPAL",
@@ -82,8 +82,8 @@
       "documents": []
     },
     {
-      "id": "haugh-kelly",
-      "name": "City Administrator Kelly Haugh",
+      "id": "haugh-daron",
+      "name": "City Administrator Daron Haugh",
       "title": "City Administrator",
       "org": "City of Mauston",
       "org_type": "MUNICIPAL",
@@ -109,8 +109,8 @@
       "documents": []
     },
     {
-      "id": "zobal-jason",
-      "name": "Sheriff Jason Zobal",
+      "id": "zobal-andy",
+      "name": "Sheriff Andy Zobal",
       "title": "Sheriff",
       "org": "Juneau County Sheriff's Office",
       "org_type": "COUNTY",
@@ -186,7 +186,7 @@
     {
       "id": "johnston-stephen",
       "name": "Stephen Johnston",
-      "title": "Customer Success Manager",
+      "title": "Senior Customer Success Manager",
       "org": "Flock Safety",
       "org_type": "CORPORATE",
       "role_in_lpr": "Direct municipal account liaison. Manages Flock Safety relationship with deploying agencies including Mauston PD.",
