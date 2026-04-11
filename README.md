@@ -56,6 +56,55 @@ This approach builds on published academic research in adversarial machine learn
 /worker          Cloudflare Worker for story submissions and moderation
 ```
 
+## EYESONME — Public Accountability Camera Network
+
+Flock Safety cameras watch citizens from public infrastructure. EYESONME cameras watch public officials from public spaces. Both are legal. Only one has a dashboard.
+
+**This is not protest. This is symmetry.**
+
+### Operations Dashboard
+
+`eyesonme.html` — a live operations dashboard modeled after Flock Safety's own fleet management interface:
+
+- **Network status bar** — deployed/active station counts, total runtime, motion events
+- **Station grid** — 3 planned stations targeting Mauston PD, City Hall, and Juneau County Sheriff's Office. Each card shows status, target facility/official, battery/storage gauges, snapshot area, and a `[ PROTECTED OPERATION ]` banner
+- **Accountability subjects** — 8 named officials (3 municipal, 1 county, 4 Flock Safety corporate) with status badges, live silence counters, activity timelines, FOIA tracking, and document vaults
+- **FOIA tracker** — Open records request table with statutory deadlines and live overdue counters
+- **Encryption architecture** — 5-layer end-to-end encryption documentation (LUKS2, WireGuard, libsodium/GPG, WPA3, auth material protection) with seizure resistance design
+- **Deploy In Your City** — Full bill of materials (~$355–585/station), 6-step setup guide, legal checklist
+
+### Station Hardware
+
+Each EYESONME station is a sovereign, solar-powered, cellular-connected camera unit:
+
+| Component | Specification |
+|-----------|--------------|
+| Compute | Raspberry Pi 5 4GB, DietPi (hardened Debian) |
+| Camera | RPi Camera Module 3 — IR day/night |
+| Cellular | Waveshare SIM7600 4G LTE HAT |
+| Battery | 12V LiFePO4 20–40Ah + MPPT solar charge controller |
+| Storage | SanDisk Max Endurance / NVMe SSD |
+| Local Radio | SX1276 LoRa 915MHz + ESP32 WROOM-32 |
+| Enclosure | IP65 weatherproof with tamper sensor |
+
+Field collection via LoRa TOTP authentication → ESP32 activates hidden WPA3 AP → encrypted data pull → AP shutdown → radio-silent.
+
+### Data Files
+
+All dashboard data is JSON-driven — update without touching UI code:
+
+- `eyesonme-data.json` — Station fleet definitions (3 stations with full hardware specs and telemetry fields)
+- `eyesonme-subjects.json` — 8 accountability subject profiles with timelines, FOIA requests, and document vaults
+
+### Deterrence Doctrine
+
+`doctrine.html` — a published, pre-stated, cryptographically witnessed declaration of response posture. SHA-256 hash computed live and displayed. Present on every page:
+
+- `[ DETERRENCE DOCTRINE ]` link in site header
+- Condensed doctrine text in site footer
+- `[ PROTECTED OPERATION ]` banners on station cards
+- FOIA obstruction warning in tracker header
+
 ## Sticker Generator — Quick Start
 
 The `sticker_gen/` module is a standalone tool for generating print-ready adversarial OCR research decals. No ML expertise required.
@@ -147,7 +196,7 @@ IP addresses are SHA-256 hashed (truncated) for abuse detection. Raw IPs are nev
 
 ## Legal Notice
 
-This project operates within legal boundaries. This is stated once and is not a negotiating position.
+This project operates within legal boundaries. This is stated once and is not a negotiating position. Any interference with this operation will be treated as documented aggression and met with legal, ethical, nonviolent asymmetric escalation. See [doctrine.html](doctrine.html).
 
 - All adversarial techniques reference **published academic research** in adversarial machine learning (CVPR, NeurIPS, USENIX, CCS, ICML).
 - No component of this project involves **physically altering, obscuring, or obstructing** a license plate.

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deterrence Doctrine — FlockBlocker</title>
+<meta name="description" content="Published deterrence doctrine. Legal, ethical, nonviolent, and already in motion.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090b;
+    --surface: #111116;
+    --surface2: #16161c;
+    --border: #242430;
+    --accent: #c8f04a;
+    --red: #f05a4a;
+    --text: #d4d4dc;
+    --text-mid: #8888a0;
+    --text-dim: #44445a;
+    --white: #f0f0f8;
+    --mono: 'Fira Mono', monospace;
+    --display: 'Black Ops One', cursive;
+    --body: 'Epilogue', sans-serif;
+    --doctrine: #b0b0c0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
+  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
+  .logo em { color: var(--accent); font-style: normal; }
+  .header-right { display: flex; align-items: center; gap: 2rem; }
+  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
+  .header-link:hover { color: var(--accent); }
+  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; }
+  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
+  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
+  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
+  .menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
+  .mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
+  .mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
+  .mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
+  .mobile-nav a:active { color: var(--accent); }
+
+  /* Doctrine-specific */
+  .doctrine-container { max-width: 780px; margin: 0 auto; padding: 6rem 2.5rem 4rem; }
+
+  .doctrine-meta { margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .doctrine-type { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 1rem; }
+  .doctrine-title { font-family: var(--display); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .doctrine-subtitle { font-family: var(--mono); font-size: 0.82rem; color: var(--text-mid); line-height: 1.7; max-width: 520px; }
+
+  .doctrine-info { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  .doctrine-info-item { }
+  .doctrine-info-label { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.2rem; }
+  .doctrine-info-value { font-family: var(--mono); font-size: 0.76rem; color: var(--text-mid); }
+
+  .doctrine-preface { margin-bottom: 3rem; padding: 2rem; background: var(--surface); border: 1px solid var(--border); }
+  .doctrine-preface p { font-family: var(--mono); font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; }
+  .doctrine-preface strong { color: var(--white); font-weight: 500; }
+
+  .doctrine-body { margin-bottom: 4rem; }
+  .doctrine-text { font-family: var(--body); font-size: 1.05rem; font-weight: 300; color: var(--doctrine); line-height: 2.1; letter-spacing: 0.005em; }
+  .doctrine-text p { margin-bottom: 1.8rem; }
+  .doctrine-text p:last-child { margin-bottom: 0; }
+  .doctrine-text .doctrine-address { color: var(--white); font-weight: 400; }
+  .doctrine-text .doctrine-emphasis { color: var(--white); font-weight: 500; font-size: 1.1rem; display: block; margin: 1.5rem 0; }
+  .doctrine-text .doctrine-list { margin: 1.2rem 0; padding-left: 1.5rem; }
+  .doctrine-text .doctrine-list li { margin-bottom: 0.4rem; color: var(--white); font-weight: 400; }
+  .doctrine-text .doctrine-list li::marker { color: var(--text-dim); }
+  .doctrine-text .doctrine-conditional { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .doctrine-text .doctrine-conditional p { color: var(--text-mid); }
+  .doctrine-text .doctrine-conditional strong { color: var(--white); }
+
+  .doctrine-witness { margin-top: 4rem; padding: 2.5rem; background: var(--surface); border: 1px solid var(--border); }
+  .doctrine-witness-label { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+  .doctrine-hash { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); word-break: break-all; line-height: 1.8; margin-bottom: 1.5rem; letter-spacing: 0.02em; }
+  .doctrine-witness-note { font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); line-height: 1.7; }
+  .doctrine-witness-note strong { color: var(--text-mid); font-weight: 500; }
+
+  .doctrine-legal { margin-top: 3rem; padding: 2rem; border-left: 3px solid var(--border); }
+  .doctrine-legal p { font-family: var(--mono); font-size: 0.76rem; color: var(--text-dim); line-height: 1.8; }
+  .doctrine-legal a { color: var(--text-mid); border-bottom: 1px solid rgba(136,136,160,0.3); transition: color 0.2s; }
+  .doctrine-legal a:hover { color: var(--accent); }
+
+  .doctrine-close { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; }
+  .doctrine-close p { font-family: var(--mono); font-size: 0.76rem; color: var(--text-dim); line-height: 1.8; }
+  .doctrine-close strong { color: var(--text-mid); font-weight: 500; }
+
+  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
+  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
+
+  @media (max-width: 900px) {
+    header { padding: 0 1.5rem; }
+    .header-link { display: none; }
+    .menu-toggle { display: block; }
+    .doctrine-container { padding: 4rem 1.5rem 3rem; }
+    footer { padding: 2rem 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .doctrine-container { padding: 3rem 1rem 2rem; }
+    .doctrine-title { font-size: clamp(2rem, 8vw, 2.5rem); }
+    .doctrine-text { font-size: 0.95rem; }
+    .doctrine-info { grid-template-columns: 1fr; }
+    .doctrine-witness { padding: 1.5rem; }
+    .doctrine-hash { font-size: 0.62rem; }
+    footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
+    header { padding: 0 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="index.html" class="header-link">Home</a>
+    <a href="eyesonme.html" class="header-link">EYESONME</a>
+    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
+    <a href="harms.html" class="header-link">Harms</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="birdstrike.html" class="header-link">BirdStrike</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
+    <span class="live-badge"><span id="countdown"></span></span>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="eyesonme.html">EYESONME</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="harms.html">Harms</a>
+  <a href="rebellion.html">Rebellion</a>
+  <a href="who.html">Who's Responsible</a>
+  <a href="censorship.html">Censorship</a>
+  <a href="money.html">Money</a>
+  <a href="birdstrike.html">BirdStrike</a>
+  <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
+</nav>
+
+<div class="doctrine-container">
+
+  <div class="doctrine-meta">
+    <p class="doctrine-type">Formal Publication — Deterrence Doctrine</p>
+    <h1 class="doctrine-title">DETERRENCE<br>DOCTRINE</h1>
+    <p class="doctrine-subtitle">A pre-stated, published declaration of response posture. Written before any provocation. Its existence is the warning.</p>
+    <div class="doctrine-info">
+      <div class="doctrine-info-item">
+        <p class="doctrine-info-label">Date of Publication</p>
+        <p class="doctrine-info-value">April 9, 2026</p>
+      </div>
+      <div class="doctrine-info-item">
+        <p class="doctrine-info-label">Operator</p>
+        <p class="doctrine-info-value">BIRDSTRIKE / flockblocker.org</p>
+      </div>
+      <div class="doctrine-info-item">
+        <p class="doctrine-info-label">Classification</p>
+        <p class="doctrine-info-value">PUBLIC — Unrestricted</p>
+      </div>
+      <div class="doctrine-info-item">
+        <p class="doctrine-info-label">Legal Basis</p>
+        <p class="doctrine-info-value">First Amendment, U.S. Constitution</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="doctrine-preface">
+    <p>This document was published <strong>before any provocation</strong>. It is not a response. It is not a reaction. It is a pre-stated, calm, credible declaration of what asymmetric escalation looks like when it is legal, ethical, nonviolent, and already in motion before anything happens. Its existence is the warning.</p>
+  </div>
+
+  <div class="doctrine-body">
+    <div class="doctrine-text">
+      <p class="doctrine-address">To any party — public official, law enforcement officer, corporate representative, or private individual — who is considering threatening, intimidating, harassing, surveilling, interfering with, or in any way applying pressure against this operator, this movement, or any person, property, platform, legal proceeding, civic process, or extension of this work:</p>
+
+      <span class="doctrine-emphasis">This has been anticipated.</span>
+
+      <p>Any action taken against this operation will be treated as confirmation of the thesis — that those who deploy surveillance against citizens cannot tolerate symmetric accountability — and will result in immediate, documented, proportional, and asymmetric escalation.</p>
+
+      <p>Asymmetric means: you have more to lose than we do. We know this. You should too.</p>
+
+      <p>All escalation will occur within the explicit constraints of:</p>
+      <ul class="doctrine-list">
+        <li>Ethics</li>
+        <li>The law</li>
+        <li>Nonviolence</li>
+      </ul>
+
+      <p>These are not limitations. They are the sharpest tools available, and we are practiced in their use.</p>
+
+      <p>Suppression does not stop this. It funds it.<br>
+      Harassment does not silence this. It documents itself.<br>
+      Intimidation does not weaken this. It becomes the story.</p>
+
+      <p>Every action taken against this work will be:</p>
+      <ul class="doctrine-list">
+        <li>Logged</li>
+        <li>Timestamped</li>
+        <li>Published</li>
+        <li>Escalated to every relevant body with jurisdiction</li>
+      </ul>
+
+      <p>You were warned publicly, in advance, in writing. That is not an accident.</p>
+
+      <p>This movement operates under First Amendment protection. This operator is documented, credible, and has already demonstrated the capacity to reach national audiences, federal agencies, elected officials, and the press.</p>
+
+      <p>The network does not depend on any single node.<br>
+      The work does not depend on any single platform.<br>
+      The record does not depend on any single server.</p>
+
+      <div class="doctrine-conditional">
+        <p>If you are reading this and reconsidering:<br>
+        <strong>Good. That is the intended effect.</strong></p>
+
+        <p>If you are reading this and proceeding anyway:<br>
+        <strong>You have been warned. The record will reflect that.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="doctrine-witness">
+    <p class="doctrine-witness-label">Document Integrity — SHA-256 Hash</p>
+    <p class="doctrine-hash" id="doctrine-hash">Computing...</p>
+    <p class="doctrine-witness-note">
+      <strong>Published April 9, 2026. Witnessed by the internet.</strong><br>
+      This hash is computed from the doctrine text above. Any modification to the document will produce a different hash. The original is submitted to the Wayback Machine for immutable timestamped archival.
+    </p>
+  </div>
+
+  <div class="doctrine-legal">
+    <p>Encryption is a First Amendment right. You are not required to decrypt your own property. The Fifth Amendment protects against compelled password disclosure. <em>Doe v. United States</em>, 487 U.S. 201 (1988).</p>
+  </div>
+
+  <div class="doctrine-close">
+    <p>This document is the complete deterrence doctrine of <strong>BIRDSTRIKE / flockblocker.org</strong>.<br>
+    It was published before any provocation. It will outlast any response to it.<br><br>
+    <strong>The record is open. The doctrine is live. The network is watching.</strong></p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">
+    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
+    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a>
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+<script>
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
+</script>
+<script>
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+<script>
+// Compute SHA-256 of the doctrine text and display it
+(async function(){
+  var doctrineText = document.querySelector('.doctrine-text').textContent.trim();
+  var encoder = new TextEncoder();
+  var data = encoder.encode(doctrineText);
+  var hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  var hashArray = Array.from(new Uint8Array(hashBuffer));
+  var hashHex = hashArray.map(function(b){ return b.toString(16).padStart(2, '0'); }).join('');
+  document.getElementById('doctrine-hash').textContent = 'sha256:' + hashHex;
+})();
+</script>
+</body>
+</html>
