@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FlockBlocker — Who's Responsible</title>
+<title>FlockBlocker — EXPOSED</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #09090b;
@@ -19,7 +19,7 @@
     --text-dim: #44445a;
     --white: #f0f0f8;
     --mono: 'Fira Mono', monospace;
-    --display: 'Syne', sans-serif;
+    --display: 'Black Ops One', cursive;
     --body: 'Epilogue', sans-serif;
     --codec-green: #1a3a2a;
     --codec-line: #2aff6a;
@@ -282,6 +282,56 @@
 
   hr { border: none; border-top: 1px solid var(--border); }
 
+  /* === EXPOSED BANNER === */
+  .exposed-banner {
+    background: linear-gradient(90deg, #1a0000 0%, #2a0505 50%, #1a0000 100%);
+    border-bottom: 2px solid var(--red);
+    padding: 1rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .exposed-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(240,90,74,0.03) 3px, rgba(240,90,74,0.03) 6px);
+    pointer-events: none;
+  }
+  .exposed-banner::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 200%; height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(240,90,74,0.06) 25%, transparent 50%);
+    animation: sweep 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes sweep { 0%{transform:translateX(-50%)} 100%{transform:translateX(50%)} }
+  .exposed-text {
+    font-family: var(--display);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--red);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-shadow: 0 0 30px rgba(240,90,74,0.4), 0 0 60px rgba(240,90,74,0.15);
+    animation: pulse-glow 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse-glow {
+    0%,100% { text-shadow: 0 0 30px rgba(240,90,74,0.4), 0 0 60px rgba(240,90,74,0.15); }
+    50% { text-shadow: 0 0 40px rgba(240,90,74,0.6), 0 0 80px rgba(240,90,74,0.25); }
+  }
+  .exposed-sub {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: #9e5a5a;
+    letter-spacing: 0.15em;
+    margin-top: 0.4rem;
+  }
+
+  @media (max-width: 900px) {
+    .exposed-banner { padding: 0.75rem 1.5rem; }
+  }
+
   .back-link {
     display: inline-flex;
     align-items: center;
@@ -301,6 +351,17 @@
   .footer-left a:hover { color: var(--accent); }
   .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
 
+  /* Mobile Navigation */
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
+  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
+  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
+  .menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
+  .mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
+  .mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
+  .mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
+  .mobile-nav a:active { color: var(--accent); }
+
   @media (max-width: 900px) {
     .codec-grid { grid-template-columns: 1fr; }
     .page-header { padding: 4rem 1.5rem 2rem; }
@@ -308,6 +369,18 @@
     footer { padding: 2rem 1.5rem; }
     header { padding: 0 1.5rem; }
     .header-link { display: none; }
+    .menu-toggle { display: block; }
+  }
+  @media (max-width: 480px) {
+    .page-header { padding: 3rem 1rem 1.5rem; }
+    .page-title { font-size: clamp(2rem, 8vw, 2.5rem); }
+    .page-lead { font-size: 0.92rem; }
+    .dossier-section { padding: 2rem 1rem; }
+    .dossier-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+    .codec-card .codec-portrait { aspect-ratio: 16/9; }
+    .codec-data { padding: 1rem 1.2rem 1.2rem; }
+    footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
+    header { padding: 0 1rem; }
   }
 </style>
 </head>
@@ -316,22 +389,46 @@
 <header>
   <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
   <div class="header-right">
-    <a href="index.html#problem" class="header-link">Problem</a>
-    <a href="index.html#approach" class="header-link">Approach</a>
-    <a href="harms.html" class="header-link">How Flock Hurts</a>
-    <a href="index.html#origin" class="header-link">Origin</a>
-    <a href="who.html" class="header-link" style="color:var(--accent)">Who's Responsible</a>
+    <a href="doctrine.html" style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;color:var(--text-dim);transition:color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-dim)'">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link" style="color:#c8f04a">EYESONME</a>
+    <a href="index.html" class="header-link">Home</a>
+    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
+    <a href="harms.html" class="header-link">Harms</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="who.html" class="header-link" style="color:var(--accent)">Who</a>
     <a href="censorship.html" class="header-link">Censorship</a>
+    <a href="money.html" class="header-link">Money</a>
+    <a href="birdstrike.html" class="header-link">BirdStrike</a>
     <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
-    <span class="live-badge">CLOCK RUNNING</span>
+    <span class="live-badge"><span id="countdown"></span></span>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
   </div>
 </header>
+
+<nav class="mobile-nav">
+  <a href="eyesonme.html">EYESONME</a>
+  <a href="doctrine.html">Deterrence Doctrine</a>
+  <a href="index.html">Home</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="harms.html">Harms</a>
+  <a href="rebellion.html">Rebellion</a>
+  <a href="who.html">Who's Responsible</a>
+  <a href="censorship.html">Censorship</a>
+  <a href="money.html">Money</a>
+  <a href="birdstrike.html">BirdStrike</a>
+  <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
+</nav>
+
+<div class="exposed-banner">
+  <p class="exposed-text">EXPOSED</p>
+  <p class="exposed-sub">Demand letter served // Contract obtained via public records // Response received</p>
+</div>
 
 <div class="page-header">
   <p class="page-kicker">// Dossier — Public Record</p>
   <h1 class="page-title">Who's Responsible</h1>
   <p class="page-lead">
-    <strong>Every name on this page is public record.</strong> These are the officials who authorized Flock Safety's deployment in Mauston and the corporate officers who sold it to them. All contact information is sourced from government directories and LinkedIn profiles.
+    <strong>Every name on this page is public record.</strong> These are the officials who authorized Flock Safety's deployment in Mauston, the corporate officers who sold it to them, and the documents that prove what they agreed to. We have the contract. We have the chief's response. The public deserves to see both.
   </p>
 </div>
 
@@ -681,17 +778,51 @@
 
   </div>
 
-  <a href="index.html" class="back-link">← Back to FlockBlocker</a>
+  <div style="margin-top:2rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+    <a href="evidence.html" class="back-link" style="color:var(--red); border:1px solid var(--red); padding:0.6rem 1.25rem; margin:0;">View Contract & Chief's Response →</a>
+    <a href="index.html" class="back-link" style="padding:0.6rem 1.25rem; margin:0;">← Back to FlockBlocker</a>
+  </div>
 </div>
 
 <footer>
   <div class="footer-left">
-    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a><br>
-    All names and contact information on this page are sourced from public government directories, official municipal websites, and LinkedIn profiles.<br>
-    No private information has been disclosed.
+    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
+    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a>
   </div>
   <div class="footer-right">FLOCKBLOCKER — 2026</div>
 </footer>
 
+<script>
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
+</script>
+<script>
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
 </body>
 </html>

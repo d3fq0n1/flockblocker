@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EYESONME — Operations Dashboard — FlockBlocker</title>
+<meta name="description" content="EYESONME public accountability camera network. You watch us. We watch back.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root {
+    --bg: #09090b;
+    --surface: #111116;
+    --surface2: #16161c;
+    --border: #242430;
+    --accent: #c8f04a;
+    --red: #f05a4a;
+    --amber: #f0a84a;
+    --green: #4af0a0;
+    --text: #d4d4dc;
+    --text-mid: #8888a0;
+    --text-dim: #44445a;
+    --white: #f0f0f8;
+    --mono: 'Fira Mono', monospace;
+    --display: 'Black Ops One', cursive;
+    --body: 'Epilogue', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  /* Header */
+  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
+  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
+  .logo em { color: var(--accent); font-style: normal; }
+  .header-right { display: flex; align-items: center; gap: 2rem; }
+  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
+  .header-link:hover { color: var(--accent); }
+  .header-link.active { color: var(--accent); }
+  .doctrine-link { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; color: var(--text-dim); transition: color 0.2s; }
+  .doctrine-link:hover { color: var(--white); }
+  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; }
+  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,240,160,0.4)} 50%{opacity:0.8;box-shadow:0 0 0 6px rgba(74,240,160,0)} }
+
+  /* Mobile nav */
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
+  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
+  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
+  .menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
+  .mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
+  .mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
+  .mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
+  .mobile-nav a:active { color: var(--accent); }
+
+  /* Shared section */
+  hr { border: none; border-top: 1px solid var(--border); }
+  .section { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
+  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+  .section-body { font-size: 1rem; line-height: 1.9; color: var(--text); max-width: 680px; }
+  .section-body strong { color: var(--white); font-weight: 500; }
+  .section-body em { color: var(--accent); font-style: normal; }
+  .btn { font-family: var(--display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
+  .btn-fill { background: var(--accent); color: #09090b; }
+  .btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--text-mid); color: var(--white); }
+
+  /* Hero */
+  .eom-hero { padding: 6rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+  .eom-hero-kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--green); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.6rem; }
+  .eom-hero-kicker::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; }
+  .eom-hero-title { font-family: var(--display); font-weight: 800; font-size: clamp(3.5rem, 8vw, 7rem); line-height: 0.92; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2rem; }
+  .eom-hero-title .accent { color: var(--green); }
+  .eom-hero-tagline { font-family: var(--mono); font-size: clamp(0.9rem, 2vw, 1.2rem); color: var(--text-mid); letter-spacing: 0.06em; margin-bottom: 1.5rem; }
+  .eom-hero-lead { font-size: 1.05rem; font-weight: 300; color: var(--text); line-height: 1.85; max-width: 640px; margin-bottom: 2.5rem; }
+  .eom-hero-lead strong { color: var(--white); font-weight: 500; }
+
+  /* Deterrence banner */
+  .deterrence-banner { background: var(--surface); border: 1px solid var(--border); padding: 2rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+  .deterrence-banner p { font-family: var(--mono); font-size: 0.78rem; color: var(--text-mid); line-height: 1.9; }
+  .deterrence-banner strong { color: var(--white); font-weight: 500; }
+  .deterrence-banner a { color: var(--accent); border-bottom: 1px solid rgba(200,240,74,0.3); transition: color 0.2s; }
+  .deterrence-banner a:hover { color: var(--white); }
+
+  /* Network status bar */
+  .net-status { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 0; }
+  .net-status-label { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+  .net-status-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); }
+  .net-stat { background: var(--surface); padding: 1.2rem 1.5rem; }
+  .net-stat-label { font-family: var(--mono); font-size: 0.58rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .net-stat-value { font-family: var(--display); font-size: 1.6rem; color: var(--white); line-height: 1.1; }
+  .net-stat-value.green { color: var(--green); }
+  .net-stat-value.amber { color: var(--amber); }
+  .net-stat-value.red { color: var(--red); }
+  .net-stat-value.sm { font-family: var(--mono); font-size: 0.82rem; font-weight: 400; }
+
+  /* Station grid */
+  .station-grid { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem; }
+  .station-grid-label { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+  .station-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+  .station-card { background: var(--surface); border: 1px solid var(--border); padding: 0; transition: border-color 0.2s; }
+  .station-card:hover { border-color: var(--text-dim); }
+  .station-card-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; }
+  .station-id { font-family: var(--display); font-size: 0.85rem; color: var(--white); letter-spacing: 0.04em; }
+  .station-name { font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.1em; margin-top: 0.2rem; }
+  .status-badge { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.6rem; border: 1px solid; display: inline-flex; align-items: center; gap: 0.4rem; }
+  .status-badge.planned { color: var(--text-mid); border-color: var(--border); }
+  .status-badge.active { color: var(--green); border-color: rgba(74,240,160,0.4); }
+  .status-badge.active::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; }
+  .status-badge.offline { color: var(--red); border-color: rgba(240,90,74,0.4); }
+  .status-badge.degraded { color: var(--amber); border-color: rgba(240,168,74,0.4); }
+  .station-card-body { padding: 1rem 1.5rem; }
+  .station-field { padding: 0.5rem 0; border-bottom: 1px solid rgba(36,36,48,0.5); }
+  .station-field:last-child { border-bottom: none; }
+  .station-field-label { font-family: var(--mono); font-size: 0.55rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.15rem; }
+  .station-field-value { font-family: var(--mono); font-size: 0.76rem; color: var(--text-mid); }
+  .station-field-value.highlight { color: var(--white); }
+  .station-card-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .station-gauges { display: flex; gap: 1rem; }
+  .gauge { display: flex; align-items: center; gap: 0.3rem; }
+  .gauge-bar { width: 40px; height: 4px; background: var(--border); position: relative; overflow: hidden; }
+  .gauge-fill { height: 100%; position: absolute; left: 0; top: 0; }
+  .gauge-fill.green { background: var(--green); }
+  .gauge-fill.amber { background: var(--amber); }
+  .gauge-fill.red { background: var(--red); }
+  .gauge-label { font-family: var(--mono); font-size: 0.55rem; color: var(--text-dim); letter-spacing: 0.08em; }
+  .station-eyesonme { font-family: var(--mono); font-size: 0.58rem; color: var(--green); letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.35rem; }
+  .station-eyesonme::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; }
+
+  /* Snapshot placeholder */
+  .station-snapshot { background: var(--bg); border: 1px solid var(--border); height: 120px; display: flex; align-items: center; justify-content: center; margin: 0.75rem 0; }
+  .station-snapshot-pending { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.1em; }
+
+  /* Protected operation banner */
+  .protected-banner { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.08em; padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); line-height: 1.6; }
+  .protected-banner a { color: var(--text-mid); border-bottom: 1px solid rgba(136,136,160,0.2); }
+  .protected-banner a:hover { color: var(--accent); }
+
+  /* Subject dossier cards */
+  .subject-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+  .subject-card { background: var(--surface); border: 1px solid var(--border); transition: border-color 0.2s; }
+  .subject-card:hover { border-color: var(--text-dim); }
+  .subject-card-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--border); }
+  .subject-org-tag { font-family: var(--mono); font-size: 0.55rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .subject-org-tag.municipal { color: var(--amber); }
+  .subject-org-tag.county { color: var(--red); }
+  .subject-org-tag.corporate { color: var(--red); }
+  .subject-name { font-family: var(--display); font-size: 1.1rem; color: var(--white); letter-spacing: 0.02em; margin-bottom: 0.2rem; }
+  .subject-title { font-family: var(--mono); font-size: 0.68rem; color: var(--text-mid); }
+  .subject-card-body { padding: 1.2rem 1.5rem; }
+  .subject-role { font-size: 0.88rem; color: var(--text); line-height: 1.7; margin-bottom: 1rem; }
+  .subject-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+  .subject-meta-item { }
+  .subject-meta-label { font-family: var(--mono); font-size: 0.52rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.15rem; }
+  .subject-meta-value { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); }
+  .subject-meta-value.overdue { color: var(--red); }
+  .subject-timeline { margin-top: 1rem; }
+  .subject-timeline-label { font-family: var(--mono); font-size: 0.55rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .tl-entry { padding: 0.5rem 0; border-bottom: 1px solid rgba(36,36,48,0.5); display: flex; gap: 0.75rem; align-items: flex-start; }
+  .tl-entry:last-child { border-bottom: none; }
+  .tl-type { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.08em; padding: 0.15rem 0.4rem; border: 1px solid; flex-shrink: 0; margin-top: 0.15rem; }
+  .tl-type.foia { color: var(--accent); border-color: rgba(200,240,74,0.3); }
+  .tl-type.statement { color: var(--green); border-color: rgba(74,240,160,0.3); }
+  .tl-type.meeting { color: var(--amber); border-color: rgba(240,168,74,0.3); }
+  .tl-type.silence { color: var(--red); border-color: rgba(240,90,74,0.3); }
+  .tl-date { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); flex-shrink: 0; min-width: 70px; margin-top: 0.15rem; }
+  .tl-desc { font-size: 0.78rem; color: var(--text); line-height: 1.5; }
+  .subject-card-footer { padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .subject-docs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .doc-badge { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.08em; padding: 0.2rem 0.5rem; background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); }
+  .doc-badge.obtained { color: var(--green); border-color: rgba(74,240,160,0.3); }
+  .doc-badge.pending { color: var(--amber); border-color: rgba(240,168,74,0.3); }
+
+  /* FOIA tracker */
+  .foia-table-wrap { overflow-x: auto; margin-top: 1.5rem; }
+  .foia-table { width: 100%; border-collapse: collapse; }
+  .foia-table th { font-family: var(--mono); font-size: 0.58rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .foia-table td { font-family: var(--mono); font-size: 0.76rem; color: var(--text-mid); padding: 0.75rem 1rem; border-bottom: 1px solid rgba(36,36,48,0.5); }
+  .foia-table tr:hover td { background: rgba(17,17,22,0.5); }
+  .foia-status { font-size: 0.58rem; letter-spacing: 0.08em; padding: 0.2rem 0.5rem; border: 1px solid; }
+  .foia-status.filed { color: var(--text-mid); border-color: var(--border); }
+  .foia-status.overdue { color: var(--red); border-color: rgba(240,90,74,0.4); }
+  .foia-status.fulfilled { color: var(--green); border-color: rgba(74,240,160,0.3); }
+  .foia-status.partial { color: var(--amber); border-color: rgba(240,168,74,0.3); }
+  .foia-status.denied { color: var(--red); border-color: rgba(240,90,74,0.4); background: rgba(240,90,74,0.08); }
+  .foia-overdue { color: var(--red); font-weight: 500; }
+
+  /* Activity feed */
+  .feed-entries { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 1.5rem; }
+  .feed-entry { background: var(--surface); padding: 1rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
+  .feed-ts { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); flex-shrink: 0; min-width: 130px; margin-top: 0.15rem; }
+  .feed-station { font-family: var(--mono); font-size: 0.62rem; color: var(--accent); flex-shrink: 0; min-width: 100px; margin-top: 0.15rem; }
+  .feed-type { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.08em; padding: 0.15rem 0.4rem; border: 1px solid var(--border); color: var(--text-mid); flex-shrink: 0; margin-top: 0.1rem; }
+  .feed-desc { font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+
+  /* Replication / Deploy section */
+  .bom-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+  .bom-table th { font-family: var(--mono); font-size: 0.58rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
+  .bom-table td { font-family: var(--mono); font-size: 0.76rem; color: var(--text-mid); padding: 0.6rem 1rem; border-bottom: 1px solid rgba(36,36,48,0.5); }
+  .bom-table td:last-child { text-align: right; color: var(--white); }
+
+  .setup-steps { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 1.5rem; }
+  .setup-step { background: var(--surface); padding: 1.2rem 1.5rem; }
+  .setup-step-num { font-family: var(--display); font-size: 0.8rem; color: var(--green); margin-bottom: 0.3rem; }
+  .setup-step-title { font-family: var(--display); font-size: 0.9rem; color: var(--white); margin-bottom: 0.4rem; }
+  .setup-step-body { font-size: 0.85rem; color: var(--text); line-height: 1.7; }
+  .setup-step-body code { font-family: var(--mono); font-size: 0.76rem; color: var(--accent); background: var(--bg); padding: 0.1rem 0.4rem; }
+
+  /* Encryption architecture */
+  .crypto-layers { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 1.5rem; }
+  .crypto-layer { background: var(--surface); padding: 1.5rem; }
+  .crypto-layer-num { font-family: var(--display); font-size: 0.75rem; color: var(--green); margin-bottom: 0.3rem; }
+  .crypto-layer-title { font-family: var(--display); font-size: 0.95rem; color: var(--white); margin-bottom: 0.5rem; }
+  .crypto-layer-body { font-size: 0.85rem; color: var(--text); line-height: 1.8; }
+  .crypto-layer-body strong { color: var(--white); font-weight: 500; }
+  .crypto-layer-body code { font-family: var(--mono); font-size: 0.76rem; color: var(--accent); background: var(--bg); padding: 0.1rem 0.4rem; }
+
+  .legal-block { margin-top: 2rem; padding: 1.5rem 2rem; border-left: 3px solid var(--green); background: var(--surface2); }
+  .legal-block p { font-family: var(--mono); font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; }
+  .legal-block strong { color: var(--green); font-weight: 500; }
+
+  /* Insight block */
+  .insight-block { margin-top: 2.5rem; background: var(--surface2); border-left: 3px solid var(--green); padding: 1.5rem 2rem; max-width: 680px; }
+  .insight-block p { font-family: var(--mono); font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; }
+  .insight-block strong { color: var(--green); font-weight: 500; }
+
+  /* Map */
+  .map-container { height: 300px; background: var(--surface); border: 1px solid var(--border); margin-top: 1.5rem; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
+  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    header { padding: 0 1.5rem; }
+    .header-link { display: none; }
+    .doctrine-link { display: none; }
+    .menu-toggle { display: block; }
+    .eom-hero { padding: 4rem 1.5rem 3rem; }
+    .net-status { padding: 2rem 1.5rem 0; }
+    .net-status-grid { grid-template-columns: repeat(3, 1fr); }
+    .station-grid { padding: 2rem 1.5rem; }
+    .station-cards { grid-template-columns: 1fr; }
+    .subject-grid { grid-template-columns: 1fr; }
+    .section { padding: 4rem 1.5rem; }
+    .deterrence-banner { margin: 0 1.5rem; }
+    footer { padding: 2rem 1.5rem; }
+    .feed-entry { flex-wrap: wrap; gap: 0.5rem; }
+    .feed-ts { min-width: auto; }
+    .feed-station { min-width: auto; }
+  }
+  @media (max-width: 480px) {
+    .eom-hero { padding: 3rem 1rem 2rem; }
+    .eom-hero-title { font-size: clamp(2.5rem, 12vw, 3.5rem); }
+    .net-status { padding: 1.5rem 1rem 0; }
+    .net-status-grid { grid-template-columns: repeat(2, 1fr); }
+    .net-stat-value { font-size: 1.2rem; }
+    .station-grid { padding: 1.5rem 1rem; }
+    .station-cards { grid-template-columns: 1fr; }
+    .section { padding: 3rem 1rem; }
+    .subject-meta { grid-template-columns: 1fr; }
+    .deterrence-banner { margin: 0 1rem; padding: 1.5rem; }
+    footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
+    header { padding: 0 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="index.html" class="header-link">Home</a>
+    <a href="eyesonme.html" class="header-link active">EYESONME</a>
+    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
+    <a href="harms.html" class="header-link">Harms</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="birdstrike.html" class="header-link">BirdStrike</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
+    <span class="live-badge"><span id="countdown"></span></span>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="eyesonme.html">EYESONME</a>
+  <a href="doctrine.html">Deterrence Doctrine</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="harms.html">Harms</a>
+  <a href="rebellion.html">Rebellion</a>
+  <a href="who.html">Who's Responsible</a>
+  <a href="censorship.html">Censorship</a>
+  <a href="money.html">Money</a>
+  <a href="birdstrike.html">BirdStrike</a>
+  <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
+</nav>
+
+<!-- ============================================================ -->
+<!-- HERO -->
+<!-- ============================================================ -->
+<div class="eom-hero" id="eyesonme">
+  <p class="eom-hero-kicker">EYESONME Network — Operational</p>
+  <h1 class="eom-hero-title">EYES<span class="accent">ON</span>ME</h1>
+  <p class="eom-hero-tagline">You watch us. We watch back.</p>
+  <p class="eom-hero-lead">
+    <strong>Flock Safety cameras watch citizens from public infrastructure.</strong> EYESONME cameras watch public officials from public spaces. Both are legal. Only one has a dashboard. This is not protest. <strong>This is symmetry.</strong>
+  </p>
+  <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+    <a href="#stations" class="btn btn-fill">View Stations ↓</a>
+    <a href="#subjects" class="btn btn-outline">Accountability Subjects</a>
+    <a href="doctrine.html" class="btn btn-outline">Deterrence Doctrine</a>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- DETERRENCE HEADER -->
+<!-- ============================================================ -->
+<div class="deterrence-banner">
+  <p><strong>EYESONME exists because accountability must be symmetric.</strong> Any attempt to interfere with this network will be logged, published, and escalated. Every station that goes dark because of external pressure becomes a headline. We do not make threats. We publish doctrines. <a href="doctrine.html">→ Read the full doctrine</a></p>
+</div>
+
+<!-- ============================================================ -->
+<!-- NETWORK STATUS BAR -->
+<!-- ============================================================ -->
+<div class="net-status">
+  <p class="net-status-label">Network Status — EYESONME Operations</p>
+  <div class="net-status-grid" id="net-status-grid">
+    <div class="net-stat">
+      <p class="net-stat-label">Stations Deployed</p>
+      <p class="net-stat-value" id="ns-deployed">0</p>
+    </div>
+    <div class="net-stat">
+      <p class="net-stat-label">Stations Active</p>
+      <p class="net-stat-value green" id="ns-active">0</p>
+    </div>
+    <div class="net-stat">
+      <p class="net-stat-label">Total Runtime</p>
+      <p class="net-stat-value sm" id="ns-runtime">—</p>
+    </div>
+    <div class="net-stat">
+      <p class="net-stat-label">Motion Events</p>
+      <p class="net-stat-value" id="ns-events">0</p>
+    </div>
+    <div class="net-stat">
+      <p class="net-stat-label">Network Since</p>
+      <p class="net-stat-value sm" id="ns-since">—</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- STATION GRID -->
+<!-- ============================================================ -->
+<div class="station-grid" id="stations">
+  <p class="station-grid-label">Station Fleet — All Units</p>
+  <div class="station-cards" id="station-cards">
+    <!-- Populated by JS from eyesonme-data.json -->
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- ACCOUNTABILITY SUBJECTS -->
+<!-- ============================================================ -->
+<div class="section" id="subjects">
+  <p class="section-tag">Accountability Subjects — Named Officials</p>
+  <h2 class="section-title">Who Is Being Watched</h2>
+  <p class="section-body" style="margin-bottom:2.5rem;">
+    Every camera Flock Safety deploys was authorized by a named official who signed a contract. Every query against the national ALPR database was executed by a named officer. Every sales call was made by a named executive. <strong>These are the subjects.</strong>
+  </p>
+
+  <!-- Municipal subjects -->
+  <p class="station-grid-label" style="margin-top:2rem;">City of Mauston — Municipal Officials</p>
+  <div class="subject-grid" id="subject-grid-municipal">
+    <!-- Populated by JS from eyesonme-subjects.json -->
+  </div>
+
+  <!-- County subjects -->
+  <p class="station-grid-label" style="margin-top:3rem;">Juneau County — County Officials</p>
+  <div class="subject-grid" id="subject-grid-county">
+    <!-- Populated by JS -->
+  </div>
+
+  <!-- Corporate subjects -->
+  <p class="station-grid-label" style="margin-top:3rem;">Flock Safety — Corporate Officers</p>
+  <div class="subject-grid" id="subject-grid-corporate">
+    <!-- Populated by JS -->
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- FOIA TRACKER -->
+<!-- ============================================================ -->
+<div class="section" id="foia">
+  <p class="section-tag">Public Records — FOIA Tracker</p>
+  <h2 class="section-title">Open Records Requests</h2>
+  <div class="insight-block" style="margin-top:0;margin-bottom:2rem;">
+    <p><strong>Obstruction of public records requests is itself a public record.</strong> Interference is logged and escalated. Wisconsin law (Wis. Stat. § 19.35) requires response within 10 business days. Every day past deadline is documented.</p>
+  </div>
+  <div class="foia-table-wrap">
+    <table class="foia-table" id="foia-table">
+      <thead>
+        <tr>
+          <th>Request ID</th>
+          <th>Target Agency</th>
+          <th>Filed</th>
+          <th>Deadline</th>
+          <th>Status</th>
+          <th>Subject(s)</th>
+          <th>Overdue</th>
+        </tr>
+      </thead>
+      <tbody id="foia-tbody">
+        <!-- Populated by JS from eyesonme-subjects.json -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- ACTIVITY FEED -->
+<!-- ============================================================ -->
+<div class="section" id="activity">
+  <p class="section-tag">Network Activity — Event Log</p>
+  <h2 class="section-title">Activity Feed</h2>
+  <div class="feed-entries" id="feed-entries">
+    <div class="feed-entry">
+      <span class="feed-ts">2026-04-09 00:00</span>
+      <span class="feed-station">NETWORK</span>
+      <span class="feed-type">NOTE</span>
+      <span class="feed-desc">EYESONME network initialized. Three stations planned: Alpha (Mauston PD), Bravo (City Hall), Charlie (Juneau County SO).</span>
+    </div>
+    <div class="feed-entry">
+      <span class="feed-ts">2026-04-07 —:—</span>
+      <span class="feed-station">EYESONME-001</span>
+      <span class="feed-type">NOTE</span>
+      <span class="feed-desc">Target subject Chief Zilisch broke 19-day silence. First documented response to BIRDSTRIKE demand.</span>
+    </div>
+    <div class="feed-entry">
+      <span class="feed-ts">2026-03-19 —:—</span>
+      <span class="feed-station">NETWORK</span>
+      <span class="feed-type">FOIA</span>
+      <span class="feed-desc">Formal decommission notice served to Mauston PD, City Hall, Juneau County SO. 30-day response window established. CC: State Senator Sarah Keyeski.</span>
+    </div>
+    <div class="feed-entry">
+      <span class="feed-ts">2026-03-19 —:—</span>
+      <span class="feed-station">NETWORK</span>
+      <span class="feed-type">NOTE</span>
+      <span class="feed-desc">BIRDSTRIKE operation commenced. All named subjects entered silence monitoring.</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- ENCRYPTION ARCHITECTURE -->
+<!-- ============================================================ -->
+<div class="section" id="encryption">
+  <p class="section-tag">Data Sovereignty — End-to-End Encryption</p>
+  <h2 class="section-title">Encryption Architecture</h2>
+  <p class="section-body" style="margin-bottom:1.5rem;">
+    <strong>Non-negotiable.</strong> All data is encrypted at every layer from moment of capture. No plaintext exists outside operator control at any point. Physical seizure, network interception, legal compulsion — all yield only ciphertext.
+  </p>
+  <div class="crypto-layers">
+    <div class="crypto-layer">
+      <p class="crypto-layer-num">Layer 1</p>
+      <p class="crypto-layer-title">Storage — At Rest, On Device</p>
+      <p class="crypto-layer-body">Root filesystem encrypted via <code>LUKS2</code>. Key derived from hardware-bound TPM secret + operator passphrase — passphrase never stored on device. Forced reboot without key = unreadable device. All snapshots, clips, logs written to encrypted partition. Temp files via <code>tmpfs</code> only — no cleartext to unencrypted storage. RAM encryption via <strong>TRESOR</strong> — keys in CPU registers, immune to cold boot attacks.</p>
+    </div>
+    <div class="crypto-layer">
+      <p class="crypto-layer-num">Layer 2</p>
+      <p class="crypto-layer-title">Transit — Station to VPS</p>
+      <p class="crypto-layer-body">All outbound traffic exclusively over <code>WireGuard</code> VPN. <strong>ChaCha20 + Poly1305 + Curve25519</strong> — modern, audited. If tunnel is down: station buffers locally and retries. No fallback to cleartext. Ever. VPS is operator-controlled, hosted <strong>outside United States jurisdiction</strong> (Iceland, Switzerland, or Netherlands). No US-based cloud providers in data path.</p>
+    </div>
+    <div class="crypto-layer">
+      <p class="crypto-layer-num">Layer 3</p>
+      <p class="crypto-layer-title">Application Layer — Payload</p>
+      <p class="crypto-layer-body">All snapshots and clips encrypted with operator public key (<code>libsodium secretbox</code> or GPG) <strong>before</strong> queuing for upload. Encrypted payload transits WireGuard — double-wrapped. VPS stores only encrypted blobs. Full VPS compromise yields no readable media without operator private key. <strong>Private key never leaves operator possession. Never stored on station. Never stored on VPS.</strong></p>
+    </div>
+    <div class="crypto-layer">
+      <p class="crypto-layer-num">Layer 4</p>
+      <p class="crypto-layer-title">Field Collection</p>
+      <p class="crypto-layer-body">Data pulled via ESP32 session written to operator device as encrypted archive (<code>age</code> or GPG). WPA3 encrypted in transit during session. Station encrypts with operator public key at source before transfer — no plaintext sent even over authenticated local session. Operator decrypts only in isolated environment.</p>
+    </div>
+    <div class="crypto-layer">
+      <p class="crypto-layer-num">Layer 5</p>
+      <p class="crypto-layer-title">Auth Material</p>
+      <p class="crypto-layer-body">TOTP secrets stored in LUKS-encrypted partition. WireGuard private keys stored in LUKS-encrypted partition. ESP32 WPA3 credentials provisioned at deployment, never transmitted in plaintext. All key material wiped from provisioning device after station setup. <strong>Operator-triggered remote wipe via authenticated WireGuard command destroys LUKS header — device forensically sterile within seconds.</strong></p>
+    </div>
+  </div>
+  <div class="insight-block" style="margin-top:2rem;border-color:var(--red);">
+    <p style="color:var(--text-mid);"><strong style="color:var(--red);">Seizure Resistance:</strong> Encrypted filesystem requires key not present on device. No credentials, keys, or plaintext recoverable. Forced reboot triggers LUKS lockout. Tamper switch triggers immediate secure wipe. Station attempts final encrypted alert before shutdown. <strong style="color:var(--white);">Operator retains sole key custody. No escrow. No recovery service. No third-party key holders.</strong></p>
+  </div>
+  <div class="legal-block">
+    <p><strong>Encryption is a First Amendment right.</strong> You are not required to decrypt your own property. The Fifth Amendment protects against compelled password disclosure. <em>Doe v. United States</em>, 487 U.S. 201 (1988).</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- DEPLOY IN YOUR CITY -->
+<!-- ============================================================ -->
+<div class="section" id="deploy">
+  <p class="section-tag">Replication — Deploy In Your City</p>
+  <h2 class="section-title">Fork The Network</h2>
+  <p class="section-body" style="margin-bottom:1.5rem;">
+    EYESONME is designed to replicate. Every component is documented, every part is commercially available, every technique is legal. <strong>Your data. Your keys. Their problem.</strong>
+  </p>
+  <p class="station-grid-label" style="margin-top:2.5rem;">Bill of Materials — Per Station</p>
+  <table class="bom-table">
+    <thead><tr><th>Component</th><th>Specification</th><th>Est. Cost</th></tr></thead>
+    <tbody>
+      <tr><td>Compute</td><td>Raspberry Pi 5 4GB</td><td>$60</td></tr>
+      <tr><td>OS</td><td>DietPi (hardened Debian minimal)</td><td>Free</td></tr>
+      <tr><td>Camera</td><td>RPi Camera Module 3 or HQ Camera — IR day/night</td><td>$25–75</td></tr>
+      <tr><td>Cellular</td><td>Waveshare SIM7600 4G LTE HAT</td><td>$45</td></tr>
+      <tr><td>Battery</td><td>12V LiFePO4 20–40Ah (NOT lead acid)</td><td>$60–120</td></tr>
+      <tr><td>Solar</td><td>30–50W panel + Victron SmartSolar 75/15 MPPT</td><td>$80–120</td></tr>
+      <tr><td>Storage</td><td>SanDisk Max Endurance 128GB or NVMe via PCIe HAT</td><td>$20–50</td></tr>
+      <tr><td>Enclosure</td><td>IP65+ weatherproof w/ tamper sensor</td><td>$30–60</td></tr>
+      <tr><td>Power</td><td>DC-DC buck converter 12V to 5V/5A</td><td>$10</td></tr>
+      <tr><td>Local Radio</td><td>SX1276 LoRa 915MHz + ESP32 WROOM-32</td><td>$15–25</td></tr>
+      <tr><td>SIM Card</td><td>Prepaid data plan 1–5GB/mo</td><td>$10–20/mo</td></tr>
+    </tbody>
+  </table>
+  <p style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim);margin-top:1rem;letter-spacing:0.06em;">Total per station: approximately $355–585 + monthly cellular</p>
+  <p class="station-grid-label" style="margin-top:3rem;">Setup Sequence</p>
+  <div class="setup-steps">
+    <div class="setup-step"><p class="setup-step-num">01</p><p class="setup-step-title">Hardware Assembly</p><p class="setup-step-body">Wire: solar panel, MPPT controller, LiFePO4 battery, buck converter (12V to 5V), RPi 5. Mount camera module. Attach 4G LTE HAT. Connect LoRa + ESP32 modules via SPI/UART. Install in IP65 enclosure with cable glands.</p></div>
+    <div class="setup-step"><p class="setup-step-num">02</p><p class="setup-step-title">OS + Hardening</p><p class="setup-step-body">Flash DietPi to industrial microSD or NVMe. Enable <code>LUKS2</code> full-disk encryption. Configure <code>unattended-upgrades</code>. Disable all unnecessary services. Set up <code>tmpfs</code> for temp writes. Install <code>WireGuard</code>, <code>OpenCV</code>, heartbeat script.</p></div>
+    <div class="setup-step"><p class="setup-step-num">03</p><p class="setup-step-title">Encryption Stack</p><p class="setup-step-body">Generate operator keypair (GPG or <code>age</code>). Deploy public key to station. Configure application-layer encryption for all captures. Set up WireGuard tunnel to offshore VPS. Verify: no plaintext leaves device at any layer.</p></div>
+    <div class="setup-step"><p class="setup-step-num">04</p><p class="setup-step-title">VPS Configuration</p><p class="setup-step-body">Provision VPS outside US jurisdiction (Iceland, Switzerland, Netherlands). Enable LUKS2 on VPS storage. Configure WireGuard endpoint. Set up <code>rsync</code>/SFTP ingestion for encrypted blobs. Deploy heartbeat monitor + alerting.</p></div>
+    <div class="setup-step"><p class="setup-step-num">05</p><p class="setup-step-title">Local Radio + Field Client</p><p class="setup-step-body">Flash ESP32 firmware for WiFi AP gatekeeper. Configure LoRa TOTP authentication. Provision WPA3 credentials. Install field client CLI on operator device: <code>totp-generate</code>, <code>lora-wake</code>, <code>collect</code>, <code>status</code>, <code>provision</code>.</p></div>
+    <div class="setup-step"><p class="setup-step-num">06</p><p class="setup-step-title">Deployment + Legal</p><p class="setup-step-body">Verify legal standing in your jurisdiction (Wisconsin: complete — other states: verify public photography + encryption rights). Deploy to public location with line-of-sight to target facility. Register station in your EYESONME dashboard fork. Publish. Watch back.</p></div>
+  </div>
+  <div class="legal-block" style="margin-top:2rem;">
+    <p><strong>Legal summary:</strong> Recording in public spaces is protected under the First Amendment. Encryption is protected speech. The Fifth Amendment protects against compelled password disclosure. No physical tampering, no computer system access, no wiretapping. Check state-specific recording and drone laws before deployment.</p>
+  </div>
+  <div style="margin-top:2rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="btn btn-fill">Fork on GitHub ↗</a>
+    <a href="birdstrike.html" class="btn btn-outline">BirdStrike Field Manual</a>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- STATION MAP -->
+<!-- ============================================================ -->
+<div class="section" id="map">
+  <p class="section-tag">Network Geography</p>
+  <h2 class="section-title">Station Map</h2>
+  <p class="section-body" style="margin-bottom:1rem;">Exact station coordinates are withheld for operational security. General coverage areas shown.</p>
+  <div class="map-container" id="station-map"></div>
+</div>
+
+<footer>
+  <div class="footer-left">
+    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
+    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a>
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+<script>
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
+</script>
+<script>
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+<script>
+function daysSince(dateStr) {
+  if (!dateStr) return 0;
+  return Math.floor((new Date() - new Date(dateStr)) / 86400000);
+}
+
+fetch('eyesonme-data.json').then(r => r.json()).then(function(data) {
+  var net = data.network;
+  var stations = data.stations;
+  var deployed = stations.filter(s => s.status === 'ACTIVE' || s.status === 'DEGRADED').length;
+  var active = stations.filter(s => s.status === 'ACTIVE').length;
+  document.getElementById('ns-deployed').textContent = deployed;
+  document.getElementById('ns-active').textContent = active;
+  document.getElementById('ns-events').textContent = net.total_motion_events || 0;
+  document.getElementById('ns-since').textContent = net.launch_date || '—';
+  if (net.total_runtime_hours > 0) document.getElementById('ns-runtime').textContent = net.total_runtime_hours + 'h';
+
+  var container = document.getElementById('station-cards');
+  stations.forEach(function(s) {
+    var statusClass = s.status.toLowerCase();
+    var battPct = s.battery_pct !== null ? s.battery_pct : 0;
+    var battColor = battPct > 50 ? 'green' : battPct > 20 ? 'amber' : 'red';
+    var storePct = s.storage_free_pct !== null ? s.storage_free_pct : 0;
+    var storeColor = storePct > 30 ? 'green' : storePct > 10 ? 'amber' : 'red';
+    var card = document.createElement('div');
+    card.className = 'station-card';
+    card.innerHTML =
+      '<div class="station-card-header"><div><p class="station-id">' + s.id + '</p><p class="station-name">' + s.name + '</p></div><span class="status-badge ' + statusClass + '">' + s.status + '</span></div>' +
+      '<div class="station-card-body">' +
+        '<div class="station-field"><p class="station-field-label">Target Facility</p><p class="station-field-value highlight">' + s.target_facility + '</p></div>' +
+        '<div class="station-field"><p class="station-field-label">Target Official</p><p class="station-field-value">' + s.target_official + '</p></div>' +
+        '<div class="station-field"><p class="station-field-label">Location</p><p class="station-field-value">' + s.location_description + '</p></div>' +
+        '<div class="station-snapshot"><span class="station-snapshot-pending">' + (s.last_snapshot_url ? '[ SNAPSHOT AVAILABLE ]' : '[ AWAITING DEPLOYMENT ]') + '</span></div>' +
+        '<div class="station-field"><p class="station-field-label">Last Heartbeat</p><p class="station-field-value">' + (s.last_heartbeat || '—') + '</p></div>' +
+        '<div class="station-field"><p class="station-field-label">Motion Events Today</p><p class="station-field-value">' + (s.motion_events_today !== null ? s.motion_events_today : '—') + '</p></div>' +
+        '<div class="station-field"><p class="station-field-label">Last Field Collection</p><p class="station-field-value">' + (s.last_collection || '—') + '</p></div>' +
+        (s.pending_collection ? '<div class="station-field"><p class="station-field-label">Pending Collection</p><p class="station-field-value" style="color:var(--amber)">Data unsynced</p></div>' : '') +
+      '</div>' +
+      '<div class="station-card-footer"><div class="station-gauges"><div class="gauge"><span class="gauge-label">BAT</span><div class="gauge-bar"><div class="gauge-fill ' + battColor + '" style="width:' + battPct + '%"></div></div></div><div class="gauge"><span class="gauge-label">STO</span><div class="gauge-bar"><div class="gauge-fill ' + storeColor + '" style="width:' + storePct + '%"></div></div></div></div><span class="station-eyesonme">EYESONME: ' + (s.status === 'ACTIVE' ? 'ACTIVE' : 'STANDBY') + '</span></div>' +
+      '<div class="protected-banner">[ PROTECTED OPERATION ] — Any interference with this station constitutes documented aggression against a lawful civic accountability operation. <a href="doctrine.html">See: doctrine</a></div>';
+    container.appendChild(card);
+  });
+}).catch(function(err) { console.warn('Station data unavailable:', err); });
+
+fetch('eyesonme-subjects.json').then(r => r.json()).then(function(data) {
+  var subjects = data.subjects;
+  var foiaRows = [];
+  subjects.forEach(function(subj) {
+    var targetId = subj.org_type === 'MUNICIPAL' ? 'subject-grid-municipal' : subj.org_type === 'COUNTY' ? 'subject-grid-county' : 'subject-grid-corporate';
+    var container = document.getElementById(targetId);
+    if (!container) return;
+    var statusColor = subj.status === 'UNRESPONSIVE' ? 'var(--red)' : subj.status === 'RESPONDED' ? 'var(--green)' : subj.status === 'UNDER REVIEW' ? 'var(--amber)' : subj.status === 'ESCALATED' ? 'var(--red)' : 'var(--text-mid)';
+    var orgTagClass = subj.org_type === 'MUNICIPAL' ? 'municipal' : subj.org_type === 'COUNTY' ? 'county' : 'corporate';
+    var silenceDays = subj.silence_broken ? 'Broke silence after ' + daysSince(subj.silence_start) + ' days' : subj.silence_start ? daysSince(subj.silence_start) + ' days silent' : '—';
+    var tlHtml = '';
+    if (subj.timeline && subj.timeline.length > 0) {
+      tlHtml = '<div class="subject-timeline"><p class="subject-timeline-label">Activity Timeline</p>';
+      subj.timeline.slice().reverse().forEach(function(ev) {
+        tlHtml += '<div class="tl-entry"><span class="tl-type ' + ev.type.toLowerCase() + '">' + ev.type + '</span><span class="tl-date">' + ev.date + '</span><span class="tl-desc">' + ev.description + '</span></div>';
+      });
+      tlHtml += '</div>';
+    }
+    var docsHtml = '';
+    if (subj.documents && subj.documents.length > 0) subj.documents.forEach(function(doc) { docsHtml += '<span class="doc-badge ' + (doc.status === 'OBTAINED' ? 'obtained' : 'pending') + '">' + doc.type + ': ' + doc.status + '</span>'; });
+    if (subj.foia_requests && subj.foia_requests.length > 0) subj.foia_requests.forEach(function(fr) { docsHtml += '<span class="doc-badge ' + (fr.status === 'FULFILLED' ? 'obtained' : 'pending') + '">' + fr.id + '</span>'; });
+    var card = document.createElement('div');
+    card.className = 'subject-card';
+    card.innerHTML =
+      '<div class="subject-card-header"><p class="subject-org-tag ' + orgTagClass + '">' + subj.org + '</p><p class="subject-name">' + subj.name + '</p><p class="subject-title">' + subj.title + '</p></div>' +
+      '<div class="subject-card-body"><p class="subject-role">' + subj.role_in_lpr + '</p>' +
+      '<div class="subject-meta"><div class="subject-meta-item"><p class="subject-meta-label">Status</p><p class="subject-meta-value" style="color:' + statusColor + '">' + subj.status + '</p></div><div class="subject-meta-item"><p class="subject-meta-label">Last Activity</p><p class="subject-meta-value">' + (subj.last_activity || 'None documented') + '</p></div><div class="subject-meta-item"><p class="subject-meta-label">Silence Counter</p><p class="subject-meta-value' + (!subj.silence_broken ? ' overdue' : '') + '">' + silenceDays + '</p></div><div class="subject-meta-item"><p class="subject-meta-label">Linked Station</p><p class="subject-meta-value">' + (subj.station_id || '—') + '</p></div></div>' + tlHtml + '</div>' +
+      (docsHtml ? '<div class="subject-card-footer"><div class="subject-docs">' + docsHtml + '</div><span class="station-eyesonme">EYESONME: ACTIVE</span></div>' : '');
+    container.appendChild(card);
+    if (subj.foia_requests) subj.foia_requests.forEach(function(fr) { foiaRows.push({ id: fr.id, target: fr.target, filed: fr.filed, deadline: fr.statutory_deadline, status: fr.status, subject: subj.name }); });
+  });
+  var tbody = document.getElementById('foia-tbody');
+  if (foiaRows.length === 0) { tbody.innerHTML = '<tr><td colspan="7" style="color:var(--text-dim);text-align:center;padding:2rem;">All FOIA requests tracked in subject profiles above.</td></tr>'; }
+  foiaRows.forEach(function(fr) {
+    var statusClass = fr.status === 'FULFILLED' ? 'fulfilled' : fr.status === 'OVERDUE' ? 'overdue' : fr.status === 'DENIED' ? 'denied' : fr.status === 'PARTIALLY FULFILLED' ? 'partial' : 'filed';
+    var overdueDays = 0;
+    var deadlineDate = new Date(fr.deadline);
+    if (new Date() > deadlineDate && fr.status !== 'FULFILLED') overdueDays = Math.floor((new Date() - deadlineDate) / 86400000);
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + fr.id + '</td><td>' + fr.target + '</td><td>' + fr.filed + '</td><td>' + fr.deadline + '</td><td><span class="foia-status ' + statusClass + '">' + fr.status + '</span></td><td>' + fr.subject + '</td><td>' + (overdueDays > 0 ? '<span class="foia-overdue">' + overdueDays + ' days</span>' : '—') + '</td>';
+    tbody.appendChild(tr);
+  });
+}).catch(function(err) { console.warn('Subject data unavailable:', err); });
+</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  try {
+    var map = L.map('station-map', { scrollWheelZoom: false }).setView([43.8, -90.1], 10);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: 'OpenStreetMap CARTO', maxZoom: 19 }).addTo(map);
+    var ms = { radius: 8, fillColor: '#4af0a0', color: '#242430', weight: 1, opacity: 1, fillOpacity: 0.7 };
+    L.circleMarker([43.800, -90.080], ms).addTo(map).bindPopup('<strong>EYESONME-001</strong><br>Mauston PD');
+    L.circleMarker([43.803, -90.083], ms).addTo(map).bindPopup('<strong>EYESONME-002</strong><br>City Hall');
+    L.circleMarker([43.795, -90.065], ms).addTo(map).bindPopup('<strong>EYESONME-003</strong><br>Juneau County SO');
+  } catch(e) { document.getElementById('station-map').innerHTML = '<p style="padding:2rem;font-family:var(--mono);font-size:0.72rem;color:var(--text-dim);">Map unavailable offline.</p>'; }
+})();
+</script>
+</body>
+</html>

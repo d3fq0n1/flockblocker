@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evidence — Mauston Contract & Chief's Response — FlockBlocker</title>
+<meta name="description" content="The Mauston PD Flock Safety contract and the Police Chief's response to a formal demand letter. Public record. Download the full contract.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
+    --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
+    --text-dim: #44445a; --white: #f0f0f8;
+    --mono: 'Fira Mono', monospace; --display: 'Black Ops One', cursive; --body: 'Epilogue', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
+  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
+  .logo em { color: var(--accent); font-style: normal; }
+  .header-right { display: flex; align-items: center; gap: 2rem; }
+  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
+  .header-link:hover { color: var(--accent); }
+  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; }
+  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  hr { border: none; border-top: 1px solid var(--border); }
+
+  /* Hero */
+  .page-hero { padding: 6rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+  .page-hero-kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--red); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .page-hero-title { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.95; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2rem; }
+  .page-hero-title .accent { color: var(--red); }
+  .page-hero-lead { font-size: 1.1rem; font-weight: 300; color: var(--text); line-height: 1.85; max-width: 640px; }
+  .page-hero-lead strong { color: var(--white); font-weight: 500; }
+
+  /* Evidence */
+  .evidence-section { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem; }
+  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+
+  .evidence-card {
+    background: #1f0d0d; border: 1px solid #3a1515; padding: 2.5rem;
+    position: relative; overflow: hidden; margin-bottom: 2rem;
+  }
+  .evidence-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(240,90,74,0.02) 2px, rgba(240,90,74,0.02) 4px);
+    pointer-events: none;
+  }
+  .evidence-card:hover { border-color: var(--red); }
+  .evidence-stamp {
+    font-family: var(--display); font-size: 0.75rem; color: var(--red);
+    letter-spacing: 0.25em; text-transform: uppercase; border: 2px solid var(--red);
+    display: inline-block; padding: 0.25rem 0.75rem; margin-bottom: 1.5rem;
+    transform: rotate(-2deg); opacity: 0.85;
+  }
+  .evidence-title {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--white); margin-bottom: 1rem;
+  }
+  .evidence-meta {
+    font-family: var(--mono); font-size: 0.72rem; color: #9e5a5a;
+    line-height: 1.8; margin-bottom: 1.5rem;
+  }
+  .evidence-meta strong { color: var(--red); font-weight: 500; }
+
+  .contract-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem; margin: 1.5rem 0;
+  }
+  .contract-stat { background: rgba(240,90,74,0.05); border: 1px solid #2e1a1a; padding: 1rem 1.25rem; }
+  .contract-stat-label {
+    font-family: var(--mono); font-size: 0.6rem; color: #6b3d3d;
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.35rem;
+  }
+  .contract-stat-value {
+    font-family: var(--display); font-size: 1.3rem; color: var(--red);
+    text-shadow: 0 0 15px rgba(240,90,74,0.2);
+  }
+  .contract-stat-value.money { color: #ff4a4a; }
+
+  .evidence-dl {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--mono); font-size: 0.75rem; color: var(--red);
+    border: 1px solid var(--red); padding: 0.6rem 1.25rem; margin-top: 1rem;
+    transition: all 0.2s; letter-spacing: 0.06em;
+  }
+  .evidence-dl:hover { background: rgba(240,90,74,0.1); text-shadow: 0 0 8px rgba(240,90,74,0.4); }
+
+  .demand-status {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: var(--mono); font-size: 0.72rem; color: var(--red);
+    letter-spacing: 0.08em; margin-bottom: 1.5rem;
+  }
+  .demand-status::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--red); animation: blink 1.8s ease-in-out infinite; flex-shrink: 0;
+  }
+
+  .response-img { max-width: 100%; border: 1px solid #2e1a1a; margin-top: 1rem; filter: contrast(1.05); }
+  .response-placeholder {
+    background: #1a0d0d; border: 1px dashed #3a1515; padding: 2rem;
+    text-align: center; font-family: var(--mono); font-size: 0.72rem;
+    color: #6b3d3d; margin-top: 1rem;
+  }
+
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid);
+    letter-spacing: 0.04em; transition: color 0.2s; margin-top: 2rem;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
+  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
+
+  /* Mobile */
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
+  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
+  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
+  .menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
+  .mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
+  .mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
+  .mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
+  .mobile-nav a:active { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .page-hero { padding: 4rem 1.5rem 2rem; }
+    .evidence-section { padding: 2.5rem 1.5rem; }
+    .evidence-card { padding: 1.5rem; }
+    .contract-grid { grid-template-columns: 1fr 1fr; }
+    footer { padding: 2rem 1.5rem; }
+    header { padding: 0 1.5rem; }
+    .header-link { display: none; }
+    .menu-toggle { display: block; }
+  }
+  @media (max-width: 480px) {
+    .page-hero { padding: 3rem 1rem 1.5rem; }
+    .page-hero-title { font-size: clamp(2rem, 8vw, 3rem); }
+    .evidence-card { padding: 1.2rem; }
+    .contract-grid { grid-template-columns: 1fr; }
+    footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
+    header { padding: 0 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="doctrine.html" style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;color:var(--text-dim);transition:color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-dim)'">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link" style="color:#c8f04a">EYESONME</a>
+    <a href="index.html" class="header-link">Home</a>
+    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
+    <a href="harms.html" class="header-link">Harms</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="who.html" class="header-link">Who</a>
+    <a href="censorship.html" class="header-link">Censorship</a>
+    <a href="money.html" class="header-link">Money</a>
+    <a href="birdstrike.html" class="header-link">BirdStrike</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
+    <span class="live-badge"><span id="countdown"></span></span>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-nav">
+  <a href="eyesonme.html">EYESONME</a>
+  <a href="doctrine.html">Deterrence Doctrine</a>
+  <a href="index.html">Home</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="harms.html">Harms</a>
+  <a href="rebellion.html">Rebellion</a>
+  <a href="who.html">Who's Responsible</a>
+  <a href="censorship.html">Censorship</a>
+  <a href="money.html">Money</a>
+  <a href="birdstrike.html">BirdStrike</a>
+  <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
+</nav>
+
+<div class="page-hero">
+  <p class="page-hero-kicker">// Public Record — Obtained & Documented</p>
+  <h1 class="page-hero-title">The <span class="accent">Evidence</span></h1>
+  <p class="page-hero-lead">
+    <strong>We have the contract. We have the chief's response.</strong> Everything below is public record obtained through formal channels. The city signed it. The chief responded. The public deserves to see both.
+  </p>
+</div>
+
+<hr>
+
+<!-- CONTRACT -->
+<div class="evidence-section">
+  <p class="section-tag">Document A — Contract</p>
+  <h2 class="section-title">Flock Safety Master Services Agreement — Mauston PD</h2>
+
+  <div class="evidence-card">
+    <div class="evidence-stamp">Obtained — Public Record</div>
+    <h3 class="evidence-title">$50,200 for 8 Cameras and Full Network Access</h3>
+    <div class="evidence-meta">
+      <strong>Effective:</strong> August 17, 2023<br>
+      <strong>Signed by:</strong> Chief Michael D. Ziebell — City of Mauston PD<br>
+      <strong>Flock contact:</strong> Kyle Whyte — kyle.whyte@flocksafety.com — 651-253-9350<br>
+      <strong>Notices ATTN:</strong> Sergeant Brandon Aronz
+    </div>
+
+    <div class="contract-grid">
+      <div class="contract-stat">
+        <p class="contract-stat-label">Contract Total</p>
+        <p class="contract-stat-value money">$50,200</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Annual Recurring</p>
+        <p class="contract-stat-value money">$24,000/yr</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Falcon Cameras</p>
+        <p class="contract-stat-value">8 units</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Initial Term</p>
+        <p class="contract-stat-value">24 months</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Auto-Renewal</p>
+        <p class="contract-stat-value">24 months</p>
+      </div>
+      <div class="contract-stat">
+        <p class="contract-stat-label">Data Retention</p>
+        <p class="contract-stat-value">30 days</p>
+      </div>
+    </div>
+
+    <div class="evidence-meta" style="margin-top:1.5rem;">
+      Includes Flock Safety Platform, FlockOS, 8 Falcon cameras, full nationwide ALPR network access, NCIC real-time alerts, unlimited custom hot lists, Vehicle Fingerprint search. 24-month auto-renewal unless 30-day written notice given.
+    </div>
+
+    <a href="mauston-contract.pdf" target="_blank" class="evidence-dl">&#9660; DOWNLOAD FULL CONTRACT (PDF — 25 pages)</a>
+  </div>
+</div>
+
+<hr>
+
+<!-- CHIEF'S RESPONSE -->
+<div class="evidence-section">
+  <p class="section-tag">Document B — Response</p>
+  <h2 class="section-title">Police Chief's Response to Demand Letter</h2>
+
+  <div class="evidence-card">
+    <div class="evidence-stamp">Response Received</div>
+    <h3 class="evidence-title">They Responded. Here's What They Said.</h3>
+    <div class="demand-status">DEMAND LETTER SERVED 2026-03-19 — RESPONSE RECEIVED APRIL 2026</div>
+    <div class="evidence-meta">
+      A formal decommission demand was sent to the Mayor, City Administrator, Police Chief, and Sheriff — CC'd to State Senator Sarah Keyeski. The chief responded. This is what he said.
+    </div>
+    <img src="chief-response.png" alt="Police Chief's response to FlockBlocker demand letter" class="response-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="response-placeholder" style="display:none;">[ Screenshot loading — if this persists, the image may still be syncing ]</div>
+  </div>
+
+  <a href="index.html" class="back-link">← Back to FlockBlocker</a>
+</div>
+
+<footer>
+  <div class="footer-left">
+    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
+    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a>
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+<script>
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
+</script>
+<script>
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>

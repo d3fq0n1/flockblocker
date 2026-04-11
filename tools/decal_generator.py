@@ -10,6 +10,8 @@ four distinct attack strategies:
 4. EOT Adversarial Patch  (§2.4) — Gradient-optimized patterns robust to transforms
 
 Each generator produces PIL Images suitable for compositing via plate_compositor.
+IR camera simulation is handled by the shared ``ir_simulation`` module;
+optimal phantom color pairs are discovered by ``ir_color_sweep``.
 """
 
 from __future__ import annotations
@@ -21,6 +23,8 @@ from pathlib import Path
 from typing import Sequence
 
 import numpy as np
+
+from ir_simulation import simulate_ir
 
 try:
     from PIL import Image, ImageDraw, ImageFont, ImageFilter
@@ -67,16 +71,38 @@ DEFAULT_DECAL_HEIGHT = 120
 
 # Colors that collapse under 850nm IR (§3.3)
 # Pairs: (visible_color_rgb, ir_equivalent_rgb) — look different to humans, same to IR
+#
+# Sweep-optimized pairs (from ir_color_sweep.py) maximize phantom_ratio
+# (IR_contrast / visible_delta_e).  "Practical" pairs trade some ratio for
+# real-world plausibility (a bright cyan bumper sticker draws attention).
+#
+# Sweep results (step=20, max_dE=5, min_ir=10):
+#   850nm top: (0,240,240)/(20,240,240) — dE=0.51, IR_Δ=10, ratio=19.6
+#   940nm top: (0,240,240)/(40,240,240) — dE=1.54, IR_Δ=16, ratio=10.4
+IR_COLLAPSE_PAIRS_850 = [
+    # Sweep-optimized: cyan with minimal red delta (dE < 1)
+    ((0, 240, 240), (20, 240, 240)),
+    ((0, 240, 220), (20, 240, 220)),
+    # Practical: dark red pairs (plausible bumper sticker)
+    ((180, 20, 20), (200, 40, 30)),
+    ((160, 30, 25), (180, 20, 20)),
+]
+
+IR_COLLAPSE_PAIRS_940 = [
+    # Sweep-optimized: cyan with moderate red delta
+    ((0, 240, 240), (40, 240, 240)),
+    ((0, 220, 240), (40, 220, 240)),
+    # Practical: green/gray pairs (garden-variety sticker)
+    ((40, 140, 40), (55, 130, 45)),
+    ((30, 100, 30), (50, 90, 40)),
+]
+
+# Legacy alias (union of practical pairs) for backward compatibility
 IR_COLLAPSE_PAIRS = [
-    # Red and black look identical under 850nm
     ((180, 20, 20), (30, 30, 30)),
-    # Certain greens and grays converge
     ((40, 140, 40), (110, 110, 110)),
-    # Dark blue and dark purple merge
     ((20, 20, 140), (80, 20, 120)),
-    # Bright red and dark gray
     ((200, 40, 30), (50, 50, 50)),
-    # Forest green and medium gray
     ((30, 100, 30), (90, 90, 90)),
 ]
 
@@ -295,19 +321,42 @@ def _generate_segmentation_extension(plate_text: str) -> str:
 
 @dataclass
 class IRPhantomConfig:
-    """Config for IR phantom character decals."""
+    """Config for IR phantom character decals.
+
+    Default colors are sweep-optimized (see ir_color_sweep.py) for maximum
+    phantom_ratio at 850nm.  Pass ``use_practical_colors=True`` to use
+    darker, less conspicuous pairs suitable for real-world stickers.
+
+    Placement controls where phantom characters sit within the decal:
+        "center"    — centered (default, backward-compatible)
+        "top_edge"  — characters hug the top edge (use when decal is below plate)
+        "bottom_edge" — characters hug the bottom edge (decal above plate)
+        "left_edge" — characters hug the left edge (decal right of plate)
+        "right_edge" — characters hug the right edge (decal left of plate)
+        "distributed" — characters spread across the near edge with plate-like
+                        inter-character spacing
+
+    For maximum segmentation bleed, combine edge placement here with a
+    negative ``decal_gap_px`` in CompositeConfig so the decal overlaps the
+    plate boundary.
+    """
     width: int = DEFAULT_DECAL_WIDTH
     height: int = DEFAULT_DECAL_HEIGHT
     font_size: int = 72
     # The IR wavelength to target
     target_wavelength_nm: int = 850
     # Background color (visible light) — should look like a normal design
-    visible_bg_color: tuple = (180, 20, 20)   # red background (looks normal)
+    visible_bg_color: tuple | None = None
     # Text color (visible light) — should be nearly invisible to humans
-    visible_text_color: tuple = (160, 30, 25)  # slightly different red (hard to see)
-    # Under IR, these collapse: red bg → dark, red text → dark, but contrast emerges
-    # from the slight material/ink differences
+    visible_text_color: tuple | None = None
+    # Use practical (plausible bumper sticker) colors instead of
+    # sweep-optimized max-ratio colors
+    use_practical_colors: bool = False
     phantom_chars: str | None = None
+    # Where to place phantom characters within the decal
+    placement: str = "center"
+    # Padding from the target edge (px) — only used for edge placements
+    edge_padding: int = 4
 
 
 def generate_ir_phantom_decal(
@@ -339,29 +388,102 @@ def generate_ir_phantom_decal(
             chars = _generate_random_confusion(5)
 
     # Select an IR collapse pair based on target wavelength
-    if config.target_wavelength_nm <= 850:
-        # Use red/black collapse — most dramatic at 850nm
+    if config.visible_bg_color is not None and config.visible_text_color is not None:
+        # Caller specified explicit colors — use as-is
         bg_vis = config.visible_bg_color
         text_vis = config.visible_text_color
     else:
-        # At 940nm, use green/gray collapse
-        bg_vis = (40, 140, 40)
-        text_vis = (55, 130, 45)
+        # Pick from wavelength-specific optimized pairs
+        if config.target_wavelength_nm <= 850:
+            pairs = IR_COLLAPSE_PAIRS_850
+        else:
+            pairs = IR_COLLAPSE_PAIRS_940
+
+        # Index 0-1 = sweep-optimized, 2+ = practical
+        idx = 2 if config.use_practical_colors else 0
+        bg_vis, text_vis = pairs[idx]
 
     img = Image.new("RGB", (config.width, config.height), bg_vis)
     draw = ImageDraw.Draw(img)
 
     font = _load_plate_font(config.font_size)
-    bbox = draw.textbbox((0, 0), chars, font=font)
-    text_w = bbox[2] - bbox[0]
-    text_h = bbox[3] - bbox[1]
-    x = (config.width - text_w) // 2
-    y = (config.height - text_h) // 2
-    draw.text((x, y), chars, fill=text_vis, font=font)
+
+    if config.placement == "distributed":
+        # Spread characters individually with plate-like spacing
+        _draw_distributed_phantom(draw, chars, font, text_vis, config)
+    else:
+        bbox = draw.textbbox((0, 0), chars, font=font)
+        text_w = bbox[2] - bbox[0]
+        text_h = bbox[3] - bbox[1]
+        x, y = _phantom_position(config, text_w, text_h)
+        draw.text((x, y), chars, fill=text_vis, font=font)
 
     if output_path:
         img.save(output_path)
     return img
+
+
+def _phantom_position(
+    config: IRPhantomConfig, text_w: int, text_h: int,
+) -> tuple[int, int]:
+    """Compute (x, y) for phantom text based on placement strategy."""
+    cx = (config.width - text_w) // 2
+    cy = (config.height - text_h) // 2
+    pad = config.edge_padding
+
+    if config.placement == "top_edge":
+        return cx, pad
+    elif config.placement == "bottom_edge":
+        return cx, config.height - text_h - pad
+    elif config.placement == "left_edge":
+        return pad, cy
+    elif config.placement == "right_edge":
+        return config.width - text_w - pad, cy
+    else:  # "center"
+        return cx, cy
+
+
+def _draw_distributed_phantom(
+    draw: "ImageDraw.Draw",
+    chars: str,
+    font: "ImageFont.FreeTypeFont",
+    fill: tuple,
+    config: IRPhantomConfig,
+) -> None:
+    """Draw phantom chars distributed across the near edge with plate-like spacing.
+
+    Characters are evenly spaced horizontally, positioned at the top edge
+    (the most common case — decal below plate). If a different edge is
+    needed, rotate the image after generation.
+    """
+    pad = config.edge_padding
+    n = len(chars)
+    if n == 0:
+        return
+
+    # Measure individual character widths
+    char_widths = []
+    char_height = 0
+    for ch in chars:
+        bb = draw.textbbox((0, 0), ch, font=font)
+        char_widths.append(bb[2] - bb[0])
+        char_height = max(char_height, bb[3] - bb[1])
+
+    total_char_w = sum(char_widths)
+    # Distribute remaining space as gaps
+    remaining = config.width - total_char_w - 2 * pad
+    gap = remaining / max(n - 1, 1) if n > 1 else 0
+    # Cap gap to prevent absurd spacing
+    gap = min(gap, char_widths[0] * 1.5)
+
+    # Center the block horizontally
+    block_w = total_char_w + gap * max(n - 1, 0)
+    x = max(pad, (config.width - block_w) / 2)
+    y = pad  # top edge
+
+    for i, ch in enumerate(chars):
+        draw.text((int(x), int(y)), ch, fill=fill, font=font)
+        x += char_widths[i] + gap
 
 
 def simulate_ir_view(
@@ -371,20 +493,10 @@ def simulate_ir_view(
     """
     Show what an IR camera sees — reveals hidden phantom characters.
 
-    This is the same transform as plate_compositor._simulate_ir but exposed
-    as a public utility for decal evaluation.
+    Delegates to :func:`ir_simulation.simulate_ir` (the single source of truth
+    for IR sensor-response weights).
     """
-    arr = np.array(image, dtype=np.float32)
-    if wavelength_nm <= 850:
-        weights = np.array([0.50, 0.35, 0.15])  # R, G, B weights for 850nm
-    else:
-        weights = np.array([0.40, 0.35, 0.25])
-
-    gray = (arr[:, :, 0] * weights[0] +
-            arr[:, :, 1] * weights[1] +
-            arr[:, :, 2] * weights[2])
-    gray = np.clip(gray, 0, 255).astype(np.uint8)
-    return Image.fromarray(np.stack([gray, gray, gray], axis=-1))
+    return simulate_ir(image, wavelength_nm)
 
 
 # ═══════════════════════════════════════════════════════════════════════════

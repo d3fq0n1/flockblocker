@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flock's Censorship — FlockBlocker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
     --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
     --text-dim: #44445a; --white: #f0f0f8;
-    --mono: 'Fira Mono', monospace; --display: 'Syne', sans-serif; --body: 'Epilogue', sans-serif;
+    --mono: 'Fira Mono', monospace; --display: 'Black Ops One', cursive; --body: 'Epilogue', sans-serif;
     --amber: #f0a84a;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -168,6 +168,17 @@
   .footer-left a:hover { color: var(--accent); }
   .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
 
+  /* Mobile Navigation */
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
+  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
+  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
+  .menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
+  .mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
+  .mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
+  .mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
+  .mobile-nav a:active { color: var(--accent); }
+
   @media (max-width: 900px) {
     .page-hero { padding: 4rem 1.5rem 3rem; }
     .section { padding: 4rem 1.5rem; }
@@ -177,6 +188,25 @@
     footer { padding: 2rem 1.5rem; }
     header { padding: 0 1.5rem; }
     .header-link { display: none; }
+    .menu-toggle { display: block; }
+  }
+  @media (max-width: 480px) {
+    .page-hero { padding: 3rem 1rem 2rem; }
+    .page-hero-title { font-size: clamp(2.2rem, 10vw, 3rem); }
+    .page-hero-lead { font-size: 0.95rem; }
+    .section { padding: 3rem 1rem; }
+    .section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
+    .evidence-card { padding: 1.5rem; }
+    .evidence-headline { font-size: 1.1rem; }
+    .evidence-quote { padding: 0.8rem 1rem; font-size: 0.75rem; }
+    .stat-row { grid-template-columns: 1fr; }
+    .stat-cell-value { font-size: 2rem; }
+    .pattern-box { padding: 1.5rem; }
+    .bottom-cta { padding: 3rem 1rem; }
+    .btn-row { flex-direction: column; align-items: stretch; }
+    .btn-row .btn { justify-content: center; }
+    footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
+    header { padding: 0 1rem; }
   }
 </style>
 </head>
@@ -185,21 +215,41 @@
 <header>
   <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
   <div class="header-right">
+    <a href="doctrine.html" style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;color:var(--text-dim);transition:color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-dim)'">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link" style="color:#c8f04a">EYESONME</a>
     <a href="index.html" class="header-link">Home</a>
-    <a href="harms.html" class="header-link">How Flock Hurts</a>
-    <a href="stories.html" class="header-link">Stories</a>
-    <a href="who.html" class="header-link">Who's Responsible</a>
+    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
+    <a href="harms.html" class="header-link">Harms</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="who.html" class="header-link">Who</a>
     <a href="censorship.html" class="header-link" style="color:var(--amber)">Censorship</a>
-    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub</a>
-    <span class="live-badge">CLOCK RUNNING</span>
+    <a href="money.html" class="header-link">Money</a>
+    <a href="birdstrike.html" class="header-link">BirdStrike</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
+    <span class="live-badge"><span id="countdown"></span></span>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
   </div>
 </header>
+
+<nav class="mobile-nav">
+  <a href="eyesonme.html">EYESONME</a>
+  <a href="doctrine.html">Deterrence Doctrine</a>
+  <a href="index.html">Home</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="harms.html">Harms</a>
+  <a href="rebellion.html">Rebellion</a>
+  <a href="who.html">Who's Responsible</a>
+  <a href="censorship.html">Censorship</a>
+  <a href="money.html">Money</a>
+  <a href="birdstrike.html">BirdStrike</a>
+  <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
+</nav>
 
 <div class="page-hero">
   <p class="page-hero-kicker">// Suppression log — documented with screenshots</p>
   <h1 class="page-hero-title">They Tried To <span class="accent">Silence</span> This</h1>
   <p class="page-hero-lead">
-    When you can't win the argument, you delete it. Flock Safety and its employees have <strong>repeatedly attempted to suppress public criticism</strong> — deleting LinkedIn threads, removing comments, lying about post removal, and pressuring platforms to censor documented facts. Every attempt is logged here with screenshots. <strong>The internet remembers.</strong>
+    Flock Safety and its employees have <strong>repeatedly attempted to suppress public criticism</strong> — deleting LinkedIn threads, removing comments, and lying about post removal. Every attempt is logged here with screenshots.
   </p>
 </div>
 
@@ -221,7 +271,7 @@
         <span class="evidence-date">March 2026</span>
       </div>
       <p class="evidence-body">
-        Chris Colwell, Flock Safety's SVP of Customer Revenue Retention, posted a thread on LinkedIn. Public comments were added documenting Flock's surveillance harms — the Texas abortion clinic tracking, the ICE data pipeline, the absence of any opt-out. When the comments couldn't be individually controlled, <strong>Colwell deleted the entire post</strong>. Not a reply. Not a single comment. The whole thread — nuked because the replies were winning.
+        Chris Colwell, Flock Safety's SVP of Customer Revenue Retention, posted a thread on LinkedIn. Public comments documented Flock's surveillance harms — the Texas abortion clinic tracking, the ICE data pipeline, the absence of any opt-out. When the comments couldn't be individually controlled, <strong>Colwell deleted the entire post</strong>. Not a reply. Not a single comment. The whole thread — nuked.
       </p>
       <div class="evidence-quote">
         "Here's their SVP being a trite ass, then when called out, tantrum deletes."<br>— Blake Clark, LinkedIn
@@ -249,7 +299,7 @@
         <strong>Rahul Sidhu</strong> — Flock Safety's Chief Strategy Officer and co-founder of Aerodome — personally replied: <strong>"No one's going to delete your comment, John. You're more than welcome to comment on all of our posts :)"</strong>
       </p>
       <p class="evidence-body">
-        Blake Clark immediately responded: <strong>"False. You will. I have proof."</strong> — and linked to the documented X thread showing Flock's prior deletions, including the Colwell incident. Flock has been deleting <strong>countless</strong> comments. The CSO's public promise is now evidence.
+        Blake Clark immediately responded: <strong>"False. You will. I have proof."</strong> — and linked to the documented X thread showing Flock's prior deletions, including the Colwell incident. The CSO's public promise is now evidence.
       </p>
       <div class="evidence-quote">
         "No one's going to delete your comment, John. You're more than welcome to comment on all of our posts :)"<br>— Rahul Sidhu, Chief Strategy Officer @ Flock Safety
@@ -331,10 +381,10 @@
         <span class="evidence-date">Ongoing</span>
       </div>
       <p class="evidence-body">
-        This is not a one-off. Across multiple LinkedIn posts by multiple Flock Safety employees — from the CEO to the CSO to the SVP of Customer Revenue — the same pattern repeats: <strong>public comment with sourced facts → comment disappears → post remains sanitized</strong>. The comments don't violate any platform policy. They cite public records, published reporting, and documented system behavior. They get removed because they're effective.
+        Across multiple LinkedIn posts by multiple Flock Safety employees — from the CEO to the CSO to the SVP of Customer Revenue — the same pattern repeats: <strong>public comment with sourced facts → comment disappears → post remains sanitized</strong>. The comments cite public records, published reporting, and documented system behavior. They get removed because they're effective.
       </p>
       <p class="evidence-body">
-        A company that deletes criticism instead of addressing it is telling you everything you need to know about whether that criticism is accurate. Flock's CSO <strong>publicly promised</strong> they don't delete. The evidence on this page proves that was a lie.
+        Flock's CSO <strong>publicly promised</strong> they don't delete. The evidence on this page proves that was a lie.
       </p>
       <div class="evidence-screenshots">
         <div class="screenshot-slot">
@@ -386,13 +436,10 @@
 
   <div style="max-width:720px;">
     <p style="font-size:0.95rem; color:var(--text); line-height:1.85; margin-bottom:1.5rem;">
-      A company confident in its product responds to criticism with data. A company confident in its mission engages with hard questions publicly. <strong>Flock Safety does neither.</strong>
+      They delete sourced, factual comments that cite public records and published reporting. Not because the comments violate any policy — but because they <strong>document what Flock cannot defend</strong>.
     </p>
     <p style="font-size:0.95rem; color:var(--text); line-height:1.85; margin-bottom:1.5rem;">
-      Instead, they delete. They scrub. They lie about deleting. They remove sourced, factual comments that cite public records and published reporting. Not because the comments violate any policy — but because they <strong>document what Flock cannot defend</strong>.
-    </p>
-    <p style="font-size:0.95rem; color:var(--text); line-height:1.85; margin-bottom:1.5rem;">
-      Every deletion is an admission. Every scrubbed comment is a concession. Every lie about a removed post confirms that the facts in that post were accurate enough to be threatening.
+      Every deletion is a concession that the facts in that post were accurate enough to be threatening.
     </p>
   </div>
 
@@ -418,12 +465,43 @@
 
 <footer>
   <div class="footer-left">
-    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a><br>
-    Every item on this page is documented with screenshots taken before deletion occurred.<br>
-    This page is version-controlled. The git history <em>is</em> the evidence chain.
+    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
+    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a>
   </div>
   <div class="footer-right">FLOCKBLOCKER — 2026</div>
 </footer>
 
+<script>
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
+</script>
+<script>
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
 </body>
 </html>
