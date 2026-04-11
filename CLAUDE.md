@@ -4,7 +4,7 @@
 
 FlockBlocker is a multi-disciplinary research project targeting **data-layer vulnerabilities** in Flock Safety's automated license plate recognition (ALPR) system. Rather than obscuring plates (failed reads are discarded), it generates **confident misreads** that get stored as ground truth in Flock's database, corrupting pattern-of-life analysis, degrading alert reliability, and undermining prosecutorial use of the data.
 
-**Key stats:** 175+ files, 100+ directories, 3.5+ MB, 550+ commits.
+**Key stats:** ~84 files, ~21 directories, ~4.0 MB, 75+ commits.
 
 ---
 
@@ -37,7 +37,7 @@ flockblocker/
 │   ├── ir_color_sweep.py   # Optimize phantom color pairs
 │   ├── evaluation.py       # Effectiveness scoring & metrics
 │   ├── foia_ingest.py      # FOIA image ingestion & benchmarking pipeline
-│   └── tests/              # pytest suite (10 modules)
+│   └── tests/              # pytest suite (9 modules)
 │       ├── test_ocr_baseline.py
 │       ├── test_decal_effect.py
 │       ├── test_ir_phantom.py
@@ -237,7 +237,7 @@ Each image entry tracks source hash (integrity), OCR-assisted labeling, and rese
 ```json
 {
   "subjects": [{
-    "id": "zilisch-shawn", "name", "title", "org", "org_type": "MUNICIPAL|COUNTY|CORPORATE",
+    "id": "zilisch-michael", "name", "title", "org", "org_type": "MUNICIPAL|COUNTY|CORPORATE",
     "role_in_lpr", "status": "UNRESPONSIVE|RESPONDED|UNDER REVIEW|ESCALATED",
     "last_activity", "silence_start", "silence_broken", "station_id",
     "timeline": [{ "date", "type": "FOIA|STATEMENT|MEETING|SILENCE", "description" }],
