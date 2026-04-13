@@ -81,7 +81,7 @@ flockblocker/
 ├── censorship.html         # Flock surveillance/censorship documentation
 ├── harms.html              # Catalog of Flock negative impacts
 ├── money.html              # Flock Safety funding & grant mechanisms
-├── rebellion.html          # Tracking 32+ municipal defections
+├── rebellion.html          # Tracking 30+ municipal defections (NPR-sourced)
 ├── who.html                # Named officials & corporate officers
 └── README.md               # Mission statement & overview
 ```
