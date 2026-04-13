@@ -4,123 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How Flock Hurts — FlockBlocker</title>
+<meta name="description" content="Documented harms, suppression record, and grant-pipeline lock-in — every item sourced from public record.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-  :root {
-    --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
-    --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
-    --text-dim: #44445a; --white: #f0f0f8;
-    --mono: 'Fira Mono', monospace; --display: 'Black Ops One', cursive; --body: 'Epilogue', sans-serif;
+  /* Page-specific — anchor nav strip */
+  .anchor-strip {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 2.5rem 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
-  a { color: inherit; text-decoration: none; }
-
-  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
-  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
-  .logo em { color: var(--accent); font-style: normal; }
-  .header-right { display: flex; align-items: center; gap: 2rem; }
-  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
-  .header-link:hover { color: var(--accent); }
-  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; }
-  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-  .page-hero { padding: 6rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
-  .page-hero-kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--red); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.5rem; }
-  .page-hero-title { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.95; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2rem; }
-  .page-hero-title .accent { color: var(--red); }
-  .page-hero-lead { font-size: 1.1rem; font-weight: 300; color: var(--text); line-height: 1.85; max-width: 680px; }
-  .page-hero-lead strong { color: var(--white); font-weight: 500; }
-
-  hr { border: none; border-top: 1px solid var(--border); }
-
-  .section { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
-  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
-  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
-
-  .offense-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-bottom: 3rem; }
-  .offense-card { background: var(--surface); padding: 2.5rem; display: flex; flex-direction: column; }
-  .offense-card.full-width { grid-column: 1 / -1; }
-  .offense-number { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.2rem; }
-  .offense-headline { font-family: var(--display); font-weight: 800; font-size: 1.4rem; color: var(--white); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1rem; }
-  .offense-body { font-size: 0.92rem; color: var(--text); line-height: 1.85; flex: 1; }
-  .offense-body strong { color: var(--white); font-weight: 500; }
-  .offense-quote { font-family: var(--mono); font-size: 0.82rem; color: var(--red); line-height: 1.7; margin: 1.2rem 0; padding: 1rem 1.5rem; background: rgba(240,90,74,0.06); border-left: 3px solid var(--red); }
-  .offense-source { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.08em; margin-top: 1.2rem; }
-
-  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
-  .stat-cell { background: var(--surface); padding: 2rem; text-align: center; }
-  .stat-cell-value { font-family: var(--display); font-weight: 800; font-size: 2.8rem; color: var(--white); line-height: 1; margin-bottom: 0.5rem; }
-  .stat-cell-value.warn { color: var(--red); }
-  .stat-cell-label { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.6; }
-
-  .pipeline { margin-top: 3rem; background: var(--surface); border: 1px solid var(--border); padding: 2.5rem; }
-  .pipeline-title { font-family: var(--display); font-weight: 700; font-size: 1rem; color: var(--white); letter-spacing: 0.04em; margin-bottom: 2rem; text-transform: uppercase; }
-  .pipeline-steps { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
-  .pipeline-step { background: var(--surface2); border: 1px solid var(--border); padding: 1rem 1.5rem; font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); line-height: 1.5; text-align: center; flex: 1; min-width: 140px; }
-  .pipeline-step.danger { border-color: var(--red); color: var(--red); }
-  .pipeline-arrow { font-family: var(--mono); color: var(--text-dim); font-size: 1.2rem; padding: 0 0.3rem; flex-shrink: 0; }
-
-  .bottom-cta { text-align: center; padding: 4rem 2.5rem; max-width: 680px; margin: 0 auto; }
-  .bottom-cta-text { font-size: 1.05rem; color: var(--text); line-height: 1.85; margin-bottom: 2rem; }
-  .bottom-cta-text strong { color: var(--white); font-weight: 500; }
-  .btn { font-family: var(--display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
-  .btn-fill { background: var(--accent); color: #09090b; }
-  .btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
-  .btn-outline:hover { border-color: var(--text-mid); color: var(--white); }
-  .btn-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-
-  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
-  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
-  .footer-left a:hover { color: var(--accent); }
-  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
-
-  /* Mobile Navigation */
-  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
-  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
-  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
-  .menu-toggle.active span:nth-child(2) { opacity: 0; }
-  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
-  .mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
-  .mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
-  .mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
-  .mobile-nav a:active { color: var(--accent); }
-
+  .anchor-strip a {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-mid);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border);
+    transition: all 0.18s;
+  }
+  .anchor-strip a:hover { color: var(--accent); border-color: var(--text-mid); }
+  .anchor-strip a.red:hover { color: var(--red); }
+  .anchor-strip a.amber:hover { color: var(--amber); }
+  .anchor-strip a.green:hover { color: var(--accent); }
+  /* Scroll offset for anchored sections under sticky header */
+  section[id] { scroll-margin-top: 72px; }
   @media (max-width: 900px) {
-    .page-hero { padding: 4rem 1.5rem 3rem; }
-    .section { padding: 4rem 1.5rem; }
-    .offense-grid { grid-template-columns: 1fr; }
-    .offense-card.full-width { grid-column: auto; }
-    .stat-row { grid-template-columns: 1fr 1fr; }
-    .pipeline-steps { flex-direction: column; }
-    .pipeline-arrow { transform: rotate(90deg); }
-    footer { padding: 2rem 1.5rem; }
-    header { padding: 0 1.5rem; }
-    .header-link { display: none; }
-    .menu-toggle { display: block; }
+    .anchor-strip { padding: 1rem 1.5rem 0; }
   }
   @media (max-width: 480px) {
-    .page-hero { padding: 3rem 1rem 2rem; }
-    .page-hero-title { font-size: clamp(2.2rem, 10vw, 3rem); }
-    .page-hero-lead { font-size: 0.95rem; }
-    .section { padding: 3rem 1rem; }
-    .section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
-    .offense-card { padding: 1.5rem; }
-    .offense-headline { font-size: 1.1rem; }
-    .stat-row { grid-template-columns: 1fr; }
-    .stat-cell-value { font-size: 2rem; }
-    .pipeline { padding: 1.5rem; }
-    .pipeline-step { padding: 0.75rem 1rem; min-width: unset; }
-    .bottom-cta { padding: 3rem 1rem; }
-    .btn-row { flex-direction: column; align-items: stretch; }
-    .btn-row .btn { justify-content: center; }
-    footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
-    header { padding: 0 1rem; }
+    .anchor-strip { padding: 0.75rem 1rem 0; }
+    .anchor-strip a { font-size: 0.62rem; padding: 0.5rem 0.8rem; }
   }
 </style>
 </head>
@@ -129,15 +48,13 @@
 <header>
   <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
   <div class="header-right">
-    <a href="doctrine.html" style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;color:var(--text-dim);transition:color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-dim)'">[ DETERRENCE DOCTRINE ]</a>
-    <a href="eyesonme.html" class="header-link" style="color:#c8f04a">EYESONME</a>
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme">EYESONME</a>
     <a href="index.html" class="header-link">Home</a>
-    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
-    <a href="harms.html" class="header-link" style="color:var(--accent)">Harms</a>
+    <a href="evidence.html" class="header-link evidence">Evidence</a>
+    <a href="harms.html" class="header-link active">Harms</a>
     <a href="rebellion.html" class="header-link">Rebellion</a>
     <a href="who.html" class="header-link">Who</a>
-    <a href="censorship.html" class="header-link">Censorship</a>
-    <a href="money.html" class="header-link">Money</a>
     <a href="birdstrike.html" class="header-link">BirdStrike</a>
     <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
     <span class="live-badge"><span id="countdown"></span></span>
@@ -153,8 +70,6 @@
   <a href="harms.html">Harms</a>
   <a href="rebellion.html">Rebellion</a>
   <a href="who.html">Who's Responsible</a>
-  <a href="censorship.html">Censorship</a>
-  <a href="money.html">Money</a>
   <a href="birdstrike.html">BirdStrike</a>
   <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
 </nav>
@@ -163,14 +78,23 @@
   <p class="page-hero-kicker">// Documented harms — all public record</p>
   <h1 class="page-hero-title">How Flock <span class="accent">Hurts</span></h1>
   <p class="page-hero-lead">
-    These are not hypotheticals. Every item below is <strong>documented, sourced, and on the public record</strong>. Flock Safety's surveillance infrastructure has been used to track abortion patients, feed data to federal immigration enforcement, and build a private pattern-of-life database on millions of Americans who never consented.
+    These are not hypotheticals. Every item below is <strong>documented, sourced, and on the public record</strong>. What Flock does, what they do when confronted, and how they bypass your vote to get installed in the first place — all on one page.
   </p>
+</div>
+
+<div class="anchor-strip">
+  <a href="#offenses" class="red">→ 01 / Egregious Offenses</a>
+  <a href="#censorship" class="amber">→ 02 / The Suppression Record</a>
+  <a href="#money" class="green">→ 03 / Follow The Money</a>
 </div>
 
 <hr>
 
-<div class="section">
-  <p class="section-tag">The Charges</p>
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 01 — EGREGIOUS OFFENSES (from original harms.html)
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="offenses" class="section">
+  <p class="section-tag">01 — The Charges</p>
   <h2 class="section-title">Egregious Offenses</h2>
 
   <div class="offense-grid">
@@ -314,16 +238,6 @@
       <p class="stat-cell-label">Opt-out<br>mechanisms</p>
     </div>
   </div>
-</div>
-
-<hr>
-
-<div class="section">
-  <p class="section-tag">How It Works</p>
-  <h2 class="section-title">The Surveillance Pipeline</h2>
-  <p style="font-size:0.95rem; color:var(--text); line-height:1.85; max-width:680px; margin-bottom:1rem;">
-    Your city bought one step. They got the whole chain.
-  </p>
 
   <div class="pipeline">
     <p class="pipeline-title">From your driveway to a federal database</p>
@@ -336,69 +250,21 @@
       <span class="pipeline-arrow">&rarr;</span>
       <div class="pipeline-step">Queryable by 221+<br>agencies statewide</div>
       <span class="pipeline-arrow">&rarr;</span>
-      <div class="pipeline-step danger">Accessible to ICE<br>& federal agencies</div>
+      <div class="pipeline-step danger">Accessible to ICE<br>&amp; federal agencies</div>
     </div>
   </div>
 
-  <div style="margin-top:2.5rem; background:var(--surface2); border-left:3px solid var(--red); padding:1.5rem 2rem; max-width:680px;">
-    <p style="font-family:var(--mono); font-size:0.82rem; color:var(--text-mid); line-height:1.9;">
-      <strong style="color:var(--red);">No single municipality controls this pipeline.</strong> Once your plate read enters the Flock database, it is no longer your city's data. It belongs to a private corporation, queryable by any agency on the network, subpoena-accessible to any federal body, and retained on terms your city council never negotiated.
+  <div class="insight-block warn">
+    <p>
+      <strong>No single municipality controls this pipeline.</strong> Once your plate read enters the Flock database, it is no longer your city's data. It belongs to a private corporation, queryable by any agency on the network, subpoena-accessible to any federal body, and retained on terms your city council never negotiated.
     </p>
   </div>
-</div>
+</section>
 
-<hr>
+<!-- ═══════════════════════════════════════════════════════════════
+     CHUNK 2B SENTINEL — censorship + money + CTA + footer go here
+     ═══════════════════════════════════════════════════════════════ -->
+<!-- INSERT_CHUNK_2B_HERE -->
 
-<div class="bottom-cta">
-  <p class="bottom-cta-text">
-    <strong>Verona, Wisconsin declined to renew their Flock contract after public pressure.</strong> That option remains available to every municipality on the network.
-  </p>
-  <div class="btn-row">
-    <a href="stories.html" class="btn btn-fill">Read Community Stories</a>
-    <a href="submit.html" class="btn btn-outline">Share Your Story</a>
-    <a href="who.html" class="btn btn-outline">See Who's Responsible</a>
-  </div>
-</div>
-
-<footer>
-  <div class="footer-left">
-    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
-    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a>
-  </div>
-  <div class="footer-right">FLOCKBLOCKER — 2026</div>
-</footer>
-
-<script>
-document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
-  document.querySelector('.mobile-nav').classList.remove('open');
-  document.querySelector('.menu-toggle').classList.remove('active');
-}));
-</script>
-<script>
-(function(){
-  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
-  var el = document.getElementById('countdown');
-  function pad(n){return n<10?'0'+n:n;}
-  function tick(){
-    var now = Date.now();
-    var diff = deadline - now;
-    if(diff > 0){
-      var d = Math.floor(diff/86400000);
-      var h = Math.floor((diff%86400000)/3600000);
-      var m = Math.floor((diff%3600000)/60000);
-      var s = Math.floor((diff%60000)/1000);
-      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
-    } else {
-      diff = Math.abs(diff);
-      var d = Math.floor(diff/86400000);
-      var h = Math.floor((diff%86400000)/3600000);
-      var m = Math.floor((diff%3600000)/60000);
-      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
-    }
-  }
-  tick();
-  setInterval(tick, 1000);
-})();
-</script>
 </body>
 </html>
