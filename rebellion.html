@@ -7,6 +7,7 @@
 <meta name="description" content="A running record of municipalities canceling, pausing, or rejecting Flock Safety ALPR contracts. 30+ cities and counting.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
   :root {
     --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
@@ -142,8 +143,7 @@
     .section { padding: 3rem 1.5rem; }
     .counter-row { grid-template-columns: 1fr 1fr; }
     .legal-grid { grid-template-columns: 1fr; }
-    .city-table { font-size: 0.85rem; }
-    .city-table th:nth-child(3), .city-table td:nth-child(3) { display: none; }
+    .city-table { font-size: 0.85rem; min-width: 640px; }
     footer { padding: 2rem 1.5rem; }
     header { padding: 0 1.5rem; }
     .header-link { display: none; }
@@ -155,9 +155,8 @@
     .page-hero-lead { font-size: 0.95rem; }
     .section { padding: 2.5rem 1rem; }
     .section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
-    .counter-row { grid-template-columns: 1fr; }
+    .counter-row { grid-template-columns: 1fr 1fr; }
     .counter-value { font-size: 2.4rem; }
-    .city-table th:nth-child(4), .city-table td:nth-child(4) { display: none; }
     .city-table td { padding: 0.65rem 0.5rem; }
     .city-name { font-size: 0.82rem; }
     .legal-card { padding: 1.5rem; }
@@ -176,15 +175,13 @@
 <header>
   <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
   <div class="header-right">
-    <a href="doctrine.html" style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;color:var(--text-dim);transition:color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-dim)'">[ DETERRENCE DOCTRINE ]</a>
-    <a href="eyesonme.html" class="header-link" style="color:#c8f04a">EYESONME</a>
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme">EYESONME</a>
     <a href="index.html" class="header-link">Home</a>
-    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
+    <a href="evidence.html" class="header-link evidence">Evidence</a>
     <a href="harms.html" class="header-link">Harms</a>
-    <a href="rebellion.html" class="header-link" style="color:var(--green)">Rebellion</a>
+    <a href="rebellion.html" class="header-link active">Rebellion</a>
     <a href="who.html" class="header-link">Who</a>
-    <a href="censorship.html" class="header-link">Censorship</a>
-    <a href="money.html" class="header-link">Money</a>
     <a href="birdstrike.html" class="header-link">BirdStrike</a>
     <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
     <span class="live-badge"><span id="countdown"></span></span>
@@ -193,15 +190,13 @@
 </header>
 
 <nav class="mobile-nav">
+  <a href="index.html">Home</a>
   <a href="eyesonme.html">EYESONME</a>
   <a href="doctrine.html">Deterrence Doctrine</a>
-  <a href="index.html">Home</a>
   <a href="evidence.html">Evidence</a>
   <a href="harms.html">Harms</a>
   <a href="rebellion.html">Rebellion</a>
   <a href="who.html">Who's Responsible</a>
-  <a href="censorship.html">Censorship</a>
-  <a href="money.html">Money</a>
   <a href="birdstrike.html">BirdStrike</a>
   <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
 </nav>
@@ -282,6 +277,7 @@
   <p class="section-tag">02 — Municipal Defections</p>
   <h2 class="section-title">Cities Walking Away</h2>
 
+  <div class="city-table-wrap" style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
   <table class="city-table">
     <thead>
       <tr>
@@ -499,6 +495,7 @@
 
     </tbody>
   </table>
+  </div>
 
   <div class="insight-block">
     <p>
