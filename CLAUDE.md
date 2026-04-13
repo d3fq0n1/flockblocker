@@ -90,7 +90,7 @@ flockblocker/
 
 ## Core Components
 
-### 1. Adversarial Decal Research (4 Attack Strategies)
+### 1. Adversarial Decal Research (5 Attack Strategies)
 
 | Strategy | Mechanism | Key Idea |
 |----------|-----------|----------|
