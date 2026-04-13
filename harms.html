@@ -526,7 +526,60 @@
   </div>
 </section>
 
-<!-- INSERT_CHUNK_2D_HERE -->
+<hr>
+
+<div class="bottom-cta">
+  <p class="bottom-cta-text">
+    <strong>Verona, Wisconsin declined to renew their Flock contract after public pressure.</strong> Every municipality on the network has the same option. If cameras aren't up in your city yet, you can stop them. If they are, the grant terms are your leverage.
+  </p>
+  <div class="btn-row">
+    <a href="birdstrike.html" class="btn btn-fill">BirdStrike Templates</a>
+    <a href="rebellion.html" class="btn btn-outline">Cities Walking Away</a>
+    <a href="who.html" class="btn btn-outline">See Who's Responsible</a>
+    <a href="submit.html" class="btn btn-outline">Share Your Story</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">
+    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
+    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a>
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+<script>
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
+</script>
+<script>
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
 
 </body>
 </html>
