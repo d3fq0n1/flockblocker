@@ -73,7 +73,7 @@ flockblocker/
 ├── doctrine.html           # Deterrence doctrine — standalone formal publication w/ SHA256
 ├── 404.html                # Custom 404 page
 ├── eyesonme-data.json      # Station fleet data (3 stations)
-├── eyesonme-subjects.json  # Accountability subject profiles (8 subjects)
+├── eyesonme-subjects.json  # Accountability subject profiles (9 subjects)
 ├── submit.html             # Story submission form
 ├── stories.html            # Approved user stories (geography-grouped)
 ├── evidence.html           # Public record contract & chief's response
@@ -182,7 +182,7 @@ Physical camera network mirroring Flock Safety's deployment methodology back at 
 **Dashboard sections:**
 - **Network status bar**: deployed/active station counts, total runtime, motion events, network launch date
 - **Station grid**: 3 station cards (Alpha/Bravo/Charlie) with status badges, target facility/official, battery/storage gauges, snapshot placeholders, field collection timestamps, `[ PROTECTED OPERATION ]` banners
-- **Accountability subjects**: 8 dossier cards (3 municipal, 1 county, 4 corporate) with status badges, silence counters, activity timelines, FOIA request tracking, document vaults
+- **Accountability subjects**: 9 dossier cards (3 municipal, 1 county, 1 state, 4 corporate) with status badges, silence counters, activity timelines, FOIA request tracking, document vaults
 - **FOIA tracker**: Table with request ID, target agency, filed date, statutory deadline, status badges, overdue day counters
 - **Activity feed**: Reverse-chronological network-wide event log
 - **Encryption architecture**: 5-layer documentation (storage, transit, application, field collection, auth material) + seizure resistance
@@ -253,7 +253,7 @@ Each image entry tracks source hash (integrity), OCR-assisted labeling, and rese
 ```json
 {
   "subjects": [{
-    "id": "zilisch-michael", "name", "title", "org", "org_type": "MUNICIPAL|COUNTY|CORPORATE",
+    "id": "zilisch-michael", "name", "title", "org", "org_type": "MUNICIPAL|COUNTY|STATE|CORPORATE",
     "role_in_lpr", "status": "UNRESPONSIVE|RESPONDED|UNDER REVIEW|ESCALATED",
     "last_activity", "silence_start", "silence_broken", "station_id",
     "timeline": [{ "date", "type": "FOIA|STATEMENT|MEETING|SILENCE|ESCALATION", "description" }],
@@ -316,6 +316,7 @@ wrangler deploy
 - All generated outputs include research attribution footer
 - EYESONME station IDs: `EYESONME-001` (Alpha), `EYESONME-002` (Bravo), `EYESONME-003` (Charlie)
 - EYESONME status values: `PLANNED`, `ACTIVE`, `OFFLINE`, `DEGRADED`
+- Subject org types: `MUNICIPAL`, `COUNTY`, `STATE`, `CORPORATE`
 - Subject status values: `UNRESPONSIVE`, `RESPONDED`, `UNDER REVIEW`, `ESCALATED`
 - FOIA status values: `FILED`, `OVERDUE`, `PARTIALLY FULFILLED`, `FULFILLED`, `DENIED`
 - Timeline event types: `FOIA`, `STATEMENT`, `MEETING`, `SILENCE`, `ESCALATION`

@@ -223,6 +223,38 @@
       "timeline": [],
       "foia_requests": [],
       "documents": []
+    },
+    {
+      "id": "testin-patrick",
+      "name": "Sen. Patrick Testin",
+      "title": "State Senator",
+      "org": "Wisconsin State Senate",
+      "org_type": "STATE",
+      "role_in_lpr": "State senator for the district containing Mauston (605 Lincoln St). Original demand letter was misrouted to Sen. Keyeski on March 19; legislative staffer Sarah Semrad redirected to Testin's office on April 7. Forwarded documents received April 7. CC'd on April 9 media escalation. Non-hostile to date but tracked as adversary pending direct engagement — no public response, no oversight action.",
+      "status": "UNDER REVIEW",
+      "last_activity": null,
+      "silence_start": "2026-04-07",
+      "silence_broken": null,
+      "station_id": null,
+      "timeline": [
+        {
+          "date": "2026-04-07",
+          "type": "FOIA",
+          "description": "Forwarded the March 19 demand-letter thread after staff redirect from Sen. Keyeski's office via Sarah Semrad."
+        },
+        {
+          "date": "2026-04-07",
+          "type": "SILENCE",
+          "description": "Silence period begins. No acknowledgment from senator's office on forwarded thread."
+        },
+        {
+          "date": "2026-04-09",
+          "type": "ESCALATION",
+          "description": "CC'd on story tip filed with Juneau County Star Times newsroom with full documents attached. No response from senator's office."
+        }
+      ],
+      "foia_requests": [],
+      "documents": []
     }
   ]
 }
