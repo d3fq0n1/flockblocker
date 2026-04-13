@@ -78,9 +78,7 @@ flockblocker/
 ├── stories.html            # Approved user stories (geography-grouped)
 ├── evidence.html           # Public record contract & chief's response
 ├── birdstrike.html         # "Project BIRDSTRIKE" municipal research template
-├── censorship.html         # Flock surveillance/censorship documentation
-├── harms.html              # Catalog of Flock negative impacts
-├── money.html              # Flock Safety funding & grant mechanisms
+├── harms.html              # Catalog of Flock harms + censorship record + money flow (merged)
 ├── rebellion.html          # Tracking 32+ municipal defections
 ├── who.html                # Named officials & corporate officers
 └── README.md               # Mission statement & overview
