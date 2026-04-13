@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="assets/site.css">
 <style>
   :root {
     --bg: #09090b;
@@ -103,7 +104,7 @@
   /* Station grid */
   .station-grid { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem; }
   .station-grid-label { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
-  .station-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+  .station-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 1.5rem; }
   .station-card { background: var(--surface); border: 1px solid var(--border); padding: 0; transition: border-color 0.2s; }
   .station-card:hover { border-color: var(--text-dim); }
   .station-card-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; }
@@ -143,7 +144,7 @@
   .protected-banner a:hover { color: var(--accent); }
 
   /* Subject dossier cards */
-  .subject-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+  .subject-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 1.5rem; }
   .subject-card { background: var(--surface); border: 1px solid var(--border); transition: border-color 0.2s; }
   .subject-card:hover { border-color: var(--text-dim); }
   .subject-card-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--border); }
@@ -231,7 +232,7 @@
   .insight-block strong { color: var(--green); font-weight: 500; }
 
   /* Map */
-  .map-container { height: 300px; background: var(--surface); border: 1px solid var(--border); margin-top: 1.5rem; }
+  .map-container { height: clamp(260px, 50vw, 420px); background: var(--surface); border: 1px solid var(--border); margin-top: 1.5rem; }
 
   /* Footer */
   footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
@@ -241,6 +242,9 @@
   .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
 
   /* Responsive */
+  @media (max-width: 1024px) {
+    .net-status-grid { grid-template-columns: repeat(3, 1fr); }
+  }
   @media (max-width: 900px) {
     header { padding: 0 1.5rem; }
     .header-link { display: none; }
@@ -258,6 +262,19 @@
     .feed-entry { flex-wrap: wrap; gap: 0.5rem; }
     .feed-ts { min-width: auto; }
     .feed-station { min-width: auto; }
+  }
+  @media (max-width: 640px) {
+    .eom-hero-title { font-size: clamp(2.8rem, 12vw, 4.5rem); }
+    .net-status-grid { grid-template-columns: repeat(2, 1fr); }
+    .station-cards { grid-template-columns: 1fr; }
+    .subject-grid { grid-template-columns: 1fr; }
+    .station-card-header { flex-wrap: wrap; gap: 0.5rem; }
+    .station-card-footer { flex-wrap: wrap; gap: 0.75rem; }
+    .subject-meta { grid-template-columns: 1fr 1fr; }
+    .crypto-layer { padding: 1.2rem; }
+    .legal-block { padding: 1.2rem 1.5rem; }
+    .insight-block { padding: 1.2rem 1.5rem; }
+    .deterrence-banner { padding: 1.5rem; }
   }
   @media (max-width: 480px) {
     .eom-hero { padding: 3rem 1rem 2rem; }
@@ -301,8 +318,6 @@
   <a href="harms.html">Harms</a>
   <a href="rebellion.html">Rebellion</a>
   <a href="who.html">Who's Responsible</a>
-  <a href="censorship.html">Censorship</a>
-  <a href="money.html">Money</a>
   <a href="birdstrike.html">BirdStrike</a>
   <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
 </nav>
