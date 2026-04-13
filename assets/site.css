@@ -17,6 +17,7 @@
   --accent: #c8f04a;
   --red: #f05a4a;
   --amber: #f0a84a;
+  --green: #4af0a0;
   --text: #d4d4dc;
   --text-mid: #8888a0;
   --text-dim: #44445a;
@@ -113,6 +114,7 @@ header {
   animation: blink 1.8s ease-in-out infinite;
 }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,240,160,0.4)} 50%{opacity:0.8;box-shadow:0 0 0 6px rgba(74,240,160,0)} }
 
 /* ---------- Mobile nav ---------- */
 .menu-toggle {

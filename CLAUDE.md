@@ -4,7 +4,7 @@
 
 FlockBlocker is a multi-disciplinary research project targeting **data-layer vulnerabilities** in Flock Safety's automated license plate recognition (ALPR) system. Rather than obscuring plates (failed reads are discarded), it generates **confident misreads** that get stored as ground truth in Flock's database, corrupting pattern-of-life analysis, degrading alert reliability, and undermining prosecutorial use of the data.
 
-**Key stats:** 175+ files, 100+ directories, 3.5+ MB, 550+ commits.
+**Key stats:** ~80 source files, ~20 directories, 4 MB.
 
 ---
 
