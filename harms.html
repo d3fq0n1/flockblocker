@@ -4,123 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How Flock Hurts — FlockBlocker</title>
+<meta name="description" content="Documented harms, suppression record, and grant-pipeline lock-in — every item sourced from public record.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-  :root {
-    --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
-    --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
-    --text-dim: #44445a; --white: #f0f0f8;
-    --mono: 'Fira Mono', monospace; --display: 'Black Ops One', cursive; --body: 'Epilogue', sans-serif;
+  /* Page-specific — anchor nav strip */
+  .anchor-strip {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 2.5rem 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
-  a { color: inherit; text-decoration: none; }
-
-  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
-  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
-  .logo em { color: var(--accent); font-style: normal; }
-  .header-right { display: flex; align-items: center; gap: 2rem; }
-  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
-  .header-link:hover { color: var(--accent); }
-  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; }
-  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-  .page-hero { padding: 6rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
-  .page-hero-kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--red); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.5rem; }
-  .page-hero-title { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.95; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2rem; }
-  .page-hero-title .accent { color: var(--red); }
-  .page-hero-lead { font-size: 1.1rem; font-weight: 300; color: var(--text); line-height: 1.85; max-width: 680px; }
-  .page-hero-lead strong { color: var(--white); font-weight: 500; }
-
-  hr { border: none; border-top: 1px solid var(--border); }
-
-  .section { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
-  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
-  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
-
-  .offense-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-bottom: 3rem; }
-  .offense-card { background: var(--surface); padding: 2.5rem; display: flex; flex-direction: column; }
-  .offense-card.full-width { grid-column: 1 / -1; }
-  .offense-number { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.2rem; }
-  .offense-headline { font-family: var(--display); font-weight: 800; font-size: 1.4rem; color: var(--white); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1rem; }
-  .offense-body { font-size: 0.92rem; color: var(--text); line-height: 1.85; flex: 1; }
-  .offense-body strong { color: var(--white); font-weight: 500; }
-  .offense-quote { font-family: var(--mono); font-size: 0.82rem; color: var(--red); line-height: 1.7; margin: 1.2rem 0; padding: 1rem 1.5rem; background: rgba(240,90,74,0.06); border-left: 3px solid var(--red); }
-  .offense-source { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.08em; margin-top: 1.2rem; }
-
-  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
-  .stat-cell { background: var(--surface); padding: 2rem; text-align: center; }
-  .stat-cell-value { font-family: var(--display); font-weight: 800; font-size: 2.8rem; color: var(--white); line-height: 1; margin-bottom: 0.5rem; }
-  .stat-cell-value.warn { color: var(--red); }
-  .stat-cell-label { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.6; }
-
-  .pipeline { margin-top: 3rem; background: var(--surface); border: 1px solid var(--border); padding: 2.5rem; }
-  .pipeline-title { font-family: var(--display); font-weight: 700; font-size: 1rem; color: var(--white); letter-spacing: 0.04em; margin-bottom: 2rem; text-transform: uppercase; }
-  .pipeline-steps { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
-  .pipeline-step { background: var(--surface2); border: 1px solid var(--border); padding: 1rem 1.5rem; font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); line-height: 1.5; text-align: center; flex: 1; min-width: 140px; }
-  .pipeline-step.danger { border-color: var(--red); color: var(--red); }
-  .pipeline-arrow { font-family: var(--mono); color: var(--text-dim); font-size: 1.2rem; padding: 0 0.3rem; flex-shrink: 0; }
-
-  .bottom-cta { text-align: center; padding: 4rem 2.5rem; max-width: 680px; margin: 0 auto; }
-  .bottom-cta-text { font-size: 1.05rem; color: var(--text); line-height: 1.85; margin-bottom: 2rem; }
-  .bottom-cta-text strong { color: var(--white); font-weight: 500; }
-  .btn { font-family: var(--display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
-  .btn-fill { background: var(--accent); color: #09090b; }
-  .btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
-  .btn-outline:hover { border-color: var(--text-mid); color: var(--white); }
-  .btn-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-
-  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
-  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
-  .footer-left a:hover { color: var(--accent); }
-  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
-
-  /* Mobile Navigation */
-  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
-  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
-  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
-  .menu-toggle.active span:nth-child(2) { opacity: 0; }
-  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
-  .mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
-  .mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
-  .mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
-  .mobile-nav a:active { color: var(--accent); }
-
+  .anchor-strip a {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-mid);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border);
+    transition: all 0.18s;
+  }
+  .anchor-strip a:hover { color: var(--accent); border-color: var(--text-mid); }
+  .anchor-strip a.red:hover { color: var(--red); }
+  .anchor-strip a.amber:hover { color: var(--amber); }
+  .anchor-strip a.green:hover { color: var(--accent); }
+  /* Scroll offset for anchored sections under sticky header */
+  section[id] { scroll-margin-top: 72px; }
   @media (max-width: 900px) {
-    .page-hero { padding: 4rem 1.5rem 3rem; }
-    .section { padding: 4rem 1.5rem; }
-    .offense-grid { grid-template-columns: 1fr; }
-    .offense-card.full-width { grid-column: auto; }
-    .stat-row { grid-template-columns: 1fr 1fr; }
-    .pipeline-steps { flex-direction: column; }
-    .pipeline-arrow { transform: rotate(90deg); }
-    footer { padding: 2rem 1.5rem; }
-    header { padding: 0 1.5rem; }
-    .header-link { display: none; }
-    .menu-toggle { display: block; }
+    .anchor-strip { padding: 1rem 1.5rem 0; }
   }
   @media (max-width: 480px) {
-    .page-hero { padding: 3rem 1rem 2rem; }
-    .page-hero-title { font-size: clamp(2.2rem, 10vw, 3rem); }
-    .page-hero-lead { font-size: 0.95rem; }
-    .section { padding: 3rem 1rem; }
-    .section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
-    .offense-card { padding: 1.5rem; }
-    .offense-headline { font-size: 1.1rem; }
-    .stat-row { grid-template-columns: 1fr; }
-    .stat-cell-value { font-size: 2rem; }
-    .pipeline { padding: 1.5rem; }
-    .pipeline-step { padding: 0.75rem 1rem; min-width: unset; }
-    .bottom-cta { padding: 3rem 1rem; }
-    .btn-row { flex-direction: column; align-items: stretch; }
-    .btn-row .btn { justify-content: center; }
-    footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
-    header { padding: 0 1rem; }
+    .anchor-strip { padding: 0.75rem 1rem 0; }
+    .anchor-strip a { font-size: 0.62rem; padding: 0.5rem 0.8rem; }
   }
 </style>
 </head>
@@ -129,15 +48,13 @@
 <header>
   <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
   <div class="header-right">
-    <a href="doctrine.html" style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;color:var(--text-dim);transition:color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-dim)'">[ DETERRENCE DOCTRINE ]</a>
-    <a href="eyesonme.html" class="header-link" style="color:#c8f04a">EYESONME</a>
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme">EYESONME</a>
     <a href="index.html" class="header-link">Home</a>
-    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
-    <a href="harms.html" class="header-link" style="color:var(--accent)">Harms</a>
+    <a href="evidence.html" class="header-link evidence">Evidence</a>
+    <a href="harms.html" class="header-link active">Harms</a>
     <a href="rebellion.html" class="header-link">Rebellion</a>
     <a href="who.html" class="header-link">Who</a>
-    <a href="censorship.html" class="header-link">Censorship</a>
-    <a href="money.html" class="header-link">Money</a>
     <a href="birdstrike.html" class="header-link">BirdStrike</a>
     <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
     <span class="live-badge"><span id="countdown"></span></span>
@@ -153,8 +70,6 @@
   <a href="harms.html">Harms</a>
   <a href="rebellion.html">Rebellion</a>
   <a href="who.html">Who's Responsible</a>
-  <a href="censorship.html">Censorship</a>
-  <a href="money.html">Money</a>
   <a href="birdstrike.html">BirdStrike</a>
   <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
 </nav>
@@ -163,14 +78,23 @@
   <p class="page-hero-kicker">// Documented harms — all public record</p>
   <h1 class="page-hero-title">How Flock <span class="accent">Hurts</span></h1>
   <p class="page-hero-lead">
-    These are not hypotheticals. Every item below is <strong>documented, sourced, and on the public record</strong>. Flock Safety's surveillance infrastructure has been used to track abortion patients, feed data to federal immigration enforcement, and build a private pattern-of-life database on millions of Americans who never consented.
+    These are not hypotheticals. Every item below is <strong>documented, sourced, and on the public record</strong>. What Flock does, what they do when confronted, and how they bypass your vote to get installed in the first place — all on one page.
   </p>
+</div>
+
+<div class="anchor-strip">
+  <a href="#offenses" class="red">→ 01 / Egregious Offenses</a>
+  <a href="#censorship" class="amber">→ 02 / The Suppression Record</a>
+  <a href="#money" class="green">→ 03 / Follow The Money</a>
 </div>
 
 <hr>
 
-<div class="section">
-  <p class="section-tag">The Charges</p>
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 01 — EGREGIOUS OFFENSES (from original harms.html)
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="offenses" class="section">
+  <p class="section-tag">01 — The Charges</p>
   <h2 class="section-title">Egregious Offenses</h2>
 
   <div class="offense-grid">
@@ -314,16 +238,6 @@
       <p class="stat-cell-label">Opt-out<br>mechanisms</p>
     </div>
   </div>
-</div>
-
-<hr>
-
-<div class="section">
-  <p class="section-tag">How It Works</p>
-  <h2 class="section-title">The Surveillance Pipeline</h2>
-  <p style="font-size:0.95rem; color:var(--text); line-height:1.85; max-width:680px; margin-bottom:1rem;">
-    Your city bought one step. They got the whole chain.
-  </p>
 
   <div class="pipeline">
     <p class="pipeline-title">From your driveway to a federal database</p>
@@ -336,27 +250,293 @@
       <span class="pipeline-arrow">&rarr;</span>
       <div class="pipeline-step">Queryable by 221+<br>agencies statewide</div>
       <span class="pipeline-arrow">&rarr;</span>
-      <div class="pipeline-step danger">Accessible to ICE<br>& federal agencies</div>
+      <div class="pipeline-step danger">Accessible to ICE<br>&amp; federal agencies</div>
     </div>
   </div>
 
-  <div style="margin-top:2.5rem; background:var(--surface2); border-left:3px solid var(--red); padding:1.5rem 2rem; max-width:680px;">
-    <p style="font-family:var(--mono); font-size:0.82rem; color:var(--text-mid); line-height:1.9;">
-      <strong style="color:var(--red);">No single municipality controls this pipeline.</strong> Once your plate read enters the Flock database, it is no longer your city's data. It belongs to a private corporation, queryable by any agency on the network, subpoena-accessible to any federal body, and retained on terms your city council never negotiated.
+  <div class="insight-block warn">
+    <p>
+      <strong>No single municipality controls this pipeline.</strong> Once your plate read enters the Flock database, it is no longer your city's data. It belongs to a private corporation, queryable by any agency on the network, subpoena-accessible to any federal body, and retained on terms your city council never negotiated.
     </p>
   </div>
-</div>
+</section>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 02 — THE SUPPRESSION RECORD (from original censorship.html)
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="censorship" class="section">
+  <p class="section-tag">02 — The Record</p>
+  <h2 class="section-title">They Tried To <span style="color:var(--amber)">Silence</span> This</h2>
+  <p class="section-body" style="margin-bottom:2.5rem;">
+    Flock Safety and its employees have <strong>repeatedly attempted to suppress public criticism</strong> — deleting LinkedIn threads, removing comments, and lying about post removal. Every attempt is logged here with screenshots.
+  </p>
+
+  <div class="evidence-grid">
+
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 01 — The SVP Tantrum Delete</p>
+          <p class="evidence-headline">Chris Colwell Nuked His Entire LinkedIn Thread After Being Called Out</p>
+        </div>
+        <span class="evidence-date">March 2026</span>
+      </div>
+      <p class="evidence-body">
+        Chris Colwell, Flock Safety's SVP of Customer Revenue Retention, posted a thread on LinkedIn. Public comments documented Flock's surveillance harms — the Texas abortion clinic tracking, the ICE data pipeline, the absence of any opt-out. When the comments couldn't be individually controlled, <strong>Colwell deleted the entire post</strong>. Not a reply. Not a single comment. The whole thread — nuked.
+      </p>
+      <div class="evidence-quote">
+        "Here's their SVP being a trite ass, then when called out, tantrum deletes."<br>— Blake Clark, LinkedIn
+      </div>
+      <p class="evidence-source">Source: LinkedIn, X (@d3fkawn) — x.com/d3fkawn/status/2036153573332181242</p>
+    </div>
+
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 02 — The Promise</p>
+          <p class="evidence-headline">Flock's Chief Strategy Officer Publicly Promised No Deletions — Then They Deleted</p>
+        </div>
+        <span class="evidence-date">March 2026</span>
+      </div>
+      <p class="evidence-body">
+        John Santry, a Skydio executive and former Naval Special Warfare officer, posted a critical technical comment on a Flock-related LinkedIn thread challenging their drone downtime claims. He ended with: <strong>"Watch how long it takes for this comment to be deleted."</strong> The comment got 12 likes.
+      </p>
+      <p class="evidence-body">
+        <strong>Rahul Sidhu</strong> — Flock Safety's Chief Strategy Officer and co-founder of Aerodome — personally replied: <strong>"No one's going to delete your comment, John. You're more than welcome to comment on all of our posts :)"</strong>
+      </p>
+      <p class="evidence-body">
+        Blake Clark immediately responded: <strong>"False. You will. I have proof."</strong> — and linked to the documented X thread showing Flock's prior deletions, including the Colwell incident. The CSO's public promise is now evidence.
+      </p>
+      <div class="evidence-quote">
+        "No one's going to delete your comment, John. You're more than welcome to comment on all of our posts :)"<br>— Rahul Sidhu, Chief Strategy Officer @ Flock Safety
+      </div>
+      <div class="evidence-screenshots">
+        <div class="screenshot-slot">
+          <img src="screenshots/rhaul_lies_1.png" alt="John Santry's comment predicting deletion, Rahul Sidhu promising no deletion, Blake Clark calling the bluff">
+        </div>
+        <div class="screenshot-slot">
+          <img src="screenshots/rahul_lies_2.png" alt="Wide view showing full context including abortion clinic surveillance comment at top">
+        </div>
+      </div>
+      <p class="evidence-source">Source: LinkedIn — Rahul Sidhu (CSO, Flock Safety), John Santry (Skydio), Blake Clark</p>
+    </div>
+
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 03 — The CEO's Cleanup</p>
+          <p class="evidence-headline">Garrett Langley Repeatedly Deleted Factual Comments From His LinkedIn Posts</p>
+        </div>
+        <span class="evidence-date">March 2026</span>
+      </div>
+      <p class="evidence-body">
+        Flock Safety CEO Garrett Langley posted on LinkedIn. Comments were added citing documented harms — true, factual, sourced from public records. <strong>The comments were deleted. Repeatedly.</strong> Not once. Not by accident. A pattern of deliberate removal of public criticism from the CEO's own feed.
+      </p>
+      <p class="evidence-body">
+        Blake Clark posted directly on Langley's thread: <strong>"lol stop deleting my comments Garrett Langley. Cities already don't trust you. Do you think deleting my comments, true, factual comments, helps?"</strong> The comment included a link to FlockBlocker, pulled 525 impressions — and documented the suppression in real time on the CEO's own post.
+      </p>
+      <div class="evidence-quote">
+        "lol stop deleting my comments Garrett Langley<br><br>Cities already don't trust you. Do you think deleting my comments, true, factual comments, helps? lol"<br>— Blake Clark, commenting on Langley's LinkedIn post (525 impressions)
+      </div>
+      <div class="evidence-screenshots">
+        <div class="screenshot-slot">
+          <img src="screenshots/garrett_deletd.png" alt="Blake Clark calling out Garrett Langley for deleting comments, with FlockBlocker link preview visible">
+        </div>
+      </div>
+      <p class="evidence-source">Source: LinkedIn — Garrett Langley (CEO, Flock Safety), Blake Clark</p>
+    </div>
+
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 04 — The X Thread</p>
+          <p class="evidence-headline">Real-Time Documentation of Flock's First Deletions on X</p>
+        </div>
+        <span class="evidence-date">March 2026</span>
+      </div>
+      <p class="evidence-body">
+        The deletions were documented in real time on X (formerly Twitter) by <strong>@d3fkawn</strong>. The thread captures Flock's initial censorship attempts as they happened — the first comments to disappear, the first threads to get nuked. This thread was later linked as proof in LinkedIn comments, creating a cross-platform evidence chain that Flock cannot scrub from either platform.
+      </p>
+      <p class="evidence-body">
+        <strong>The thread is still live.</strong> Flock can delete their LinkedIn comments. They cannot delete someone else's X thread.
+      </p>
+      <p class="evidence-source">Source: X — @d3fkawn, x.com/d3fkawn/status/2036153573332181242</p>
+    </div>
+
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 05 — The Pattern</p>
+          <p class="evidence-headline">Systematic Removal Across Multiple Flock Employee Posts</p>
+        </div>
+        <span class="evidence-date">Ongoing</span>
+      </div>
+      <p class="evidence-body">
+        Across multiple LinkedIn posts by multiple Flock Safety employees — from the CEO to the CSO to the SVP of Customer Revenue — the same pattern repeats: <strong>public comment with sourced facts → comment disappears → post remains sanitized</strong>. The comments cite public records, published reporting, and documented system behavior. They get removed because they're effective.
+      </p>
+      <p class="evidence-body">
+        Flock's CSO <strong>publicly promised</strong> they don't delete. The evidence on this page proves that was a lie.
+      </p>
+      <p class="evidence-source">Source: LinkedIn, X, archived screenshots</p>
+    </div>
+
+  </div>
+
+  <div class="pattern-box">
+    <p class="pattern-box-title">The Playbook</p>
+    <p>
+      <strong>Step 1:</strong> Flock executive posts promotional content on LinkedIn.<br>
+      <strong>Step 2:</strong> Public comments cite documented harms — abortion surveillance, ICE pipeline, no opt-out.<br>
+      <strong>Step 3:</strong> Comments are deleted. Sometimes the entire post is nuked (see: Colwell).<br>
+      <strong>Step 4:</strong> When confronted, the CSO personally promises "No one's going to delete your comment." (see: Sidhu)<br>
+      <strong>Step 5:</strong> They delete anyway. The cycle repeats. Every deletion is screenshotted.
+    </p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-cell">
+      <p class="stat-cell-value amber">0</p>
+      <p class="stat-cell-label">Substantive<br>responses</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value amber">0</p>
+      <p class="stat-cell-label">Facts<br>disputed</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value">100%</p>
+      <p class="stat-cell-label">Critical comments<br>removed</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value">100%</p>
+      <p class="stat-cell-label">Incidents<br>screenshotted</p>
+    </div>
+  </div>
+
+  <div class="insight-block amber">
+    <p>
+      <strong>Censorship is confession.</strong> Every deletion is a concession that the facts in that post were accurate enough to be threatening. Every screenshot on this page was taken before the deletion occurred. This is a permanent, public, version-controlled record. It cannot be scrubbed. It cannot be moderated away. It lives in a git repository. The commit history is the evidence chain.
+    </p>
+  </div>
+</section>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 03 — FOLLOW THE MONEY (from original money.html)
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="money" class="section">
+  <p class="section-tag">03 — The Pipeline</p>
+  <h2 class="section-title">Follow The <span style="color:var(--accent)">Money</span></h2>
+  <p class="section-body" style="margin-bottom:2.5rem;">
+    Flock deploys cameras for "free" using federal grant money, <strong>bypassing public oversight</strong>. When the grant ends, the subscription doesn't. Municipalities get locked into recurring fees that become permanent budget lines — for infrastructure their residents never approved.
+  </p>
+
+  <div class="flow">
+    <div class="flow-node">
+      <p class="flow-node-label">Step 1</p>
+      <p class="flow-node-value">Federal Grant<br>Program<br><span style="font-size:0.62rem;color:var(--text-dim)">(SHSP, UASI, Byrne JAG)</span></p>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-node">
+      <p class="flow-node-label">Step 2</p>
+      <p class="flow-node-value">Flock / Lexipol<br>write the<br>application</p>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-node">
+      <p class="flow-node-label">Step 3</p>
+      <p class="flow-node-value">Police Dept<br>receives grant<br><span style="font-size:0.62rem;color:var(--text-dim)">(no council vote)</span></p>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-node trap">
+      <p class="flow-node-label trap-label">Step 4</p>
+      <p class="flow-node-value">"Free" cameras<br>deployed<br><span style="font-size:0.62rem;color:var(--text-dim)">(year one only)</span></p>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-node trap">
+      <p class="flow-node-label trap-label">Step 5</p>
+      <p class="flow-node-value">Subscription<br>lock-in<br><span style="font-size:0.62rem;color:var(--text-dim)">(~$2,500/cam/yr)</span></p>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-node trap">
+      <p class="flow-node-label trap-label">Step 6</p>
+      <p class="flow-node-value">Permanent<br>surveillance<br>infrastructure</p>
+    </div>
+  </div>
+
+  <div class="stat-row three">
+    <div class="stat-cell">
+      <p class="stat-cell-value green">$0</p>
+      <p class="stat-cell-label">Year one cost<br>to department</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value warn">$39K+</p>
+      <p class="stat-cell-label">Year two cost<br>(Sumner, WA)</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value warn">&infin;</p>
+      <p class="stat-cell-label">Years of<br>subscription</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--white);margin-top:3.5rem;margin-bottom:0.5rem;">The Trick — Grant-Funded Deployment</h3>
+  <ul class="fact-list">
+    <li><strong>Flock Safety partnered with Lexipol</strong> to run a "License Plate Readers Grant Assistance Program." Flock and Lexipol fill out the federal grant paperwork for police departments.</li>
+    <li><strong>Primary federal funding vehicles:</strong> DHS Homeland Security Grant Program (SHSP, UASI), DOJ Byrne JAG, and Community Project Funding earmarks.</li>
+    <li>The grant covers <strong>year one</strong>: hardware, installation, maintenance. The department pays nothing.</li>
+    <li><em>No city council budget vote required.</em> Grant money bypasses normal procurement and appropriation processes.</li>
+    <li><em>No public hearing required</em> in most jurisdictions. Cameras go up. Residents find out later, if at all.</li>
+    <li><strong>Santa Cruz, CA:</strong> Police explicitly sought SHSP grants for a citywide Flock network covering all city entrances and exits.</li>
+  </ul>
+
+  <div class="insight-block warn">
+    <p>
+      <strong>The vendor writes the grant application for the product it sells.</strong> The department that receives the grant has no incentive to question the vendor's claims. The public that funds the grant has no mechanism to object before cameras are installed.
+    </p>
+  </div>
+
+  <h3 style="font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--white);margin-top:3.5rem;margin-bottom:0.5rem;">The Trap — Grant Ends. Subscription Doesn't.</h3>
+  <ul class="fact-list">
+    <li><strong>Sumner, WA:</strong> $50,000 federal grant covered year one entirely. Year two onward: <em>~$39,000/year, in perpetuity.</em></li>
+    <li>Once prosecutors build cases on ALPR data and patrol officers rely on alerts, <strong>cancellation becomes politically toxic</strong>. No chief will be the one who "turned off the crime-fighting tool."</li>
+    <li><strong>Fall River, MA:</strong> City declined to fund ShotSpotter's $90,000 annual cost. The company <em>continued providing the service free</em> — maintaining dependency without payment, waiting for money to return.</li>
+    <li>Flock's own marketing: <em>"although some technologies require an upfront investment, they often result in significant savings over time."</em> This is the lock-in pitch.</li>
+  </ul>
+
+  <div class="quote-block">
+    <p><strong>The "free" camera is the dealer's first hit.</strong></p>
+    <p>Year one costs nothing. Year two costs $39,000. Year ten costs $390,000. By then, the department can't function without it and the council won't vote to remove it.</p>
+  </div>
+
+  <h3 style="font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--white);margin-top:3.5rem;margin-bottom:0.5rem;">The Cut — How To Kill It Before It Starts</h3>
+  <ul class="action-list">
+    <li><strong>Federal grants have public comment periods.</strong> Most residents never know they exist. SHSP and Byrne JAG grants require local government to publish notices — find them.</li>
+    <li><strong>FOIA the grant application before it's approved.</strong> Request all pending federal grant applications from your police department. The application reveals the surveillance plan before cameras go up.</li>
+    <li><strong>Monitor city council agendas.</strong> Grant acceptance resolutions must be voted on. This is your intervention window — often buried on the consent agenda where it passes without discussion.</li>
+    <li><strong>Pull it off consent.</strong> The single most powerful intervention: show up to the council meeting where grant acceptance is on the consent agenda and request it be pulled for individual discussion. One resident. One request. Full public debate.</li>
+    <li><strong>Use the BirdStrike templates.</strong> Public comment scripts, FOIA request language, and demand letter templates are ready to deploy. <a href="birdstrike.html" style="color:var(--accent);border-bottom:1px solid rgba(200,240,74,0.3)">Go to BirdStrike →</a></li>
+    <li><strong>If cameras are already up:</strong> FOIA the grant documentation. Undisclosed federal funding has its own accountability requirements — reporting obligations, use restrictions, audit trails — that Flock deployments frequently don't meet.</li>
+  </ul>
+
+  <div class="insight-block">
+    <p>
+      <strong>The grant pipeline is Flock's primary go-to-market strategy.</strong> It is also its most vulnerable point. Every dollar of federal money comes with federal strings. Pull them.
+    </p>
+  </div>
+</section>
 
 <hr>
 
 <div class="bottom-cta">
   <p class="bottom-cta-text">
-    <strong>Verona, Wisconsin declined to renew their Flock contract after public pressure.</strong> That option remains available to every municipality on the network.
+    <strong>Verona, Wisconsin declined to renew their Flock contract after public pressure.</strong> Every municipality on the network has the same option. If cameras aren't up in your city yet, you can stop them. If they are, the grant terms are your leverage.
   </p>
   <div class="btn-row">
-    <a href="stories.html" class="btn btn-fill">Read Community Stories</a>
-    <a href="submit.html" class="btn btn-outline">Share Your Story</a>
+    <a href="birdstrike.html" class="btn btn-fill">BirdStrike Templates</a>
+    <a href="rebellion.html" class="btn btn-outline">Cities Walking Away</a>
     <a href="who.html" class="btn btn-outline">See Who's Responsible</a>
+    <a href="submit.html" class="btn btn-outline">Share Your Story</a>
   </div>
 </div>
 
@@ -400,5 +580,6 @@ document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('clic
   setInterval(tick, 1000);
 })();
 </script>
+
 </body>
 </html>
