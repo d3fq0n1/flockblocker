@@ -20,27 +20,42 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 # Known OCR confusion pairs — characters that degrade classifier confidence
-# when rendered at boundary font weights / stroke widths
+# when rendered at boundary font weights / stroke widths.
+#
+# CANONICAL SOURCE: tools/decal_generator.py::CONFUSION_PAIRS
+# This dict MUST remain identical to the tools/ version so that stickers
+# produced by sticker_gen/ are evaluated against the same confusion model
+# used by the research pipeline. Test coverage in
+# tools/tests/test_decal_generator.py asserts equality — do not edit one
+# without the other.
 CONFUSION_PAIRS = {
     "0": ["O", "D", "Q"],
-    "O": ["0", "D"],
-    "1": ["I", "L", "7"],
+    "O": ["0", "D", "Q"],
+    "D": ["0", "O", "Q"],
+    "Q": ["0", "O", "D"],
+    "1": ["I", "L"],
     "I": ["1", "L"],
-    "8": ["B", "3"],
-    "B": ["8", "3"],
-    "5": ["S", "6"],
-    "S": ["5", "8"],
-    "2": ["Z", "7"],
-    "Z": ["2", "7"],
-    "6": ["G", "b"],
-    "G": ["6", "C"],
-    "D": ["0", "O"],
-    "Q": ["0", "O"],
+    "L": ["1", "I"],
+    "8": ["B"],
+    "B": ["8"],
+    "5": ["S"],
+    "S": ["5"],
+    "2": ["Z"],
+    "Z": ["2"],
+    "6": ["G"],
+    "G": ["6"],
     "C": ["G", "O"],
+    "M": ["N", "H"],
+    "N": ["M", "H"],
+    "H": ["M", "N"],
+    "V": ["U", "Y"],
+    "U": ["V", "Y"],
+    "K": ["X"],
+    "X": ["K"],
 }
 
 # High-confusion character set — all chars that appear in confusion pairs
-HIGH_CONFUSION_CHARS = "0O1IL8B5S2Z6GDQ"
+HIGH_CONFUSION_CHARS = "".join(sorted(CONFUSION_PAIRS.keys()))
 
 # Retroreflective interference pattern parameters
 # Based on documented IR interaction at 850nm/940nm wavelengths

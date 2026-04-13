@@ -151,6 +151,7 @@
   .subject-org-tag.municipal { color: var(--amber); }
   .subject-org-tag.county { color: var(--red); }
   .subject-org-tag.corporate { color: var(--red); }
+  .subject-org-tag.state { color: #7a8af0; }
   .subject-name { font-family: var(--display); font-size: 1.1rem; color: var(--white); letter-spacing: 0.02em; margin-bottom: 0.2rem; }
   .subject-title { font-family: var(--mono); font-size: 0.68rem; color: var(--text-mid); }
   .subject-card-body { padding: 1.2rem 1.5rem; }
@@ -169,6 +170,7 @@
   .tl-type.statement { color: var(--green); border-color: rgba(74,240,160,0.3); }
   .tl-type.meeting { color: var(--amber); border-color: rgba(240,168,74,0.3); }
   .tl-type.silence { color: var(--red); border-color: rgba(240,90,74,0.3); }
+  .tl-type.escalation { color: #4ad0f0; border-color: rgba(74,208,240,0.3); }
   .tl-date { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); flex-shrink: 0; min-width: 70px; margin-top: 0.15rem; }
   .tl-desc { font-size: 0.78rem; color: var(--text); line-height: 1.5; }
   .subject-card-footer { padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
@@ -399,6 +401,12 @@
   <div class="subject-grid" id="subject-grid-corporate">
     <!-- Populated by JS -->
   </div>
+
+  <!-- State subjects -->
+  <p class="station-grid-label" style="margin-top:3rem;">Wisconsin State Legislature — Oversight Officials</p>
+  <div class="subject-grid" id="subject-grid-state">
+    <!-- Populated by JS -->
+  </div>
 </div>
 
 <hr>
@@ -457,7 +465,7 @@
       <span class="feed-ts">2026-03-19 —:—</span>
       <span class="feed-station">NETWORK</span>
       <span class="feed-type">FOIA</span>
-      <span class="feed-desc">Formal decommission notice served to Mauston PD, City Hall, Juneau County SO. 30-day response window established. CC: State Senator Sarah Keyeski.</span>
+      <span class="feed-desc">Formal decommission notice served to Mauston PD, City Hall, Juneau County SO. 30-day response window established. CC: State Senator Patrick Testin.</span>
     </div>
     <div class="feed-entry">
       <span class="feed-ts">2026-03-19 —:—</span>
@@ -661,11 +669,11 @@ fetch('eyesonme-subjects.json').then(r => r.json()).then(function(data) {
   var subjects = data.subjects;
   var foiaRows = [];
   subjects.forEach(function(subj) {
-    var targetId = subj.org_type === 'MUNICIPAL' ? 'subject-grid-municipal' : subj.org_type === 'COUNTY' ? 'subject-grid-county' : 'subject-grid-corporate';
+    var targetId = subj.org_type === 'MUNICIPAL' ? 'subject-grid-municipal' : subj.org_type === 'COUNTY' ? 'subject-grid-county' : subj.org_type === 'STATE' ? 'subject-grid-state' : 'subject-grid-corporate';
     var container = document.getElementById(targetId);
     if (!container) return;
     var statusColor = subj.status === 'UNRESPONSIVE' ? 'var(--red)' : subj.status === 'RESPONDED' ? 'var(--green)' : subj.status === 'UNDER REVIEW' ? 'var(--amber)' : subj.status === 'ESCALATED' ? 'var(--red)' : 'var(--text-mid)';
-    var orgTagClass = subj.org_type === 'MUNICIPAL' ? 'municipal' : subj.org_type === 'COUNTY' ? 'county' : 'corporate';
+    var orgTagClass = subj.org_type === 'MUNICIPAL' ? 'municipal' : subj.org_type === 'COUNTY' ? 'county' : subj.org_type === 'STATE' ? 'state' : 'corporate';
     var silenceDays = subj.silence_broken ? 'Broke silence after ' + daysSince(subj.silence_start) + ' days' : subj.silence_start ? daysSince(subj.silence_start) + ' days silent' : '—';
     var tlHtml = '';
     if (subj.timeline && subj.timeline.length > 0) {

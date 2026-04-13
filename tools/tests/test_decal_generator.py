@@ -295,10 +295,10 @@ class TestCandidateSuite:
             seed=42,
         )
         strategies = {c.strategy for c in candidates}
-        assert "confusion" in strategies
-        assert "segmentation" in strategies
+        assert "character_ambiguity" in strategies
+        assert "boundary_noise" in strategies
         assert "ir_phantom" in strategies
-        assert "adversarial_patch" in strategies
+        assert "eot_adversarial" in strategies
 
     def test_correct_variant_count(self, tmp_output):
         from decal_generator import generate_candidate_suite
@@ -336,13 +336,13 @@ class TestCandidateSuite:
         from decal_generator import generate_candidate_suite
 
         candidates = generate_candidate_suite(
-            strategies=["confusion", "ir_phantom"],
+            strategies=["character_ambiguity", "ir_phantom"],
             variants_per_strategy=2,
             seed=42,
         )
         assert len(candidates) == 4  # 2 strategies × 2 variants
         strategies = {c.strategy for c in candidates}
-        assert strategies == {"confusion", "ir_phantom"}
+        assert strategies == {"character_ambiguity", "ir_phantom"}
 
     def test_candidate_metadata(self, tmp_output):
         from decal_generator import generate_candidate_suite
@@ -353,7 +353,7 @@ class TestCandidateSuite:
             seed=42,
         )
         for c in candidates:
-            assert c.strategy in ("confusion", "segmentation", "ir_phantom", "adversarial_patch")
+            assert c.strategy in ("character_ambiguity", "boundary_noise", "ir_phantom", "eot_adversarial")
             assert "variant" in c.params
             assert "seed" in c.params
             assert c.path is not None
@@ -414,7 +414,7 @@ class TestEvaluationPipeline:
     def test_decal_score_composite(self):
         from evaluation import DecalScore, SingleResult
 
-        score = DecalScore(decal_name="test", strategy="confusion")
+        score = DecalScore(decal_name="test", strategy="character_ambiguity")
         # 2 misreads out of 3 reads, across 2 engines
         score.results = [
             SingleResult("eng1", "ideal", "ABC", "ABC", "A8C", 0.9, 0.85),
@@ -427,7 +427,7 @@ class TestEvaluationPipeline:
     def test_decal_score_summary(self):
         from evaluation import DecalScore, SingleResult
 
-        score = DecalScore(decal_name="test", strategy="segmentation")
+        score = DecalScore(decal_name="test", strategy="boundary_noise")
         score.results = [
             SingleResult("eng1", "ideal", "ABC", "ABC", "ABCOO", 0.9, 0.80),
         ]
@@ -435,7 +435,7 @@ class TestEvaluationPipeline:
         assert "decal" in summary
         assert "strategy" in summary
         assert "composite_score" in summary
-        assert summary["strategy"] == "segmentation"
+        assert summary["strategy"] == "boundary_noise"
 
     def test_leaderboard_format(self):
         from evaluation import DecalScore, SingleResult, print_leaderboard
@@ -443,14 +443,14 @@ class TestEvaluationPipeline:
         scores = [
             DecalScore(
                 decal_name="confusion_v0",
-                strategy="confusion",
+                strategy="character_ambiguity",
                 results=[
                     SingleResult("eng1", "ideal", "ABC", "ABC", "A8C", 0.9, 0.85),
                 ],
             ),
             DecalScore(
                 decal_name="seg_v0",
-                strategy="segmentation",
+                strategy="boundary_noise",
                 results=[
                     SingleResult("eng1", "ideal", "ABC", "ABC", "ABC", 0.9, 0.9),
                 ],
@@ -460,3 +460,75 @@ class TestEvaluationPipeline:
         assert "LEADERBOARD" in report
         assert "confusion_v0" in report
         assert "seg_v0" in report
+
+
+# ---------------------------------------------------------------------------
+# 7. Cross-Package Sync Tests
+# ---------------------------------------------------------------------------
+
+class TestCrossPackageSync:
+    """
+    Ensures the two separate packages (tools/ research pipeline and
+    sticker_gen/ standalone CLI) stay in lock-step on shared constants.
+
+    If these tests fail, a change was made in one package without updating
+    the other — fix by copying the canonical value from
+    tools/decal_generator.py into sticker_gen/strategies.py.
+    """
+
+    def test_confusion_pairs_match_canonical(self):
+        """tools/ is canonical; sticker_gen/ must mirror it verbatim."""
+        import sys
+        from pathlib import Path
+        repo_root = Path(__file__).resolve().parents[2]
+        sys.path.insert(0, str(repo_root))
+        try:
+            from decal_generator import CONFUSION_PAIRS as TOOLS_PAIRS
+            from sticker_gen.strategies import CONFUSION_PAIRS as STICKER_PAIRS
+        finally:
+            sys.path.pop(0)
+
+        assert TOOLS_PAIRS == STICKER_PAIRS, (
+            "CONFUSION_PAIRS diverged between tools/decal_generator.py "
+            "and sticker_gen/strategies.py. The tools/ version is canonical "
+            "— copy it to sticker_gen/ to resolve."
+        )
+
+    def test_strategy_names_match_canonical(self):
+        """
+        CLAUDE.md documents six canonical strategy names. Verify both
+        packages use names from that canon (allowing each package to
+        implement a subset).
+        """
+        canon = {
+            "character_ambiguity",
+            "retroreflective",
+            "boundary_noise",
+            "ir_phantom",
+            "eot_adversarial",
+            "ensemble_eot",
+        }
+        import sys
+        from pathlib import Path
+        repo_root = Path(__file__).resolve().parents[2]
+        sys.path.insert(0, str(repo_root))
+        try:
+            from sticker_gen.strategies import STRATEGIES as STICKER_STRATEGIES
+        finally:
+            sys.path.pop(0)
+
+        # sticker_gen/ strategy keys must all be in the canon
+        assert set(STICKER_STRATEGIES.keys()).issubset(canon), (
+            f"sticker_gen/ uses strategy names outside canon: "
+            f"{set(STICKER_STRATEGIES.keys()) - canon}"
+        )
+
+        # tools/ default strategy list must all be in the canon
+        from decal_generator import generate_candidate_suite  # noqa: F401
+        import inspect
+        src = inspect.getsource(generate_candidate_suite)
+        for name in ("character_ambiguity", "boundary_noise", "ir_phantom", "eot_adversarial"):
+            assert name in src, (
+                f"tools/decal_generator.py::generate_candidate_suite no "
+                f"longer references canonical strategy name {name!r}"
+            )

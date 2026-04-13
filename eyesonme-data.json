@@ -15,7 +15,6 @@
       "location_description": "Public area — Mauston, WI [EXACT POSITION OPSEC]",
       "coordinates": { "lat": null, "lng": null },
       "status": "PLANNED",
-      "deployed": null,
       "hardware": {
         "compute": "Raspberry Pi 5 4GB",
         "os": "DietPi (hardened Debian minimal)",
@@ -44,11 +43,10 @@
       "id": "EYESONME-002",
       "name": "Station Bravo",
       "target_facility": "Mauston City Hall",
-      "target_official": "Mayor Darryl \"D.D.\" Teske / City Admin Daron Haugh",
+      "target_official": "Mayor Darryl \"D.D.\" Teske / City Admin Daron J. Haugh",
       "location_description": "Public area — Mauston, WI [EXACT POSITION OPSEC]",
       "coordinates": { "lat": null, "lng": null },
       "status": "PLANNED",
-      "deployed": null,
       "hardware": {
         "compute": "Raspberry Pi 5 4GB",
         "os": "DietPi (hardened Debian minimal)",
@@ -81,7 +79,6 @@
       "location_description": "Public area — Juneau County, WI [EXACT POSITION OPSEC]",
       "coordinates": { "lat": null, "lng": null },
       "status": "PLANNED",
-      "deployed": null,
       "hardware": {
         "compute": "Raspberry Pi 5 4GB",
         "os": "DietPi (hardened Debian minimal)",

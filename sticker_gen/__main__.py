@@ -41,7 +41,15 @@ def main() -> int:
         "--strategy",
         default="all",
         choices=["all", "character_ambiguity", "retroreflective", "boundary_noise"],
-        help="Pattern generation strategy (default: all)",
+        help=(
+            "Pattern generation strategy (default: all). "
+            "sticker_gen is the print-ready-sticker subset of the canonical "
+            "six strategies in CLAUDE.md. The research-only strategies "
+            "(ir_phantom, eot_adversarial, ensemble_eot) live in "
+            "tools/decal_generator.py + tools/ensemble_eot.py — they "
+            "require IR camera simulation or gradient optimization and "
+            "are not usefully expressible as a printed bumper sticker."
+        ),
     )
     parser.add_argument(
         "--output",

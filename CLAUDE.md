@@ -73,7 +73,7 @@ flockblocker/
 ├── doctrine.html           # Deterrence doctrine — standalone formal publication w/ SHA256
 ├── 404.html                # Custom 404 page
 ├── eyesonme-data.json      # Station fleet data (3 stations)
-├── eyesonme-subjects.json  # Accountability subject profiles (8 subjects)
+├── eyesonme-subjects.json  # Accountability subject profiles (9 subjects)
 ├── submit.html             # Story submission form
 ├── stories.html            # Approved user stories (geography-grouped)
 ├── evidence.html           # Public record contract & chief's response
@@ -81,7 +81,7 @@ flockblocker/
 ├── censorship.html         # Flock surveillance/censorship documentation
 ├── harms.html              # Catalog of Flock negative impacts
 ├── money.html              # Flock Safety funding & grant mechanisms
-├── rebellion.html          # Tracking 32+ municipal defections
+├── rebellion.html          # Tracking 30+ municipal defections (NPR-sourced)
 ├── who.html                # Named officials & corporate officers
 └── README.md               # Mission statement & overview
 ```
@@ -90,15 +90,31 @@ flockblocker/
 
 ## Core Components
 
-### 1. Adversarial Decal Research (4 Attack Strategies)
+### 1. Adversarial Decal Research (6 Attack Strategies)
 
 | Strategy | Mechanism | Key Idea |
 |----------|-----------|----------|
-| **Character Confusion** | Font-weight/stroke manipulation at OCR confidence boundary | Exploits pairs like 0/O/D/Q, 1/I/L, 8/B, 5/S |
-| **Segmentation Boundary** | Extends plate boundary into sticker region | OCR reads extra characters from adjacent sticker |
-| **IR Phantom Injection** | Color pairs that collapse under 850nm/940nm IR | Visually distinct to humans, identical to IR cameras |
-| **EOT Adversarial Patch** | Gradient-optimized patterns (Expectation Over Transformation) | Robust to angle, distance (10-50 ft), lighting, printing |
-| **Ensemble EOT** | Hybrid white-box/black-box multi-engine optimization | Weighted aggregation across 3 OCR architectures for max transferability |
+| **Character Ambiguity** (`character_ambiguity`) | Font-weight/stroke manipulation at OCR confidence boundary | Exploits pairs like 0/O/D/Q, 1/I/L, 8/B, 5/S |
+| **Retroreflective Interference** (`retroreflective`) | Geometric patterns (chevron, diamond, concentric) with IR-reactive materials | Physical-layer optical interference at 850/940nm wavelengths |
+| **Boundary Noise** (`boundary_noise`) | Extends plate boundary into sticker region | OCR reads extra characters from adjacent sticker |
+| **IR Phantom Injection** (`ir_phantom`) | Color pairs that collapse under 850nm/940nm IR | Visually distinct to humans, identical to IR cameras |
+| **EOT Adversarial Patch** (`eot_adversarial`) | Gradient-optimized patterns (Expectation Over Transformation) | Robust to angle, distance (10-50 ft), lighting, printing |
+| **Ensemble EOT** (`ensemble_eot`) | Hybrid white-box/black-box multi-engine optimization | Weighted aggregation across 3 OCR architectures for max transferability |
+
+**Package-to-strategy matrix** (each package implements an intentional subset):
+
+| Strategy | `sticker_gen/` (print-ready) | `tools/` (research pipeline) |
+|---|:---:|:---:|
+| `character_ambiguity` | ✓ | ✓ |
+| `retroreflective` | ✓ | — (not an OCR attack) |
+| `boundary_noise` | ✓ | ✓ |
+| `ir_phantom` | — (research-only) | ✓ |
+| `eot_adversarial` | — (research-only) | ✓ |
+| `ensemble_eot` | — (research-only) | ✓ (in `ensemble_eot.py`) |
+
+- `sticker_gen/` produces PNGs + Avery 5163 PDFs at 300 DPI. Restricted to strategies that actually make sense as a printed bumper sticker.
+- `tools/` is the OCR research/evaluation pipeline. Restricted to strategies testable against OCR engines; physical retroreflective interference is out of scope.
+- `CONFUSION_PAIRS` dict is canonical in `tools/decal_generator.py` and mirrored verbatim in `sticker_gen/strategies.py` — sync enforced by `TestCrossPackageSync` in `tools/tests/test_decal_generator.py`.
 
 ### 2. Sticker Generator (`sticker_gen/`)
 
@@ -166,7 +182,7 @@ Physical camera network mirroring Flock Safety's deployment methodology back at 
 **Dashboard sections:**
 - **Network status bar**: deployed/active station counts, total runtime, motion events, network launch date
 - **Station grid**: 3 station cards (Alpha/Bravo/Charlie) with status badges, target facility/official, battery/storage gauges, snapshot placeholders, field collection timestamps, `[ PROTECTED OPERATION ]` banners
-- **Accountability subjects**: 8 dossier cards (3 municipal, 1 county, 4 corporate) with status badges, silence counters, activity timelines, FOIA request tracking, document vaults
+- **Accountability subjects**: 9 dossier cards (3 municipal, 1 county, 1 state, 4 corporate) with status badges, silence counters, activity timelines, FOIA request tracking, document vaults
 - **FOIA tracker**: Table with request ID, target agency, filed date, statutory deadline, status badges, overdue day counters
 - **Activity feed**: Reverse-chronological network-wide event log
 - **Encryption architecture**: 5-layer documentation (storage, transit, application, field collection, auth material) + seizure resistance
@@ -237,10 +253,10 @@ Each image entry tracks source hash (integrity), OCR-assisted labeling, and rese
 ```json
 {
   "subjects": [{
-    "id": "zilisch-michael", "name", "title", "org", "org_type": "MUNICIPAL|COUNTY|CORPORATE",
+    "id": "zilisch-michael", "name", "title", "org", "org_type": "MUNICIPAL|COUNTY|STATE|CORPORATE",
     "role_in_lpr", "status": "UNRESPONSIVE|RESPONDED|UNDER REVIEW|ESCALATED",
     "last_activity", "silence_start", "silence_broken", "station_id",
-    "timeline": [{ "date", "type": "FOIA|STATEMENT|MEETING|SILENCE", "description" }],
+    "timeline": [{ "date", "type": "FOIA|STATEMENT|MEETING|SILENCE|ESCALATION", "description" }],
     "foia_requests": [{ "id", "filed", "target", "subject", "statutory_deadline", "status" }],
     "documents": [{ "title", "type", "status": "OBTAINED|PENDING", "url" }]
   }]
@@ -300,9 +316,10 @@ wrangler deploy
 - All generated outputs include research attribution footer
 - EYESONME station IDs: `EYESONME-001` (Alpha), `EYESONME-002` (Bravo), `EYESONME-003` (Charlie)
 - EYESONME status values: `PLANNED`, `ACTIVE`, `OFFLINE`, `DEGRADED`
+- Subject org types: `MUNICIPAL`, `COUNTY`, `STATE`, `CORPORATE`
 - Subject status values: `UNRESPONSIVE`, `RESPONDED`, `UNDER REVIEW`, `ESCALATED`
 - FOIA status values: `FILED`, `OVERDUE`, `PARTIALLY FULFILLED`, `FULFILLED`, `DENIED`
-- Timeline event types: `FOIA`, `STATEMENT`, `MEETING`, `SILENCE`
+- Timeline event types: `FOIA`, `STATEMENT`, `MEETING`, `SILENCE`, `ESCALATION`
 - Color coding: green (`#4af0a0`) = EYESONME/active, amber (`#f0a84a`) = BirdStrike/warning, red (`#f05a4a`) = evidence/overdue, lime (`#c8f04a`) = default accent
 - Deterrence doctrine footer present on every HTML page site-wide
 - `[ DETERRENCE DOCTRINE ]` header link present on every HTML page
