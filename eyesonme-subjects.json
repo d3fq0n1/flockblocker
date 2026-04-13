@@ -27,6 +27,11 @@
           "date": "2026-04-07",
           "type": "STATEMENT",
           "description": "Broke silence. First documented response to BIRDSTRIKE demand."
+        },
+        {
+          "date": "2026-04-09",
+          "type": "ESCALATION",
+          "description": "Story tip filed with Juneau County Star Times newsroom (jcst-news@wiscnews.com) with full documents attached. Subject CC'd on public media escalation ahead of April 18 deadline."
         }
       ],
       "foia_requests": [
@@ -76,6 +81,11 @@
           "date": "2026-03-19",
           "type": "SILENCE",
           "description": "Silence period begins. No response to date."
+        },
+        {
+          "date": "2026-04-09",
+          "type": "ESCALATION",
+          "description": "Story tip filed with Juneau County Star Times newsroom. Subject CC'd on public media escalation ahead of April 18 deadline."
         }
       ],
       "foia_requests": [],
@@ -87,7 +97,7 @@
       "title": "City Administrator",
       "org": "City of Mauston",
       "org_type": "MUNICIPAL",
-      "role_in_lpr": "Administrative authority over municipal contracts. Received formal decommission notice. No public response documented.",
+      "role_in_lpr": "Administrative authority over municipal contracts. Delivery confirmed via March 19 out-of-office auto-reply (covering Mar 19–Mar 30). No substantive response to letter content.",
       "status": "UNRESPONSIVE",
       "last_activity": null,
       "silence_start": "2026-03-19",
@@ -101,8 +111,18 @@
         },
         {
           "date": "2026-03-19",
+          "type": "STATEMENT",
+          "description": "Automatic out-of-office reply received (covering Mar 19–Mar 30). Confirms delivery of demand letter; no substantive response to content."
+        },
+        {
+          "date": "2026-03-19",
           "type": "SILENCE",
-          "description": "Silence period begins. No response to date."
+          "description": "Substantive silence period begins. Auto-reply only; no response on letter content."
+        },
+        {
+          "date": "2026-04-09",
+          "type": "ESCALATION",
+          "description": "Story tip filed with Juneau County Star Times newsroom. Subject CC'd on public media escalation ahead of April 18 deadline."
         }
       ],
       "foia_requests": [],
@@ -130,6 +150,11 @@
           "date": "2026-03-19",
           "type": "SILENCE",
           "description": "Silence period begins. No response to date."
+        },
+        {
+          "date": "2026-04-09",
+          "type": "ESCALATION",
+          "description": "Story tip filed with Juneau County Star Times newsroom. Subject CC'd on public media escalation ahead of April 18 deadline."
         }
       ],
       "foia_requests": [],
