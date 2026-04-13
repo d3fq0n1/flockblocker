@@ -35,7 +35,11 @@ except ImportError:
 # Shared constants
 # ---------------------------------------------------------------------------
 
-# Character confusion pairs from Vulnerability Catalog §1.1
+# Character confusion pairs from Vulnerability Catalog §1.1.
+#
+# CANONICAL SOURCE for the repo. sticker_gen/strategies.py::CONFUSION_PAIRS
+# mirrors this dict verbatim; keep them in sync. A sync test in
+# tools/tests/test_decal_generator.py asserts equality.
 CONFUSION_PAIRS: dict[str, list[str]] = {
     "0": ["O", "D", "Q"],
     "O": ["0", "D", "Q"],
@@ -804,7 +808,7 @@ def generate_candidate_suite(
         seed: Random seed for reproducibility
     """
     if strategies is None:
-        strategies = ["confusion", "segmentation", "ir_phantom", "adversarial_patch"]
+        strategies = ["character_ambiguity", "boundary_noise", "ir_phantom", "eot_adversarial"]
 
     if output_dir:
         Path(output_dir).mkdir(parents=True, exist_ok=True)
@@ -821,7 +825,7 @@ def generate_candidate_suite(
             random.seed(current_seed)
             np.random.seed(current_seed)
 
-            if strategy == "confusion":
+            if strategy == "character_ambiguity":
                 img = generate_confusion_decal(
                     config=ConfusionDecalConfig(
                         plate_mimicry=bool(v % 2),
@@ -829,7 +833,7 @@ def generate_candidate_suite(
                     ),
                     target_plate=target_plate,
                 )
-            elif strategy == "segmentation":
+            elif strategy == "boundary_noise":
                 img = generate_segmentation_decal(
                     config=SegmentationDecalConfig(
                         extend_plate_border=True,
@@ -847,7 +851,7 @@ def generate_candidate_suite(
                     ),
                     target_plate=target_plate,
                 )
-            elif strategy == "adversarial_patch":
+            elif strategy == "eot_adversarial":
                 img = _generate_heuristic_patch(
                     AdversarialPatchConfig(seed=current_seed),
                 )
