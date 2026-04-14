@@ -6,31 +6,14 @@
 <title>404 — FlockBlocker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <style>
-  :root {
-    --bg: #09090b;
-    --surface: #111116;
-    --border: #242430;
-    --accent: #c8f04a;
-    --red: #f05a4a;
-    --text: #d4d4dc;
-    --text-mid: #8888a0;
-    --text-dim: #44445a;
-    --white: #f0f0f8;
-    --mono: 'Fira Mono', monospace;
-    --display: 'Black Ops One', cursive;
-    --body: 'Epilogue', sans-serif;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; text-align: center; }
-
+  body { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; text-align: center; }
   .four-oh-four { font-family: var(--display); font-size: clamp(5rem, 15vw, 10rem); color: var(--border); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2rem; }
   .four-message { font-family: var(--body); font-size: 1.1rem; color: var(--text-mid); line-height: 1.9; max-width: 420px; margin-bottom: 3rem; }
   .four-message strong { color: var(--white); font-weight: 500; }
   .four-link { font-family: var(--mono); font-size: 0.82rem; color: var(--accent); letter-spacing: 0.04em; border-bottom: 1px solid rgba(200,240,74,0.3); padding-bottom: 2px; transition: all 0.2s; }
   .four-link:hover { color: var(--white); border-color: var(--white); }
-  a { color: inherit; text-decoration: none; }
-
   .four-doctrine { margin-top: 4rem; font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.1em; max-width: 380px; line-height: 1.8; }
   .four-doctrine a { color: var(--text-mid); border-bottom: 1px solid rgba(136,136,160,0.2); transition: color 0.2s; }
   .four-doctrine a:hover { color: var(--accent); }

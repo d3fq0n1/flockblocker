@@ -11,18 +11,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Wall of Shame | FlockBlocker">
 <meta name="twitter:description" content="Documented cases of Flock Safety surveillance infrastructure used for stalking, voyeurism, and predatory abuse.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <style>
   :root {
-    --bg: #0a0a0a;
-    --surface: #121216;
     --surface-2: #17171d;
-    --border: #24242c;
     --border-strong: #3a3a44;
-    --text: #e8e8e8;
-    --text-mid: #9a9aa6;
-    --text-dim: #5a5a66;
-    --white: #ffffff;
-    --accent: #c8f04a;
     --featured-border: #8b0000;
     --tag-flock-employee: #7a5a10;
     --tag-law-enforcement: #2f4a6b;
@@ -30,61 +25,10 @@
     --tag-voyeurism: #3e1a4a;
     --tag-minors: #ff1f1f;
     --tag-ice-immigration: #8a3a10;
-    --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", "DejaVu Sans Mono", monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   }
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-weight: 400;
-    line-height: 1.6;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-  a { color: inherit; text-decoration: none; }
   a.inline-link { color: var(--text); border-bottom: 1px solid var(--border-strong); transition: border-color 0.15s, color 0.15s; }
   a.inline-link:hover, a.inline-link:focus { color: var(--white); border-bottom-color: var(--white); }
-  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
-
-  /* Site header */
-  .site-header {
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    height: 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    background: rgba(10,10,10,0.96);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    z-index: 100;
-  }
-  .logo {
-    font-family: var(--mono);
-    font-weight: 700;
-    font-size: 0.82rem;
-    letter-spacing: 0.1em;
-    color: var(--white);
-    text-transform: uppercase;
-  }
-  .logo em { color: var(--accent); font-style: normal; }
-  .header-nav { display: flex; align-items: center; gap: 1.75rem; }
-  .header-nav a {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--text-mid);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: color 0.15s;
-  }
-  .header-nav a:hover, .header-nav a:focus { color: var(--white); }
-  .header-nav a.current { color: var(--accent); }
+  hr { margin: 2rem 0; }
 
   /* Hero */
   .hero {
@@ -101,17 +45,16 @@
     margin-bottom: 1.25rem;
   }
   .hero-title {
-    font-family: var(--mono);
-    font-weight: 700;
-    font-size: clamp(2.4rem, 6vw, 4.5rem);
-    letter-spacing: -0.01em;
-    line-height: 1;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    letter-spacing: -0.02em;
+    line-height: 0.95;
     color: var(--white);
-    text-transform: uppercase;
     margin-bottom: 1.5rem;
   }
   .hero-subtitle {
-    font-family: var(--sans);
+    font-family: var(--body);
     font-style: italic;
     font-size: 1.05rem;
     color: var(--text-mid);
@@ -221,8 +164,8 @@
     font-weight: 700;
   }
   .case-name {
-    font-family: var(--mono);
-    font-weight: 700;
+    font-family: var(--display);
+    font-weight: 800;
     font-size: 1.5rem;
     line-height: 1.15;
     color: var(--white);
@@ -233,7 +176,7 @@
     font-size: 2rem;
   }
   .case-title {
-    font-family: var(--sans);
+    font-family: var(--body);
     font-size: 0.92rem;
     color: var(--text-mid);
     line-height: 1.5;
@@ -301,7 +244,7 @@
   }
   .read-more-btn:hover, .read-more-btn:focus { color: var(--white); outline: none; }
   .case-charges {
-    font-family: var(--sans);
+    font-family: var(--body);
     font-size: 0.88rem;
     color: var(--text-mid);
     line-height: 1.6;
@@ -321,7 +264,7 @@
     font-weight: 500;
   }
   .case-quote {
-    font-family: var(--sans);
+    font-family: var(--body);
     font-style: italic;
     font-size: 0.92rem;
     color: var(--text);
@@ -382,13 +325,13 @@
     border-top: 1px solid var(--border);
   }
   .cta-title {
-    font-family: var(--mono);
-    font-weight: 700;
-    font-size: 1.5rem;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.2rem);
     color: var(--white);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    line-height: 1;
     margin-bottom: 2rem;
-    text-transform: uppercase;
   }
   .cta-grid {
     display: grid;
@@ -416,7 +359,8 @@
     margin-bottom: 0.75rem;
   }
   .cta-card-title {
-    font-family: var(--mono);
+    font-family: var(--display);
+    font-weight: 800;
     font-size: 1rem;
     color: var(--white);
     line-height: 1.4;
@@ -450,29 +394,8 @@
     margin-top: 1rem;
   }
 
-  /* Footer */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem;
-    margin-top: 2rem;
-  }
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    line-height: 1.8;
-    letter-spacing: 0.04em;
-  }
-  .footer-inner a { color: var(--text-mid); transition: color 0.15s; }
-  .footer-inner a:hover { color: var(--white); }
-  .footer-doctrine { margin-top: 0.75rem; color: var(--text-dim); font-size: 0.65rem; letter-spacing: 0.06em; }
-
   /* Responsive */
   @media (max-width: 900px) {
-    .site-header { padding: 0 1.25rem; gap: 1rem; }
-    .header-nav { gap: 1rem; }
     .hero { padding: 3rem 1.25rem 2rem; }
     .hero-title { font-size: clamp(2rem, 10vw, 3rem); }
     .filter-bar { padding: 0.9rem 1.25rem; }
@@ -483,17 +406,13 @@
     .cta-section { padding: 3rem 1.25rem; }
     .cta-grid { grid-template-columns: 1fr; }
     .editorial { padding: 1.5rem 1.25rem 3rem; }
-    footer { padding: 1.5rem 1.25rem; }
-  }
-  @media (max-width: 600px) {
-    .header-nav a:not(.current):not(.home-link) { display: none; }
   }
 
   /* Print */
   @media print {
     :root { --bg: #fff; --surface: #fff; --surface-2: #fff; --text: #000; --text-mid: #333; --text-dim: #555; --border: #999; --border-strong: #666; --white: #000; }
     body { background: #fff; color: #000; }
-    .site-header, .filter-bar, .cta-section, footer, .read-more-btn { display: none !important; }
+    header, .filter-bar, .cta-section, footer, .read-more-btn { display: none !important; }
     .hero { padding: 1rem 0; }
     main { padding: 1rem 0; max-width: 100%; }
     .case-grid { display: block; }
@@ -510,16 +429,39 @@
 </style>
 </head>
 <body>
-<header class="site-header" role="banner">
+<header role="banner">
   <a href="index.html" class="logo" aria-label="FlockBlocker home">FLOCK<em>BLOCKER</em></a>
-  <nav class="header-nav" aria-label="Primary">
-    <a href="index.html" class="home-link">Home</a>
-    <a href="wall-of-shame.html" class="current" aria-current="page">Wall of Shame</a>
-    <a href="eyesonme.html">EyesOnMe</a>
-    <a href="rebellion.html">Rebellion</a>
-    <a href="doctrine.html">Doctrine</a>
-  </nav>
+  <div class="header-right">
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="index.html" class="header-link">Home</a>
+    <a href="eyesonme.html" class="header-link accent">EYESONME</a>
+    <a href="evidence.html" class="header-link red">Evidence</a>
+    <a href="wall-of-shame.html" class="header-link red active" aria-current="page">Wall of Shame</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="who.html" class="header-link">Who</a>
+    <a href="censorship.html" class="header-link">Censorship</a>
+    <a href="money.html" class="header-link">Money</a>
+    <a href="birdstrike.html" class="header-link">BirdStrike</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
+  </div>
 </header>
+
+<nav class="mobile-nav">
+  <a href="doctrine.html">Deterrence Doctrine</a>
+  <a href="index.html">Home</a>
+  <a href="eyesonme.html">EYESONME</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="wall-of-shame.html" class="active">Wall of Shame</a>
+  <a href="rebellion.html">Rebellion</a>
+  <a href="who.html">Who's Responsible</a>
+  <a href="censorship.html">Censorship</a>
+  <a href="money.html">Money</a>
+  <a href="birdstrike.html">BirdStrike</a>
+  <a href="stories.html">Stories</a>
+  <a href="submit.html">Submit Your Story</a>
+  <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub ↗</a>
+</nav>
 
 <section class="hero" aria-labelledby="page-title">
   <div class="hero-kicker">Public Record &middot; Civic Accountability</div>
@@ -574,10 +516,11 @@
 </section>
 
 <footer role="contentinfo">
-  <div class="footer-inner">
-    FLOCKBLOCKER &middot; Research, publication, and civic accountability. &middot; <a href="doctrine.html">Deterrence Doctrine</a> &middot; <a href="index.html">Home</a>
-    <div class="footer-doctrine">Deterrence is the architecture. Documentation is the weapon. Every entry on this page is a public record the audit trail failed to prevent.</div>
+  <div class="footer-left">
+    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
+    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a>
   </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
 </footer>
 
 <script>
@@ -824,6 +767,11 @@ filterButtons.forEach(btn => {
 })();
 
 render();
+
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
 </script>
 </body>
 </html>

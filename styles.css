@@ -1,0 +1,125 @@
+/* ==========================================================================
+   FlockBlocker — Shared Base Stylesheet
+   Canonical template: vars, reset, header, nav, footer, buttons, typography.
+   Page-specific components remain in per-page <style> blocks.
+   ========================================================================== */
+
+:root {
+  --bg: #09090b;
+  --surface: #111116;
+  --surface2: #16161c;
+  --border: #242430;
+  --accent: #c8f04a;
+  --red: #f05a4a;
+  --text: #d4d4dc;
+  --text-mid: #8888a0;
+  --text-dim: #44445a;
+  --white: #f0f0f8;
+  --mono: 'Fira Mono', monospace;
+  --display: 'Black Ops One', cursive;
+  --body: 'Epilogue', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+hr { border: none; border-top: 1px solid var(--border); }
+
+/* Header */
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: rgba(9,9,11,0.96);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+}
+.logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
+.logo em { color: var(--accent); font-style: normal; }
+.header-right { display: flex; align-items: center; gap: 2rem; }
+.header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
+.header-link:hover { color: var(--accent); }
+.header-link.accent { color: var(--accent); }
+.header-link.red { color: var(--red); }
+.header-link.active { color: var(--accent); border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+
+/* Canonical deterrence doctrine header link — identical on every page */
+.doctrine-link {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  transition: color 0.2s;
+}
+.doctrine-link:hover { color: var(--white); }
+.doctrine-link.active { color: var(--accent); }
+
+.live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; }
+.live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* Mobile Navigation */
+.menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
+.menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
+.mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
+.mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
+.mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
+.mobile-nav a:active,
+.mobile-nav a.active { color: var(--accent); }
+
+/* Buttons */
+.btn { font-family: var(--display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
+.btn-fill { background: var(--accent); color: #09090b; }
+.btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--text-mid); color: var(--white); }
+
+/* Section scaffolding */
+.section { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
+.section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+.section-title { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+.section-body { font-size: 1rem; line-height: 1.9; color: var(--text); max-width: 680px; }
+.section-body strong { color: var(--white); font-weight: 500; }
+.section-body em { color: var(--accent); font-style: normal; }
+
+.insight-block { margin-top: 2.5rem; background: var(--surface2); border-left: 3px solid var(--accent); padding: 1.5rem 2rem; max-width: 680px; }
+.insight-block p { font-family: var(--mono); font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; }
+.insight-block p strong { color: var(--accent); font-weight: 500; }
+
+/* Footer */
+footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
+.footer-left a { color: var(--text-mid); transition: color 0.2s; }
+.footer-left a:hover { color: var(--accent); }
+.footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
+
+/* Shared responsive breakpoints for base chrome */
+@media (max-width: 900px) {
+  header { padding: 0 1.5rem; }
+  .header-link, .doctrine-link, .live-badge { display: none; }
+  .menu-toggle { display: block; }
+  .section { padding: 4rem 1.5rem; }
+  footer { padding: 2rem 1.5rem; }
+}
+@media (max-width: 480px) {
+  header { padding: 0 1rem; }
+  .section { padding: 3rem 1rem; }
+  .section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
+  footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
+}
