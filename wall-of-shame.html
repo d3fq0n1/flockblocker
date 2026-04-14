@@ -621,8 +621,8 @@ const cases = [
     location: "Sedgwick, KS",
     date: "2024\u20132025",
     tags: ["law-enforcement", "stalking"],
-    summary: "Lee Nygaard used Flock cameras to track his ex-girlfriend's vehicles 228 times over a period of more than four months. He also followed her and her new boyfriend in his patrol car. The pattern was documented through Flock's own audit logs.",
-    charges: "Documented in ACLU report on ALPR misuse. Outcome per public record.",
+    summary: "Lee Nygaard used Flock cameras 228 times across a four-month span to surveil his ex-girlfriend (164 searches, June 24\u2013Oct. 5, 2023) and her new boyfriend (64 searches, Aug. 11\u2013Oct. 10, 2023). He also followed them out of town in his patrol car. Nygaard initially blamed drug concerns, then admitted jealousy. The pattern was documented through Flock's own audit logs and surfaced during an unrelated misconduct investigation.",
+    charges: "No criminal charges. Resigned Oct. 20, 2023 and permanently lost his Kansas police certification.",
     sources: [
       { label: "ACLU-WI", url: "https://www.aclu-wi.org/" }
     ]
@@ -632,9 +632,9 @@ const cases = [
     name: "Anna Altobello",
     title: "Secretary, Echols County Sheriff's Office",
     location: "Echols County, GA",
-    date: "Arrested Jan. 7, 2026",
+    date: "Arrested Jan. 5, 2026",
     tags: ["law-enforcement", "stalking"],
-    summary: "Anna Altobello used her Flock account to search the tags of two personal acquaintances on multiple occasions. She was arrested by the Georgia Bureau of Investigation and charged with eight counts of misuse of license plate data, along with stalking, family-violence stalking, and violation of the oath of office.",
+    summary: "Anna Altobello, a civilian secretary at the Echols County Sheriff's Office, used the department's Flock account to search the tags of two personal acquaintances on multiple occasions. Sheriff Randy Courson requested a GBI investigation on Dec. 18, 2025. Altobello was arrested Jan. 5, 2026; the GBI announced the charges publicly on Jan. 7, 2026. She was charged with eight counts of misuse of license plate data, along with stalking, family-violence stalking, and violation of the oath of office.",
     charges: "8 counts misuse of license plate data, stalking, stalking (family violence), violation of oath of office.",
     sources: [
       { label: "GBI", url: "https://gbi.georgia.gov/" },
@@ -656,16 +656,17 @@ const cases = [
     ]
   },
   {
-    id: "kechi-officer",
-    name: "Name Withheld / Pending",
-    title: "Officer, Kechi Police Department",
+    id: "heiar-victor",
+    name: "Victor Heiar",
+    title: "Former Lieutenant, Kechi Police Department",
     location: "Kechi, KS",
-    date: "Arrested 2022",
+    date: "Arrested Oct. 2022; convicted April 2023",
     tags: ["law-enforcement", "stalking"],
-    summary: "A Kechi, Kansas police officer used the Flock system to stalk his former wife. The incident was documented in scholarly analysis of ALPR misuse and represents one of the earlier known cases of a law enforcement officer turning the system on a private individual for personal reasons.",
-    charges: "Documented in scholarly review of ALPR misuse.",
+    summary: "Kechi Police Lt. Victor Heiar used his law-enforcement access to the Wichita Police Department's Flock license-plate-reader system to search for his estranged wife's vehicle on Oct. 23, 2022, then sent her text messages saying she had been \"spotted\" on specific streets. It is one of the earliest publicly documented cases of a sworn officer weaponizing Flock against a private individual. In response, the Wichita PD revoked Kechi PD's access to the Flock system entirely and tightened its audit cadence from biweekly to weekly.",
+    charges: "Pleaded guilty to misdemeanor computer crime and misdemeanor stalking. Sentenced to 18 months probation. Kansas POST revoked his law enforcement certification.",
     sources: [
-      { label: "UNC JOLT", url: "https://ncjolt.org/" }
+      { label: "KWCH", url: "https://www.kwch.com/2022/10/31/kechi-police-lieutenant-arrested-using-police-technology-stalk-wife/" },
+      { label: "Kansas CPOST Order", url: "https://www.kscpost.gov/orders/2023/vheiar.pdf" }
     ]
   },
   {
@@ -673,12 +674,13 @@ const cases = [
     name: "Ryan Terrell",
     title: "Former Lieutenant, North Charleston Police Department",
     location: "North Charleston, SC",
-    date: "Documented per public record",
-    tags: ["law-enforcement", "stalking", "voyeurism"],
-    summary: "Former Lt. Ryan Terrell used city-owned surveillance cameras to monitor his wife, whom he suspected of having an affair. Terrell was not fired for the misuse of the surveillance infrastructure. He was demoted.",
-    charges: "Demoted. Not terminated.",
+    date: "June 2024",
+    tags: ["law-enforcement", "voyeurism", "non-flock"],
+    summary: "Former Lt. Ryan Terrell \u2014 at the time the head of the North Charleston PD's technology unit \u2014 used the city-owned Verkada surveillance-camera network to track his wife's vehicle on at least three occasions on suspicion of an affair, including spotting her with a department sergeant in a Target parking lot. (Included here for context: Verkada, not Flock, but an identical misuse pattern by a sworn officer with privileged access to a municipal camera network.) Terrell was demoted to Master Patrol Officer, placed on six-month probation, transferred out of the technology unit, and stripped of Verkada access. He was not terminated.",
+    charges: "Administrative discipline only. Demoted, not terminated.",
     sources: [
-      { label: "ACLU-WI", url: "https://www.aclu-wi.org/" }
+      { label: "Live 5 News", url: "https://www.live5news.com/2024/06/24/north-charleston-police-officer-demoted-using-cameras-track-wife/" },
+      { label: "WBTV", url: "https://www.wbtv.com/2024/06/24/lieutenant-demoted-after-using-city-cameras-spy-wife-he-suspected-was-having-an-affair/" }
     ]
   },
   {

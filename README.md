@@ -10,19 +10,19 @@ Flock Safety is not a camera company. It is a **centralized data aggregation pla
 
 What this means:
 
-- **A private corporation operates the largest license plate surveillance network in the United States.** Over 5,000 law enforcement agencies feed plate reads from more than 40,000 cameras into a single queryable backend. Flock processes billions of reads. This is the largest privately operated vehicle tracking system in U.S. history.
+- **A private corporation operates the largest license plate surveillance network in the United States.** Over 5,000 law enforcement agencies and 6,000+ municipalities across 49 states feed plate reads from an estimated 80,000–100,000 Flock cameras into a single queryable backend. Flock reports performing over 20 billion vehicle scans per month. This is the largest privately operated vehicle tracking system in U.S. history.
 - **ICE and federal agencies access Flock data** through partnerships and subpoenas, converting local municipal camera purchases into federal immigration enforcement infrastructure. DHS has issued subpoenas for Flock data to identify and locate undocumented individuals using nothing but driving patterns.
 - **A Texas sheriff used the Flock database to identify vehicles that traveled from out of state to a reproductive health clinic.** This is not hypothetical. This is documented use of the system as deployed.
 - **Flock data has been used to monitor protest attendance.** Law enforcement agencies have queried plate reads near protest locations to build lists of attendees. No warrant. No probable cause. No individualized suspicion.
 - **A Georgia woman was held at gunpoint during a felony traffic stop triggered by a Flock misread.** The plate on her vehicle did not match the flagged vehicle. The system was confident. The system was wrong.
-- **Wisconsin alone has 221 agencies querying Flock data.** A single plate read in Mauston is queryable by every participating department in the state and potentially nationwide through Flock's cross-network sharing.
+- **At least 221 Wisconsin law enforcement agencies queried Flock data between Jan. 1 and May 31, 2025**, according to a Wisconsin Examiner investigation — many using a single-word justification ("investigation") to access the system. A single plate read in Mauston is queryable by every participating department in the state and potentially nationwide through Flock's cross-network sharing.
 - **Flock markets directly to HOAs, gated communities, apartment complexes, and private businesses.** These private installations feed the same law enforcement query network — without public records obligations, government oversight, or warrant requirements. The EFF has identified this as a parallel private surveillance architecture operating outside constitutional constraints.
 - **Flock's standard contracts include automatic renewal clauses** requiring written notice 60–90 days before expiration to cancel. Municipalities have reported being locked into multi-year renewals they did not intend to authorize.
 - **There is no opt-out.** If you drive on a road with a Flock camera, your location is logged, timestamped, and retained. You were not consulted. There is no mechanism to view, challenge, or correct the data collected about your vehicle.
 
 Flock Safety claims over 99% accuracy. Independent analysis tells a different story. At scale, even a 1% error rate across billions of reads means tens of thousands of incorrect records entering the database daily — each one treated as ground truth, each one queryable by thousands of agencies, each one sufficient to trigger an alert, a stop, or an investigation. No vendor publishes adversarial robustness figures. No independent audit has validated Flock's claims under real-world conditions.
 
-The company reached a reported $7.5 billion valuation after a 2024 funding round led by Andreessen Horowitz. The product is not public safety. The product is data.
+In March 2025, Flock Safety raised a reported $275 million at a $7.5 billion valuation, in a round led by Andreessen Horowitz. The product is not public safety. The product is data.
 
 ## The Approach
 
