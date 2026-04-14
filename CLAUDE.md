@@ -79,7 +79,7 @@ flockblocker/
 ├── evidence.html           # Public record contract & chief's response
 ├── birdstrike.html         # "Project BIRDSTRIKE" municipal research template
 ├── censorship.html         # Flock surveillance/censorship documentation
-├── harms.html              # Catalog of Flock negative impacts
+├── wall-of-shame.html      # Documented cases of Flock infrastructure misuse (stalking, voyeurism, predation)
 ├── money.html              # Flock Safety funding & grant mechanisms
 ├── rebellion.html          # Tracking 30+ municipal defections (NPR-sourced)
 ├── who.html                # Named officials & corporate officers
@@ -205,7 +205,7 @@ Published deterrence doctrine — formal dated document with live SHA-256 hash (
 
 ### 10. Public Information Pages
 
-Static HTML pages documenting surveillance harms, municipal defections, FOIA templates, the "Project BIRDSTRIKE" distributed research framework, evidence/contracts, funding analysis, censorship documentation, and personnel dossiers.
+Static HTML pages documenting the Wall of Shame (verified misuse cases), municipal defections, FOIA templates, the "Project BIRDSTRIKE" distributed research framework, evidence/contracts, funding analysis, censorship documentation, and personnel dossiers.
 
 ---
 
