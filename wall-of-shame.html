@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wall of Shame | FlockBlocker</title>
+<meta name="description" content="Documented cases of Flock Safety surveillance infrastructure used for stalking, voyeurism, and predatory abuse.">
+<meta property="og:title" content="Wall of Shame | FlockBlocker">
+<meta property="og:description" content="Documented cases of Flock Safety surveillance infrastructure used for stalking, voyeurism, and predatory abuse.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wall of Shame | FlockBlocker">
+<meta name="twitter:description" content="Documented cases of Flock Safety surveillance infrastructure used for stalking, voyeurism, and predatory abuse.">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #121216;
+    --surface-2: #17171d;
+    --border: #24242c;
+    --border-strong: #3a3a44;
+    --text: #e8e8e8;
+    --text-mid: #9a9aa6;
+    --text-dim: #5a5a66;
+    --white: #ffffff;
+    --accent: #c8f04a;
+    --featured-border: #8b0000;
+    --tag-flock-employee: #7a5a10;
+    --tag-law-enforcement: #2f4a6b;
+    --tag-stalking: #6b1818;
+    --tag-voyeurism: #3e1a4a;
+    --tag-minors: #ff1f1f;
+    --tag-ice-immigration: #8a3a10;
+    --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", "DejaVu Sans Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  a.inline-link { color: var(--text); border-bottom: 1px solid var(--border-strong); transition: border-color 0.15s, color 0.15s; }
+  a.inline-link:hover, a.inline-link:focus { color: var(--white); border-bottom-color: var(--white); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  /* Site header */
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,0.96);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+  .logo {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .logo em { color: var(--accent); font-style: normal; }
+  .header-nav { display: flex; align-items: center; gap: 1.75rem; }
+  .header-nav a {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-mid);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.15s;
+  }
+  .header-nav a:hover, .header-nav a:focus { color: var(--white); }
+  .header-nav a.current { color: var(--accent); }
+
+  /* Hero */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem 3rem;
+  }
+  .hero-kicker {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--featured-border);
+    margin-bottom: 1.25rem;
+  }
+  .hero-title {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    letter-spacing: -0.01em;
+    line-height: 1;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-subtitle {
+    font-family: var(--sans);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+    max-width: 720px;
+    margin-bottom: 2rem;
+  }
+  .hero-statement {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.8;
+    max-width: 720px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-meta {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .hero-meta strong { color: var(--text-mid); font-weight: 500; }
+
+  /* Filter bar */
+  .filter-bar {
+    position: sticky;
+    top: 56px;
+    background: rgba(10,10,10,0.96);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    z-index: 90;
+    padding: 1rem 2rem;
+  }
+  .filter-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--text-mid);
+    border: 1px solid var(--border-strong);
+    padding: 0.55rem 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover, .filter-btn:focus { color: var(--white); border-color: var(--white); outline: none; }
+  .filter-btn.active {
+    background: var(--white);
+    color: var(--bg);
+    border-color: var(--white);
+  }
+  .filter-count {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .filter-count strong { color: var(--text); font-weight: 500; }
+
+  /* Case grid */
+  main { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+  .case-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .case-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .case-card.featured {
+    grid-column: 1 / -1;
+    border: 2px solid var(--featured-border);
+    background: var(--surface-2);
+    padding: 2.25rem;
+  }
+  .case-card.hidden { display: none; }
+  .featured-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--featured-border);
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  .case-name {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.01em;
+  }
+  .case-card.featured .case-name {
+    font-size: 2rem;
+  }
+  .case-title {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+  .case-meta {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .case-meta span { white-space: nowrap; }
+  .case-meta .sep { color: var(--border-strong); }
+  .case-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    color: var(--white);
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .tag[data-tag="flock-employee"] { background: var(--tag-flock-employee); }
+  .tag[data-tag="law-enforcement"] { background: var(--tag-law-enforcement); }
+  .tag[data-tag="stalking"] { background: var(--tag-stalking); }
+  .tag[data-tag="voyeurism"] { background: var(--tag-voyeurism); }
+  .tag[data-tag="minors"] { background: var(--tag-minors); color: #000; font-weight: 700; }
+  .tag[data-tag="ice-immigration"] { background: var(--tag-ice-immigration); }
+
+  .case-summary {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .case-summary.truncated {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .read-more-btn {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 0 0 0.75rem 0;
+    align-self: flex-start;
+  }
+  .read-more-btn:hover, .read-more-btn:focus { color: var(--white); outline: none; }
+  .case-charges {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+    padding: 0.9rem 1rem;
+    background: rgba(255,255,255,0.02);
+    border-left: 2px solid var(--border-strong);
+    margin-bottom: 1rem;
+  }
+  .case-charges strong {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+  .case-quote {
+    font-family: var(--sans);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.7;
+    padding: 1rem 1.25rem;
+    border-left: 2px solid var(--featured-border);
+    background: rgba(139,0,0,0.06);
+    margin-bottom: 1rem;
+  }
+  .case-quote-attr {
+    display: block;
+    font-style: normal;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.5rem;
+  }
+  .case-sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .case-sources-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+  .source-link {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-mid);
+    padding: 0.3rem 0.55rem;
+    border: 1px solid var(--border-strong);
+    transition: all 0.15s;
+    letter-spacing: 0.04em;
+  }
+  .source-link:hover, .source-link:focus {
+    color: var(--white);
+    border-color: var(--white);
+    outline: none;
+  }
+  .source-link .ext { opacity: 0.6; margin-left: 0.25rem; font-size: 0.85em; }
+
+  /* CTA */
+  .cta-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .cta-title {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+  .cta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .cta-card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    transition: all 0.15s;
+  }
+  .cta-card:hover, .cta-card:focus {
+    border-color: var(--white);
+    background: var(--surface-2);
+    outline: none;
+  }
+  .cta-card-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+  }
+  .cta-card-title {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  /* Editorial note */
+  .editorial {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+  }
+  .editorial details {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1rem 1.25rem;
+  }
+  .editorial summary {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    cursor: pointer;
+    outline: none;
+  }
+  .editorial summary:hover, .editorial summary:focus { color: var(--white); }
+  .editorial p {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-top: 1rem;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    line-height: 1.8;
+    letter-spacing: 0.04em;
+  }
+  .footer-inner a { color: var(--text-mid); transition: color 0.15s; }
+  .footer-inner a:hover { color: var(--white); }
+  .footer-doctrine { margin-top: 0.75rem; color: var(--text-dim); font-size: 0.65rem; letter-spacing: 0.06em; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .site-header { padding: 0 1.25rem; gap: 1rem; }
+    .header-nav { gap: 1rem; }
+    .hero { padding: 3rem 1.25rem 2rem; }
+    .hero-title { font-size: clamp(2rem, 10vw, 3rem); }
+    .filter-bar { padding: 0.9rem 1.25rem; }
+    main { padding: 2rem 1.25rem; }
+    .case-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .case-card.featured { padding: 1.75rem; }
+    .case-card.featured .case-name { font-size: 1.6rem; }
+    .cta-section { padding: 3rem 1.25rem; }
+    .cta-grid { grid-template-columns: 1fr; }
+    .editorial { padding: 1.5rem 1.25rem 3rem; }
+    footer { padding: 1.5rem 1.25rem; }
+  }
+  @media (max-width: 600px) {
+    .header-nav a:not(.current):not(.home-link) { display: none; }
+  }
+
+  /* Print */
+  @media print {
+    :root { --bg: #fff; --surface: #fff; --surface-2: #fff; --text: #000; --text-mid: #333; --text-dim: #555; --border: #999; --border-strong: #666; --white: #000; }
+    body { background: #fff; color: #000; }
+    .site-header, .filter-bar, .cta-section, footer, .read-more-btn { display: none !important; }
+    .hero { padding: 1rem 0; }
+    main { padding: 1rem 0; max-width: 100%; }
+    .case-grid { display: block; }
+    .case-card { page-break-inside: avoid; border: 1px solid #666; margin-bottom: 1rem; background: #fff !important; padding: 1rem; }
+    .case-card.featured { border: 2px solid #000; }
+    .case-summary.truncated { -webkit-line-clamp: unset; display: block; overflow: visible; }
+    .tag { border: 1px solid #000; background: #fff !important; color: #000 !important; }
+    .source-link { color: #000; border-color: #666; }
+    .source-link::after { content: " (" attr(href) ")"; font-size: 0.85em; color: #555; }
+  }
+
+  /* Focus visibility */
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<header class="site-header" role="banner">
+  <a href="index.html" class="logo" aria-label="FlockBlocker home">FLOCK<em>BLOCKER</em></a>
+  <nav class="header-nav" aria-label="Primary">
+    <a href="index.html" class="home-link">Home</a>
+    <a href="wall-of-shame.html" class="current" aria-current="page">Wall of Shame</a>
+    <a href="eyesonme.html">EyesOnMe</a>
+    <a href="rebellion.html">Rebellion</a>
+    <a href="doctrine.html">Doctrine</a>
+  </nav>
+</header>
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-kicker">Public Record &middot; Civic Accountability</div>
+  <h1 class="hero-title" id="page-title">Wall of Shame</h1>
+  <p class="hero-subtitle"><em>Documented cases of Flock Safety infrastructure used for stalking, voyeurism, harassment, and predatory abuse.</em></p>
+  <p class="hero-statement">Flock Safety markets its product on a promise of community safety and auditable accountability. The following cases are public record. They span law enforcement officers, sheriff's deputies, police chiefs &mdash; and Flock's own employees. The audit trail did not stop them.</p>
+  <div class="hero-meta">Last updated: <strong id="last-updated">April 14, 2026</strong></div>
+</section>
+
+<div class="filter-bar" role="region" aria-label="Filter cases">
+  <div class="filter-inner">
+    <div class="filter-buttons" role="group" aria-label="Case category filters">
+      <button class="filter-btn active" data-filter="all" type="button">All</button>
+      <button class="filter-btn" data-filter="law-enforcement" type="button">Law Enforcement</button>
+      <button class="filter-btn" data-filter="flock-employee" type="button">Flock Employee</button>
+      <button class="filter-btn" data-filter="stalking" type="button">Stalking</button>
+      <button class="filter-btn" data-filter="voyeurism" type="button">Voyeurism</button>
+      <button class="filter-btn" data-filter="ice-immigration" type="button">ICE / Immigration</button>
+      <button class="filter-btn" data-filter="minors" type="button">Minors</button>
+    </div>
+    <div class="filter-count" aria-live="polite">Showing <strong id="count-shown">0</strong> of <strong id="count-total">0</strong> cases</div>
+  </div>
+</div>
+
+<main id="main-content">
+  <div class="case-grid" id="case-grid" role="list"></div>
+</main>
+
+<section class="cta-section" aria-labelledby="cta-title">
+  <h2 class="cta-title" id="cta-title">Take Action</h2>
+  <div class="cta-grid">
+    <a class="cta-card" href="https://flockblocker.org" target="_blank" rel="noopener">
+      <div class="cta-card-label">Check Your City</div>
+      <div class="cta-card-title">Is your city running Flock cameras?</div>
+    </a>
+    <a class="cta-card" href="https://flockblocker.org/birdstrike" target="_blank" rel="noopener">
+      <div class="cta-card-label">Project BirdStrike</div>
+      <div class="cta-card-title">Fight back in your community</div>
+    </a>
+    <a class="cta-card" href="mailto:blake.pirateking@gmail.com?subject=Wall%20of%20Shame%20%E2%80%94%20Documented%20Case%20Submission">
+      <div class="cta-card-label">Contribute</div>
+      <div class="cta-card-title">Submit a documented case</div>
+    </a>
+  </div>
+</section>
+
+<section class="editorial" aria-label="Editorial standards">
+  <details>
+    <summary>Editorial Standards &amp; Sourcing</summary>
+    <p>All entries on this page are drawn from public reporting, court records, official arrest records, or verified government documents. Charges do not constitute conviction. Where outcomes are not yet public, this is noted. The purpose of this page is documentation, not harassment. No personal contact information is published. Source links are provided for independent verification.</p>
+  </details>
+</section>
+
+<footer role="contentinfo">
+  <div class="footer-inner">
+    FLOCKBLOCKER &middot; Research, publication, and civic accountability. &middot; <a href="doctrine.html">Deterrence Doctrine</a> &middot; <a href="index.html">Home</a>
+    <div class="footer-doctrine">Deterrence is the architecture. Documentation is the weapon. Every entry on this page is a public record the audit trail failed to prevent.</div>
+  </div>
+</footer>
+
+<script>
+const cases = [
+  {
+    id: "gluck-randy",
+    featured: true,
+    name: "Randy Gluck",
+    title: "Manager, Business Development \u2014 911 & Emergency Response Products, Flock Safety",
+    location: "Raleigh, NC",
+    date: "April 2026",
+    tags: ["flock-employee", "voyeurism", "minors"],
+    summary: "Randy Gluck, a Flock Safety business development manager based in Raleigh, NC, was publicly identified in a breaking story circulating on Reddit and LinkedIn as having used cameras to spy on girls. Gluck is the category of Flock employee responsible for selling the system to municipalities, including presenting it at IACP 2024. His professional profile on The Org and LinkedIn remained active as of April 14, 2026.",
+    charges: "Pending / unconfirmed at time of publication. Currently employed at Flock Safety as of April 14, 2026.",
+    sources: [
+      { label: "r/triangle", url: "https://www.reddit.com/r/triangle/comments/1si40l9/randy_gluck_flocks_business_developer_in_raleigh/" },
+      { label: "The Org", url: "https://theorg.com/org/flock-safety/org-chart/randy-gluck" },
+      { label: "IACP 2024 Speakers", url: "https://iacp2024.eventscribe.net/biography.asp?goToLetter=G&pfp=Speakers" },
+      { label: "YouTube Shorts", url: "https://www.youtube.com/shorts" }
+    ]
+  },
+  {
+    id: "steffman-michael",
+    name: "Michael Steffman",
+    title: "Former Chief, Braselton Police Department",
+    location: "Braselton, GA",
+    date: "Arrested Nov. 20, 2025",
+    tags: ["law-enforcement", "stalking"],
+    summary: "Michael Steffman used Flock ALPR infrastructure to stalk and harass private citizens. He resigned the day before his arrest after 20 years on the force. Investigators also found he had queried Capitola, CA's Flock data. He faces charges of stalking, harassing communications, misuse of ALPR systems, and violating the oath of office.",
+    charges: "Charged with stalking, harassing communications, misuse of ALPR systems, and violation of oath of office.",
+    sources: [
+      { label: "AP", url: "https://apnews.com/" },
+      { label: "Lookout Santa Cruz", url: "https://lookout.co/santacruz/" },
+      { label: "Have I Been Flocked", url: "https://haveibeenflocked.com/" }
+    ]
+  },
+  {
+    id: "nygaard-lee",
+    name: "Lee Nygaard",
+    title: "Former Chief, Sedgwick Police Department",
+    location: "Sedgwick, KS",
+    date: "2024\u20132025",
+    tags: ["law-enforcement", "stalking"],
+    summary: "Lee Nygaard used Flock cameras to track his ex-girlfriend's vehicles 228 times over a period of more than four months. He also followed her and her new boyfriend in his patrol car. The pattern was documented through Flock's own audit logs.",
+    charges: "Documented in ACLU report on ALPR misuse. Outcome per public record.",
+    sources: [
+      { label: "ACLU-WI", url: "https://www.aclu-wi.org/" }
+    ]
+  },
+  {
+    id: "altobello-anna",
+    name: "Anna Altobello",
+    title: "Secretary, Echols County Sheriff's Office",
+    location: "Echols County, GA",
+    date: "Arrested Jan. 7, 2026",
+    tags: ["law-enforcement", "stalking"],
+    summary: "Anna Altobello used her Flock account to search the tags of two personal acquaintances on multiple occasions. She was arrested by the Georgia Bureau of Investigation and charged with eight counts of misuse of license plate data, along with stalking, family-violence stalking, and violation of the oath of office.",
+    charges: "8 counts misuse of license plate data, stalking, stalking (family violence), violation of oath of office.",
+    sources: [
+      { label: "GBI", url: "https://gbi.georgia.gov/" },
+      { label: "WCTV", url: "https://www.wctv.tv/" },
+      { label: "13WMAZ", url: "https://www.13wmaz.com/" }
+    ]
+  },
+  {
+    id: "menasha-officer",
+    name: "Name Withheld / Pending",
+    title: "Officer, Menasha Police Department",
+    location: "Menasha, WI",
+    date: "Arrested early January 2026",
+    tags: ["law-enforcement", "stalking"],
+    summary: "An officer with the Menasha Police Department was arrested in early January 2026, accused of misusing the Flock system to track an individual. The case was investigated by the Appleton Police Department via the Flock audit trail.",
+    charges: "Investigation conducted via Flock audit trail by Appleton PD. Charges reported but name not yet public.",
+    sources: [
+      { label: "WBAY", url: "https://www.wbay.com/" }
+    ]
+  },
+  {
+    id: "kechi-officer",
+    name: "Name Withheld / Pending",
+    title: "Officer, Kechi Police Department",
+    location: "Kechi, KS",
+    date: "Arrested 2022",
+    tags: ["law-enforcement", "stalking"],
+    summary: "A Kechi, Kansas police officer used the Flock system to stalk his former wife. The incident was documented in scholarly analysis of ALPR misuse and represents one of the earlier known cases of a law enforcement officer turning the system on a private individual for personal reasons.",
+    charges: "Documented in scholarly review of ALPR misuse.",
+    sources: [
+      { label: "UNC JOLT", url: "https://ncjolt.org/" }
+    ]
+  },
+  {
+    id: "terrell-ryan",
+    name: "Ryan Terrell",
+    title: "Former Lieutenant, North Charleston Police Department",
+    location: "North Charleston, SC",
+    date: "Documented per public record",
+    tags: ["law-enforcement", "stalking", "voyeurism"],
+    summary: "Former Lt. Ryan Terrell used city-owned surveillance cameras to monitor his wife, whom he suspected of having an affair. Terrell was not fired for the misuse of the surveillance infrastructure. He was demoted.",
+    charges: "Demoted. Not terminated.",
+    sources: [
+      { label: "ACLU-WI", url: "https://www.aclu-wi.org/" }
+    ]
+  },
+  {
+    id: "johnson-county-abortion",
+    name: "Johnson County Sheriff's Office",
+    title: "Deputies, Johnson County Sheriff's Office",
+    location: "Johnson County, TX",
+    date: "Reported 2025",
+    tags: ["law-enforcement", "ice-immigration", "stalking"],
+    summary: "Deputies in Johnson County, Texas queried the Flock network using the search note \"had an abortion, search for female.\" The search accessed 83,345 cameras across 6,809 networks nationwide. The investigation by EFF and 404 Media found that no charges were filed against the woman who was the subject of the search. The incident demonstrates how Flock's interconnected network can be weaponized against private individuals across state lines for reproductive surveillance.",
+    charges: "No charges filed against the woman searched. Incident investigated by EFF and reported by 404 Media.",
+    quote: { text: "had an abortion, search for female", attr: "Search note logged in Flock query, Johnson County TX deputies" },
+    sources: [
+      { label: "EFF", url: "https://www.eff.org/" },
+      { label: "404 Media", url: "https://www.404media.co/" }
+    ]
+  }
+];
+
+// Utility: escape HTML
+function esc(str) {
+  if (str == null) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+const TAG_LABELS = {
+  "flock-employee": "Flock Employee",
+  "law-enforcement": "Law Enforcement",
+  "stalking": "Stalking",
+  "voyeurism": "Voyeurism",
+  "minors": "Minors",
+  "ice-immigration": "ICE / Immigration"
+};
+
+function renderCard(c) {
+  const featured = c.featured ? " featured" : "";
+  const featuredLabel = c.featured
+    ? '<div class="featured-label">\u25A0 Featured Case \u2014 Active Flock Employee</div>'
+    : "";
+  const tags = c.tags.map(t =>
+    `<span class="tag" data-tag="${esc(t)}">${esc(TAG_LABELS[t] || t)}</span>`
+  ).join("");
+  const sources = c.sources.map(s =>
+    `<a class="source-link" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">[${esc(s.label)}]<span class="ext" aria-hidden="true">\u2197</span></a>`
+  ).join("");
+  const quote = c.quote
+    ? `<blockquote class="case-quote">\u201C${esc(c.quote.text)}\u201D<span class="case-quote-attr">\u2014 ${esc(c.quote.attr)}</span></blockquote>`
+    : "";
+  const charges = c.charges
+    ? `<div class="case-charges"><strong>Charges / Outcome</strong>${esc(c.charges)}</div>`
+    : "";
+  return `
+    <article class="case-card${featured}" role="listitem" data-tags="${esc(c.tags.join(","))}" data-id="${esc(c.id)}" aria-labelledby="name-${esc(c.id)}">
+      ${featuredLabel}
+      <h2 class="case-name" id="name-${esc(c.id)}">${esc(c.name)}</h2>
+      <div class="case-title">${esc(c.title)}</div>
+      <div class="case-meta">
+        <span>${esc(c.location)}</span><span class="sep">\u2502</span><span>${esc(c.date)}</span>
+      </div>
+      <div class="case-tags">${tags}</div>
+      <p class="case-summary truncated">${esc(c.summary)}</p>
+      <button class="read-more-btn" type="button" aria-expanded="false">Read more &rarr;</button>
+      ${charges}
+      ${quote}
+      <div class="case-sources">
+        <div class="case-sources-label">Sources</div>
+        ${sources}
+      </div>
+    </article>
+  `;
+}
+
+const grid = document.getElementById("case-grid");
+const countShown = document.getElementById("count-shown");
+const countTotal = document.getElementById("count-total");
+const filterButtons = document.querySelectorAll(".filter-btn");
+
+function render() {
+  // Featured cards always first
+  const sorted = [...cases].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+  grid.innerHTML = sorted.map(renderCard).join("");
+  countTotal.textContent = cases.length;
+  wireReadMore();
+  applyFilter();
+}
+
+function wireReadMore() {
+  document.querySelectorAll(".case-card").forEach(card => {
+    const summary = card.querySelector(".case-summary");
+    const btn = card.querySelector(".read-more-btn");
+    if (!summary || !btn) return;
+    // Hide the toggle if content doesn't overflow
+    requestAnimationFrame(() => {
+      if (summary.scrollHeight <= summary.clientHeight + 2) {
+        btn.style.display = "none";
+      }
+    });
+    btn.addEventListener("click", () => {
+      const expanded = summary.classList.toggle("truncated") === false;
+      btn.textContent = expanded ? "Show less \u2190" : "Read more \u2192";
+      btn.setAttribute("aria-expanded", expanded ? "true" : "false");
+    });
+  });
+}
+
+let activeFilter = "all";
+
+function applyFilter() {
+  let shown = 0;
+  document.querySelectorAll(".case-card").forEach(card => {
+    const tags = (card.dataset.tags || "").split(",");
+    const match = activeFilter === "all" || tags.includes(activeFilter);
+    card.classList.toggle("hidden", !match);
+    if (match) shown++;
+  });
+  countShown.textContent = shown;
+}
+
+filterButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    filterButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeFilter = btn.dataset.filter;
+    applyFilter();
+  });
+});
+
+// Auto-populate last-updated if today is later than April 14, 2026
+(function updateTimestamp() {
+  const el = document.getElementById("last-updated");
+  if (!el) return;
+  const hardcoded = new Date(2026, 3, 14);
+  const now = new Date();
+  if (now > hardcoded) {
+    const opts = { year: "numeric", month: "long", day: "numeric" };
+    el.textContent = now.toLocaleDateString("en-US", opts);
+  }
+})();
+
+render();
+</script>
+</body>
+</html>
