@@ -6,9 +6,9 @@
       "title": "Chief of Police",
       "org": "Mauston Police Department",
       "org_type": "MUNICIPAL",
-      "role_in_lpr": "Contract authorizing official. Broke 19-day silence on April 7, 2026 — within the 30-day response window set by the March 19 BIRDSTRIKE demand letter.",
-      "status": "RESPONDED",
-      "last_activity": "2026-04-07",
+      "role_in_lpr": "Contract authorizing official. Broke 19-day silence on April 7, 2026 by providing a document he represented as the Flock contract. On April 15, 2026, City Administrator Haugh's response letter — co-signed by Mayor Teske — formally admitted that the document the Chief of Police provided was a quote, not the executed contract. Chief's own administration has publicly discredited his document handling. Named in § 1983 threat (individual and official capacity).",
+      "status": "ESCALATED",
+      "last_activity": "2026-04-15",
       "silence_start": "2026-03-19",
       "silence_broken": "2026-04-07",
       "station_id": "EYESONME-001",
@@ -26,12 +26,22 @@
         {
           "date": "2026-04-07",
           "type": "STATEMENT",
-          "description": "Broke silence. First documented response to BIRDSTRIKE demand."
+          "description": "Broke 19-day silence. Attached a document represented as the Flock contract (later admitted by City Administrator to be a quote, not the executed agreement). Flat refusal of decommission demand."
+        },
+        {
+          "date": "2026-04-07",
+          "type": "ESCALATION",
+          "description": "Forensic rebuttal sent 54 minutes after Chief's response — 5 contract deficiencies, CC'd to all original recipients. Senator Testin added to distribution."
         },
         {
           "date": "2026-04-09",
           "type": "ESCALATION",
           "description": "Story tip filed with Juneau County Star Times newsroom (jcst-news@wiscnews.com) with full documents attached. Subject CC'd on public media escalation ahead of April 18 deadline."
+        },
+        {
+          "date": "2026-04-15",
+          "type": "STATEMENT",
+          "description": "Chief's document discredited in writing. City Administrator Haugh's formal response letter — co-signed by Mayor Teske — admits: 'The document previously sent to you was a quote, not the final agreement... this oversight was unintentional.' Executed contract produced: Flock Group Inc. Amendment, DocuSign 1/23/2024, 2 cameras, $6,300 total. References a previously executed agreement dated 11/09/2023 that was not provided."
         }
       ],
       "foia_requests": [
@@ -41,21 +51,41 @@
           "target": "Mauston Police Department",
           "subject": "Flock Safety contract, data retention policy, third-party access terms",
           "statutory_deadline": "2026-04-02",
-          "status": "FULFILLED"
+          "status": "PARTIALLY FULFILLED"
+        },
+        {
+          "id": "FOIA-MAUSTON-002",
+          "filed": "2026-04-15",
+          "target": "City of Mauston",
+          "subject": "November 9, 2023 original Flock agreement (referenced in but not provided with Jan 23 2024 amendment); estate donation fund source/terms/accounting; any council resolutions or minutes authorizing Flock deployment",
+          "statutory_deadline": "2026-04-29",
+          "status": "FILED"
         }
       ],
       "documents": [
         {
-          "title": "Flock Safety Contract — City of Mauston",
-          "type": "CONTRACT",
+          "title": "Flock Quote — Provided April 7 As 'The Contract' (Later Admitted By City To Be A Quote)",
+          "type": "QUOTE",
           "status": "OBTAINED",
           "url": "mauston-contract.pdf"
         },
         {
-          "title": "Chief's Response Letter",
+          "title": "Flock Group Inc. Executed Amendment — DocuSign 1/23/2024",
+          "type": "CONTRACT",
+          "status": "OBTAINED",
+          "url": "Flock%20Executed%20Agreement%20-%20Signed.pdf"
+        },
+        {
+          "title": "City of Mauston Formal Response Letter (Haugh + Teske, April 15, 2026)",
           "type": "CORRESPONDENCE",
           "status": "OBTAINED",
-          "url": "evidence.html"
+          "url": "Response%20to%20Clark%2C%20Blake.pdf"
+        },
+        {
+          "title": "November 9, 2023 Original Agreement (Referenced In Amendment)",
+          "type": "CONTRACT",
+          "status": "PENDING",
+          "url": null
         }
       ]
     },
@@ -65,11 +95,11 @@
       "title": "Mayor",
       "org": "City of Mauston",
       "org_type": "MUNICIPAL",
-      "role_in_lpr": "Municipal executive authority. Received formal decommission notice. No public response documented.",
-      "status": "UNRESPONSIVE",
-      "last_activity": null,
+      "role_in_lpr": "Municipal executive authority. Silent for 27 days. On April 15, 2026, co-signed City Administrator Haugh's formal close-out letter — the first document with Mayor's signature on record acknowledging the BIRDSTRIKE demand. Named in § 1983 threat (individual and official capacity).",
+      "status": "RESPONDED",
+      "last_activity": "2026-04-15",
       "silence_start": "2026-03-19",
-      "silence_broken": null,
+      "silence_broken": "2026-04-15",
       "station_id": "EYESONME-002",
       "timeline": [
         {
@@ -86,22 +116,39 @@
           "date": "2026-04-09",
           "type": "ESCALATION",
           "description": "Story tip filed with Juneau County Star Times newsroom. Subject CC'd on public media escalation ahead of April 18 deadline."
+        },
+        {
+          "date": "2026-04-15",
+          "type": "STATEMENT",
+          "description": "Broke 27-day silence by co-signing City Administrator Haugh's formal response letter. Letter admits Chief Zilisch provided a quote instead of the executed contract on April 7 ('unintentional oversight'). Dismisses the campaign as 'threats and intimidation tactics' while providing no substantive answer to Section 5.3 (independent disclosure authority), the Chief's dual role as School Board President, or Section 11.16 (no-penalty termination clause)."
+        },
+        {
+          "date": "2026-04-15",
+          "type": "ESCALATION",
+          "description": "34-minute rebuttal sent. Named in § 1983 threat (individual and official capacity). Pre-framing of accountability as 'intimidation' rejected on the record with Senator Testin CC'd."
         }
       ],
       "foia_requests": [],
-      "documents": []
+      "documents": [
+        {
+          "title": "City of Mauston Formal Response Letter (Haugh + Teske, April 15, 2026)",
+          "type": "CORRESPONDENCE",
+          "status": "OBTAINED",
+          "url": "Response%20to%20Clark%2C%20Blake.pdf"
+        }
+      ]
     },
     {
       "id": "haugh-daron",
-      "name": "City Administrator Daron J. Haugh",
+      "name": "City Administrator Daron J. Haugh, MBA",
       "title": "City Administrator",
       "org": "City of Mauston",
       "org_type": "MUNICIPAL",
-      "role_in_lpr": "Administrative authority over municipal contracts. Delivery confirmed via March 19 out-of-office auto-reply (covering Mar 19–Mar 30). No substantive response to letter content.",
-      "status": "UNRESPONSIVE",
-      "last_activity": null,
+      "role_in_lpr": "Administrative authority over municipal contracts. Ghost for 27 days. Responded April 15, 2026 at 2:36 PM CDT with formal letter co-signed by Mayor Teske + the 'corrected' executed contract (Flock Group Inc. Amendment, DocuSign 1/23/2024). Started a new email thread — classic containment. Admitted in writing that Chief Zilisch's April 7 document was a quote, not the contract. Named in § 1983 threat (individual and official capacity).",
+      "status": "RESPONDED",
+      "last_activity": "2026-04-15",
       "silence_start": "2026-03-19",
-      "silence_broken": null,
+      "silence_broken": "2026-04-15",
       "station_id": "EYESONME-002",
       "timeline": [
         {
@@ -123,10 +170,42 @@
           "date": "2026-04-09",
           "type": "ESCALATION",
           "description": "Story tip filed with Juneau County Star Times newsroom. Subject CC'd on public media escalation ahead of April 18 deadline."
+        },
+        {
+          "date": "2026-04-15",
+          "type": "STATEMENT",
+          "description": "Broke 27-day silence at 2:36 PM CDT. Formal response letter on City of Mauston letterhead, co-signed with Mayor Teske. Admits: 'The document previously sent to you was a quote, not the final agreement... this oversight was unintentional.' Provides 'corrected' Flock Group Inc. Amendment (DocuSign 1/23/2024 — 2 fixed Falcon cameras, $6,300 total, amends a previously executed agreement dated 11/09/2023 that was NOT provided). New funding disclosure: 'interest earned on a prior estate donation made to the Police Department.' Dismisses the campaign as 'threats and intimidation tactics.' Does not address Section 5.3, the Chief's School Board dual role, or Section 11.16."
+        },
+        {
+          "date": "2026-04-15",
+          "type": "ESCALATION",
+          "description": "34-minute rebuttal sent at 3:10 PM CDT. § 1983 threat (individual and official capacity). Formal Wis. Stat. § 19.35 open records request filed for the missing November 9, 2023 original agreement. Randy Gluck (Flock employee / Dunwoody pool camera findings) included on the record. Media campaign escalation announced."
         }
       ],
-      "foia_requests": [],
-      "documents": []
+      "foia_requests": [
+        {
+          "id": "FOIA-MAUSTON-002",
+          "filed": "2026-04-15",
+          "target": "City of Mauston",
+          "subject": "November 9, 2023 original Flock agreement; estate donation fund source/terms/accounting; any council resolutions or minutes authorizing Flock deployment",
+          "statutory_deadline": "2026-04-29",
+          "status": "FILED"
+        }
+      ],
+      "documents": [
+        {
+          "title": "City of Mauston Formal Response Letter (Haugh + Teske, April 15, 2026)",
+          "type": "CORRESPONDENCE",
+          "status": "OBTAINED",
+          "url": "Response%20to%20Clark%2C%20Blake.pdf"
+        },
+        {
+          "title": "Flock Group Inc. Executed Amendment — DocuSign 1/23/2024",
+          "type": "CONTRACT",
+          "status": "OBTAINED",
+          "url": "Flock%20Executed%20Agreement%20-%20Signed.pdf"
+        }
+      ]
     },
     {
       "id": "zobal-andy",
@@ -207,6 +286,102 @@
       "timeline": [],
       "foia_requests": [],
       "documents": []
+    },
+    {
+      "id": "gluck-randy",
+      "name": "Randy Gluck",
+      "title": "Manager, Business Development — 911 & Emergency Response Products",
+      "org": "Flock Safety",
+      "org_type": "CORPORATE",
+      "role_in_lpr": "Flock Safety employee. Used live camera access into the Dunwoody, GA Flock network to view 54 cameras with suspicious clicking patterns — including the Dunwoody Library camera for approximately 2 hours and the Marcus Jewish Community Center 'Main Pool Right' camera for over 3 hours. Also viewed soccer field cameras on multiple occasions. Still an active user in the Flock system as of audit log publication (April 2026). Documented in Jason Hunyar's published audit log analysis and at haveibeenflocked.com/news/the-platform.",
+      "status": "ESCALATED",
+      "last_activity": "2026-04-08",
+      "silence_start": "2026-04-08",
+      "silence_broken": null,
+      "station_id": null,
+      "timeline": [
+        {
+          "date": "2026-04-08",
+          "type": "STATEMENT",
+          "description": "Audit log findings published via Jason Hunyar Substack based on Dunwoody, GA Open Records Request. Employee access pattern documented publicly."
+        },
+        {
+          "date": "2026-04-15",
+          "type": "ESCALATION",
+          "description": "Named on record in Blake Clark's rebuttal letter to City of Mauston as the reason the Flock Safety vendor relationship cannot be defended: 'By refusing to decommission this system, you are actively enabling the infrastructure through which a private corporation's employee watched children at a community pool for three hours.'"
+        }
+      ],
+      "foia_requests": [],
+      "documents": [
+        {
+          "title": "Jason Hunyar — 'Why Are Flock Employees Watching?' (Audit log analysis)",
+          "type": "ANALYSIS",
+          "status": "OBTAINED",
+          "url": "https://jasonhunyar.substack.com/p/why-are-flock-employees-watching-720"
+        },
+        {
+          "title": "haveibeenflocked.com — The Platform (Audit log repository)",
+          "type": "ANALYSIS",
+          "status": "OBTAINED",
+          "url": "https://haveibeenflocked.com/news/the-platform"
+        }
+      ]
+    },
+    {
+      "id": "carter-bob",
+      "name": "Bob Carter",
+      "title": "VP, Strategic Relations & Business Development",
+      "org": "Flock Safety",
+      "org_type": "CORPORATE",
+      "role_in_lpr": "Flock Safety sales executive. Documented in Dunwoody audit logs running searches for 'chicken truck,' 'cattle truck,' and 'lawnmower' across live police surveillance networks. He is not law enforcement. Used a sales role to run queries against an operational ALPR system used by 898+ agencies.",
+      "status": "ESCALATED",
+      "last_activity": "2026-04-08",
+      "silence_start": "2026-04-08",
+      "silence_broken": null,
+      "station_id": null,
+      "timeline": [
+        {
+          "date": "2026-04-08",
+          "type": "STATEMENT",
+          "description": "Documented in published audit log analysis running non-law-enforcement search queries ('chicken truck,' 'cattle truck,' 'lawnmower') on live police surveillance networks."
+        }
+      ],
+      "foia_requests": [],
+      "documents": []
+    },
+    {
+      "id": "smith-mark",
+      "name": "Mark Smith",
+      "title": "General Counsel",
+      "org": "Flock Group Inc.",
+      "org_type": "CORPORATE",
+      "role_in_lpr": "Flock Safety legal authority. Signed the City of Mauston amendment via DocuSign on January 23, 2024 from IP 99.98.103.138 — 22 minutes after Chief Zilisch signed from IP 207.190.95.145. The executed amendment reduces the Mauston deployment to 2 fixed Falcon cameras at $6,300 total and supersedes a prior November 9, 2023 agreement that was not provided with the April 15, 2026 disclosure.",
+      "status": "UNDER REVIEW",
+      "last_activity": "2024-01-23",
+      "silence_start": "2026-04-15",
+      "silence_broken": null,
+      "station_id": null,
+      "timeline": [
+        {
+          "date": "2024-01-23",
+          "type": "STATEMENT",
+          "description": "Signed Flock Group Inc. Amendment with City of Mauston via DocuSign at 9:39:12 AM from IP 99.98.103.138. Envelope originated by Kyle Whyte (Flock Safety Atlanta HQ). Envelope ID 276C2AE4-3CB3-4E37-B58A-20F61A840112."
+        },
+        {
+          "date": "2026-04-15",
+          "type": "FOIA",
+          "description": "Executed amendment disclosed publicly by City of Mauston. Mark Smith's signature now on record as Flock's contractual counterparty in the Mauston deployment."
+        }
+      ],
+      "foia_requests": [],
+      "documents": [
+        {
+          "title": "Flock Group Inc. Executed Amendment — DocuSign 1/23/2024",
+          "type": "CONTRACT",
+          "status": "OBTAINED",
+          "url": "Flock%20Executed%20Agreement%20-%20Signed.pdf"
+        }
+      ]
     },
     {
       "id": "johnston-stephen",
