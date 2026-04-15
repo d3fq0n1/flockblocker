@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Flock Hurts — FlockBlocker</title>
+<meta name="description" content="Documented harms, suppression record, and grant-pipeline lock-in — every item sourced from public record.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  /* Page-specific — anchor nav strip */
+  .anchor-strip {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 2.5rem 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .anchor-strip a {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-mid);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border);
+    transition: all 0.18s;
+  }
+  .anchor-strip a:hover { color: var(--accent); border-color: var(--text-mid); }
+  .anchor-strip a.red:hover { color: var(--red); }
+  .anchor-strip a.amber:hover { color: var(--amber); }
+  .anchor-strip a.green:hover { color: var(--accent); }
+  /* Scroll offset for anchored sections under sticky header */
+  section[id] { scroll-margin-top: 72px; }
+  @media (max-width: 900px) {
+    .anchor-strip { padding: 1rem 1.5rem 0; }
+  }
+  @media (max-width: 480px) {
+    .anchor-strip { padding: 0.75rem 1rem 0; }
+    .anchor-strip a { font-size: 0.62rem; padding: 0.5rem 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme">EYESONME</a>
+    <a href="index.html" class="header-link">Home</a>
+    <a href="evidence.html" class="header-link evidence">Evidence</a>
+    <a href="harms.html" class="header-link active">Harms</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="who.html" class="header-link">Who</a>
+    <a href="birdstrike.html" class="header-link">BirdStrike</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
+    <span class="live-badge"><span id="countdown"></span></span>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-nav">
+  <a href="eyesonme.html">EYESONME</a>
+  <a href="doctrine.html">Deterrence Doctrine</a>
+  <a href="index.html">Home</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="harms.html">Harms</a>
+  <a href="rebellion.html">Rebellion</a>
+  <a href="who.html">Who's Responsible</a>
+  <a href="birdstrike.html">BirdStrike</a>
+  <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
+</nav>
+
+<div class="page-hero">
+  <p class="page-hero-kicker">// Documented harms — all public record</p>
+  <h1 class="page-hero-title">How Flock <span class="accent">Hurts</span></h1>
+  <p class="page-hero-lead">
+    These are not hypotheticals. Every item below is <strong>documented, sourced, and on the public record</strong>. What Flock does, what they do when confronted, and how they bypass your vote to get installed in the first place — all on one page.
+  </p>
+</div>
+
+<div class="anchor-strip">
+  <a href="#offenses" class="red">→ 01 / Egregious Offenses</a>
+  <a href="#censorship" class="amber">→ 02 / The Suppression Record</a>
+  <a href="#money" class="green">→ 03 / Follow The Money</a>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 01 — EGREGIOUS OFFENSES (from original harms.html)
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="offenses" class="section">
+  <p class="section-tag">01 — The Charges</p>
+  <h2 class="section-title">Egregious Offenses</h2>
+
+  <div class="offense-grid">
+
+    <div class="offense-card full-width">
+      <p class="offense-number">Offense 01 — Reproductive Surveillance</p>
+      <p class="offense-headline">A Texas Sheriff Used Flock To Track Women Who Visited Abortion Clinics</p>
+      <div class="offense-quote">"had an abortion, search for female"<br>— actual logged query justification</div>
+      <p class="offense-body">
+        A Texas sheriff queried the Flock database to identify vehicles that traveled from out of state to an abortion clinic. The search justification was logged as a single phrase. This is <strong>a documented use of the system as deployed</strong>. Every municipality running Flock cameras contributed plate reads that made this query possible.
+      </p>
+      <p class="offense-source">Source: Documented Flock system query log</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 02 — Federal Immigration Pipeline</p>
+      <p class="offense-headline">Flock Data Flows Directly To ICE</p>
+      <p class="offense-body">
+        Through partnerships and subpoena access, Flock Safety data feeds directly into federal immigration enforcement. Local plate reads become ICE intelligence upon request. Your city council voted to buy a "crime-fighting tool." What they purchased was a <strong>node in a federal deportation surveillance network</strong>.
+      </p>
+      <p class="offense-source">Source: Flock Safety federal partnership documentation, ICE data access records</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 03 — No Consent, No Exit</p>
+      <p class="offense-headline">Every Driver Is Surveilled Without Opt-Out</p>
+      <p class="offense-body">
+        If you drive past a Flock camera, your plate is read, timestamped, and stored. There is <strong>no consent mechanism</strong>. There is <strong>no opt-out</strong>. There is <strong>no correction channel</strong>. You cannot view your records, challenge their accuracy, or request deletion.
+      </p>
+      <p class="offense-source">Source: Flock Safety terms of service, municipal contract analysis</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 04 — Cross-Jurisdictional Exposure</p>
+      <p class="offense-headline">221 Wisconsin Agencies Query A Single Database</p>
+      <p class="offense-body">
+        A plate read captured by a single camera in Mauston, Wisconsin is instantly queryable by <strong>all 221 agencies</strong> in the state's Flock network. Through inter-network sharing, that same read may be accessible to agencies nationwide.
+      </p>
+      <p class="offense-source">Source: Flock Safety Wisconsin deployment data</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 05 — Documented Misuse By Law Enforcement</p>
+      <p class="offense-headline">Wisconsin Police Chief Criminally Charged For Abusing Surveillance Systems</p>
+      <p class="offense-body">
+        A Wisconsin police chief was <strong>criminally charged</strong> for using similar automated surveillance infrastructure for personal purposes. The system Flock provides has the same access model, the same query structure, and the same single-word justification logging. The safeguards do not exist because the architecture does not require them.
+      </p>
+      <p class="offense-source">Source: Wisconsin criminal charging documents</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 06 — Private Profit From Public Movement</p>
+      <p class="offense-headline">Your Movement Patterns Are A Corporate Asset</p>
+      <p class="offense-body">
+        Flock Safety is a private corporation headquartered in Atlanta, Georgia. The movement data collected from municipal cameras — where you go, when you go, how often, who you're near — sits on <strong>their corporate balance sheet as a commercial asset</strong>. Your city sold your residents' movements to a private company and called it public safety.
+      </p>
+      <p class="offense-source">Source: Flock Safety corporate filings, municipal contract terms</p>
+    </div>
+
+    <div class="offense-card full-width">
+      <p class="offense-number">Offense 07 — The Database Has No Integrity Checks</p>
+      <p class="offense-headline">No Validation, No Correction, No Accountability</p>
+      <p class="offense-body">
+        Flock's data pipeline performs <strong>no validation against actual vehicle registries</strong>. Plate reads enter the database on OCR confidence alone. No deduplication audit, no correction mechanism for false reads, no feedback loop for systematic errors. The system that can put you at a location you never visited has <strong>no process for you to challenge that record</strong>. This is the database law enforcement queries and prosecutors cite — with no integrity guarantees.
+      </p>
+      <p class="offense-source">Source: FlockBlocker vulnerability research, Flock system architecture analysis</p>
+    </div>
+
+    <div class="offense-card full-width">
+      <p class="offense-number">Offense 08 — 1.6 Million Unauthorized Federal Searches</p>
+      <p class="offense-headline">Flock Shared California License Plate Data With Federal Agencies 1.6 Million Times</p>
+      <div class="offense-quote">"vendor-based issue" enabled a "nationwide query" feature<br>— Oxnard Police Department, upon suspending all Flock cameras</div>
+      <p class="offense-body">
+        A class action lawsuit filed February 26, 2026 in San Francisco Superior Court revealed that <strong>San Francisco Police Department cameras were searched by out-of-state agencies over 1.6 million times in seven months</strong>. Los Altos's readers shared data to out-of-state agencies more than a million times. Ventura County found 364,000 unauthorized searches. Oxnard Police suspended all Flock cameras after discovering that despite setting access to "California only," Flock's system allowed nationwide queries. California law explicitly bans sharing ALPR data outside the state. Flock did it 1.6 million times.
+      </p>
+      <p class="offense-source">Source: Gibbs Mura v. Flock Safety, SF Superior Court (Feb 2026); SFist; Courthouse News Service; CBS Los Angeles</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 09 — No Password Required</p>
+      <p class="offense-headline">67 Cameras Streamed Live To The Open Internet With Zero Authentication</p>
+      <p class="offense-body">
+        Security researchers discovered at least <strong>67 Flock Safety cameras streaming live video to the public internet</strong> — no username, no password, no encryption. Anyone could watch real-time footage of playgrounds, parking lots, and public streets. Anyone could view a month of archived footage. Anyone could <strong>delete recordings</strong>. A 404 Media journalist confirmed by visiting a California traffic signal and watching themselves on camera in real time. Flock called it a "limited misconfiguration." Senator Wyden called for an FTC investigation.
+      </p>
+      <p class="offense-source">Source: 404 Media, SFist, Privacy Guides (Dec 2025 – Jan 2026); Sen. Wyden FTC referral</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 10 — Stolen Credentials On Russian Forums</p>
+      <p class="offense-headline">Flock Login Credentials Are Being Sold On Cybercrime Markets</p>
+      <p class="offense-body">
+        Cybersecurity firm Hudson Rock found that at least <strong>35 Flock customer accounts had passwords stolen by hackers</strong>. Flock login credentials appeared on Russian cybercrime forums. The surveillance system that tracks millions of Americans' movements is secured so poorly that access to it is <strong>being sold as a commodity on the dark web</strong>. This is the company cities trust with their residents' location data.
+      </p>
+      <p class="offense-source">Source: Hudson Rock cybersecurity research; Malwarebytes (Feb 2026)</p>
+    </div>
+
+    <div class="offense-card full-width">
+      <p class="offense-number">Offense 11 — Surveillance Of Protesters And Activists</p>
+      <p class="offense-headline">Police Used Flock To Track People Exercising Their First Amendment Rights</p>
+      <p class="offense-body">
+        An Electronic Frontier Foundation investigation in November 2025 documented law enforcement using Flock's ALPR network to <strong>surveil protesters exercising their First Amendment rights</strong>, target Romani people with discriminatory searches, and track women seeking reproductive healthcare. Every plate read from every municipality on the network made these searches possible.
+      </p>
+      <p class="offense-source">Source: EFF, "How Cops Are Using Flock Safety's ALPR Network to Surveil Protesters and Activists" (Nov 2025); EFF 2025 Year in Review</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 12 — Cameras That Won't Turn Off</p>
+      <p class="offense-headline">Flock Cameras Remained Active After Cities Ordered Them Deactivated</p>
+      <p class="offense-body">
+        In at least two cities, Flock cameras <strong>continued collecting data after officials explicitly ordered them turned off</strong>. Eugene, Oregon terminated their contract after a camera was reactivated without authorization. The off switch is a suggestion.
+      </p>
+      <p class="offense-source">Source: Ban The Cams (Dec 2025); Eugene, OR contract termination records</p>
+    </div>
+
+    <div class="offense-card">
+      <p class="offense-number">Offense 13 — Cambridge Secret Installation</p>
+      <p class="offense-headline">Flock Installed Cameras In Cambridge Without Authorization</p>
+      <p class="offense-body">
+        Cambridge, Massachusetts canceled their Flock contract after discovering that <strong>Flock secretly installed two cameras without city authorization</strong>. A surveillance company installed surveillance equipment without telling the government that hired them.
+      </p>
+      <p class="offense-source">Source: Cambridge, MA contract cancellation records (Late 2025)</p>
+    </div>
+
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-cell">
+      <p class="stat-cell-value warn">1.6M</p>
+      <p class="stat-cell-label">Unauthorized federal<br>searches (CA alone)</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value">30+</p>
+      <p class="stat-cell-label">Cities canceling<br>Flock contracts</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value warn">67</p>
+      <p class="stat-cell-label">Cameras exposed<br>no password</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value warn">0</p>
+      <p class="stat-cell-label">Opt-out<br>mechanisms</p>
+    </div>
+  </div>
+
+  <div class="pipeline">
+    <p class="pipeline-title">From your driveway to a federal database</p>
+    <div class="pipeline-steps">
+      <div class="pipeline-step">Municipal camera<br>captures plate</div>
+      <span class="pipeline-arrow">&rarr;</span>
+      <div class="pipeline-step">OCR processes read<br>at high confidence</div>
+      <span class="pipeline-arrow">&rarr;</span>
+      <div class="pipeline-step">Enters Flock's<br>centralized database</div>
+      <span class="pipeline-arrow">&rarr;</span>
+      <div class="pipeline-step">Queryable by 221+<br>agencies statewide</div>
+      <span class="pipeline-arrow">&rarr;</span>
+      <div class="pipeline-step danger">Accessible to ICE<br>&amp; federal agencies</div>
+    </div>
+  </div>
+
+  <div class="insight-block warn">
+    <p>
+      <strong>No single municipality controls this pipeline.</strong> Once your plate read enters the Flock database, it is no longer your city's data. It belongs to a private corporation, queryable by any agency on the network, subpoena-accessible to any federal body, and retained on terms your city council never negotiated.
+    </p>
+  </div>
+</section>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 02 — THE SUPPRESSION RECORD (from original censorship.html)
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="censorship" class="section">
+  <p class="section-tag">02 — The Record</p>
+  <h2 class="section-title">They Tried To <span style="color:var(--amber)">Silence</span> This</h2>
+  <p class="section-body" style="margin-bottom:2.5rem;">
+    Flock Safety and its employees have <strong>repeatedly attempted to suppress public criticism</strong> — deleting LinkedIn threads, removing comments, and lying about post removal. Every attempt is logged here with screenshots.
+  </p>
+
+  <div class="evidence-grid">
+
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 01 — The SVP Tantrum Delete</p>
+          <p class="evidence-headline">Chris Colwell Nuked His Entire LinkedIn Thread After Being Called Out</p>
+        </div>
+        <span class="evidence-date">March 2026</span>
+      </div>
+      <p class="evidence-body">
+        Chris Colwell, Flock Safety's SVP of Customer Revenue Retention, posted a thread on LinkedIn. Public comments documented Flock's surveillance harms — the Texas abortion clinic tracking, the ICE data pipeline, the absence of any opt-out. When the comments couldn't be individually controlled, <strong>Colwell deleted the entire post</strong>. Not a reply. Not a single comment. The whole thread — nuked.
+      </p>
+      <div class="evidence-quote">
+        "Here's their SVP being a trite ass, then when called out, tantrum deletes."<br>— Blake Clark, LinkedIn
+      </div>
+      <p class="evidence-source">Source: LinkedIn, X (@d3fkawn) — x.com/d3fkawn/status/2036153573332181242</p>
+    </div>
+
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 02 — The Promise</p>
+          <p class="evidence-headline">Flock's Chief Strategy Officer Publicly Promised No Deletions — Then They Deleted</p>
+        </div>
+        <span class="evidence-date">March 2026</span>
+      </div>
+      <p class="evidence-body">
+        John Santry, a Skydio executive and former Naval Special Warfare officer, posted a critical technical comment on a Flock-related LinkedIn thread challenging their drone downtime claims. He ended with: <strong>"Watch how long it takes for this comment to be deleted."</strong> The comment got 12 likes.
+      </p>
+      <p class="evidence-body">
+        <strong>Rahul Sidhu</strong> — Flock Safety's Chief Strategy Officer and co-founder of Aerodome — personally replied: <strong>"No one's going to delete your comment, John. You're more than welcome to comment on all of our posts :)"</strong>
+      </p>
+      <p class="evidence-body">
+        Blake Clark immediately responded: <strong>"False. You will. I have proof."</strong> — and linked to the documented X thread showing Flock's prior deletions, including the Colwell incident. The CSO's public promise is now evidence.
+      </p>
+      <div class="evidence-quote">
+        "No one's going to delete your comment, John. You're more than welcome to comment on all of our posts :)"<br>— Rahul Sidhu, Chief Strategy Officer @ Flock Safety
+      </div>
+      <div class="evidence-screenshots">
+        <div class="screenshot-slot">
+          <img src="screenshots/rhaul_lies_1.png" alt="John Santry's comment predicting deletion, Rahul Sidhu promising no deletion, Blake Clark calling the bluff">
+        </div>
+        <div class="screenshot-slot">
+          <img src="screenshots/rahul_lies_2.png" alt="Wide view showing full context including abortion clinic surveillance comment at top">
+        </div>
+      </div>
+      <p class="evidence-source">Source: LinkedIn — Rahul Sidhu (CSO, Flock Safety), John Santry (Skydio), Blake Clark</p>
+    </div>
+
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 03 — The CEO's Cleanup</p>
+          <p class="evidence-headline">Garrett Langley Repeatedly Deleted Factual Comments From His LinkedIn Posts</p>
+        </div>
+        <span class="evidence-date">March 2026</span>
+      </div>
+      <p class="evidence-body">
+        Flock Safety CEO Garrett Langley posted on LinkedIn. Comments were added citing documented harms — true, factual, sourced from public records. <strong>The comments were deleted. Repeatedly.</strong> Not once. Not by accident. A pattern of deliberate removal of public criticism from the CEO's own feed.
+      </p>
+      <p class="evidence-body">
+        Blake Clark posted directly on Langley's thread: <strong>"lol stop deleting my comments Garrett Langley. Cities already don't trust you. Do you think deleting my comments, true, factual comments, helps?"</strong> The comment included a link to FlockBlocker, pulled 525 impressions — and documented the suppression in real time on the CEO's own post.
+      </p>
+      <div class="evidence-quote">
+        "lol stop deleting my comments Garrett Langley<br><br>Cities already don't trust you. Do you think deleting my comments, true, factual comments, helps? lol"<br>— Blake Clark, commenting on Langley's LinkedIn post (525 impressions)
+      </div>
+      <div class="evidence-screenshots">
+        <div class="screenshot-slot">
+          <img src="screenshots/garrett_deletd.png" alt="Blake Clark calling out Garrett Langley for deleting comments, with FlockBlocker link preview visible">
+        </div>
+      </div>
+      <p class="evidence-source">Source: LinkedIn — Garrett Langley (CEO, Flock Safety), Blake Clark</p>
+    </div>
+
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 04 — The X Thread</p>
+          <p class="evidence-headline">Real-Time Documentation of Flock's First Deletions on X</p>
+        </div>
+        <span class="evidence-date">March 2026</span>
+      </div>
+      <p class="evidence-body">
+        The deletions were documented in real time on X (formerly Twitter) by <strong>@d3fkawn</strong>. The thread captures Flock's initial censorship attempts as they happened — the first comments to disappear, the first threads to get nuked. This thread was later linked as proof in LinkedIn comments, creating a cross-platform evidence chain that Flock cannot scrub from either platform.
+      </p>
+      <p class="evidence-body">
+        <strong>The thread is still live.</strong> Flock can delete their LinkedIn comments. They cannot delete someone else's X thread.
+      </p>
+      <p class="evidence-source">Source: X — @d3fkawn, x.com/d3fkawn/status/2036153573332181242</p>
+    </div>
+
+    <div class="evidence-card">
+      <div class="evidence-header">
+        <div>
+          <p class="evidence-number">Incident 05 — The Pattern</p>
+          <p class="evidence-headline">Systematic Removal Across Multiple Flock Employee Posts</p>
+        </div>
+        <span class="evidence-date">Ongoing</span>
+      </div>
+      <p class="evidence-body">
+        Across multiple LinkedIn posts by multiple Flock Safety employees — from the CEO to the CSO to the SVP of Customer Revenue — the same pattern repeats: <strong>public comment with sourced facts → comment disappears → post remains sanitized</strong>. The comments cite public records, published reporting, and documented system behavior. They get removed because they're effective.
+      </p>
+      <p class="evidence-body">
+        Flock's CSO <strong>publicly promised</strong> they don't delete. The evidence on this page proves that was a lie.
+      </p>
+      <p class="evidence-source">Source: LinkedIn, X, archived screenshots</p>
+    </div>
+
+  </div>
+
+  <div class="pattern-box">
+    <p class="pattern-box-title">The Playbook</p>
+    <p>
+      <strong>Step 1:</strong> Flock executive posts promotional content on LinkedIn.<br>
+      <strong>Step 2:</strong> Public comments cite documented harms — abortion surveillance, ICE pipeline, no opt-out.<br>
+      <strong>Step 3:</strong> Comments are deleted. Sometimes the entire post is nuked (see: Colwell).<br>
+      <strong>Step 4:</strong> When confronted, the CSO personally promises "No one's going to delete your comment." (see: Sidhu)<br>
+      <strong>Step 5:</strong> They delete anyway. The cycle repeats. Every deletion is screenshotted.
+    </p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-cell">
+      <p class="stat-cell-value amber">0</p>
+      <p class="stat-cell-label">Substantive<br>responses</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value amber">0</p>
+      <p class="stat-cell-label">Facts<br>disputed</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value">100%</p>
+      <p class="stat-cell-label">Critical comments<br>removed</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value">100%</p>
+      <p class="stat-cell-label">Incidents<br>screenshotted</p>
+    </div>
+  </div>
+
+  <div class="insight-block amber">
+    <p>
+      <strong>Censorship is confession.</strong> Every deletion is a concession that the facts in that post were accurate enough to be threatening. Every screenshot on this page was taken before the deletion occurred. This is a permanent, public, version-controlled record. It cannot be scrubbed. It cannot be moderated away. It lives in a git repository. The commit history is the evidence chain.
+    </p>
+  </div>
+</section>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 03 — FOLLOW THE MONEY (from original money.html)
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="money" class="section">
+  <p class="section-tag">03 — The Pipeline</p>
+  <h2 class="section-title">Follow The <span style="color:var(--accent)">Money</span></h2>
+  <p class="section-body" style="margin-bottom:2.5rem;">
+    Flock deploys cameras for "free" using federal grant money, <strong>bypassing public oversight</strong>. When the grant ends, the subscription doesn't. Municipalities get locked into recurring fees that become permanent budget lines — for infrastructure their residents never approved.
+  </p>
+
+  <div class="flow">
+    <div class="flow-node">
+      <p class="flow-node-label">Step 1</p>
+      <p class="flow-node-value">Federal Grant<br>Program<br><span style="font-size:0.62rem;color:var(--text-dim)">(SHSP, UASI, Byrne JAG)</span></p>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-node">
+      <p class="flow-node-label">Step 2</p>
+      <p class="flow-node-value">Flock / Lexipol<br>write the<br>application</p>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-node">
+      <p class="flow-node-label">Step 3</p>
+      <p class="flow-node-value">Police Dept<br>receives grant<br><span style="font-size:0.62rem;color:var(--text-dim)">(no council vote)</span></p>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-node trap">
+      <p class="flow-node-label trap-label">Step 4</p>
+      <p class="flow-node-value">"Free" cameras<br>deployed<br><span style="font-size:0.62rem;color:var(--text-dim)">(year one only)</span></p>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-node trap">
+      <p class="flow-node-label trap-label">Step 5</p>
+      <p class="flow-node-value">Subscription<br>lock-in<br><span style="font-size:0.62rem;color:var(--text-dim)">(~$2,500/cam/yr)</span></p>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-node trap">
+      <p class="flow-node-label trap-label">Step 6</p>
+      <p class="flow-node-value">Permanent<br>surveillance<br>infrastructure</p>
+    </div>
+  </div>
+
+  <div class="stat-row three">
+    <div class="stat-cell">
+      <p class="stat-cell-value green">$0</p>
+      <p class="stat-cell-label">Year one cost<br>to department</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value warn">$39K+</p>
+      <p class="stat-cell-label">Year two cost<br>(Sumner, WA)</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-cell-value warn">&infin;</p>
+      <p class="stat-cell-label">Years of<br>subscription</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--white);margin-top:3.5rem;margin-bottom:0.5rem;">The Trick — Grant-Funded Deployment</h3>
+  <ul class="fact-list">
+    <li><strong>Flock Safety partnered with Lexipol</strong> to run a "License Plate Readers Grant Assistance Program." Flock and Lexipol fill out the federal grant paperwork for police departments.</li>
+    <li><strong>Primary federal funding vehicles:</strong> DHS Homeland Security Grant Program (SHSP, UASI), DOJ Byrne JAG, and Community Project Funding earmarks.</li>
+    <li>The grant covers <strong>year one</strong>: hardware, installation, maintenance. The department pays nothing.</li>
+    <li><em>No city council budget vote required.</em> Grant money bypasses normal procurement and appropriation processes.</li>
+    <li><em>No public hearing required</em> in most jurisdictions. Cameras go up. Residents find out later, if at all.</li>
+    <li><strong>Santa Cruz, CA:</strong> Police explicitly sought SHSP grants for a citywide Flock network covering all city entrances and exits.</li>
+  </ul>
+
+  <div class="insight-block warn">
+    <p>
+      <strong>The vendor writes the grant application for the product it sells.</strong> The department that receives the grant has no incentive to question the vendor's claims. The public that funds the grant has no mechanism to object before cameras are installed.
+    </p>
+  </div>
+
+  <h3 style="font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--white);margin-top:3.5rem;margin-bottom:0.5rem;">The Trap — Grant Ends. Subscription Doesn't.</h3>
+  <ul class="fact-list">
+    <li><strong>Sumner, WA:</strong> $50,000 federal grant covered year one entirely. Year two onward: <em>~$39,000/year, in perpetuity.</em></li>
+    <li>Once prosecutors build cases on ALPR data and patrol officers rely on alerts, <strong>cancellation becomes politically toxic</strong>. No chief will be the one who "turned off the crime-fighting tool."</li>
+    <li><strong>Fall River, MA:</strong> City declined to fund ShotSpotter's $90,000 annual cost. The company <em>continued providing the service free</em> — maintaining dependency without payment, waiting for money to return.</li>
+    <li>Flock's own marketing: <em>"although some technologies require an upfront investment, they often result in significant savings over time."</em> This is the lock-in pitch.</li>
+  </ul>
+
+  <div class="quote-block">
+    <p><strong>The "free" camera is the dealer's first hit.</strong></p>
+    <p>Year one costs nothing. Year two costs $39,000. Year ten costs $390,000. By then, the department can't function without it and the council won't vote to remove it.</p>
+  </div>
+
+  <h3 style="font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--white);margin-top:3.5rem;margin-bottom:0.5rem;">The Cut — How To Kill It Before It Starts</h3>
+  <ul class="action-list">
+    <li><strong>Federal grants have public comment periods.</strong> Most residents never know they exist. SHSP and Byrne JAG grants require local government to publish notices — find them.</li>
+    <li><strong>FOIA the grant application before it's approved.</strong> Request all pending federal grant applications from your police department. The application reveals the surveillance plan before cameras go up.</li>
+    <li><strong>Monitor city council agendas.</strong> Grant acceptance resolutions must be voted on. This is your intervention window — often buried on the consent agenda where it passes without discussion.</li>
+    <li><strong>Pull it off consent.</strong> The single most powerful intervention: show up to the council meeting where grant acceptance is on the consent agenda and request it be pulled for individual discussion. One resident. One request. Full public debate.</li>
+    <li><strong>Use the BirdStrike templates.</strong> Public comment scripts, FOIA request language, and demand letter templates are ready to deploy. <a href="birdstrike.html" style="color:var(--accent);border-bottom:1px solid rgba(200,240,74,0.3)">Go to BirdStrike →</a></li>
+    <li><strong>If cameras are already up:</strong> FOIA the grant documentation. Undisclosed federal funding has its own accountability requirements — reporting obligations, use restrictions, audit trails — that Flock deployments frequently don't meet.</li>
+  </ul>
+
+  <div class="insight-block">
+    <p>
+      <strong>The grant pipeline is Flock's primary go-to-market strategy.</strong> It is also its most vulnerable point. Every dollar of federal money comes with federal strings. Pull them.
+    </p>
+  </div>
+</section>
+
+<hr>
+
+<div class="bottom-cta">
+  <p class="bottom-cta-text">
+    <strong>Verona, Wisconsin declined to renew their Flock contract after public pressure.</strong> Every municipality on the network has the same option. If cameras aren't up in your city yet, you can stop them. If they are, the grant terms are your leverage.
+  </p>
+  <div class="btn-row">
+    <a href="birdstrike.html" class="btn btn-fill">BirdStrike Templates</a>
+    <a href="rebellion.html" class="btn btn-outline">Cities Walking Away</a>
+    <a href="who.html" class="btn btn-outline">See Who's Responsible</a>
+    <a href="submit.html" class="btn btn-outline">Share Your Story</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">
+    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
+    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a>
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+<script>
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
+</script>
+<script>
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
+</body>
+</html>

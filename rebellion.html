@@ -4,42 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Rebellion — Cities Rejecting Flock Safety — FlockBlocker</title>
-<meta name="description" content="A running record of municipalities canceling, pausing, or rejecting Flock Safety ALPR contracts. 30+ cities and counting (NPR, Feb 2026).">
+<meta name="description" content="A running record of municipalities canceling, pausing, or rejecting Flock Safety ALPR contracts. 30+ cities and counting.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-  :root {
-    --bg: #04040a; --surface: #0b0b14; --surface2: #10101a; --border: #1a1a26;
-    --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
-    --text-dim: #44445a; --white: #f0f0f8;
-    --mono: 'Fira Mono', monospace; --display: 'Black Ops One', cursive; --body: 'Epilogue', sans-serif;
-    --green: #4af0a0; --amber: #f0a84a;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
-  a { color: inherit; text-decoration: none; }
-
-  header { border-bottom: 1px solid rgba(200,240,74,0.12); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(4,4,10,0.94); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(200,240,74,0.04), 0 10px 32px -16px rgba(200,240,74,0.08); z-index: 100; }
-  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
-  .logo em { color: var(--accent); font-style: normal; text-shadow: 0 0 12px rgba(200,240,74,0.4); }
-  .header-right { display: flex; align-items: center; gap: 1.25rem; flex-wrap: nowrap; }
-  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; white-space: nowrap; transition: color 0.2s; }
-  .header-link:hover { color: var(--accent); text-shadow: 0 0 10px rgba(200,240,74,0.35); }
-  .header-link[style*="--accent"] { text-shadow: 0 0 10px rgba(200,240,74,0.3); }
-  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
-  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-  hr { border: none; border-top: 1px solid var(--border); }
-
-  /* Hero */
-  .page-hero { padding: 6rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
-  .page-hero-kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--green); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.5rem; }
-  .page-hero-title { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.95; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2rem; }
+  /* Page-specific — shared chrome lives in assets/site.css */
+  .page-hero-kicker { color: var(--green); }
   .page-hero-title .accent { color: var(--green); }
-  .page-hero-lead { font-size: 1.1rem; font-weight: 300; color: var(--text); line-height: 1.85; max-width: 720px; }
-  .page-hero-lead strong { color: var(--white); font-weight: 500; }
   .page-hero-lead em { color: var(--green); font-style: normal; }
 
   /* Counter */
@@ -50,11 +22,6 @@
   .counter-value.red { color: var(--red); }
   .counter-value.amber { color: var(--amber); }
   .counter-label { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.6; }
-
-  /* Sections */
-  .section { max-width: 1200px; margin: 0 auto; padding: 4rem 2.5rem; }
-  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
-  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
 
   /* City table */
   .city-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
@@ -110,69 +77,21 @@
   .insight-block p { font-family: var(--mono); font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; }
   .insight-block strong { color: var(--accent); font-weight: 500; }
 
-  /* CTA */
-  .bottom-cta { text-align: center; padding: 4rem 2.5rem; max-width: 680px; margin: 0 auto; }
-  .bottom-cta-text { font-size: 1.05rem; color: var(--text); line-height: 1.85; margin-bottom: 2rem; }
-  .bottom-cta-text strong { color: var(--white); font-weight: 500; }
-  .btn { font-family: var(--display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
-  .btn-fill { background: var(--accent); color: #09090b; }
-  .btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
-  .btn-outline:hover { border-color: var(--text-mid); color: var(--white); }
-  .btn-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-
-  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
-  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
-  .footer-left a:hover { color: var(--accent); }
-  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
-
-  /* Mobile Navigation */
-  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
-  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
-  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
-  .menu-toggle.active span:nth-child(2) { opacity: 0; }
-  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
-  .mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
-  .mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
-  .mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
-  .mobile-nav a:active { color: var(--accent); }
-
-  @media (max-width: 1200px) {
-    .header-link { display: none; }
-    .menu-toggle { display: block; }
-  }
   @media (max-width: 900px) {
-    .page-hero { padding: 4rem 1.5rem 3rem; }
-    .section { padding: 3rem 1.5rem; }
     .counter-row { grid-template-columns: 1fr 1fr; }
     .legal-grid { grid-template-columns: 1fr; }
-    .city-table { font-size: 0.85rem; }
-    .city-table th:nth-child(3), .city-table td:nth-child(3) { display: none; }
-    footer { padding: 2rem 1.5rem; }
-    header { padding: 0 1.5rem; }
-    .header-link { display: none; }
-    .menu-toggle { display: block; }
+    .city-table { font-size: 0.85rem; min-width: 640px; }
   }
   @media (max-width: 480px) {
-    .page-hero { padding: 3rem 1rem 2rem; }
     .page-hero-title { font-size: clamp(2.2rem, 10vw, 3rem); }
-    .page-hero-lead { font-size: 0.95rem; }
-    .section { padding: 2.5rem 1rem; }
     .section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
-    .counter-row { grid-template-columns: 1fr; }
+    .counter-row { grid-template-columns: 1fr 1fr; }
     .counter-value { font-size: 2.4rem; }
-    .city-table th:nth-child(4), .city-table td:nth-child(4) { display: none; }
     .city-table td { padding: 0.65rem 0.5rem; }
     .city-name { font-size: 0.82rem; }
     .legal-card { padding: 1.5rem; }
     .legal-headline { font-size: 1rem; }
     .quote-block { padding: 1.2rem 1.2rem; }
-    .bottom-cta { padding: 3rem 1rem; }
-    .btn-row { flex-direction: column; align-items: stretch; }
-    .btn-row .btn { justify-content: center; }
-    footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
-    header { padding: 0 1rem; }
   }
 </style>
 </head>
@@ -181,15 +100,13 @@
 <header>
   <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
   <div class="header-right">
-    <a href="doctrine.html" style="font-family:var(--mono);font-size:0.62rem;font-weight:700;letter-spacing:0.12em;color:#f0a84a;white-space:nowrap;text-shadow:0 0 10px rgba(240,168,74,0.35);transition:color 0.2s,text-shadow 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='#f0a84a'">[ DETERRENCE DOCTRINE ]</a>
-    <a href="eyesonme.html" class="header-link" style="color:#c8f04a">EYESONME</a>
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme">EYESONME</a>
     <a href="index.html" class="header-link">Home</a>
-    <a href="evidence.html" class="header-link">Evidence</a>
-    <a href="wall-of-shame.html" class="header-link">Wall of Shame</a>
-    <a href="rebellion.html" class="header-link" style="color:var(--green)">Rebellion</a>
+    <a href="evidence.html" class="header-link evidence">Evidence</a>
+    <a href="harms.html" class="header-link">Harms</a>
+    <a href="rebellion.html" class="header-link active">Rebellion</a>
     <a href="who.html" class="header-link">Who</a>
-    <a href="censorship.html" class="header-link">Censorship</a>
-    <a href="money.html" class="header-link">Money</a>
     <a href="birdstrike.html" class="header-link">BirdStrike</a>
     <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
     <span class="live-badge"><span id="countdown"></span></span>
@@ -198,15 +115,13 @@
 </header>
 
 <nav class="mobile-nav">
+  <a href="index.html">Home</a>
   <a href="eyesonme.html">EYESONME</a>
   <a href="doctrine.html">Deterrence Doctrine</a>
-  <a href="index.html">Home</a>
   <a href="evidence.html">Evidence</a>
-  <a href="wall-of-shame.html">Wall of Shame</a>
+  <a href="harms.html">Harms</a>
   <a href="rebellion.html">Rebellion</a>
   <a href="who.html">Who's Responsible</a>
-  <a href="censorship.html">Censorship</a>
-  <a href="money.html">Money</a>
   <a href="birdstrike.html">BirdStrike</a>
   <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
 </nav>
@@ -220,8 +135,8 @@
 
   <div class="counter-row">
     <div class="counter-cell">
-      <p class="counter-value green">30+</p>
-      <p class="counter-label">Cities canceled<br>or deactivated</p>
+      <p class="counter-value green">32+</p>
+      <p class="counter-label">Cities canceled<br>or paused</p>
     </div>
     <div class="counter-cell">
       <p class="counter-value red">1.6M</p>
@@ -236,14 +151,6 @@
       <p class="counter-label">Cameras found<br>streaming unprotected</p>
     </div>
   </div>
-  <p style="font-family:var(--mono);font-size:0.62rem;color:var(--text-dim);letter-spacing:0.04em;margin-top:1rem;line-height:1.7;">
-    "At least 30 localities have either deactivated their Flock cameras or canceled their contracts since the beginning of 2025" —
-    <a href="https://www.npr.org/2026/02/17/nx-s1-5612825/flock-contracts-canceled-immigration-survillance-concerns" target="_blank" rel="noopener" style="color:var(--text-mid);text-decoration:underline;text-decoration-color:var(--text-dim);">NPR, Feb 17 2026</a>.
-    Figure excludes communities in active review or deferred votes — actual total including in-progress cancellations is higher.
-    Additional tracking:
-    <a href="https://stateofsurveillance.org/articles/surveillance/communities-winning-against-alpr-flock-safety-2025/" target="_blank" rel="noopener" style="color:var(--text-mid);text-decoration:underline;text-decoration-color:var(--text-dim);">State of Surveillance</a>,
-    <a href="https://deflock.me" target="_blank" rel="noopener" style="color:var(--text-mid);text-decoration:underline;text-decoration-color:var(--text-dim);">deflock.me</a>.
-  </p>
 </div>
 
 <hr>
@@ -295,6 +202,7 @@
   <p class="section-tag">02 — Municipal Defections</p>
   <h2 class="section-title">Cities Walking Away</h2>
 
+  <div class="city-table-wrap" style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
   <table class="city-table">
     <thead>
       <tr>
@@ -512,6 +420,7 @@
 
     </tbody>
   </table>
+  </div>
 
   <div class="insight-block">
     <p>
@@ -575,7 +484,7 @@
       Same sequence everywhere: a resident asks a question, the city ignores it, the resident documents the silence, the documentation reaches the council. The council realizes they signed a contract they didn't read for a system they don't control that feeds data to agencies they can't name. The contract dies.
     </p>
     <p style="font-size:0.95rem; color:var(--text); line-height:1.85; margin-bottom:1.5rem;">
-      <strong>Flock's business model depends on city councils not paying attention.</strong> The moment attention arrives, the contract becomes indefensible. 30+ cities walked away. Flock calls the attention "terroristic."
+      <strong>Flock's business model depends on city councils not paying attention.</strong> The moment attention arrives, the contract becomes indefensible. 32+ cities walked away. Flock calls the attention "terroristic."
     </p>
     <p style="font-size:0.95rem; color:var(--text); line-height:1.85; margin-bottom:1.5rem;">
       Mauston signed the same contract — same data sharing, same ICE access vector, same absent oversight. The only difference is Mauston hasn't canceled yet.
