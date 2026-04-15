@@ -1,12 +1,12 @@
 {
   "subjects": [
     {
-      "id": "zilisch-shawn",
-      "name": "Chief Shawn Zilisch",
+      "id": "zilisch-michael",
+      "name": "Chief Michael Zilisch",
       "title": "Chief of Police",
       "org": "Mauston Police Department",
       "org_type": "MUNICIPAL",
-      "role_in_lpr": "Contract authorizing official. Maintained public silence for 30 days following BIRDSTRIKE launch. Broke silence April 7, 2026.",
+      "role_in_lpr": "Contract authorizing official. Broke 19-day silence on April 7, 2026 — within the 30-day response window set by the March 19 BIRDSTRIKE demand letter.",
       "status": "RESPONDED",
       "last_activity": "2026-04-07",
       "silence_start": "2026-03-19",
@@ -27,6 +27,11 @@
           "date": "2026-04-07",
           "type": "STATEMENT",
           "description": "Broke silence. First documented response to BIRDSTRIKE demand."
+        },
+        {
+          "date": "2026-04-09",
+          "type": "ESCALATION",
+          "description": "Story tip filed with Juneau County Star Times newsroom (jcst-news@wiscnews.com) with full documents attached. Subject CC'd on public media escalation ahead of April 18 deadline."
         }
       ],
       "foia_requests": [
@@ -55,8 +60,8 @@
       ]
     },
     {
-      "id": "teske-todd",
-      "name": "Mayor Todd Teske",
+      "id": "teske-darryl",
+      "name": "Mayor Darryl \"D.D.\" Teske",
       "title": "Mayor",
       "org": "City of Mauston",
       "org_type": "MUNICIPAL",
@@ -76,18 +81,23 @@
           "date": "2026-03-19",
           "type": "SILENCE",
           "description": "Silence period begins. No response to date."
+        },
+        {
+          "date": "2026-04-09",
+          "type": "ESCALATION",
+          "description": "Story tip filed with Juneau County Star Times newsroom. Subject CC'd on public media escalation ahead of April 18 deadline."
         }
       ],
       "foia_requests": [],
       "documents": []
     },
     {
-      "id": "haugh-kelly",
-      "name": "City Administrator Kelly Haugh",
+      "id": "haugh-daron",
+      "name": "City Administrator Daron J. Haugh",
       "title": "City Administrator",
       "org": "City of Mauston",
       "org_type": "MUNICIPAL",
-      "role_in_lpr": "Administrative authority over municipal contracts. Received formal decommission notice. No public response documented.",
+      "role_in_lpr": "Administrative authority over municipal contracts. Delivery confirmed via March 19 out-of-office auto-reply (covering Mar 19–Mar 30). No substantive response to letter content.",
       "status": "UNRESPONSIVE",
       "last_activity": null,
       "silence_start": "2026-03-19",
@@ -101,16 +111,26 @@
         },
         {
           "date": "2026-03-19",
+          "type": "STATEMENT",
+          "description": "Automatic out-of-office reply received (covering Mar 19–Mar 30). Confirms delivery of demand letter; no substantive response to content."
+        },
+        {
+          "date": "2026-03-19",
           "type": "SILENCE",
-          "description": "Silence period begins. No response to date."
+          "description": "Substantive silence period begins. Auto-reply only; no response on letter content."
+        },
+        {
+          "date": "2026-04-09",
+          "type": "ESCALATION",
+          "description": "Story tip filed with Juneau County Star Times newsroom. Subject CC'd on public media escalation ahead of April 18 deadline."
         }
       ],
       "foia_requests": [],
       "documents": []
     },
     {
-      "id": "zobal-jason",
-      "name": "Sheriff Jason Zobal",
+      "id": "zobal-andy",
+      "name": "Sheriff Andy Zobal",
       "title": "Sheriff",
       "org": "Juneau County Sheriff's Office",
       "org_type": "COUNTY",
@@ -130,6 +150,11 @@
           "date": "2026-03-19",
           "type": "SILENCE",
           "description": "Silence period begins. No response to date."
+        },
+        {
+          "date": "2026-04-09",
+          "type": "ESCALATION",
+          "description": "Story tip filed with Juneau County Star Times newsroom. Subject CC'd on public media escalation ahead of April 18 deadline."
         }
       ],
       "foia_requests": [],
@@ -186,7 +211,7 @@
     {
       "id": "johnston-stephen",
       "name": "Stephen Johnston",
-      "title": "Customer Success Manager",
+      "title": "Senior Customer Success Manager",
       "org": "Flock Safety",
       "org_type": "CORPORATE",
       "role_in_lpr": "Direct municipal account liaison. Manages Flock Safety relationship with deploying agencies including Mauston PD.",
@@ -196,6 +221,38 @@
       "silence_broken": null,
       "station_id": null,
       "timeline": [],
+      "foia_requests": [],
+      "documents": []
+    },
+    {
+      "id": "testin-patrick",
+      "name": "Sen. Patrick Testin",
+      "title": "State Senator",
+      "org": "Wisconsin State Senate",
+      "org_type": "STATE",
+      "role_in_lpr": "State senator for the district containing Mauston (605 Lincoln St). Original demand letter was misrouted to Sen. Keyeski on March 19; legislative staffer Sarah Semrad redirected to Testin's office on April 7. Forwarded documents received April 7. CC'd on April 9 media escalation. Non-hostile to date but tracked as adversary pending direct engagement — no public response, no oversight action.",
+      "status": "UNDER REVIEW",
+      "last_activity": null,
+      "silence_start": "2026-04-07",
+      "silence_broken": null,
+      "station_id": null,
+      "timeline": [
+        {
+          "date": "2026-04-07",
+          "type": "FOIA",
+          "description": "Forwarded the March 19 demand-letter thread after staff redirect from Sen. Keyeski's office via Sarah Semrad."
+        },
+        {
+          "date": "2026-04-07",
+          "type": "SILENCE",
+          "description": "Silence period begins. No acknowledgment from senator's office on forwarded thread."
+        },
+        {
+          "date": "2026-04-09",
+          "type": "ESCALATION",
+          "description": "CC'd on story tip filed with Juneau County Star Times newsroom with full documents attached. No response from senator's office."
+        }
+      ],
       "foia_requests": [],
       "documents": []
     }

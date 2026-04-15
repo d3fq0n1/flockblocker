@@ -10,10 +10,10 @@
    ============================================================ */
 
 :root {
-  --bg: #09090b;
-  --surface: #111116;
-  --surface2: #16161c;
-  --border: #242430;
+  --bg: #04040a;
+  --surface: #0b0b14;
+  --surface2: #10101a;
+  --border: #1a1a26;
   --accent: #c8f04a;
   --red: #f05a4a;
   --amber: #f0a84a;
@@ -44,7 +44,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 
 /* ---------- Header ---------- */
 header {
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(200,240,74,0.12);
   padding: 0 2.5rem;
   height: 56px;
   display: flex;
@@ -52,8 +52,9 @@ header {
   align-items: center;
   position: sticky;
   top: 0;
-  background: rgba(9,9,11,0.96);
-  backdrop-filter: blur(12px);
+  background: rgba(4,4,10,0.94);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(200,240,74,0.04), 0 10px 32px -16px rgba(200,240,74,0.08);
   z-index: 100;
 }
 .logo {
@@ -64,34 +65,42 @@ header {
   color: var(--white);
   flex-shrink: 0;
 }
-.logo em { color: var(--accent); font-style: normal; }
+.logo em {
+  color: var(--accent);
+  font-style: normal;
+  text-shadow: 0 0 12px rgba(200,240,74,0.4);
+}
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.25rem;
   min-width: 0;
+  flex-wrap: nowrap;
 }
 .header-link {
   font-family: var(--mono);
   font-size: 0.72rem;
   color: var(--text-mid);
   letter-spacing: 0.04em;
-  transition: color 0.2s;
+  transition: color 0.2s, text-shadow 0.2s;
   white-space: nowrap;
 }
-.header-link:hover { color: var(--accent); }
-.header-link.active { color: var(--accent); }
-.header-link.evidence { color: var(--red); }
-.header-link.eyesonme { color: var(--accent); }
+.header-link:hover { color: var(--accent); text-shadow: 0 0 10px rgba(200,240,74,0.35); }
+.header-link.active { color: var(--accent); text-shadow: 0 0 10px rgba(200,240,74,0.3); }
+.header-link.eyesonme { color: var(--accent); text-shadow: 0 0 10px rgba(200,240,74,0.3); }
+/* .evidence class retained as semantic hook; red reserved for live state only */
+.header-link.evidence { color: var(--text-mid); }
 
 .doctrine-link {
   font-family: var(--mono);
   font-size: 0.62rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
-  color: var(--text-dim);
-  transition: color 0.2s;
+  color: var(--amber);
+  transition: color 0.2s, text-shadow 0.2s;
   white-space: nowrap;
+  text-shadow: 0 0 10px rgba(240,168,74,0.35);
 }
 .doctrine-link:hover { color: var(--white); }
 
@@ -657,7 +666,7 @@ header {
   border: none;
   text-align: center;
 }
-.btn-fill { background: var(--accent); color: #09090b; }
+.btn-fill { background: var(--accent); color: var(--bg); }
 .btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
 .btn-outline {
   background: transparent;
@@ -702,6 +711,17 @@ footer {
 /* ============================================================
    RESPONSIVE BREAKPOINTS
    ============================================================ */
+
+/* ---------- 1200px: collapse desktop nav to hamburger early ---------- */
+/* The nav has 9 items plus a live badge; at widths between ~900px and
+   1200px the nowrap items would overflow the header, so we collapse to
+   the mobile menu earlier than the main 900px breakpoint. */
+@media (max-width: 1200px) {
+  .header-link,
+  .doctrine-link,
+  .live-badge { display: none; }
+  .menu-toggle { display: block; }
+}
 
 /* ---------- 900px: tablet / small laptop ---------- */
 @media (max-width: 900px) {

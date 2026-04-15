@@ -53,7 +53,7 @@ class TestComputeTransferabilityMatrix:
 
     def _build_scores(self):
         """Build test scores where engines have known transfer patterns."""
-        score = DecalScore(decal_name="test_decal", strategy="confusion")
+        score = DecalScore(decal_name="test_decal", strategy="character_ambiguity")
 
         # Case 1: All three engines misread (full transfer)
         score.results.append(_make_result("tesseract", "ideal", "ABC1234", "ABC1234", "A8C1234"))
@@ -142,11 +142,11 @@ class TestPerStrategyMatrix:
     """Test that the matrix breaks down by attack strategy."""
 
     def _build_multi_strategy_scores(self):
-        confusion_score = DecalScore(decal_name="confusion_v0", strategy="confusion")
+        confusion_score = DecalScore(decal_name="confusion_v0", strategy="character_ambiguity")
         confusion_score.results.append(_make_result("tesseract", "ideal", "ABC1234", "ABC1234", "A8C1234"))
         confusion_score.results.append(_make_result("easyocr", "ideal", "ABC1234", "ABC1234", "A8C1234"))
 
-        seg_score = DecalScore(decal_name="segmentation_v0", strategy="segmentation")
+        seg_score = DecalScore(decal_name="segmentation_v0", strategy="boundary_noise")
         seg_score.results.append(_make_result("tesseract", "ideal", "ABC1234", "ABC1234", "ABC12340"))
         seg_score.results.append(_make_result("easyocr", "ideal", "ABC1234", "ABC1234", "ABC1234"))
 
@@ -155,35 +155,35 @@ class TestPerStrategyMatrix:
     def test_strategy_matrices_populated(self):
         scores = self._build_multi_strategy_scores()
         matrix = compute_transferability_matrix(scores)
-        assert "confusion" in matrix.strategy_matrices
-        assert "segmentation" in matrix.strategy_matrices
+        assert "character_ambiguity" in matrix.strategy_matrices
+        assert "boundary_noise" in matrix.strategy_matrices
 
     def test_confusion_transfers_fully(self):
-        """Confusion attack fools both engines -> 100% transfer."""
+        """Character ambiguity attack fools both engines -> 100% transfer."""
         scores = self._build_multi_strategy_scores()
         matrix = compute_transferability_matrix(scores)
-        assert matrix.strategy_rate("confusion", "tesseract", "easyocr") == 1.0
+        assert matrix.strategy_rate("character_ambiguity", "tesseract", "easyocr") == 1.0
 
     def test_segmentation_does_not_transfer(self):
-        """Segmentation fools tesseract but not easyocr -> 0% transfer."""
+        """Boundary noise fools tesseract but not easyocr -> 0% transfer."""
         scores = self._build_multi_strategy_scores()
         matrix = compute_transferability_matrix(scores)
-        assert matrix.strategy_rate("segmentation", "tesseract", "easyocr") == 0.0
+        assert matrix.strategy_rate("boundary_noise", "tesseract", "easyocr") == 0.0
 
     def test_summary_includes_per_strategy(self):
         scores = self._build_multi_strategy_scores()
         matrix = compute_transferability_matrix(scores)
         summary = matrix.summary()
         assert "per_strategy" in summary
-        assert "confusion" in summary["per_strategy"]
-        assert "segmentation" in summary["per_strategy"]
+        assert "character_ambiguity" in summary["per_strategy"]
+        assert "boundary_noise" in summary["per_strategy"]
 
 
 class TestPrintTransferabilityMatrix:
     """Test the ASCII table formatter."""
 
     def test_output_contains_engines(self):
-        score = DecalScore(decal_name="test", strategy="confusion")
+        score = DecalScore(decal_name="test", strategy="character_ambiguity")
         score.results.append(_make_result("tesseract", "ideal", "ABC1234", "ABC1234", "A8C1234"))
         score.results.append(_make_result("easyocr", "ideal", "ABC1234", "ABC1234", "A8C1234"))
 
@@ -196,7 +196,7 @@ class TestPrintTransferabilityMatrix:
         assert "Mean off-diagonal transfer" in output
 
     def test_output_contains_rates(self):
-        score = DecalScore(decal_name="test", strategy="confusion")
+        score = DecalScore(decal_name="test", strategy="character_ambiguity")
         score.results.append(_make_result("tesseract", "ideal", "ABC1234", "ABC1234", "A8C1234"))
         score.results.append(_make_result("easyocr", "ideal", "ABC1234", "ABC1234", "A8C1234"))
 
