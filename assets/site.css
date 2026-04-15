@@ -89,8 +89,9 @@ header {
 .header-link:hover { color: var(--accent); text-shadow: 0 0 10px rgba(200,240,74,0.35); }
 .header-link.active { color: var(--accent); text-shadow: 0 0 10px rgba(200,240,74,0.3); }
 .header-link.eyesonme { color: var(--accent); text-shadow: 0 0 10px rgba(200,240,74,0.3); }
-/* .evidence class retained as semantic hook; red reserved for live state only */
-.header-link.evidence { color: var(--text-mid); }
+/* .evidence class is retained as a semantic hook on the Evidence nav link
+   but has no style of its own — red is reserved for live state only, so
+   Evidence inherits the default .header-link look and hover. */
 
 .doctrine-link {
   font-family: var(--mono);
