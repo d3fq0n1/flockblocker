@@ -35,13 +35,13 @@
   header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
   .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
   .logo em { color: var(--accent); font-style: normal; }
-  .header-right { display: flex; align-items: center; gap: 2rem; }
-  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; transition: color 0.2s; }
+  .header-right { display: flex; align-items: center; gap: 1.25rem; flex-wrap: nowrap; }
+  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; white-space: nowrap; transition: color 0.2s; }
   .header-link:hover { color: var(--accent); }
   .header-link.active { color: var(--accent); }
   .doctrine-link { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; color: var(--text-dim); transition: color 0.2s; }
   .doctrine-link:hover { color: var(--white); }
-  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; }
+  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
   .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
   @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,240,160,0.4)} 50%{opacity:0.8;box-shadow:0 0 0 6px rgba(74,240,160,0)} }
@@ -243,6 +243,10 @@
   .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
 
   /* Responsive */
+  @media (max-width: 1200px) {
+    .header-link { display: none; }
+    .menu-toggle { display: block; }
+  }
   @media (max-width: 900px) {
     header { padding: 0 1.5rem; }
     .header-link { display: none; }
