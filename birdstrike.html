@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
+    --bg: #04040a; --surface: #0b0b14; --surface2: #10101a; --border: #1a1a26;
     --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
     --text-dim: #44445a; --white: #f0f0f8;
     --mono: 'Fira Mono', monospace; --display: 'Black Ops One', cursive; --body: 'Epilogue', sans-serif;
@@ -28,12 +28,13 @@
   body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
   a { color: inherit; text-decoration: none; }
 
-  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
+  header { border-bottom: 1px solid rgba(200,240,74,0.12); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(4,4,10,0.94); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(200,240,74,0.04), 0 10px 32px -16px rgba(200,240,74,0.08); z-index: 100; }
   .logo { font-family: var(--display); font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
-  .logo em { color: var(--accent); font-style: normal; }
+  .logo em { color: var(--accent); font-style: normal; text-shadow: 0 0 12px rgba(200,240,74,0.4); }
   .header-right { display: flex; align-items: center; gap: 1.25rem; flex-wrap: nowrap; }
   .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; white-space: nowrap; transition: color 0.2s; }
-  .header-link:hover { color: var(--accent); }
+  .header-link:hover { color: var(--accent); text-shadow: 0 0 10px rgba(200,240,74,0.35); }
+  .header-link[style*="--accent"] { text-shadow: 0 0 10px rgba(200,240,74,0.3); }
   .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
   .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
@@ -174,11 +175,11 @@
 <header>
   <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
   <div class="header-right">
-    <a href="doctrine.html" style="font-family:var(--mono);font-size:0.62rem;font-weight:700;letter-spacing:0.12em;color:#f0a84a;white-space:nowrap;transition:color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='#f0a84a'">[ DETERRENCE DOCTRINE ]</a>
+    <a href="doctrine.html" style="font-family:var(--mono);font-size:0.62rem;font-weight:700;letter-spacing:0.12em;color:#f0a84a;white-space:nowrap;text-shadow:0 0 10px rgba(240,168,74,0.35);transition:color 0.2s,text-shadow 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='#f0a84a'">[ DETERRENCE DOCTRINE ]</a>
     <a href="eyesonme.html" class="header-link" style="color:#c8f04a">EYESONME</a>
     <a href="index.html" class="header-link">Home</a>
-    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
-    <a href="wall-of-shame.html" class="header-link" style="color:var(--red)">Wall of Shame</a>
+    <a href="evidence.html" class="header-link">Evidence</a>
+    <a href="wall-of-shame.html" class="header-link">Wall of Shame</a>
     <a href="rebellion.html" class="header-link">Rebellion</a>
     <a href="who.html" class="header-link">Who</a>
     <a href="censorship.html" class="header-link">Censorship</a>
