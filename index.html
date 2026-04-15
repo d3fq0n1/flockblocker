@@ -6,137 +6,169 @@
 <title>FlockBlocker — The Data Layer Fights Back</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-  :root {
-    --bg: #09090b;
-    --surface: #111116;
-    --surface2: #16161c;
-    --border: #242430;
-    --accent: #c8f04a;
-    --red: #f05a4a;
-    --text: #d4d4dc;
-    --text-mid: #8888a0;
-    --text-dim: #44445a;
-    --white: #f0f0f8;
-    --mono: 'Fira Mono', monospace;
-    --display: 'Black Ops One', cursive;
-    --body: 'Epilogue', sans-serif;
+  /* Page-specific — homepage hero + stat card + problem grid + origin card */
+  .hero {
+    padding: 8rem 2.5rem 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 5rem;
+    align-items: end;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
-  a { color: inherit; text-decoration: none; }
-
-  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
-  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
-  .logo em { color: var(--accent); font-style: normal; }
-  .header-right { display: flex; align-items: center; gap: 1.25rem; flex-wrap: nowrap; }
-  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; white-space: nowrap; transition: color 0.2s; }
-  .header-link:hover { color: var(--accent); }
-  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
-  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-  .hero { padding: 8rem 2.5rem 6rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 360px; gap: 5rem; align-items: end; }
-  .hero-kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 2.5rem; }
-  .hero-h1 { font-family: var(--display); font-weight: 800; font-size: clamp(4.5rem, 9vw, 8.5rem); line-height: 0.92; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2.5rem; }
+  .hero-kicker {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+  .hero-h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(3.2rem, 9vw, 8.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 2.5rem;
+    overflow-wrap: break-word;
+  }
   .hero-h1 .line2 { color: var(--accent); display: block; }
-  .hero-lead { font-size: 1.1rem; font-weight: 300; color: var(--text); line-height: 1.85; max-width: 560px; margin-bottom: 3rem; }
+  .hero-lead {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.85;
+    max-width: 560px;
+    margin-bottom: 3rem;
+  }
   .hero-lead strong { color: var(--white); font-weight: 500; }
   .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-  .btn { font-family: var(--display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
-  .btn-fill { background: var(--accent); color: #09090b; }
-  .btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
-  .btn-outline:hover { border-color: var(--text-mid); color: var(--white); }
 
   .stat-card { background: var(--surface); border: 1px solid var(--border); padding: 2rem; }
-  .stat-card-label { font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .stat-card-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
   .stat-item { padding: 1.1rem 0; border-bottom: 1px solid var(--border); }
   .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .stat-item-label { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 0.35rem; }
-  .stat-item-value { font-family: var(--display); font-weight: 700; font-size: 1.6rem; color: var(--white); letter-spacing: -0.01em; line-height: 1.1; }
+  .stat-item-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.35rem;
+  }
+  .stat-item-value {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
   .stat-item-value.deadline { color: var(--accent); font-size: 1.05rem; }
-  .stat-item-value.warn { font-family: var(--mono); font-size: 0.76rem; color: var(--red); line-height: 1.6; font-weight: 400; }
+  .stat-item-value.warn {
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    color: var(--red);
+    line-height: 1.6;
+    font-weight: 400;
+  }
   .stat-item-value.sm { font-size: 1rem; }
 
-  hr { border: none; border-top: 1px solid var(--border); }
-
-  .section { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
-  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
-  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
-  .section-body { font-size: 1rem; line-height: 1.9; color: var(--text); max-width: 680px; }
-  .section-body strong { color: var(--white); font-weight: 500; }
   .section-body em { color: var(--accent); font-style: normal; }
 
-  .problem-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3.5rem; }
+  .problem-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3.5rem;
+  }
   .problem-cells { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
   .pcell { background: var(--surface); padding: 1.5rem; }
-  .pcell-label { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .pcell-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
   .pcell-value { font-size: 0.95rem; color: var(--text); line-height: 1.55; }
-  .pcell-value.big { font-family: var(--display); font-size: 3rem; font-weight: 800; color: var(--white); line-height: 1; }
-  .pcell-value.warn { font-family: var(--mono); font-size: 0.76rem; color: var(--red); line-height: 1.7; }
+  .pcell-value.big {
+    font-family: var(--display);
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+  }
+  .pcell-value.warn {
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    color: var(--red);
+    line-height: 1.7;
+  }
 
-  .insight-block { margin-top: 2.5rem; background: var(--surface2); border-left: 3px solid var(--accent); padding: 1.5rem 2rem; max-width: 680px; }
-  .insight-block p { font-family: var(--mono); font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; }
-  .insight-block p strong { color: var(--accent); font-weight: 500; }
-
-  .origin-card { background: var(--surface); border: 1px solid var(--border); padding: 2.5rem; max-width: 700px; margin-top: 2.5rem; }
+  .origin-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    max-width: 700px;
+    margin-top: 2.5rem;
+  }
   .origin-card p { font-size: 0.98rem; line-height: 1.85; color: var(--text); margin-bottom: 1.25rem; }
   .origin-card p:last-of-type { margin-bottom: 0; }
   .origin-card p strong { color: var(--white); font-weight: 500; }
-  .origin-meta { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .meta-label { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.2rem; }
+  .origin-meta {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
   .meta-value { font-family: var(--mono); font-size: 0.76rem; color: var(--text-mid); line-height: 1.5; }
 
-  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
-  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
-  .footer-left a:hover { color: var(--accent); }
-  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
-
-  /* Mobile Navigation */
-  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
-  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
-  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
-  .menu-toggle.active span:nth-child(2) { opacity: 0; }
-  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
-  .mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
-  .mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
-  .mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
-  .mobile-nav a:active { color: var(--accent); }
-
-  @media (max-width: 1200px) {
-    .header-link { display: none; }
-    .menu-toggle { display: block; }
-  }
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.5rem 4rem; }
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding: 5rem 1.5rem 4rem;
+    }
     .hero-right { order: -1; }
     .problem-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-    .section { padding: 4rem 1.5rem; }
-    footer { padding: 2rem 1.5rem; }
-    header { padding: 0 1.5rem; }
-    .header-link { display: none; }
-    .menu-toggle { display: block; }
-    .origin-meta { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 4.5rem 1.25rem 3.5rem; gap: 2.5rem; }
+    .origin-card { padding: 2rem 1.5rem; }
   }
   @media (max-width: 480px) {
     .hero { padding: 3.5rem 1rem 3rem; gap: 2rem; }
-    .hero-h1 { font-size: clamp(2.8rem, 13vw, 4.5rem); }
     .hero-lead { font-size: 0.95rem; }
-    .hero-actions { flex-direction: column; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
     .hero-actions .btn { width: 100%; justify-content: center; }
-    .section { padding: 3rem 1rem; }
-    .section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
     .stat-card { padding: 1.5rem; }
     .stat-item-value { font-size: 1.3rem; }
-    .pcell-value.big { font-size: 2.2rem; }
-    .insight-block { padding: 1.2rem 1.2rem; }
     .origin-card { padding: 1.5rem; }
     .origin-meta { grid-template-columns: 1fr; }
-    footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
-    header { padding: 0 1rem; }
   }
 </style>
 </head>
@@ -145,16 +177,13 @@
 <header>
   <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
   <div class="header-right">
-    <a href="doctrine.html" style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;color:var(--text-dim);transition:color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-dim)'">[ DETERRENCE DOCTRINE ]</a>
-    <a href="#problem" class="header-link">Problem</a>
-    <a href="#approach" class="header-link">Approach</a>
-    <a href="eyesonme.html" class="header-link" style="color:var(--accent)">EYESONME</a>
-    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
-    <a href="wall-of-shame.html" class="header-link" style="color:var(--red)">Wall of Shame</a>
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme">EYESONME</a>
+    <a href="index.html" class="header-link active">Home</a>
+    <a href="evidence.html" class="header-link evidence">Evidence</a>
+    <a href="harms.html" class="header-link">Harms</a>
     <a href="rebellion.html" class="header-link">Rebellion</a>
     <a href="who.html" class="header-link">Who</a>
-    <a href="censorship.html" class="header-link">Censorship</a>
-    <a href="money.html" class="header-link">Money</a>
     <a href="birdstrike.html" class="header-link">BirdStrike</a>
     <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
     <span class="live-badge"><span id="countdown"></span></span>
@@ -163,16 +192,13 @@
 </header>
 
 <nav class="mobile-nav">
-  <a href="#problem">Problem</a>
-  <a href="#approach">Approach</a>
   <a href="eyesonme.html">EYESONME</a>
   <a href="doctrine.html">Deterrence Doctrine</a>
+  <a href="index.html">Home</a>
   <a href="evidence.html">Evidence</a>
-  <a href="wall-of-shame.html">Wall of Shame</a>
+  <a href="harms.html">Harms</a>
   <a href="rebellion.html">Rebellion</a>
   <a href="who.html">Who's Responsible</a>
-  <a href="censorship.html">Censorship</a>
-  <a href="money.html">Money</a>
   <a href="birdstrike.html">BirdStrike</a>
   <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
 </nav>
@@ -191,21 +217,21 @@
   </div>
   <div class="hero-right">
     <div class="stat-card">
-      <p class="stat-card-label">Case: Mauston, WI — Active</p>
+      <p class="stat-card-label">Case: Mauston, WI — Responded April 15</p>
       <div class="stat-item">
-        <p class="stat-item-label">Response Deadline</p>
-        <p class="stat-item-value deadline">April 18, 2026</p>
+        <p class="stat-item-label">City Response Time</p>
+        <p class="stat-item-value deadline">27 days silence</p>
       </div>
       <div class="stat-item">
-        <p class="stat-item-label">WI Agencies Querying Flock</p>
-        <p class="stat-item-value">221</p>
+        <p class="stat-item-label">Rebuttal Sent</p>
+        <p class="stat-item-value">34 minutes</p>
       </div>
       <div class="stat-item">
-        <p class="stat-item-label">Documented Query — TX Sheriff</p>
-        <p class="stat-item-value warn">"had an abortion,<br>search for female"</p>
+        <p class="stat-item-label">Document Provided By Chief</p>
+        <p class="stat-item-value warn">Wrong document —<br>"unintentional oversight"</p>
       </div>
       <div class="stat-item">
-        <p class="stat-item-label">Notice Issued</p>
+        <p class="stat-item-label">Original Notice Issued</p>
         <p class="stat-item-value sm">2026-03-19</p>
       </div>
     </div>
@@ -277,7 +303,7 @@
   <p class="section-tag">03 — Origin</p>
   <h2 class="section-title">How This Started</h2>
   <div class="origin-card">
-    <p>On <strong>March 19, 2026</strong>, a formal decommission notice was sent to the Mayor, City Administrator, Police Chief, and Sheriff of Mauston, Wisconsin — CC'd to State Senator Patrick Testin.</p>
+    <p>On <strong>March 19, 2026</strong>, a formal decommission notice was sent to the Mayor, City Administrator, Police Chief, and Sheriff of Mauston, Wisconsin — originally CC'd to State Senator Sarah Keyeski (misrouted; redirected to the correct-district senator, <strong>Sen. Patrick Testin</strong>, on April 7).</p>
     <p>The letter documented Flock Safety's data architecture, the ICE access vector, documented misuse cases nationally and in Wisconsin, and municipal liability exposure under the existing contract. Three specific demands were made: the authorizing ordinance, the full contract including data retention and third-party access terms, and the city's stated position on decommissioning.</p>
     <p>A 30-day response window was established. No response becomes documented public record of officials ignoring a formal resident complaint with a sitting state senator CC'd.</p>
     <p><strong>FlockBlocker is what gets built while they decide.</strong></p>
@@ -305,23 +331,78 @@
 <hr>
 
 <div class="section" id="evidence">
-  <p class="section-tag">04 — They Responded</p>
-  <h2 class="section-title">We Have The Contract.<br>We Have The Response.</h2>
+  <p class="section-tag">04 — The City Responded — April 15</p>
+  <h2 class="section-title">They Sent The Wrong Document.<br>Then They Corrected It.</h2>
   <div class="problem-layout">
     <div>
       <p class="section-body">
-        On March 19, a formal demand letter was served. The chief responded. We obtained the full contract — <strong>$50,200 for 8 cameras</strong>, 24-month auto-renewal, full nationwide ALPR network access. Every detail is now public record.
+        On <strong>April 15, 2026 at 2:36 PM CDT</strong>, City Administrator <strong>Daron J. Haugh, MBA</strong> — silent for 27 days — sent a formal response letter co-signed by Mayor <strong>D.D. Teske</strong>, accompanied by a "corrected" executed contract. The letter admits the document Chief Zilisch previously provided was <em>not the contract</em> — it was a quote. <strong>Blake's rebuttal went out 34 minutes later.</strong>
+        <br><br>
+        The corrected figures: <strong>2 fixed Falcon cameras, $6,300 total, $6,000/yr</strong> — signed via DocuSign on January 23, 2024 by Chief Zilisch and Flock General Counsel Mark Smith. The amendment references a prior November 9, 2023 agreement that was <em>not provided</em>. FOIA filed.
       </p>
       <div style="margin-top:2rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
-        <a href="evidence.html" class="btn btn-fill">See The Evidence →</a>
-        <a href="mauston-contract.pdf" target="_blank" class="btn btn-outline">Download Contract (PDF)</a>
+        <a href="evidence.html" class="btn btn-fill">See The Forensic Record →</a>
+        <a href="Flock%20Executed%20Agreement%20-%20Signed.pdf" target="_blank" class="btn btn-outline">Executed Contract (PDF)</a>
+        <a href="Response%20to%20Clark%2C%20Blake.pdf" target="_blank" class="btn btn-outline">City Response Letter (PDF)</a>
       </div>
     </div>
     <div>
       <a href="evidence.html" style="display:block;">
-        <img src="chief-response.png" alt="Police Chief's response to demand letter" style="width:100%; border:1px solid var(--border); filter:contrast(1.05); transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='var(--border)'">
+        <img src="chief-response.png" alt="The Chief's April 7 response — document later admitted to be a quote, not the contract" style="width:100%; border:1px solid var(--border); filter:contrast(1.05); transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='var(--border)'">
       </a>
-      <p style="font-family:var(--mono); font-size:0.62rem; color:var(--text-dim); letter-spacing:0.1em; text-transform:uppercase; margin-top:0.75rem;">Police Chief's Response — April 2026</p>
+      <p style="font-family:var(--mono); font-size:0.62rem; color:var(--text-dim); letter-spacing:0.1em; text-transform:uppercase; margin-top:0.75rem;">Apr 7 — Wrong Document · Apr 15 — City Corrected It</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section" id="timeline">
+  <p class="section-tag">05 — Campaign Timeline</p>
+  <h2 class="section-title">The Record So Far</h2>
+  <p class="section-body" style="max-width:780px;">
+    Every step documented. Every communication logged. Their response times are decelerating while the rebuttal velocity is increasing. The complete forensic record lives on the <a href="evidence.html" style="color:var(--accent);border-bottom:1px solid rgba(200,240,74,0.3)">Evidence page</a>.
+  </p>
+  <div style="margin-top:2rem;display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);">
+    <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;">Jan 30, 2026</span>
+      <span style="font-size:0.9rem;color:var(--text);">Sheriff Zobal on record: ICE cooperation "like any other federal agency."</span>
+    </div>
+    <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;">Mar 19, 2026</span>
+      <span style="font-size:0.9rem;color:var(--text);">Demand letter sent to Mayor Teske, Admin Haugh, Chief Zilisch, Sheriff Zobal.</span>
+    </div>
+    <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;">Apr 3, 2026</span>
+      <span style="font-size:0.9rem;color:var(--text);">BIRDSTRIKE announced publicly as a national template.</span>
+    </div>
+    <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--red);letter-spacing:0.1em;">Apr 7 · 12:23 PM</span>
+      <span style="font-size:0.9rem;color:var(--text);">Chief Zilisch breaks 19-day silence. Attaches <strong style="color:var(--white)">wrong document</strong> — a quote, not the contract.</span>
+    </div>
+    <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.1em;">Apr 7 · 1:17 PM</span>
+      <span style="font-size:0.9rem;color:var(--text);">Forensic rebuttal — 5 contract deficiencies. Response time: <strong style="color:var(--accent)">54 minutes</strong>.</span>
+    </div>
+    <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;">Apr 9, 2026</span>
+      <span style="font-size:0.9rem;color:var(--text);">Press pitch to Juneau County Star-Times. EYESONME conceived and built.</span>
+    </div>
+    <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;">Apr 11, 2026</span>
+      <span style="font-size:0.9rem;color:var(--text);">EYESONME launched on flockblocker.org.</span>
+    </div>
+    <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--red);letter-spacing:0.1em;">Apr 15 · 2:36 PM</span>
+      <span style="font-size:0.9rem;color:var(--text);">City Administrator Haugh responds. Formal letter co-signed by Mayor Teske + "corrected" executed contract.</span>
+    </div>
+    <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.1em;">Apr 15 · 3:10 PM</span>
+      <span style="font-size:0.9rem;color:var(--text);">Rebuttal sent. <strong style="color:var(--accent)">34-minute response time.</strong> Randy Gluck. § 1983. FOIA filed. Media campaign announced.</span>
+    </div>
+    <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;">Apr 18, 2026</span>
+      <span style="font-size:0.9rem;color:var(--text);">Original 30-day deadline.</span>
     </div>
   </div>
 </div>
@@ -329,7 +410,7 @@
 <hr>
 
 <div class="section" id="who">
-  <p class="section-tag">05 — Personnel</p>
+  <p class="section-tag">06 — Personnel</p>
   <h2 class="section-title">Who's Responsible</h2>
   <p class="section-body">
     Every deployment has names attached — the officials who signed the contract, the executives who sold it. <strong>All public record.</strong>
@@ -342,7 +423,7 @@
 <hr>
 
 <div class="section" id="eyesonme">
-  <p class="section-tag">06 — EYESONME</p>
+  <p class="section-tag">07 — EYESONME</p>
   <h2 class="section-title" style="color:var(--accent);">You Watch Us.<br>We Watch Back.</h2>
   <p class="section-body">
     <strong>EYESONME</strong> is a network of physical public accountability cameras deployed in public spaces, directed at public facilities and the officials who authorized Flock Safety surveillance. Both are legal. Only one has a dashboard. <em>This is symmetry.</em>

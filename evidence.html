@@ -3,158 +3,255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Evidence — Mauston Contract & Chief's Response — FlockBlocker</title>
-<meta name="description" content="The Mauston PD Flock Safety contract and the Police Chief's response to a formal demand letter. Public record. Download the full contract.">
+<title>Evidence — The City Responded — FlockBlocker</title>
+<meta name="description" content="April 15, 2026: City Administrator Daron J. Haugh, co-signed by Mayor Teske, admits the Chief of Police provided the wrong document. The corrected contract and full forensic rebuttal. Public record.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-  :root {
-    --bg: #09090b; --surface: #111116; --surface2: #16161c; --border: #242430;
-    --accent: #c8f04a; --red: #f05a4a; --text: #d4d4dc; --text-mid: #8888a0;
-    --text-dim: #44445a; --white: #f0f0f8;
-    --mono: 'Fira Mono', monospace; --display: 'Black Ops One', cursive; --body: 'Epilogue', sans-serif;
+  /* Page-specific — forensic record chrome */
+  :root { --forensic: #f05a4a; --doc: #c8f04a; }
+
+  .page-hero-lead { max-width: 760px; }
+  .page-hero-lead .accent { color: var(--forensic); font-style: normal; }
+
+  .anchor-strip {
+    max-width: 1200px; margin: 0 auto;
+    padding: 1.5rem 2.5rem 0;
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
-  a { color: inherit; text-decoration: none; }
-
-  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
-  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
-  .logo em { color: var(--accent); font-style: normal; }
-  .header-right { display: flex; align-items: center; gap: 1.25rem; flex-wrap: nowrap; }
-  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; white-space: nowrap; transition: color 0.2s; }
-  .header-link:hover { color: var(--accent); }
-  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
-  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-  hr { border: none; border-top: 1px solid var(--border); }
-
-  /* Hero */
-  .page-hero { padding: 6rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
-  .page-hero-kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--red); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.5rem; }
-  .page-hero-title { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.95; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2rem; }
-  .page-hero-title .accent { color: var(--red); }
-  .page-hero-lead { font-size: 1.1rem; font-weight: 300; color: var(--text); line-height: 1.85; max-width: 640px; }
-  .page-hero-lead strong { color: var(--white); font-weight: 500; }
-
-  /* Evidence */
-  .evidence-section { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem; }
-  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
-  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
-
-  .evidence-card {
-    background: #1f0d0d; border: 1px solid #3a1515; padding: 2.5rem;
-    position: relative; overflow: hidden; margin-bottom: 2rem;
+  .anchor-strip a {
+    font-family: var(--mono); font-size: 0.66rem;
+    color: var(--text-mid); letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.55rem 0.95rem; border: 1px solid var(--border);
+    transition: all 0.18s;
   }
-  .evidence-card::before {
+  .anchor-strip a:hover { color: var(--forensic); border-color: var(--forensic); }
+  section[id] { scroll-margin-top: 72px; }
+
+  .section { max-width: 1100px; margin: 0 auto; padding: 3rem 2.5rem; }
+  .section-title { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+
+  /* Timeline strip */
+  .rx-strip {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px; background: var(--border); margin: 2rem 0 2.5rem;
+  }
+  .rx-cell { background: var(--surface); padding: 1.25rem 1.5rem; }
+  .rx-cell .rx-label {
+    font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim);
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.45rem;
+  }
+  .rx-cell .rx-val {
+    font-family: var(--display); font-size: 1.05rem; color: var(--white);
+    line-height: 1.25;
+  }
+  .rx-cell .rx-val.accent { color: var(--forensic); }
+  .rx-cell .rx-val.good { color: var(--accent); }
+
+  /* Document cards */
+  .doc-card {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 2.25rem 2rem; margin-bottom: 1.5rem; position: relative;
+  }
+  .doc-card.wrong { border-color: #3a1515; background: #1f0d0d; }
+  .doc-card.wrong::before {
     content: ''; position: absolute; inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(240,90,74,0.02) 2px, rgba(240,90,74,0.02) 4px);
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(240,90,74,0.025) 2px, rgba(240,90,74,0.025) 4px);
     pointer-events: none;
   }
-  .evidence-card:hover { border-color: var(--red); }
-  .evidence-stamp {
-    font-family: var(--display); font-size: 0.75rem; color: var(--red);
-    letter-spacing: 0.25em; text-transform: uppercase; border: 2px solid var(--red);
-    display: inline-block; padding: 0.25rem 0.75rem; margin-bottom: 1.5rem;
-    transform: rotate(-2deg); opacity: 0.85;
+  .doc-card.real { border-color: #1f2f1f; }
+
+  .doc-stamp {
+    font-family: var(--display); font-size: 0.72rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    display: inline-block; padding: 0.25rem 0.75rem;
+    margin-bottom: 1.25rem; transform: rotate(-1.5deg);
+    border: 2px solid currentColor;
   }
-  .evidence-title {
+  .doc-stamp.wrong { color: var(--forensic); }
+  .doc-stamp.real { color: var(--accent); }
+
+  .doc-title {
     font-family: var(--display); font-weight: 800;
-    font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--white); margin-bottom: 1rem;
+    font-size: clamp(1.2rem, 2.3vw, 1.65rem);
+    color: var(--white); margin-bottom: 1rem; line-height: 1.2;
   }
-  .evidence-meta {
-    font-family: var(--mono); font-size: 0.72rem; color: #9e5a5a;
-    line-height: 1.8; margin-bottom: 1.5rem;
+  .doc-meta {
+    font-family: var(--mono); font-size: 0.72rem;
+    color: var(--text-mid); line-height: 1.8; margin-bottom: 1.25rem;
   }
-  .evidence-meta strong { color: var(--red); font-weight: 500; }
+  .doc-meta strong { color: var(--white); font-weight: 500; }
+  .doc-meta.wrong strong { color: var(--forensic); }
 
-  .contract-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem; margin: 1.5rem 0;
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
+    gap: 1px; background: var(--border); margin: 1.25rem 0;
   }
-  .contract-stat { background: rgba(240,90,74,0.05); border: 1px solid #2e1a1a; padding: 1rem 1.25rem; }
-  .contract-stat-label {
-    font-family: var(--mono); font-size: 0.6rem; color: #6b3d3d;
-    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.35rem;
+  .stat-cell { background: var(--surface2); padding: 1rem 1.25rem; }
+  .stat-cell .st-label {
+    font-family: var(--mono); font-size: 0.58rem;
+    color: var(--text-dim); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 0.35rem;
   }
-  .contract-stat-value {
-    font-family: var(--display); font-size: 1.3rem; color: var(--red);
-    text-shadow: 0 0 15px rgba(240,90,74,0.2);
+  .stat-cell .st-val {
+    font-family: var(--display); font-size: 1.2rem; line-height: 1.15;
+    color: var(--white);
   }
-  .contract-stat-value.money { color: #ff4a4a; }
+  .stat-cell .st-val.warn { color: var(--forensic); }
+  .stat-cell .st-val.good { color: var(--accent); }
 
-  .evidence-dl {
+  .doc-dl {
     display: inline-flex; align-items: center; gap: 0.5rem;
-    font-family: var(--mono); font-size: 0.75rem; color: var(--red);
-    border: 1px solid var(--red); padding: 0.6rem 1.25rem; margin-top: 1rem;
+    font-family: var(--mono); font-size: 0.72rem;
+    border: 1px solid currentColor; padding: 0.6rem 1.15rem;
+    margin-top: 0.75rem; margin-right: 0.5rem;
     transition: all 0.2s; letter-spacing: 0.06em;
   }
-  .evidence-dl:hover { background: rgba(240,90,74,0.1); text-shadow: 0 0 8px rgba(240,90,74,0.4); }
+  .doc-dl.wrong { color: var(--forensic); }
+  .doc-dl.wrong:hover { background: rgba(240,90,74,0.1); }
+  .doc-dl.real { color: var(--accent); }
+  .doc-dl.real:hover { background: rgba(200,240,74,0.08); }
 
-  .demand-status {
-    display: flex; align-items: center; gap: 0.6rem;
-    font-family: var(--mono); font-size: 0.72rem; color: var(--red);
-    letter-spacing: 0.08em; margin-bottom: 1.5rem;
+  /* Admission pull-quote */
+  .admission {
+    background: #0f0f10; border-left: 3px solid var(--forensic);
+    padding: 1.75rem 2rem; margin: 1.75rem 0;
+    font-family: var(--mono); font-size: 0.85rem;
+    color: var(--text); line-height: 1.9;
   }
-  .demand-status::before {
-    content: ''; width: 8px; height: 8px; border-radius: 50%;
-    background: var(--red); animation: blink 1.8s ease-in-out infinite; flex-shrink: 0;
+  .admission .att {
+    display: block; margin-top: 0.9rem;
+    font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.1em;
+  }
+  .admission.warn { border-left-color: var(--forensic); }
+
+  /* Rebuttal cards */
+  .reb-grid {
+    display: flex; flex-direction: column; gap: 1px;
+    background: var(--border); margin-top: 2rem;
+  }
+  .reb { background: var(--surface); padding: 1.75rem 2rem; }
+  .reb .reb-num {
+    font-family: var(--mono); font-size: 0.6rem;
+    color: var(--forensic); letter-spacing: 0.18em;
+    text-transform: uppercase; margin-bottom: 0.4rem;
+  }
+  .reb .reb-claim {
+    font-family: var(--display); font-weight: 700;
+    font-size: 1.05rem; color: var(--white);
+    margin-bottom: 0.75rem; line-height: 1.35;
+  }
+  .reb .reb-quote {
+    font-family: var(--mono); font-size: 0.78rem;
+    color: var(--text-mid); border-left: 2px solid var(--border);
+    padding-left: 1rem; margin: 0.85rem 0; line-height: 1.75;
+  }
+  .reb .reb-body {
+    font-size: 0.93rem; color: var(--text); line-height: 1.8;
+  }
+  .reb .reb-body strong { color: var(--white); font-weight: 500; }
+  .reb .reb-body em { color: var(--forensic); font-style: normal; }
+
+  /* Gluck callout */
+  .gluck {
+    background: #150808; border: 1px solid #3a1515;
+    padding: 2.5rem; margin: 2.5rem 0; position: relative;
+  }
+  .gluck::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(240,90,74,0.04) 2px, rgba(240,90,74,0.04) 4px);
+    pointer-events: none;
+  }
+  .gluck > * { position: relative; }
+  .gluck .gluck-tag {
+    font-family: var(--mono); font-size: 0.62rem;
+    color: var(--forensic); letter-spacing: 0.2em;
+    text-transform: uppercase; margin-bottom: 0.85rem;
+  }
+  .gluck .gluck-title {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+    color: var(--white); margin-bottom: 1.25rem; line-height: 1.2;
+  }
+  .gluck .gluck-title .red { color: var(--forensic); }
+  .gluck p { font-size: 0.95rem; line-height: 1.85; color: var(--text); margin-bottom: 1rem; }
+  .gluck p strong { color: var(--white); font-weight: 500; }
+  .gluck ul { margin: 0 0 1rem 1.2rem; font-size: 0.9rem; line-height: 1.85; color: var(--text); }
+  .gluck ul li { margin-bottom: 0.5rem; }
+  .gluck ul li strong { color: var(--white); }
+  .gluck .callout {
+    background: #1f0d0d; border-left: 3px solid var(--forensic);
+    padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+    font-family: var(--mono); font-size: 0.85rem;
+    color: var(--forensic); line-height: 1.8;
+  }
+  .gluck .sources {
+    font-family: var(--mono); font-size: 0.68rem;
+    color: var(--text-dim); margin-top: 1rem; line-height: 1.9;
+  }
+  .gluck .sources a { color: var(--forensic); border-bottom: 1px solid rgba(240,90,74,0.3); }
+
+  /* Escalation ladder */
+  .ladder { margin-top: 2rem; display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+  .rung { background: var(--surface); padding: 1.5rem 1.75rem; display: grid; grid-template-columns: 60px 1fr; gap: 1.25rem; align-items: start; }
+  .rung .num {
+    font-family: var(--display); font-size: 2rem;
+    color: var(--forensic); line-height: 1;
+  }
+  .rung .lb {
+    font-family: var(--mono); font-size: 0.62rem;
+    color: var(--text-dim); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 0.3rem;
+  }
+  .rung h4 { font-family: var(--display); font-size: 1.05rem; color: var(--white); margin-bottom: 0.5rem; }
+  .rung p { font-size: 0.9rem; line-height: 1.75; color: var(--text); }
+  .rung p strong { color: var(--white); }
+
+  /* DocuSign metadata */
+  .ds-meta {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 1.75rem 2rem; margin-top: 1.5rem;
+    font-family: var(--mono); font-size: 0.76rem;
+    color: var(--text-mid); line-height: 1.95;
+  }
+  .ds-meta strong { color: var(--white); font-weight: 500; }
+  .ds-meta .ds-label {
+    font-family: var(--mono); font-size: 0.6rem;
+    color: var(--forensic); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 0.75rem;
   }
 
-  .response-img { max-width: 100%; border: 1px solid #2e1a1a; margin-top: 1rem; filter: contrast(1.05); }
-  .response-placeholder {
-    background: #1a0d0d; border: 1px dashed #3a1515; padding: 2rem;
-    text-align: center; font-family: var(--mono); font-size: 0.72rem;
-    color: #6b3d3d; margin-top: 1rem;
+  .close-quote {
+    background: #0f0f10; border-left: 3px solid var(--forensic);
+    padding: 2rem 2.25rem; margin: 2rem 0;
+    font-family: var(--mono); font-size: 0.88rem;
+    color: var(--text); line-height: 1.95;
   }
+  .close-quote em { color: var(--forensic); font-style: normal; }
 
   .back-link {
     display: inline-flex; align-items: center; gap: 0.5rem;
-    font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid);
-    letter-spacing: 0.04em; transition: color 0.2s; margin-top: 2rem;
+    font-family: var(--mono); font-size: 0.72rem;
+    color: var(--text-mid); letter-spacing: 0.04em;
+    transition: color 0.2s; margin-top: 2rem;
   }
-  .back-link:hover { color: var(--accent); }
+  .back-link:hover { color: var(--forensic); }
 
-  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
-  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
-  .footer-left a:hover { color: var(--accent); }
-  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
-
-  /* Mobile */
-  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
-  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
-  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
-  .menu-toggle.active span:nth-child(2) { opacity: 0; }
-  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
-  .mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
-  .mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
-  .mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
-  .mobile-nav a:active { color: var(--accent); }
-
-  @media (max-width: 1200px) {
-    .header-link { display: none; }
-    .menu-toggle { display: block; }
-  }
   @media (max-width: 900px) {
-    .page-hero { padding: 4rem 1.5rem 2rem; }
-    .evidence-section { padding: 2.5rem 1.5rem; }
-    .evidence-card { padding: 1.5rem; }
-    .contract-grid { grid-template-columns: 1fr 1fr; }
-    footer { padding: 2rem 1.5rem; }
-    header { padding: 0 1.5rem; }
-    .header-link { display: none; }
-    .menu-toggle { display: block; }
+    .section { padding: 2.5rem 1.5rem; }
+    .anchor-strip { padding: 1rem 1.5rem 0; }
+    .rx-strip { grid-template-columns: 1fr; }
+    .doc-card { padding: 1.5rem; }
+    .rung { grid-template-columns: 1fr; gap: 0.4rem; }
+    .rung .num { font-size: 1.5rem; }
   }
   @media (max-width: 480px) {
-    .page-hero { padding: 3rem 1rem 1.5rem; }
-    .page-hero-title { font-size: clamp(2rem, 8vw, 3rem); }
-    .evidence-card { padding: 1.2rem; }
-    .contract-grid { grid-template-columns: 1fr; }
-    footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
-    header { padding: 0 1rem; }
+    .section { padding: 2rem 1rem; }
+    .anchor-strip { padding: 0.75rem 1rem 0; }
+    .anchor-strip a { font-size: 0.6rem; padding: 0.45rem 0.7rem; }
+    .doc-card, .gluck { padding: 1.25rem; }
   }
 </style>
 </head>
@@ -163,15 +260,13 @@
 <header>
   <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
   <div class="header-right">
-    <a href="doctrine.html" style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;color:var(--text-dim);transition:color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-dim)'">[ DETERRENCE DOCTRINE ]</a>
-    <a href="eyesonme.html" class="header-link" style="color:#c8f04a">EYESONME</a>
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme">EYESONME</a>
     <a href="index.html" class="header-link">Home</a>
-    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
-    <a href="wall-of-shame.html" class="header-link" style="color:var(--red)">Wall of Shame</a>
+    <a href="evidence.html" class="header-link evidence active">Evidence</a>
+    <a href="harms.html" class="header-link">Harms</a>
     <a href="rebellion.html" class="header-link">Rebellion</a>
     <a href="who.html" class="header-link">Who</a>
-    <a href="censorship.html" class="header-link">Censorship</a>
-    <a href="money.html" class="header-link">Money</a>
     <a href="birdstrike.html" class="header-link">BirdStrike</a>
     <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
     <span class="live-badge"><span id="countdown"></span></span>
@@ -180,99 +275,471 @@
 </header>
 
 <nav class="mobile-nav">
+  <a href="index.html">Home</a>
   <a href="eyesonme.html">EYESONME</a>
   <a href="doctrine.html">Deterrence Doctrine</a>
-  <a href="index.html">Home</a>
   <a href="evidence.html">Evidence</a>
-  <a href="wall-of-shame.html">Wall of Shame</a>
+  <a href="harms.html">Harms</a>
   <a href="rebellion.html">Rebellion</a>
   <a href="who.html">Who's Responsible</a>
-  <a href="censorship.html">Censorship</a>
-  <a href="money.html">Money</a>
   <a href="birdstrike.html">BirdStrike</a>
   <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
 </nav>
 
 <div class="page-hero">
-  <p class="page-hero-kicker">// Public Record — Obtained & Documented</p>
-  <h1 class="page-hero-title">The <span class="accent">Evidence</span></h1>
+  <p class="page-hero-kicker">// April 15, 2026 — The City Responded</p>
+  <h1 class="page-hero-title">They Sent The <span class="accent" style="color:var(--forensic)">Wrong Document</span>.<br>Then They Corrected It.</h1>
   <p class="page-hero-lead">
-    <strong>We have the contract. We have the chief's response.</strong> Everything below is public record obtained through formal channels. The city signed it. The chief responded. The public deserves to see both.
+    On <strong>April 15, 2026 at 2:36 PM CDT</strong>, City Administrator <strong>Daron J. Haugh, MBA</strong> — silent for 27 days — sent a formal response letter co-signed by Mayor <strong>D.D. Teske</strong>, accompanied by a "corrected" executed contract. The letter admits that the document Chief Michael Zilisch previously provided was <em class="accent">not the contract</em>. It was a quote. For an entirely different arrangement. <strong>Blake's rebuttal went out 34 minutes later.</strong> This is the forensic record.
   </p>
 </div>
 
-<hr>
-
-<!-- CONTRACT -->
-<div class="evidence-section">
-  <p class="section-tag">Document A — Contract</p>
-  <h2 class="section-title">Flock Safety Master Services Agreement — Mauston PD</h2>
-
-  <div class="evidence-card">
-    <div class="evidence-stamp">Obtained — Public Record</div>
-    <h3 class="evidence-title">$50,200 for 8 Cameras and Full Network Access</h3>
-    <div class="evidence-meta">
-      <strong>Effective:</strong> August 17, 2023<br>
-      <strong>Signed by:</strong> Chief Michael D. Zilisch — City of Mauston PD<br>
-      <strong>Flock contact:</strong> Kyle Whyte — kyle.whyte@flocksafety.com — 651-253-9350<br>
-      <strong>Notices ATTN:</strong> Sergeant Brandon Aronz
-    </div>
-
-    <div class="contract-grid">
-      <div class="contract-stat">
-        <p class="contract-stat-label">Contract Total</p>
-        <p class="contract-stat-value money">$50,200</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Annual Recurring</p>
-        <p class="contract-stat-value money">$24,000/yr</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Falcon Cameras</p>
-        <p class="contract-stat-value">8 units</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Initial Term</p>
-        <p class="contract-stat-value">24 months</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Auto-Renewal</p>
-        <p class="contract-stat-value">24 months</p>
-      </div>
-      <div class="contract-stat">
-        <p class="contract-stat-label">Data Retention</p>
-        <p class="contract-stat-value">30 days</p>
-      </div>
-    </div>
-
-    <div class="evidence-meta" style="margin-top:1.5rem;">
-      Includes Flock Safety Platform, FlockOS, 8 Falcon cameras, full nationwide ALPR network access, NCIC real-time alerts, unlimited custom hot lists, Vehicle Fingerprint search. 24-month auto-renewal unless 30-day written notice given.
-    </div>
-
-    <a href="mauston-contract.pdf" target="_blank" class="evidence-dl">&#9660; DOWNLOAD FULL CONTRACT (PDF — 26 pages)</a>
-  </div>
+<div class="anchor-strip">
+  <a href="#strip">→ 00 / Response Clock</a>
+  <a href="#wrong-doc">→ 01 / The Wrong Document</a>
+  <a href="#real-contract">→ 02 / The Real Contract</a>
+  <a href="#contradictions">→ 03 / Contradictions</a>
+  <a href="#gluck">→ 04 / Randy Gluck</a>
+  <a href="#missing">→ 05 / Missing Agreement</a>
+  <a href="#ignored">→ 06 / What They Ignored</a>
+  <a href="#ladder">→ 07 / Escalation Ladder</a>
+  <a href="#exit">→ 08 / The Exit</a>
 </div>
 
 <hr>
 
-<!-- CHIEF'S RESPONSE -->
-<div class="evidence-section">
-  <p class="section-tag">Document B — Response</p>
-  <h2 class="section-title">Police Chief's Response to Demand Letter</h2>
+<!-- 00 — RESPONSE CLOCK -->
+<section id="strip" class="section">
+  <p class="section-tag">00 — Response Clock</p>
+  <h2 class="section-title">The Response Times Are Accelerating. Theirs Are Not.</h2>
+  <p class="section-body" style="max-width:780px;">
+    On April 7, Chief Zilisch broke 19 days of silence. Blake's rebuttal went out <strong>54 minutes later</strong>. On April 15, City Administrator Haugh broke 27 days of silence. Blake's rebuttal went out <strong>34 minutes later</strong>. Their delay is decelerating while his velocity is increasing. The machinery does not require their cooperation to function.
+  </p>
 
-  <div class="evidence-card">
-    <div class="evidence-stamp">Response Received</div>
-    <h3 class="evidence-title">They Responded. Here's What They Said.</h3>
-    <div class="demand-status">DEMAND LETTER SERVED 2026-03-19 — RESPONSE RECEIVED 2026-04-07</div>
-    <div class="evidence-meta">
-      A formal decommission demand was sent to the Mayor, City Administrator, Police Chief, and Sheriff — CC'd to State Senator Patrick Testin. The chief responded. This is what he said.
+  <div class="rx-strip">
+    <div class="rx-cell">
+      <p class="rx-label">City Silence (Haugh)</p>
+      <p class="rx-val accent">27 days</p>
     </div>
-    <img src="chief-response.png" alt="Police Chief's response to FlockBlocker demand letter" class="response-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-    <div class="response-placeholder" style="display:none;">[ Screenshot loading — if this persists, the image may still be syncing ]</div>
+    <div class="rx-cell">
+      <p class="rx-label">Response To Letter</p>
+      <p class="rx-val good">34 minutes</p>
+    </div>
+    <div class="rx-cell">
+      <p class="rx-label">Original Deadline</p>
+      <p class="rx-val">April 18, 2026</p>
+    </div>
+    <div class="rx-cell">
+      <p class="rx-label">Letter Received</p>
+      <p class="rx-val">Apr 15 · 2:36 PM CDT</p>
+    </div>
+    <div class="rx-cell">
+      <p class="rx-label">Rebuttal Sent</p>
+      <p class="rx-val">Apr 15 · 3:10 PM CDT</p>
+    </div>
+    <div class="rx-cell">
+      <p class="rx-label">Issues Dodged</p>
+      <p class="rx-val accent">3 of 5</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- 01 — THE WRONG DOCUMENT -->
+<section id="wrong-doc" class="section">
+  <p class="section-tag">01 — The Wrong Document</p>
+  <h2 class="section-title">The Chief of Police Responded To A Formal Records Demand With A Quote</h2>
+  <p class="section-body" style="max-width:820px;">
+    On April 7, 2026, Chief Michael Zilisch broke 19 days of silence by attaching what he represented as the Flock Safety contract. FlockBlocker reported what the City's own chief provided — <strong>8 Falcon cameras, $50,200 total value, 24-month auto-renewal, Flock signature block blank</strong>. On April 15, 2026, the City admitted that document was not the contract. It was a quote. The City called the oversight <em class="accent">"unintentional."</em>
+  </p>
+
+  <div class="doc-card wrong">
+    <div class="doc-stamp wrong">Document That Was Sent — Not The Contract</div>
+    <h3 class="doc-title">The Quote Chief Zilisch Provided On April 7</h3>
+    <div class="doc-meta wrong">
+      <strong>Date provided:</strong> April 7, 2026 — in response to March 19 demand letter<br>
+      <strong>Provided by:</strong> Chief Michael Zilisch, Mauston Police Department<br>
+      <strong>Represented as:</strong> The Flock Safety contract<br>
+      <strong>Actual document type:</strong> Unexecuted quote — Flock signature block blank<br>
+      <strong>Operational contact listed:</strong> Sgt. Brandon Arenz
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <p class="st-label">Quoted Total</p>
+        <p class="st-val warn">$50,200</p>
+      </div>
+      <div class="stat-cell">
+        <p class="st-label">Annual Recurring</p>
+        <p class="st-val warn">$24,000/yr</p>
+      </div>
+      <div class="stat-cell">
+        <p class="st-label">Falcon Cameras</p>
+        <p class="st-val warn">8 units</p>
+      </div>
+      <div class="stat-cell">
+        <p class="st-label">Initial Term</p>
+        <p class="st-val warn">24 months</p>
+      </div>
+      <div class="stat-cell">
+        <p class="st-label">Auto-Renewal</p>
+        <p class="st-val warn">24 months</p>
+      </div>
+      <div class="stat-cell">
+        <p class="st-label">Flock Signature</p>
+        <p class="st-val warn">BLANK</p>
+      </div>
+    </div>
+
+    <a href="mauston-contract.pdf" target="_blank" class="doc-dl wrong">&#9660; DOWNLOAD QUOTE (PDF — AS PROVIDED BY CHIEF)</a>
+  </div>
+
+  <div class="admission warn">
+    "The document previously sent to you was a quote, not the final agreement. We apologize for any confusion caused by providing the unexecuted quote. Please know that this oversight was unintentional."
+    <span class="att">— Daron J. Haugh, MBA, City Administrator &nbsp;·&nbsp; D.D. Teske, Mayor &nbsp;·&nbsp; April 15, 2026</span>
+  </div>
+
+  <p class="section-body" style="max-width:820px;">
+    FlockBlocker reported what the Chief of Police provided in response to a formal records demand. If the figures on this site were wrong between April 7 and April 15, that is because the document the Chief of Police provided was wrong. <strong>The question of why the Chief of Police did not know the difference between his own quote and his executed contract remains unanswered.</strong>
+  </p>
+
+  <p class="section-body" style="max-width:820px;margin-top:1.25rem;">
+    <a href="Response%20to%20Clark%2C%20Blake.pdf" target="_blank" class="doc-dl wrong">&#9660; DOWNLOAD CITY'S RESPONSE LETTER (PDF)</a>
+  </p>
+</section>
+
+<hr>
+
+<!-- 02 — THE REAL CONTRACT -->
+<section id="real-contract" class="section">
+  <p class="section-tag">02 — The Real Contract</p>
+  <h2 class="section-title">The Executed Amendment — $6,300 For 2 Cameras</h2>
+  <p class="section-body" style="max-width:820px;">
+    The document the City produced on April 15, 2026 is a <strong>Flock Group Inc. Amendment</strong>, signed via DocuSign on <strong>January 23, 2024</strong>. The amendment supersedes a previously executed agreement dated <strong>November 9, 2023</strong> — an original that the City did not provide. A formal open records request under Wis. Stat. § 19.35 has been filed for the missing November 2023 agreement.
+  </p>
+
+  <div class="doc-card real">
+    <div class="doc-stamp real">Executed Contract — Public Record</div>
+    <h3 class="doc-title">Flock Group Inc. Amendment — City of Mauston</h3>
+    <div class="doc-meta">
+      <strong>Executed:</strong> January 23, 2024 — DocuSign<br>
+      <strong>Supersedes:</strong> Original agreement dated November 9, 2023 (not provided — FOIA filed)<br>
+      <strong>City signatory:</strong> Michael Zilisch — Chief of Police<br>
+      <strong>Flock signatory:</strong> Mark Smith — General Counsel, Flock Group Inc.<br>
+      <strong>Envelope originator:</strong> Kyle Whyte — kyle.whyte@flocksafety.com — 1170 Howell Mill Rd NW, Unit 210, Atlanta GA 30318<br>
+      <strong>Disclosed April 15, 2026</strong> by City Administrator Daron J. Haugh
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <p class="st-label">Contract Total</p>
+        <p class="st-val good">$6,300.00</p>
+      </div>
+      <div class="stat-cell">
+        <p class="st-label">Annual Cost</p>
+        <p class="st-val good">$6,000/yr</p>
+      </div>
+      <div class="stat-cell">
+        <p class="st-label">Per Camera</p>
+        <p class="st-val good">$3,000/yr</p>
+      </div>
+      <div class="stat-cell">
+        <p class="st-label">Implementation</p>
+        <p class="st-val good">$300 ($150×2)</p>
+      </div>
+      <div class="stat-cell">
+        <p class="st-label">Falcon Cameras</p>
+        <p class="st-val good">2 fixed</p>
+      </div>
+      <div class="stat-cell">
+        <p class="st-label">Term</p>
+        <p class="st-val good">12 months</p>
+      </div>
+    </div>
+
+    <a href="Flock%20Executed%20Agreement%20-%20Signed.pdf" target="_blank" class="doc-dl real">&#9660; DOWNLOAD EXECUTED AMENDMENT (PDF)</a>
+    <a href="Response%20to%20Clark%2C%20Blake.pdf" target="_blank" class="doc-dl real">&#9660; DOWNLOAD CITY RESPONSE LETTER (PDF)</a>
+  </div>
+
+  <div class="ds-meta">
+    <p class="ds-label">DocuSign Certificate of Completion — Forensic Metadata</p>
+    <strong>Envelope ID:</strong> 276C2AE4-3CB3-4E37-B58A-20F61A840112<br>
+    <strong>Originator:</strong> Kyle Whyte &nbsp;·&nbsp; kyle.whyte@flocksafety.com &nbsp;·&nbsp; Flock Safety HQ, Atlanta GA<br>
+    <strong>Envelope sent:</strong> 1/18/2024 — 11:50:26 AM<br>
+    <strong>Zilisch viewed:</strong> 1/22/2024 — 5:05:57 AM<br>
+    <strong>Zilisch signed:</strong> 1/23/2024 — 9:17:46 AM &nbsp;·&nbsp; IP 207.190.95.145<br>
+    <strong>Mark Smith (Flock General Counsel) signed:</strong> 1/23/2024 — 9:39:12 AM &nbsp;·&nbsp; IP 99.98.103.138<br>
+    <strong>Electronic Record &amp; Signature Disclosure:</strong> Created 8/31/2021 — agreed to by Michael Zilisch<br>
+    <strong>Contact email in DocuSign boilerplate:</strong> vishal.deshmukh@oyasolutions.com <em style="color:var(--forensic);font-style:normal">(not a @flocksafety.com address — Oya Solutions, third-party vendor)</em>
+  </div>
+
+  <p class="section-body" style="max-width:820px;margin-top:1.75rem;">
+    The Oya Solutions contact address in Flock's own DocuSign boilerplate raises a separate question: <strong>Flock Safety's contract administration pipeline routes through a third-party vendor that is not on the camera contract</strong>. What data handling agreement governs Oya Solutions' access to the DocuSign envelopes containing municipal law-enforcement contracts, city signatories, and IP addresses? That is its own public records request.
+  </p>
+</section>
+
+<hr>
+
+<!-- 03 — CONTRADICTIONS -->
+<section id="contradictions" class="section">
+  <p class="section-tag">03 — Your Contradictions</p>
+  <h2 class="section-title">Four Contradictions In The City's Own Letter</h2>
+  <p class="section-body" style="max-width:820px;">
+    Below are four claims made in the April 15 response letter from City Administrator Haugh and Mayor Teske, paired with the City's own record. Every quotation is from the letter. Every rebuttal is sourced.
+  </p>
+
+  <div class="reb-grid">
+    <div class="reb">
+      <p class="reb-num">Contradiction 01 — The Wrong Document</p>
+      <p class="reb-claim">"A quote, not the final agreement."</p>
+      <div class="reb-quote">
+        "The document previously sent to you was a quote, not the final agreement. We apologize for any confusion caused by providing the unexecuted quote. Please know that this oversight was unintentional."
+      </div>
+      <p class="reb-body">
+        The Chief of Police responded to a formal records demand on April 7, 2026 by attaching a document he represented as the Flock Safety contract. On April 15, the City Administrator and Mayor confirmed in writing that the document was a quote — for an entirely different deployment, at more than eight times the actual price, with no executed signature block. <em>The Chief of Police did not know the difference between his own quote and his executed contract.</em> That is the contradiction. The correction does not resolve it.
+      </p>
+    </div>
+
+    <div class="reb">
+      <p class="reb-num">Contradiction 02 — "Not Infrastructure"</p>
+      <p class="reb-claim">Network-connected surveillance hardware is "considered an operational investigative tool."</p>
+      <div class="reb-quote">
+        "The statute you cited pertains specifically to public infrastructure projects exceeding $25,000, which require a formal Request for Proposals (RFP) process. Not only is the Flock camera purchase not considered public infrastructure, it's considered an operational investigative tool."
+      </div>
+      <p class="reb-body">
+        Two network-connected, pole-mounted, always-on license plate readers — bolted to public structures, transmitting continuously to servers operated by a private corporation in Atlanta, integrated into a nationwide law enforcement data-sharing network — are infrastructure under any defensible definition. The City's position is that the classification hinges on the accounting label applied during procurement. <em>Reclassifying surveillance hardware does not make it something other than surveillance hardware.</em> The RFP question is preserved for discovery.
+      </p>
+    </div>
+
+    <div class="reb">
+      <p class="reb-num">Contradiction 03 — "We Take Every Request Seriously"</p>
+      <p class="reb-claim">27 days of silence, one wrong document, one apology.</p>
+      <p class="reb-body">
+        A formal decommission notice was served on March 19, 2026 to the Mayor, City Administrator, Chief of Police, and Sheriff — CC'd to a sitting state senator. The City Administrator's office returned an out-of-office auto-reply and then went silent for twenty-seven days. The Chief of Police broke silence on April 7 by providing the wrong document. The City's formal response arrived three days before the original 30-day deadline. <em>A record this sparse does not support the claim that every resident's request is taken seriously.</em> It supports the claim that this one had to be.
+      </p>
+    </div>
+
+    <div class="reb">
+      <p class="reb-num">Contradiction 04 — "Threats And Intimidation"</p>
+      <p class="reb-claim">Civic accountability is not intimidation. Pre-framing rejected on the record.</p>
+      <div class="reb-quote">
+        "We will not make policy or safety decisions regarding our community based on threats or intimidation tactics."
+      </div>
+      <p class="reb-body">
+        Every action taken in this campaign is legal, documented, public, non-violent, and constitutionally protected. First Amendment petition. Protected speech and press. Publication of public records the City itself provided. Commentary on corporate social media. Website operation. No lawsuit has been filed. No threat of physical harm has been made. No voice has been raised at any official in any public setting. <em>Calling civic accountability "intimidation" — while operating a mass surveillance network on a population of 4,400 people without consent — is a posture that should be reconsidered before it is tested in court.</em> For the record, CC'd to Senator Testin.
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- 04 — RANDY GLUCK -->
+<section id="gluck" class="section">
+  <p class="section-tag">04 — The Company You Are Defending</p>
+  <h2 class="section-title">Randy Gluck, Dunwoody, And The Pool Cameras</h2>
+
+  <div class="gluck">
+    <p class="gluck-tag">// Nuclear Finding — Dunwoody, GA Audit Log Release</p>
+    <h3 class="gluck-title">A Flock Safety Employee Used Live Camera Access To Watch Children At A Community Pool For Three Hours. He Is <span class="red">Still An Active User</span>.</h3>
+
+    <p>
+      Source: Jason Hunyar's published analysis (April 8, 2026) of the Flock Safety audit logs released via a Dunwoody, Georgia Open Records Request. The full audit log documentation is maintained at <a href="https://haveibeenflocked.com/news/the-platform" target="_blank">haveibeenflocked.com/news/the-platform</a>.
+    </p>
+
+    <p>
+      <strong>Randy Gluck</strong> — Manager, Business Development, 911 and Emergency Response Products at Flock Safety — had live-view access to the Dunwoody Flock camera network. The audit logs show a pattern that is impossible to characterize as routine:
+    </p>
+
+    <ul>
+      <li>Viewed <strong>54 cameras</strong> across the Dunwoody network with suspicious clicking patterns.</li>
+      <li>On one day, clicked through <strong>5 traffic cameras</strong> before settling on the <strong>Dunwoody Library camera</strong>. No further camera activity in the logs for <strong>approximately two hours</strong>.</li>
+      <li>Two days later, clicked through <strong>3 private cameras at the Marcus Jewish Community Center</strong> before settling on the camera labeled <strong>"Main Pool Right."</strong> Over <strong>three hours</strong> elapsed before his next camera view. The pool is used by families and children.</li>
+      <li>Also viewed <strong>soccer field cameras</strong> at the same facility on multiple occasions.</li>
+      <li>Gluck is <strong>still an active user in the Flock system</strong> as of the audit log publication.</li>
+    </ul>
+
+    <div class="callout">
+      "By refusing to decommission this system, you are actively enabling the infrastructure through which a private corporation's employee watched children at a community pool for three hours. You signed your names to a letter defending this vendor on April 15, 2026. The same day."
+    </div>
+
+    <p><strong>Randy Gluck is not the only case in the audit logs.</strong> The same Dunwoody release documents:</p>
+
+    <ul>
+      <li><strong>Bob Carter</strong>, VP of Strategic Relations / Business Development — ran searches including <em>"chicken truck," "cattle truck,"</em> and <em>"lawnmower"</em> on live police surveillance networks. He is a sales executive, not law enforcement.</li>
+      <li>Flock employees <strong>disabling MFA requirements</strong> on user accounts.</li>
+      <li>Flock employees <strong>disabling audit trails</strong> so their searches do not appear in logs.</li>
+      <li>API connections created to <strong>third-party companies that have no city contract</strong> with Flock.</li>
+      <li><strong>Blank searches</strong> (no query term) sweeping across <strong>898 law enforcement networks</strong> simultaneously.</li>
+      <li><strong>Ghost user accounts</strong> that do not appear in user export reports.</li>
+      <li>An <strong>"auto-approved" user</strong> who conducted <strong>1,931 data-sharing arrangements</strong> with no human review.</li>
+    </ul>
+
+    <p>
+      Flock Safety's public FAQ states: <em>"Nobody from Flock Safety is accessing or monitoring your footage."</em> Their own audit logs contradict that sentence repeatedly. This is the vendor the City of Mauston executed an agreement with in January 2024. This is the vendor the City of Mauston declined to decommission in April 2026.
+    </p>
+
+    <p class="sources">
+      Sources:
+      <a href="https://jasonhunyar.substack.com/p/why-are-flock-employees-watching-720" target="_blank">jasonhunyar.substack.com — "Why Are Flock Employees Watching?"</a> &nbsp;·&nbsp;
+      <a href="https://haveibeenflocked.com/news/the-platform" target="_blank">haveibeenflocked.com/news/the-platform</a> &nbsp;·&nbsp;
+      Dunwoody, GA Open Records Request audit logs (April 2026)
+    </p>
+  </div>
+</section>
+
+<hr>
+
+<!-- 05 — MISSING AGREEMENT -->
+<section id="missing" class="section">
+  <p class="section-tag">05 — The Missing Agreement</p>
+  <h2 class="section-title">The November 9, 2023 Original — FOIA Filed</h2>
+  <p class="section-body" style="max-width:820px;">
+    The executed amendment disclosed on April 15, 2026 references — in its own first paragraph — <em>"a previously executed agreement between the Parties, dated 11/09/2023."</em> That original agreement was <strong>not provided</strong>. A formal open records request under <strong>Wis. Stat. § 19.35</strong> has been filed with the City of Mauston for the missing document.
+  </p>
+
+  <div class="reb-grid" style="margin-top:1.5rem;">
+    <div class="reb">
+      <p class="reb-num">Open Question 01</p>
+      <p class="reb-claim">Was the November 2023 agreement the 8-camera, $50,200 deployment described in the quote?</p>
+      <p class="reb-body">
+        If yes: <em>why did the deployment scale from 8 cameras to 2 between November 2023 and January 2024?</em> What changed? Who made the decision? On whose authority? The quote and the executed amendment describe two fundamentally different deployments signed by the same chief two months apart.
+      </p>
+    </div>
+    <div class="reb">
+      <p class="reb-num">Open Question 02</p>
+      <p class="reb-claim">Was the original agreement authorized by the City Council?</p>
+      <p class="reb-body">
+        If yes: <em>where is the resolution number, the meeting agenda, and the minutes?</em> All three are public records. All three are subject to Wis. Stat. § 19.35. If no: under what delegated authority did the Chief of Police enter the City of Mauston into a contract with a national surveillance vendor without elected-body approval?
+      </p>
+    </div>
+    <div class="reb">
+      <p class="reb-num">Open Question 03</p>
+      <p class="reb-claim">The estate donation funding claim is new. It is also FOIA-able.</p>
+      <p class="reb-body">
+        The April 15 letter states the cameras are funded from <em>"interest earned on a prior estate donation made to the Police Department."</em> Who donated? When? What were the terms? Is there an ordinance governing how police department donation funds are spent? Is there a public accounting of the fund balance, annual draws, and expenditures? Every question on this list will be the subject of a formal records request.
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- 06 — IGNORED -->
+<section id="ignored" class="section">
+  <p class="section-tag">06 — What You Did Not Address</p>
+  <h2 class="section-title">Three Of Five Original Issues Ignored</h2>
+  <p class="section-body" style="max-width:820px;">
+    The April 15 response letter addressed procurement classification and the Chief's document error. It did not address three of the five substantive issues raised in the March 19 demand letter and the April 7 rebuttal. Each of these issues survives the correction.
+  </p>
+
+  <div class="reb-grid" style="margin-top:1.5rem;">
+    <div class="reb">
+      <p class="reb-num">Unaddressed 01 — Section 5.3</p>
+      <p class="reb-claim">Flock's Independent Disclosure Authority — the ICE Second Pathway</p>
+      <p class="reb-body">
+        The Flock Safety Master Services Agreement reserves to Flock the unilateral authority to disclose customer data to law enforcement and government agencies in response to legal process, subpoenas, and agency requests — <em>independent of city authorization, notification, or review</em>. This creates a second pathway into federal immigration enforcement that does not pass through the City of Mauston. The April 15 letter did not acknowledge that this clause exists.
+      </p>
+    </div>
+    <div class="reb">
+      <p class="reb-num">Unaddressed 02 — Chief Zilisch's Dual Role</p>
+      <p class="reb-claim">Chief of Police and Mauston School Board President</p>
+      <p class="reb-body">
+        Chief Michael Zilisch simultaneously serves as President of the Mauston School Board. The same executed contract places the signing authority for a surveillance system monitoring the entire community in the hands of an official who also controls the elected body overseeing the education of that community's children. The April 15 letter did not acknowledge that this dual role exists, let alone that it creates a concentration of unaccountable authority worth addressing.
+      </p>
+    </div>
+    <div class="reb">
+      <p class="reb-num">Unaddressed 03 — Section 11.16</p>
+      <p class="reb-claim">No-Penalty Termination Clause — 30 Days, Zero Cost</p>
+      <p class="reb-body">
+        Section 11.16 of the executed agreement permits the City of Mauston to terminate the contract with <strong>30 days' written notice at zero cost</strong>. This clause exists. The City's own contract contains its exit. The April 15 letter characterized decommissioning as a policy decision subject to "threats and intimidation" rhetoric — while the contract itself already provides a free, pre-authorized, 30-day off-ramp. The exit is not a demand. It is a line in the agreement the Chief of Police signed.
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- 07 — ESCALATION LADDER -->
+<section id="ladder" class="section">
+  <p class="section-tag">07 — The Escalation Ladder</p>
+  <h2 class="section-title">Five Rungs. Fully Transparent. Already Moving.</h2>
+  <p class="section-body" style="max-width:820px;">
+    Every step on this ladder is legal, documented, and explicitly announced in advance. Nothing is hidden. Nothing requires the City's cooperation. Every step is a lawful consequence of the City's decision to not decommission.
+  </p>
+
+  <div class="ladder">
+    <div class="rung">
+      <p class="num">01</p>
+      <div>
+        <p class="lb">Active</p>
+        <h4>EYESONME — Physical Public Accountability Network</h4>
+        <p>
+          Station hardware fully disclosed. Raspberry Pi 5, DietPi, RPi Camera Module 3 (IR), Waveshare SIM7600 4G LTE, LiFePO4 battery bank, MPPT solar, SX1276 LoRa 915MHz + ESP32 local radio, IP65 enclosure with tamper sensor. Field collection flow: LoRa TOTP authentication → ESP32 activates hidden WPA3 access point → encrypted data pull → access point shutdown → radio silent. Five-layer encryption architecture. Offshore data sovereignty. <a href="eyesonme.html" style="color:var(--forensic);border-bottom:1px solid rgba(240,90,74,0.3)">Operations dashboard →</a>
+        </p>
+      </div>
+    </div>
+    <div class="rung">
+      <p class="num">02</p>
+      <div>
+        <p class="lb">Filed</p>
+        <h4>Formal Open Records Requests — Wis. Stat. § 19.35</h4>
+        <p>
+          November 9, 2023 original agreement. Estate donation fund: source, terms, accounting, annual draws. Resolution/minutes for any council authorization of Flock deployments. Correspondence between Chief Zilisch, Flock Safety personnel, and Oya Solutions relating to DocuSign envelope 276C2AE4-3CB3-4E37-B58A-20F61A840112. Every response is public record the moment it lands.
+        </p>
+      </div>
+    </div>
+    <div class="rung">
+      <p class="num">03</p>
+      <div>
+        <p class="lb">Preserved</p>
+        <h4>Civil Liberties Litigation — 42 U.S.C. § 1983</h4>
+        <p>
+          Individual and official capacity. Preserved against Chief Michael Zilisch, Mayor D.D. Teske, and City Administrator Daron J. Haugh. The official-capacity claim is the City of Mauston. The individual-capacity claim is personal liability. This is not a threat. It is a line item on the ladder — notice provided so the record is clean at the time of filing.
+        </p>
+      </div>
+    </div>
+    <div class="rung">
+      <p class="num">04</p>
+      <div>
+        <p class="lb">Rolling</p>
+        <h4>Media Campaign — Press Pitches Going Live</h4>
+        <p>
+          <strong>Juneau County Star-Times</strong> (initial pitch filed April 9). <strong>Wall Street Journal.</strong> <strong>La Crosse Tribune.</strong> <strong>Capital Times.</strong> Long-form video documentation on YouTube with paid algorithmic promotion — budget committed. Every document on this page is a receipt. Every receipt is shareable.
+        </p>
+      </div>
+    </div>
+    <div class="rung">
+      <p class="num">05</p>
+      <div>
+        <p class="lb">Engaged</p>
+        <h4>Legislative Engagement — Sen. Patrick Testin</h4>
+        <p>
+          The original March 19 demand letter was misrouted to Sen. Sarah Keyeski; legislative staff redirected to Sen. Testin on April 7. Full correspondence chain forwarded. Subsequent CC on every subsequent filing. The state-level record builds independently of the municipal record and is not under the City's control.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- 08 — THE EXIT -->
+<section id="exit" class="section">
+  <p class="section-tag">08 — The Exit Is Still Free</p>
+  <h2 class="section-title">Section 11.16. 30 Days. Zero Cost. It's In The Contract The Chief Signed.</h2>
+  <p class="section-body" style="max-width:820px;">
+    Section 11.16 of the executed Flock Group Inc. Amendment permits the City of Mauston to terminate the agreement with <strong>30 days' written notice at zero cost</strong>. The exit is not a demand made by this site. It is a line in a contract the City's own Chief of Police signed on January 23, 2024. The exit has been available every day of this campaign. It is available now. <em class="accent" style="color:var(--forensic)">The cost of staying is going up every day. The cost of leaving is zero.</em>
+  </p>
+
+  <div class="close-quote">
+    "The consequences of this campaign — every article, every FOIA response, every court filing, every frame of footage — rest squarely and entirely on the decisions you make from this moment forward. You were informed. You were given a free exit. You chose to call accountability <em>'intimidation'</em> instead. Choose differently, or don't. <em>The machinery does not require your cooperation to function.</em>"
+    <span class="att" style="display:block;margin-top:1rem;font-size:0.7rem;color:var(--text-dim);letter-spacing:0.1em;">— Blake Clark &nbsp;·&nbsp; April 15, 2026 &nbsp;·&nbsp; 3:10 PM CDT</span>
   </div>
 
   <a href="index.html" class="back-link">← Back to FlockBlocker</a>
-</div>
+</section>
 
 <footer>
   <div class="footer-left">

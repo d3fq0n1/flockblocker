@@ -8,68 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-  :root {
-    --bg: #09090b;
-    --surface: #111116;
-    --surface2: #16161c;
-    --border: #242430;
-    --accent: #c8f04a;
-    --red: #f05a4a;
-    --amber: #f0a84a;
-    --green: #4af0a0;
-    --text: #d4d4dc;
-    --text-mid: #8888a0;
-    --text-dim: #44445a;
-    --white: #f0f0f8;
-    --mono: 'Fira Mono', monospace;
-    --display: 'Black Ops One', cursive;
-    --body: 'Epilogue', sans-serif;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
-  a { color: inherit; text-decoration: none; }
-
-  /* Header */
-  header { border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 56px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9,9,11,0.96); backdrop-filter: blur(12px); z-index: 100; }
-  .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--white); }
-  .logo em { color: var(--accent); font-style: normal; }
-  .header-right { display: flex; align-items: center; gap: 1.25rem; flex-wrap: nowrap; }
-  .header-link { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em; white-space: nowrap; transition: color 0.2s; }
-  .header-link:hover { color: var(--accent); }
-  .header-link.active { color: var(--accent); }
-  .doctrine-link { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; color: var(--text-dim); transition: color 0.2s; }
-  .doctrine-link:hover { color: var(--white); }
-  .live-badge { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--red); display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
-  .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: blink 1.8s ease-in-out infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-  @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,240,160,0.4)} 50%{opacity:0.8;box-shadow:0 0 0 6px rgba(74,240,160,0)} }
-
-  /* Mobile nav */
-  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 200; }
-  .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--white); margin: 4px 0; transition: all 0.3s; }
-  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 5px); }
-  .menu-toggle.active span:nth-child(2) { opacity: 0; }
-  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -5px); }
-  .mobile-nav { display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0; background: rgba(9,9,11,0.98); backdrop-filter: blur(12px); z-index: 99; padding: 2rem 1.5rem; overflow-y: auto; }
-  .mobile-nav.open { display: flex; flex-direction: column; gap: 0.25rem; }
-  .mobile-nav a { font-family: var(--mono); font-size: 0.85rem; color: var(--text-mid); letter-spacing: 0.04em; padding: 0.75rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
-  .mobile-nav a:active { color: var(--accent); }
-
-  /* Shared section */
-  hr { border: none; border-top: 1px solid var(--border); }
-  .section { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
-  .section-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
-  .section-title { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); line-height: 1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
-  .section-body { font-size: 1rem; line-height: 1.9; color: var(--text); max-width: 680px; }
-  .section-body strong { color: var(--white); font-weight: 500; }
-  .section-body em { color: var(--accent); font-style: normal; }
-  .btn { font-family: var(--display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 1.8rem; transition: all 0.18s ease; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; }
-  .btn-fill { background: var(--accent); color: #09090b; }
-  .btn-fill:hover { background: #d8ff5a; transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
-  .btn-outline:hover { border-color: var(--text-mid); color: var(--white); }
+  /* Page-specific — shared chrome lives in assets/site.css */
 
   /* Hero */
   .eom-hero { padding: 6rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
@@ -103,7 +44,7 @@
   /* Station grid */
   .station-grid { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem; }
   .station-grid-label { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
-  .station-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+  .station-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 1.5rem; }
   .station-card { background: var(--surface); border: 1px solid var(--border); padding: 0; transition: border-color 0.2s; }
   .station-card:hover { border-color: var(--text-dim); }
   .station-card-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; }
@@ -143,7 +84,7 @@
   .protected-banner a:hover { color: var(--accent); }
 
   /* Subject dossier cards */
-  .subject-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+  .subject-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 1.5rem; }
   .subject-card { background: var(--surface); border: 1px solid var(--border); transition: border-color 0.2s; }
   .subject-card:hover { border-color: var(--text-dim); }
   .subject-card-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--border); }
@@ -151,7 +92,6 @@
   .subject-org-tag.municipal { color: var(--amber); }
   .subject-org-tag.county { color: var(--red); }
   .subject-org-tag.corporate { color: var(--red); }
-  .subject-org-tag.state { color: #7a8af0; }
   .subject-name { font-family: var(--display); font-size: 1.1rem; color: var(--white); letter-spacing: 0.02em; margin-bottom: 0.2rem; }
   .subject-title { font-family: var(--mono); font-size: 0.68rem; color: var(--text-mid); }
   .subject-card-body { padding: 1.2rem 1.5rem; }
@@ -170,7 +110,6 @@
   .tl-type.statement { color: var(--green); border-color: rgba(74,240,160,0.3); }
   .tl-type.meeting { color: var(--amber); border-color: rgba(240,168,74,0.3); }
   .tl-type.silence { color: var(--red); border-color: rgba(240,90,74,0.3); }
-  .tl-type.escalation { color: #4ad0f0; border-color: rgba(74,208,240,0.3); }
   .tl-date { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); flex-shrink: 0; min-width: 70px; margin-top: 0.15rem; }
   .tl-desc { font-size: 0.78rem; color: var(--text); line-height: 1.5; }
   .subject-card-footer { padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
@@ -233,37 +172,37 @@
   .insight-block strong { color: var(--green); font-weight: 500; }
 
   /* Map */
-  .map-container { height: 300px; background: var(--surface); border: 1px solid var(--border); margin-top: 1.5rem; }
+  .map-container { height: clamp(260px, 50vw, 420px); background: var(--surface); border: 1px solid var(--border); margin-top: 1.5rem; }
 
-  /* Footer */
-  footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-left { font-family: var(--mono); font-size: 0.71rem; color: var(--text-dim); line-height: 1.9; }
-  .footer-left a { color: var(--text-mid); transition: color 0.2s; }
-  .footer-left a:hover { color: var(--accent); }
-  .footer-right { font-family: var(--display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-dim); }
 
   /* Responsive */
-  @media (max-width: 1200px) {
-    .header-link { display: none; }
-    .menu-toggle { display: block; }
+  @media (max-width: 1024px) {
+    .net-status-grid { grid-template-columns: repeat(3, 1fr); }
   }
   @media (max-width: 900px) {
-    header { padding: 0 1.5rem; }
-    .header-link { display: none; }
-    .doctrine-link { display: none; }
-    .menu-toggle { display: block; }
     .eom-hero { padding: 4rem 1.5rem 3rem; }
     .net-status { padding: 2rem 1.5rem 0; }
     .net-status-grid { grid-template-columns: repeat(3, 1fr); }
     .station-grid { padding: 2rem 1.5rem; }
     .station-cards { grid-template-columns: 1fr; }
     .subject-grid { grid-template-columns: 1fr; }
-    .section { padding: 4rem 1.5rem; }
     .deterrence-banner { margin: 0 1.5rem; }
-    footer { padding: 2rem 1.5rem; }
     .feed-entry { flex-wrap: wrap; gap: 0.5rem; }
     .feed-ts { min-width: auto; }
     .feed-station { min-width: auto; }
+  }
+  @media (max-width: 640px) {
+    .eom-hero-title { font-size: clamp(2.8rem, 12vw, 4.5rem); }
+    .net-status-grid { grid-template-columns: repeat(2, 1fr); }
+    .station-cards { grid-template-columns: 1fr; }
+    .subject-grid { grid-template-columns: 1fr; }
+    .station-card-header { flex-wrap: wrap; gap: 0.5rem; }
+    .station-card-footer { flex-wrap: wrap; gap: 0.75rem; }
+    .subject-meta { grid-template-columns: 1fr 1fr; }
+    .crypto-layer { padding: 1.2rem; }
+    .legal-block { padding: 1.2rem 1.5rem; }
+    .insight-block { padding: 1.2rem 1.5rem; }
+    .deterrence-banner { padding: 1.5rem; }
   }
   @media (max-width: 480px) {
     .eom-hero { padding: 3rem 1rem 2rem; }
@@ -273,11 +212,8 @@
     .net-stat-value { font-size: 1.2rem; }
     .station-grid { padding: 1.5rem 1rem; }
     .station-cards { grid-template-columns: 1fr; }
-    .section { padding: 3rem 1rem; }
     .subject-meta { grid-template-columns: 1fr; }
     .deterrence-banner { margin: 0 1rem; padding: 1.5rem; }
-    footer { padding: 1.5rem 1rem; flex-direction: column; align-items: flex-start; }
-    header { padding: 0 1rem; }
   }
 </style>
 </head>
@@ -287,11 +223,12 @@
   <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
   <div class="header-right">
     <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme active">EYESONME</a>
     <a href="index.html" class="header-link">Home</a>
-    <a href="eyesonme.html" class="header-link active">EYESONME</a>
-    <a href="evidence.html" class="header-link" style="color:var(--red)">Evidence</a>
-    <a href="wall-of-shame.html" class="header-link" style="color:var(--red)">Wall of Shame</a>
+    <a href="evidence.html" class="header-link evidence">Evidence</a>
+    <a href="harms.html" class="header-link">Harms</a>
     <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="who.html" class="header-link">Who</a>
     <a href="birdstrike.html" class="header-link">BirdStrike</a>
     <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
     <span class="live-badge"><span id="countdown"></span></span>
@@ -304,11 +241,9 @@
   <a href="eyesonme.html">EYESONME</a>
   <a href="doctrine.html">Deterrence Doctrine</a>
   <a href="evidence.html">Evidence</a>
-  <a href="wall-of-shame.html">Wall of Shame</a>
+  <a href="harms.html">Harms</a>
   <a href="rebellion.html">Rebellion</a>
   <a href="who.html">Who's Responsible</a>
-  <a href="censorship.html">Censorship</a>
-  <a href="money.html">Money</a>
   <a href="birdstrike.html">BirdStrike</a>
   <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
 </nav>
@@ -405,12 +340,6 @@
   <div class="subject-grid" id="subject-grid-corporate">
     <!-- Populated by JS -->
   </div>
-
-  <!-- State subjects -->
-  <p class="station-grid-label" style="margin-top:3rem;">Wisconsin State Legislature — Oversight Officials</p>
-  <div class="subject-grid" id="subject-grid-state">
-    <!-- Populated by JS -->
-  </div>
 </div>
 
 <hr>
@@ -469,7 +398,7 @@
       <span class="feed-ts">2026-03-19 —:—</span>
       <span class="feed-station">NETWORK</span>
       <span class="feed-type">FOIA</span>
-      <span class="feed-desc">Formal decommission notice served to Mauston PD, City Hall, Juneau County SO. 30-day response window established. CC: State Senator Patrick Testin.</span>
+      <span class="feed-desc">Formal decommission notice served to Mauston PD, City Hall, Juneau County SO. 30-day response window established. CC: State Senator Sarah Keyeski.</span>
     </div>
     <div class="feed-entry">
       <span class="feed-ts">2026-03-19 —:—</span>
@@ -673,11 +602,11 @@ fetch('eyesonme-subjects.json').then(r => r.json()).then(function(data) {
   var subjects = data.subjects;
   var foiaRows = [];
   subjects.forEach(function(subj) {
-    var targetId = subj.org_type === 'MUNICIPAL' ? 'subject-grid-municipal' : subj.org_type === 'COUNTY' ? 'subject-grid-county' : subj.org_type === 'STATE' ? 'subject-grid-state' : 'subject-grid-corporate';
+    var targetId = subj.org_type === 'MUNICIPAL' ? 'subject-grid-municipal' : subj.org_type === 'COUNTY' ? 'subject-grid-county' : 'subject-grid-corporate';
     var container = document.getElementById(targetId);
     if (!container) return;
     var statusColor = subj.status === 'UNRESPONSIVE' ? 'var(--red)' : subj.status === 'RESPONDED' ? 'var(--green)' : subj.status === 'UNDER REVIEW' ? 'var(--amber)' : subj.status === 'ESCALATED' ? 'var(--red)' : 'var(--text-mid)';
-    var orgTagClass = subj.org_type === 'MUNICIPAL' ? 'municipal' : subj.org_type === 'COUNTY' ? 'county' : subj.org_type === 'STATE' ? 'state' : 'corporate';
+    var orgTagClass = subj.org_type === 'MUNICIPAL' ? 'municipal' : subj.org_type === 'COUNTY' ? 'county' : 'corporate';
     var silenceDays = subj.silence_broken ? 'Broke silence after ' + daysSince(subj.silence_start) + ' days' : subj.silence_start ? daysSince(subj.silence_start) + ' days silent' : '—';
     var tlHtml = '';
     if (subj.timeline && subj.timeline.length > 0) {
