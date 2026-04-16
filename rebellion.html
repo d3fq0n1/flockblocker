@@ -408,13 +408,25 @@
 
       <tr>
         <td>
+          <span class="city-name">Sturgeon Bay</span><br>
+          <span class="city-state">Wisconsin</span>
+        </td>
+        <td><span class="status status-canceled">Removed</span></td>
+        <td class="city-date">Apr 2026</td>
+        <td>
+          <span class="city-detail">Flock cameras removed. Surfaced via a resident reply in <strong>r/Appleton</strong> on April 10, 2026. First Wisconsin municipality to dump Flock in the window since BIRDSTRIKE launched. Parallel momentum, not causation &mdash; but the pattern is visible.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
           <span class="city-name">Mauston</span><br>
           <span class="city-state">Wisconsin</span>
         </td>
         <td><span class="status status-challenged">Challenged</span></td>
         <td class="city-date">Mar 19, 2026</td>
         <td>
-          <span class="city-detail"><strong>This campaign.</strong> Formal demand letter sent March 19. 30-day deadline expires April 18. No substantive response from any city official. You're reading the result.</span>
+          <span class="city-detail"><strong>This campaign.</strong> Demand letter served March 19. Chief Zilisch broke 19-day silence on April 7 with the wrong document. Forensic rebuttal same day. Press tip filed April 9. Public comment delivered at council April 14. Admin Haugh + Mayor Teske formally responded April 15 with a reissued executed contract &mdash; vendor signature block now completed. Full record: <a href="evidence.html" style="color:var(--accent);border-bottom:1px solid rgba(200,240,74,0.3);">evidence.html</a>.</span>
         </td>
       </tr>
 
@@ -425,6 +437,12 @@
   <div class="insight-block">
     <p>
       <strong>This list is incomplete.</strong> New cancellations are being reported weekly. If your city has canceled, paused, or challenged a Flock Safety contract, submit it. Every documented defection makes the next one easier.
+    </p>
+  </div>
+
+  <div class="insight-block" style="border-left-color:var(--amber);">
+    <p>
+      <strong style="color:var(--amber);">Wisconsin exits underway &mdash; parallel momentum.</strong> Verona declined renewal in 2025. Sturgeon Bay removed cameras in the window since BIRDSTRIKE launched, surfaced through organic discussion in <em style="color:var(--amber);font-style:normal;">r/FlockSurveillance</em>, <em style="color:var(--amber);font-style:normal;">r/Appleton</em>, and <em style="color:var(--amber);font-style:normal;">r/GreenBay</em>, with inbound engagement from residents in Oshkosh, Waukesha, Green Bay, and Appleton. Not causation &mdash; the template is not claiming credit for municipalities that moved independently. Parallel momentum, documented for the record. Wisconsin is not a Flock stronghold.
     </p>
   </div>
 </div>
@@ -493,7 +511,7 @@
 
   <div class="insight-block">
     <p>
-      <strong>To Mauston's city officials:</strong> You are not the first city to face this question. You will not be the last. But you are running out of time to answer it on your own terms. The deadline is April 18, 2026. After that, the answer becomes part of the public record whether you provide it or not.
+      <strong>To Mauston's city officials:</strong> You are not the first city to face this question. You will not be the last. The response window closes April 18, 2026. The Chief of Police has responded. The City Administrator and Mayor have responded. A reissued contract has been produced. What remains on the record is what comes <em>next</em> &mdash; between now and the close &mdash; and what comes next after the close. Section 11.16 of the contract the Chief signed offers a 30-day no-penalty exit. That exit is still available.
     </p>
   </div>
 </div>
@@ -538,7 +556,8 @@ document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('clic
       var h = Math.floor((diff%86400000)/3600000);
       var m = Math.floor((diff%3600000)/60000);
       var s = Math.floor((diff%60000)/1000);
-      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+      var daysRemaining = Math.ceil(diff/86400000);
+      el.textContent = 'T-'+daysRemaining+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
     } else {
       diff = Math.abs(diff);
       var d = Math.floor(diff/86400000);
