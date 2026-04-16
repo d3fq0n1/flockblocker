@@ -218,6 +218,22 @@
       <p class="offense-source">Source: Cambridge, MA contract cancellation records (Late 2025)</p>
     </div>
 
+    <div class="offense-card full-width">
+      <p class="offense-number">Offense 14 — Flock Employees Watching Children On Live Cameras</p>
+      <p class="offense-headline">A Flock Business Development Manager Used Live Camera Access To Watch Children At A Community Pool For Three Hours — And Is Still An Active User</p>
+      <div class="offense-quote">"Nobody from Flock Safety is accessing or monitoring your footage."<br>— Flock Safety public FAQ, directly contradicted by Flock's own audit logs</div>
+      <p class="offense-body">
+        Audit logs released through a Dunwoody, Georgia Open Records Request — published in a public analysis on April 8, 2026 — document <strong>Randy Gluck</strong>, Manager of Business Development for 911 and Emergency Response Products at Flock Safety, using his employee access to the Dunwoody camera network in a pattern no sales role can explain.
+      </p>
+      <p class="offense-body">
+        Gluck viewed <strong>54 cameras</strong> with suspicious clicking patterns. On one day he clicked through 5 traffic cameras before settling on the <strong>Dunwoody Library camera</strong> — approximately <strong>two hours</strong> with no further camera activity in the logs. Two days later, he clicked through 3 private cameras at the <strong>Marcus Jewish Community Center</strong> before settling on <strong>"Main Pool Right"</strong> — <strong>over three hours</strong> before his next camera view. The pool is used by families and children. He also viewed soccer field cameras at the same facility on multiple occasions. <strong>He is still an active user in the Flock system as of publication.</strong>
+      </p>
+      <p class="offense-body">
+        The same audit log release also documents: <strong>Bob Carter</strong>, VP of Strategic Relations &amp; Business Development, running searches for <em>"chicken truck," "cattle truck,"</em> and <em>"lawnmower"</em> across live police surveillance networks — he is a sales executive, not law enforcement. Flock employees <strong>disabling MFA requirements</strong> on user accounts. Flock employees <strong>disabling audit trails</strong> so their searches do not appear in logs. API connections created to third-party companies with <strong>no city contract</strong>. <strong>Blank searches</strong> (no query term) sweeping <strong>898 law enforcement networks</strong> simultaneously. <strong>Ghost user accounts</strong> absent from user export reports. One <strong>"auto-approved" user</strong> who conducted <strong>1,931 data-sharing arrangements</strong> with zero human review. Flock's public FAQ says none of this happens. Flock's own audit logs say all of it does.
+      </p>
+      <p class="offense-source">Source: Jason Hunyar, "Why Are Flock Employees Watching?" (Substack, Apr 8, 2026) · haveibeenflocked.com/news/the-platform · Dunwoody, GA Open Records Request audit logs</p>
+    </div>
+
   </div>
 
   <div class="stat-row">
@@ -567,7 +583,8 @@ document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('clic
       var h = Math.floor((diff%86400000)/3600000);
       var m = Math.floor((diff%3600000)/60000);
       var s = Math.floor((diff%60000)/1000);
-      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+      var daysRemaining = Math.ceil(diff/86400000);
+      el.textContent = 'T-'+daysRemaining+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
     } else {
       diff = Math.abs(diff);
       var d = Math.floor(diff/86400000);

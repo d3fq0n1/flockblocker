@@ -91,6 +91,8 @@ header {
 .header-link.eyesonme { color: var(--accent); text-shadow: 0 0 10px rgba(200,240,74,0.3); }
 /* .evidence class retained as semantic hook; red reserved for live state only */
 .header-link.evidence { color: var(--text-mid); }
+.header-link.evidence:hover { color: var(--accent); text-shadow: 0 0 10px rgba(200,240,74,0.35); }
+.header-link.evidence.active { color: var(--accent); text-shadow: 0 0 10px rgba(200,240,74,0.3); }
 
 .doctrine-link {
   font-family: var(--mono);
