@@ -10,6 +10,9 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Wall of Shame | FlockBlocker">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <meta name="twitter:description" content="Documented cases of Flock Safety surveillance infrastructure used for stalking, voyeurism, and predatory abuse.">
 <style>
   :root {
@@ -510,16 +513,34 @@
 </style>
 </head>
 <body>
-<header class="site-header" role="banner">
-  <a href="index.html" class="logo" aria-label="FlockBlocker home">FLOCK<em>BLOCKER</em></a>
-  <nav class="header-nav" aria-label="Primary">
-    <a href="index.html" class="home-link">Home</a>
-    <a href="wall-of-shame.html" class="current" aria-current="page">Wall of Shame</a>
-    <a href="eyesonme.html">EyesOnMe</a>
-    <a href="rebellion.html">Rebellion</a>
-    <a href="doctrine.html">Doctrine</a>
-  </nav>
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme">EYESONME</a>
+    <a href="index.html" class="header-link">Home</a>
+    <a href="evidence.html" class="header-link evidence">Evidence</a>
+    <a href="wall-of-shame.html" class="header-link active">Wall of Shame</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="who.html" class="header-link">Who</a>
+    <a href="birdstrike.html" class="header-link">BirdStrike</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
+    <span class="live-badge"><span id="countdown"></span></span>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
+  </div>
 </header>
+
+<nav class="mobile-nav">
+  <a href="eyesonme.html">EYESONME</a>
+  <a href="doctrine.html">Deterrence Doctrine</a>
+  <a href="index.html">Home</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="wall-of-shame.html">Wall of Shame</a>
+  <a href="rebellion.html">Rebellion</a>
+  <a href="who.html">Who's Responsible</a>
+  <a href="birdstrike.html">BirdStrike</a>
+  <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
+</nav>
 
 <section class="hero" aria-labelledby="page-title">
   <div class="hero-kicker">Public Record &middot; Civic Accountability</div>
@@ -824,6 +845,39 @@ filterButtons.forEach(btn => {
 })();
 
 render();
+</script>
+<script>
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
+</script>
+<script>
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      var daysRemaining = Math.ceil(diff/86400000);
+      el.textContent = 'T-'+daysRemaining+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
 </script>
 </body>
 </html>
