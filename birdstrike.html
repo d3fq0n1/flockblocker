@@ -144,7 +144,7 @@
   <h1 class="page-hero-title">BIRD<span class="accent">STRIKE</span></h1>
   <p class="page-hero-lead">
     <strong>A replicable playbook for challenging Flock Safety in your city.</strong>
-    Proven in Mauston, Wisconsin. Built to scale. Everything you need &mdash; FOIA templates, demand letters, council scripts, documented evidence &mdash; on one page. <em>Pick it up. Run it.</em>
+    Proven in Mauston, Wisconsin &mdash; complete exchange cycle documented. Built to scale. Everything you need &mdash; FOIA templates, demand letters, council scripts, documented evidence &mdash; on one page. <em>Pick it up. Run it.</em>
   </p>
 </div>
 
@@ -169,6 +169,15 @@
     <div class="tier-label">Technical Contributor</div>
     <div class="tier-time">Variable</div>
   </a>
+</div>
+
+<div class="section" style="padding-top:1rem;padding-bottom:1rem;">
+  <div class="evidence-callout" style="border-left:3px solid var(--strike);max-width:1000px;">
+    <p class="ev-label" style="color:var(--strike);">Mauston &mdash; Completed Exchange Cycle</p>
+    <p class="ev-body">
+      This template is no longer hypothetical proof. Mauston is a <strong>documented, complete exchange cycle</strong> &mdash; demand letter, chief's response citing general authority, forensic rebuttal, press tip, council testimony, and a reissued contract produced by the city in response to the rebuttal. Future operators should expect this pattern: <em>cite chief authority &rarr; produce paperwork &rarr; reissue cleaner paperwork when deficiencies are flagged</em>. The city's response posture is now on the record. Use it. <a href="evidence.html" style="color:var(--strike);border-bottom:1px solid rgba(240,168,74,0.3);">See the full forensic record &rarr;</a>
+    </p>
+  </div>
 </div>
 
 <hr>
@@ -767,7 +776,8 @@ document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('clic
       var h = Math.floor((diff%86400000)/3600000);
       var m = Math.floor((diff%3600000)/60000);
       var s = Math.floor((diff%60000)/1000);
-      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+      var daysRemaining = Math.ceil(diff/86400000);
+      el.textContent = 'T-'+daysRemaining+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
     } else {
       diff = Math.abs(diff);
       var d = Math.floor(diff/86400000);

@@ -234,6 +234,10 @@
         <p class="stat-item-label">Original Notice Issued</p>
         <p class="stat-item-value sm">2026-03-19</p>
       </div>
+      <div class="stat-item">
+        <p class="stat-item-label">Response Window Closes</p>
+        <p class="stat-item-value deadline" id="stat-window-closes">Apr 18 · T-?D</p>
+      </div>
     </div>
   </div>
 </div>
@@ -305,7 +309,7 @@
   <div class="origin-card">
     <p>On <strong>March 19, 2026</strong>, a formal decommission notice was sent to the Mayor, City Administrator, Police Chief, and Sheriff of Mauston, Wisconsin — originally CC'd to State Senator Sarah Keyeski (misrouted; redirected to the correct-district senator, <strong>Sen. Patrick Testin</strong>, on April 7).</p>
     <p>The letter documented Flock Safety's data architecture, the ICE access vector, documented misuse cases nationally and in Wisconsin, and municipal liability exposure under the existing contract. Three specific demands were made: the authorizing ordinance, the full contract including data retention and third-party access terms, and the city's stated position on decommissioning.</p>
-    <p>A 30-day response window was established. No response becomes documented public record of officials ignoring a formal resident complaint with a sitting state senator CC'd.</p>
+    <p>A 30-day response window was established. Chief Zilisch broke nineteen days of silence on April 7 by providing the wrong document. City Administrator Haugh and Mayor Teske formally responded on April 15 &mdash; three days before the window closed &mdash; with a reissued contract having the previously-blank vendor signature block now completed. The record is bilateral. See the <a href="evidence.html" style="color:var(--accent);border-bottom:1px solid rgba(200,240,74,0.3)">Evidence page</a>.</p>
     <p><strong>FlockBlocker is what gets built while they decide.</strong></p>
     <div class="origin-meta">
       <div>
@@ -339,6 +343,8 @@
         On <strong>April 15, 2026 at 2:36 PM CDT</strong>, City Administrator <strong>Daron J. Haugh, MBA</strong> — silent for 27 days — sent a formal response letter co-signed by Mayor <strong>D.D. Teske</strong>, accompanied by a "corrected" executed contract. The letter admits the document Chief Zilisch previously provided was <em>not the contract</em> — it was a quote. <strong>Blake's rebuttal went out 34 minutes later.</strong>
         <br><br>
         The corrected figures: <strong>2 fixed Falcon cameras, $6,300 total, $6,000/yr</strong> — signed via DocuSign on January 23, 2024 by Chief Zilisch and Flock General Counsel Mark Smith. The amendment references a prior November 9, 2023 agreement that was <em>not provided</em>. FOIA filed.
+        <br><br>
+        The city produced cleaner paperwork <em>in response to</em> our forensic findings. That act &mdash; not any one line in the document &mdash; is the material admission. When a municipal legal apparatus produces a revised contract, co-signed by the mayor, three days before a stated deadline, the reissuance itself is the record.
       </p>
       <div style="margin-top:2rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
         <a href="evidence.html" class="btn btn-fill">See The Forensic Record →</a>
@@ -386,11 +392,15 @@
     </div>
     <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
       <span style="font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;">Apr 9, 2026</span>
-      <span style="font-size:0.9rem;color:var(--text);">Press pitch to Juneau County Star-Times. EYESONME conceived and built.</span>
+      <span style="font-size:0.9rem;color:var(--text);">Story tip filed with WiscNews / Juneau County Star-Times. CC: every original recipient + Sen. Testin. EYESONME conceived and built.</span>
     </div>
     <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
       <span style="font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;">Apr 11, 2026</span>
       <span style="font-size:0.9rem;color:var(--text);">EYESONME launched on flockblocker.org.</span>
+    </div>
+    <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;">Apr 14, 2026</span>
+      <span style="font-size:0.9rem;color:var(--text);">Three-minute public comment delivered at Mauston city council meeting. On the record.</span>
     </div>
     <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
       <span style="font-family:var(--mono);font-size:0.68rem;color:var(--red);letter-spacing:0.1em;">Apr 15 · 2:36 PM</span>
@@ -401,8 +411,8 @@
       <span style="font-size:0.9rem;color:var(--text);">Rebuttal sent. <strong style="color:var(--accent)">34-minute response time.</strong> Randy Gluck. § 1983. FOIA filed. Media campaign announced.</span>
     </div>
     <div style="background:var(--surface);padding:1.1rem 1.4rem;display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:baseline;">
-      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;">Apr 18, 2026</span>
-      <span style="font-size:0.9rem;color:var(--text);">Original 30-day deadline.</span>
+      <span style="font-family:var(--mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.1em;" id="timeline-deadline-label">Apr 18 · T-?D</span>
+      <span style="font-size:0.9rem;color:var(--text);">Original 30-day response window closes. <span id="timeline-deadline-aux" style="color:var(--text-dim);font-family:var(--mono);font-size:0.72rem;"></span></span>
     </div>
   </div>
 </div>
@@ -455,6 +465,9 @@ document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('clic
 (function(){
   var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
   var el = document.getElementById('countdown');
+  var tlLabel = document.getElementById('timeline-deadline-label');
+  var tlAux = document.getElementById('timeline-deadline-aux');
+  var statWindow = document.getElementById('stat-window-closes');
   function pad(n){return n<10?'0'+n:n;}
   function tick(){
     var now = Date.now();
@@ -464,13 +477,20 @@ document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('clic
       var h = Math.floor((diff%86400000)/3600000);
       var m = Math.floor((diff%3600000)/60000);
       var s = Math.floor((diff%60000)/1000);
-      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+      var daysRemaining = Math.ceil(diff/86400000);
+      if(el) el.textContent = 'T-'+daysRemaining+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+      if(tlLabel) tlLabel.textContent = 'Apr 18 · T-'+daysRemaining+'D';
+      if(tlAux) tlAux.textContent = '(' + daysRemaining + ' day' + (daysRemaining===1?'':'s') + ' remaining)';
+      if(statWindow) statWindow.textContent = 'Apr 18 · T-'+daysRemaining+'D';
     } else {
       diff = Math.abs(diff);
       var d = Math.floor(diff/86400000);
       var h = Math.floor((diff%86400000)/3600000);
       var m = Math.floor((diff%3600000)/60000);
-      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+      if(el) el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+      if(tlLabel) tlLabel.textContent = 'Apr 18 · CLOSED';
+      if(tlAux) tlAux.textContent = '(window closed)';
+      if(statWindow) statWindow.textContent = 'Apr 18 · CLOSED';
     }
   }
   tick();

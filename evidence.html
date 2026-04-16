@@ -341,6 +341,18 @@
       <p class="rx-label">Issues Dodged</p>
       <p class="rx-val accent">3 of 5</p>
     </div>
+    <div class="rx-cell">
+      <p class="rx-label">Council Testimony</p>
+      <p class="rx-val">Apr 14 · 3-min public comment</p>
+    </div>
+    <div class="rx-cell">
+      <p class="rx-label">Response Window</p>
+      <p class="rx-val accent" id="evd-window-closes">Apr 18 · T-?D</p>
+    </div>
+    <div class="rx-cell">
+      <p class="rx-label">Press Tip Filed</p>
+      <p class="rx-val">Apr 9 · Juneau Star-Times</p>
+    </div>
   </div>
 </section>
 
@@ -415,6 +427,9 @@
 <section id="real-contract" class="section">
   <p class="section-tag">02 — The Real Contract</p>
   <h2 class="section-title">The Executed Amendment — $6,300 For 2 Cameras</h2>
+  <p class="section-body" style="max-width:820px;">
+    Note the sequence. On April 7, the Chief of Police responded to a formal records demand by providing a document with a <strong>blank vendor signature block</strong>. On April 15 &mdash; after a same-day forensic rebuttal, a press tip to the Juneau County Star-Times, and a three-minute public comment at the April 14 council meeting &mdash; the City Administrator produced cleaner paperwork: an executed amendment with the Flock signature block now fully populated. <em class="accent" style="color:var(--forensic)">The reissuance itself is the material admission.</em> A municipal legal apparatus does not co-sign a corrected contract three days before a stated deadline absent pressure. That pressure is the record.
+  </p>
   <p class="section-body" style="max-width:820px;">
     The document the City produced on April 15, 2026 is a <strong>Flock Group Inc. Amendment</strong>, signed via DocuSign on <strong>January 23, 2024</strong>. The amendment supersedes a previously executed agreement dated <strong>November 9, 2023</strong> — an original that the City did not provide. A formal open records request under Wis. Stat. § 19.35 has been filed for the missing November 2023 agreement.
   </p>
@@ -759,6 +774,7 @@ document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('clic
 (function(){
   var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
   var el = document.getElementById('countdown');
+  var evdWindow = document.getElementById('evd-window-closes');
   function pad(n){return n<10?'0'+n:n;}
   function tick(){
     var now = Date.now();
@@ -768,13 +784,16 @@ document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('clic
       var h = Math.floor((diff%86400000)/3600000);
       var m = Math.floor((diff%3600000)/60000);
       var s = Math.floor((diff%60000)/1000);
-      el.textContent = pad(d)+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+      var daysRemaining = Math.ceil(diff/86400000);
+      if(el) el.textContent = 'T-'+daysRemaining+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+      if(evdWindow) evdWindow.textContent = 'Apr 18 · T-'+daysRemaining+'D';
     } else {
       diff = Math.abs(diff);
       var d = Math.floor(diff/86400000);
       var h = Math.floor((diff%86400000)/3600000);
       var m = Math.floor((diff%3600000)/60000);
-      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+      if(el) el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+      if(evdWindow) evdWindow.textContent = 'Apr 18 · CLOSED';
     }
   }
   tick();
