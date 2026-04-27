@@ -64,7 +64,8 @@ flockblocker/
 ├── hardware/               # Raspberry Pi & Public Accountability Station specs
 ├── optical/                # IR interference & retroreflective material research
 ├── distribution/           # Bumper sticker designs & distribution strategy
-├── legal/                  # FOIA templates & contract analysis
+├── legal/                  # FOIA templates, contract analysis, C&D transcription
+├── flockdocs/              # Primary-source documents (C&D PDF, contracts, FOIA productions)
 ├── prompts/                # System prompts for Gemini Nano on-device intelligence
 ├── screenshots/            # Media assets
 │
@@ -77,6 +78,8 @@ flockblocker/
 ├── submit.html             # Story submission form
 ├── stories.html            # Approved user stories (geography-grouped)
 ├── evidence.html           # Public record contract & chief's response
+├── the-letter.html         # April 16 cease-and-desist as redaction-with-reveal performance
+├── wall-of-shame.html      # Documented LPR-network misuse cases
 ├── birdstrike.html         # "Project BIRDSTRIKE" municipal research template
 ├── harms.html              # Catalog of Flock harms + censorship record + money flow (merged)
 ├── rebellion.html          # Tracking 32+ municipal defections
@@ -185,7 +188,31 @@ Published deterrence doctrine — formal dated document with live SHA-256 hash (
 - FOIA tracker header note
 - Standalone `/doctrine` page
 
-### 10. Public Information Pages
+### 10. The Letter (`the-letter.html`)
+
+Cease-and-desist letter served by Flock Safety on April 16, 2026, published April 28, 2026 as a redaction-with-reveal performance piece — Day 1 of a staggered three-page rollout (Day 2 and Day 3 not yet built).
+
+**Component behavior:**
+- The procedural envelope (letterhead, date, service line, recipient block with the eight noticed email addresses, RE line, salutation, closing, Dan Haley signature, proof-of-service footer) renders unredacted.
+- All 14 substantive paragraphs of demand and legal argument are wrapped in `<span class="redactable">` elements that render as solid black bars.
+- Desktop: hover reveals; focus also reveals (keyboard accessible).
+- Touch: tap to reveal; 4-second auto-conceal; immediate conceal on scroll-out (IntersectionObserver).
+- Per-element timeouts isolated so adjacent spans don't interfere.
+- "Reveal All" / "Conceal All" buttons at the top of the letter section override per-element behavior with a global lock.
+- `<noscript>` block: redactions stay opaque if JS is disabled; download link to original PDF remains accessible.
+- ARIA: `tabindex="0"`, `role="button"`, `aria-label="Redacted text — activate to reveal"`, `aria-live="polite"` on every redactable; hidden `.sr-only` preface announces redaction-by-design before the revealed text.
+
+**Source artifacts:**
+- Original PDF: `flockdocs/CEASE AND DESIST_Flockblocker.pdf`
+- Verbatim transcription (canonical): `legal/cease-and-desist-2026-04-16.txt`
+- Wayback snapshot link: April 16, 2026 15:29 ET (link in Status block)
+- Git tag (operator-managed): `pre-cease-and-desist-2026-04-16`
+
+**Tone constraint:** the-letter.html is the only page on the site where the campaign jokes. The joke is the design (redaction undone trivially) — the prose stays flat, dated, and procedural. No exclamation marks, no adjectives describing Flock's conduct, no mention of any city official, no preview of forthcoming page content beyond Section 5's single dated sentence.
+
+**Not in nav.** The page is reachable from the homepage "Recent" section only, matching the existing out-of-nav pattern (`harms.html`, `doctrine.html`, `stories.html`, `submit.html`).
+
+### 11. Public Information Pages
 
 Static HTML pages documenting surveillance harms, municipal defections, FOIA templates, the "Project BIRDSTRIKE" distributed research framework, evidence/contracts, funding analysis, censorship documentation, and personnel dossiers.
 
@@ -305,3 +332,6 @@ wrangler deploy
 - Deterrence doctrine footer present on every HTML page site-wide
 - `[ DETERRENCE DOCTRINE ]` header link present on every HTML page
 - All pages link to `eyesonme.html` and `doctrine.html` in both desktop and mobile navigation
+- Pages outside the standardized nav: `harms.html`, `doctrine.html`, `stories.html`, `submit.html`, `the-letter.html`, `404.html` — reachable from the homepage or contextual links only
+- Redaction component: `.redactable` spans with click/focus reveal, 4-second auto-conceal, IntersectionObserver scroll-conceal, `prefers-reduced-motion` honored; `[ REVEAL ALL ]` / `[ CONCEAL ALL ]` controls override per-element behavior. Used only on `the-letter.html`.
+- Editorial tone is clinical and procedural across the site — `the-letter.html` is the sole exception, where the joke lives in the design rather than the prose

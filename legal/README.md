@@ -17,6 +17,11 @@ FOIA templates, open records request frameworks, and municipal contract analysis
 - Georgetown Law Center on Privacy & Technology — ALPR documentation
 - State open records request procedures and response timelines
 
+## Files in this directory
+
+- `cease-and-desist-2026-04-16.txt` — Verbatim transcription of the cease-and-desist letter served to this project on April 16, 2026 by Flock Safety (Dan Haley, Chief Legal Officer). The original PDF lives at `flockdocs/CEASE AND DESIST_Flockblocker.pdf`. The letter is rendered on `the-letter.html` as a redaction-with-reveal piece.
+- `contracts/mauston-flock-contract.pdf` — Executed Flock Safety contract obtained from the City of Mauston.
+
 ## Key Legal Distinctions
 
 - **Physically obscuring or altering a license plate:** Illegal in all 50 states.
