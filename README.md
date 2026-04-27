@@ -47,7 +47,8 @@ This approach builds on published academic research in adversarial machine learn
 /research        Academic papers, LPR vulnerability analysis, Flock architecture documentation
 /optical         Retroreflective and IR-based interference approaches
 /adversarial     Adversarial patch research for OCR/neural network misclassification
-/legal           FOIA templates, open records requests, municipal contract analysis
+/legal           FOIA templates, open records requests, municipal contract analysis, C&D transcription
+/flockdocs       Primary-source documents — Flock Safety legal correspondence, executed contracts, FOIA productions
 /distribution    Bumper sticker designs, print specifications, distribution strategy
 /hardware        Raspberry Pi hardware catalog, Public Accountability Station specifications
 /prompts         System prompts for on-device PAS intelligence (Gemini Nano)

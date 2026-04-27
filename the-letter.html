@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Letter — flockblocker.org</title>
+<meta name="description" content="Cease and desist letter from Flock Safety, served April 16, 2026. Published in full.">
+<meta property="og:title" content="The Letter — flockblocker.org">
+<meta property="og:description" content="Cease and desist letter from Flock Safety, served April 16, 2026. Published in full.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="chief-response.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  :root {
+    --color-redaction: #000;
+  }
+
+  /* ---------- Page layout ---------- */
+  .letter-page { max-width: 880px; margin: 0 auto; }
+  .letter-page .section { padding: 4rem 2.5rem; }
+
+  /* ---------- Status block (Section 2) ---------- */
+  .status-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    margin-top: 2rem;
+  }
+  .status-block .status-line {
+    font-family: var(--mono);
+    font-size: 0.86rem;
+    color: var(--text);
+    line-height: 1.85;
+  }
+  .status-block .status-line + .status-line { margin-top: 0.25rem; }
+  .status-meta {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .status-meta a {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-mid);
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.15rem;
+    transition: color 0.2s, border-color 0.2s;
+    overflow-wrap: break-word;
+  }
+  .status-meta a:hover { color: var(--accent); border-color: rgba(200,240,74,0.4); }
+
+  /* ---------- The letter (Section 3) ---------- */
+  .reveal-controls {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .reveal-controls .btn {
+    font-size: 0.7rem;
+    padding: 0.65rem 1.25rem;
+  }
+  .noscript-note {
+    background: var(--surface2);
+    border-left: 3px solid var(--amber);
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  .letter {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 3rem 3rem;
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    line-height: 1.9;
+    color: var(--text);
+  }
+  .letter-head,
+  .letter-recipient,
+  .letter-signature,
+  .letter-service,
+  .letter-service-proof,
+  .letter-re {
+    white-space: pre-line;
+    color: var(--white);
+  }
+  .letter-head {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .letter-service,
+  .letter-service-proof {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+  .letter-recipient { font-size: 0.86rem; }
+  .letter-recipient .emails { color: var(--text-mid); word-break: break-word; }
+  .letter-date,
+  .letter-salutation,
+  .letter-closing { color: var(--white); }
+  .letter-block { margin-bottom: 1.75rem; }
+  .letter-block:last-child { margin-bottom: 0; }
+  .letter-body p { margin-bottom: 1.4rem; }
+  .letter-body p:last-child { margin-bottom: 0; }
+
+  /* ---------- Redactable spans ---------- */
+  .redactable {
+    background-color: var(--color-redaction);
+    color: var(--color-redaction);
+    cursor: pointer;
+    transition: color 250ms ease, background-color 250ms ease;
+    outline: none;
+    padding: 0 2px;
+    user-select: none;
+    border-radius: 1px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .redactable:hover,
+  .redactable:focus,
+  .redactable.is-revealed {
+    background-color: transparent;
+    color: var(--text);
+    user-select: text;
+  }
+  .redactable:focus-visible {
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  @media (pointer: coarse) {
+    .redactable:hover {
+      background-color: var(--color-redaction);
+      color: var(--color-redaction);
+    }
+    .redactable.is-revealed {
+      background-color: transparent;
+      color: var(--text);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .redactable { transition: none; }
+  }
+  .redactable .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ---------- Provenance + What's next ---------- */
+  .provenance p,
+  .whats-next p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 1.4rem;
+    max-width: 720px;
+  }
+  .provenance p:last-child,
+  .whats-next p:last-child { margin-bottom: 0; }
+  .provenance a,
+  .whats-next a {
+    color: var(--accent);
+    border-bottom: 1px solid rgba(200,240,74,0.3);
+    transition: border-color 0.2s;
+  }
+  .provenance a:hover,
+  .whats-next a:hover { border-color: var(--accent); }
+
+  .signoff {
+    margin-top: 2rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 900px) {
+    .letter-page .section { padding: 3rem 1.5rem; }
+    .letter { padding: 2rem 1.75rem; }
+    .status-block { padding: 1.5rem 1.75rem; }
+  }
+  @media (max-width: 480px) {
+    .letter-page .section { padding: 2.5rem 1rem; }
+    .letter { padding: 1.5rem 1.25rem; font-size: 0.85rem; }
+    .status-block { padding: 1.25rem 1rem; }
+    .reveal-controls .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme">EYESONME</a>
+    <a href="index.html" class="header-link">Home</a>
+    <a href="evidence.html" class="header-link evidence">Evidence</a>
+    <a href="wall-of-shame.html" class="header-link">Wall of Shame</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="who.html" class="header-link">Who</a>
+    <a href="birdstrike.html" class="header-link">BirdStrike</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
+    <span class="live-badge"><span id="countdown"></span></span>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="eyesonme.html">EYESONME</a>
+  <a href="doctrine.html">Deterrence Doctrine</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="wall-of-shame.html">Wall of Shame</a>
+  <a href="rebellion.html">Rebellion</a>
+  <a href="who.html">Who's Responsible</a>
+  <a href="birdstrike.html">BirdStrike</a>
+  <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
+</nav>
+
+<div class="letter-page">
+
+  <!-- Section 1 — Page hero -->
+  <div class="page-hero">
+    <p class="page-hero-kicker">// Cease and desist · Flock Safety</p>
+    <h1 class="page-hero-title">THE LETTER</h1>
+    <p class="page-hero-lead">
+      Cease and desist served <time datetime="2026-04-16T15:29:00-04:00">April 16, 2026, 3:29 PM ET</time>. Published <time datetime="2026-04-28">April 28, 2026</time>.
+    </p>
+  </div>
+
+  <hr>
+
+  <!-- Section 2 — Status block -->
+  <div class="section" id="status">
+    <p class="section-tag">Status</p>
+    <div class="status-block">
+      <p class="status-line">Site state at time of service preserved.</p>
+      <p class="status-line">No edits made post-service to the substantive site.</p>
+      <p class="status-line">Site posture resumed <time datetime="2026-04-27">April 27, 2026</time>.</p>
+      <div class="status-meta">
+        <a href="https://web.archive.org/web/20260416152900*/flockblocker.org" target="_blank" rel="noopener">Wayback Machine snapshot — April 16, 2026, 15:29 ET ↗</a>
+        <a href="https://github.com/d3fq0n1/flockblocker/releases/tag/pre-cease-and-desist-2026-04-16" target="_blank" rel="noopener">Git tag pre-cease-and-desist-2026-04-16 ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Section 3 — The letter -->
+  <div class="section" id="letter">
+    <p class="section-tag">The letter</p>
+    <h2 class="section-title">In Full</h2>
+
+    <noscript>
+      <div class="noscript-note">
+        Interactive reveal requires JavaScript. With JavaScript disabled, the redacted paragraphs remain redacted. The original PDF is linked below in Section 4.
+      </div>
+    </noscript>
+
+    <div class="reveal-controls" role="group" aria-label="Reveal controls">
+      <button type="button" class="btn btn-outline" id="reveal-all">[ REVEAL ALL ]</button>
+      <button type="button" class="btn btn-outline" id="conceal-all">[ CONCEAL ALL ]</button>
+    </div>
+
+    <article class="letter" aria-label="Cease and desist letter, full text">
+
+      <div class="letter-block letter-head">FLOCK SAFETY</div>
+
+      <div class="letter-block letter-date">April 16, 2026</div>
+
+      <div class="letter-block letter-service">VIA CERTIFIED MAIL AND EMAIL</div>
+
+      <div class="letter-block letter-recipient">Blake Clark
+605 Lincoln Street
+Mauston, WI 53948
+
+<span class="emails"><strong>EMAIL:</strong> ultima_blake@hotmail.com; communistwithagun@gmail.com; omni_blake@hotmail.com; blake.pirateking@gmail.com; blakepirateking@gmail.com; ultima_blake@dell.com; communistwithagun@mail.com; ultima_blake@gmail.com</span></div>
+
+      <div class="letter-block letter-re"><strong>RE:</strong> Demand for Immediate Cessation of Defamatory and False Online Publications Related to the Website &ldquo;flockblocker.org&rdquo;</div>
+
+      <div class="letter-block letter-salutation">Mr. Clark,</div>
+
+      <div class="letter-body">
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>I write concerning your unauthorized and unlawful creation, ownership, and operation of the website &ldquo;flockblocker.org&rdquo; (the &ldquo;Website&rdquo;). In addition to numerous false, misleading, and/or defamatory representations about Flock Safety and its technologies, operations, and personnel, this Website presently contains demonstrably false, misleading, and defamatory statements regarding a specific Flock employee at https://flockblocker.org/wall-of-shame.html.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>Flock hereby demands that you immediately cease and desist all unlawful activities described herein, specifically:</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>1. IMMEDIATELY taking down, de-indexing, and permanently deleting all defamatory and false content on the Website &ldquo;flockblocker.org,&rdquo; and on all associated social media accounts, mirror sites, and archived versions.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>2. IMMEDIATELY removing all false, misleading, and defamatory content concerning the Flock employee Randy Gluck, and any other Flock personnel or the company itself, from all online platforms, including but not limited to any remaining websites, social media, forums, and discussion boards.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>3. IMMEDIATELY providing written confirmation within seven (7) calendar days of the date of this Notice that you have complied with all of the demands set forth herein.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>The content published on &ldquo;flockblocker.org&rdquo; contains statements of fact concerning the Flock employee that are patently false and untrue. Under Wisconsin law and common law principles, these statements are defamatory <em>per se</em>, causing irreparable harm to the employee&rsquo;s professional and personal reputation, and resulting in ongoing damages to Mr. Gluck and to Flock.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>Defamation consists of a statement that is published to a third party, is false, and tends to harm the reputation of the individual (<em>See Torgerson v. Journal/Sentinel, Inc.</em>, 210 Wis. 2d 525 (1997)). Given that the inflammatory and false statements made on your Website pertain directly to the employee&rsquo;s professional and personal conduct and integrity, they constitute defamation <em>per se</em>, meaning falsity and damages are presumed.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>Your publication of these statements demonstrates a malicious intent or, at minimum, a reckless disregard for the truth, and is not excused or validated by your citation to equally false assertions by others.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>Your failure to immediately comply with the demands set forth above will leave Flock with no alternative but to pursue all available legal remedies against you, including, but not limited to:</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>1. Filing a lawsuit for defamation and related torts in the appropriate federal or Wisconsin state court.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>2. Seeking a temporary restraining order and permanent injunction to compel the immediate removal of the content and the shutdown of the Website, as provided under Rule 65 of the Federal Rules of Civil Procedure or corresponding Wisconsin Rules.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>3. Seeking monetary damages, which include actual damages, punitive damages for malicious conduct, and recovery of all attorneys&rsquo; fees and costs incurred in enforcing Flock&rsquo;s rights.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>This letter is not an exhaustive statement of Flock&rsquo;s rights and remedies, all of which are expressly reserved.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>We trust that you will give this matter the immediate attention it requires and comply fully with these demands to avoid further legal action.</span></p>
+      </div>
+
+      <div class="letter-block letter-closing">Sincerely,</div>
+
+      <div class="letter-block letter-signature">Dan Haley
+Chief Legal Officer</div>
+
+      <div class="letter-block letter-service-proof"><strong>Proof of Service:</strong> This Notice was sent via USPS Certified Mail, Return Receipt Requested, and via email on April 16, 2026.</div>
+
+    </article>
+  </div>
+
+  <hr>
+
+  <!-- Section 4 — Provenance -->
+  <div class="section provenance" id="provenance">
+    <p class="section-tag">Provenance</p>
+    <h2 class="section-title">Service and Status</h2>
+    <p>The letter was served on <time datetime="2026-04-16">April 16, 2026</time> to eight email addresses associated with the operator and by certified mail. The seven-day takedown deadline stated in the letter expired on <time datetime="2026-04-23">April 23, 2026</time>. No litigation has been filed as of <time datetime="2026-04-28">April 28, 2026</time>.</p>
+    <p>The letter is a unilateral communication from corporate counsel to a private citizen. It is not subject to confidentiality absent a separate agreement.</p>
+    <p><a href="flockdocs/CEASE%20AND%20DESIST_Flockblocker.pdf">Download CEASE AND DESIST_Flockblocker.pdf</a></p>
+  </div>
+
+  <hr>
+
+  <!-- Section 5 — What's next -->
+  <div class="section whats-next" id="next">
+    <p class="section-tag">What's next</p>
+    <h2 class="section-title">Continuing Schedule</h2>
+    <p>Additional documentation, including the City of Mauston's open records production and analysis of municipal procurement and fiduciary process, will be published on a continuing schedule. <time datetime="2026-04-27">April 27, 2026</time>.</p>
+    <p class="signoff">Updates dated as published. — flockblocker.org</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">
+    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
+    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a> · <time datetime="2026-04-27">2026-04-27</time>
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+<script>
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
+</script>
+
+<script>
+/* Live-badge countdown — same logic as other pages so the header behaves identically. */
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    if(!el) return;
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      var daysRemaining = Math.ceil(diff/86400000);
+      el.textContent = 'T-'+daysRemaining+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
+<script>
+/* Redaction reveal/conceal module.
+   - click / focus reveals; 4s timeout returns to redacted
+   - blur returns to redacted after 4s
+   - IntersectionObserver returns to redacted on scroll-out
+   - "Reveal all" / "Conceal all" buttons override per-element behavior */
+(() => {
+  const REVEAL_TIMEOUT_MS = 4000;
+  const redactables = document.querySelectorAll('.redactable');
+  let lockRevealed = false;
+
+  redactables.forEach(el => {
+    let timeoutId = null;
+
+    const scheduleConceal = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        if (!lockRevealed) el.classList.remove('is-revealed');
+      }, REVEAL_TIMEOUT_MS);
+    };
+
+    const reveal = () => {
+      el.classList.add('is-revealed');
+      if (!lockRevealed) scheduleConceal();
+    };
+
+    const conceal = () => {
+      if (lockRevealed) return;
+      el.classList.remove('is-revealed');
+      clearTimeout(timeoutId);
+    };
+
+    el.addEventListener('click', reveal);
+    el.addEventListener('focus', reveal);
+    el.addEventListener('blur', () => {
+      if (lockRevealed) return;
+      scheduleConceal();
+    });
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        reveal();
+      }
+    });
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) conceal();
+        });
+      }, { threshold: 0 });
+      observer.observe(el);
+    }
+  });
+
+  const revealAllBtn = document.getElementById('reveal-all');
+  const concealAllBtn = document.getElementById('conceal-all');
+
+  if (revealAllBtn) {
+    revealAllBtn.addEventListener('click', () => {
+      lockRevealed = true;
+      redactables.forEach(el => el.classList.add('is-revealed'));
+    });
+  }
+  if (concealAllBtn) {
+    concealAllBtn.addEventListener('click', () => {
+      lockRevealed = false;
+      redactables.forEach(el => el.classList.remove('is-revealed'));
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
