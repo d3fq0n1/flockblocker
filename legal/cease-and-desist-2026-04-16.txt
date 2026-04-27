@@ -1,0 +1,108 @@
+============================================================
+[TODO BEFORE DEPLOY] — Transcription scaffold
+Cease and desist letter from Flock Group, Inc.
+Served: 2026-04-16 15:29 ET (eight email addresses + certified mail)
+Takedown deadline (per letter): 2026-04-23
+============================================================
+
+Workflow:
+  1. Operator transcribes the C&D into the slots below.
+  2. Operator copies each numbered body paragraph into the
+     corresponding `<span class="redactable">[TODO PARAGRAPH N]</span>`
+     in the-letter.html.
+  3. Operator copies the unredacted blocks (letterhead, recipient,
+     date, signature) into the matching unredacted slots in the-letter.html.
+  4. Operator places the original PDF at:
+        legal/cease-and-desist-2026-04-16.pdf
+     (or updates the download link in the-letter.html Section 4
+     to wherever the file lives).
+
+============================================================
+UNREDACTED — letterhead block
+============================================================
+
+[TODO LETTERHEAD]
+  Flock Group, Inc.
+  [street address]
+  [city, state, zip]
+  [phone / email if present on letterhead]
+
+
+============================================================
+UNREDACTED — date line
+============================================================
+
+April 16, 2026
+
+
+============================================================
+UNREDACTED — recipient block
+============================================================
+
+[TODO RECIPIENT]
+  [name as addressed]
+  [street address]
+  [city, state, zip]
+  [delivery method line, e.g. "Via Email and Certified Mail"]
+
+
+============================================================
+UNREDACTED — salutation
+============================================================
+
+[TODO SALUTATION — e.g. "Dear Mr. ___:"]
+
+
+============================================================
+REDACTED BODY — paragraphs of demand and legal argument
+============================================================
+
+[TODO PARAGRAPH 1]
+  (Opening paragraph — typically identifies sender's role and
+  the subject of the letter. Paste verbatim.)
+
+
+[TODO PARAGRAPH 2]
+  (Paste verbatim.)
+
+
+[TODO PARAGRAPH 3]
+  (Paste verbatim.)
+
+
+[TODO PARAGRAPH 4]
+  (Paste verbatim.)
+
+
+[TODO PARAGRAPH 5]
+  (Paste verbatim.)
+
+
+[TODO PARAGRAPH 6]
+  (Paste verbatim.)
+
+
+[TODO PARAGRAPH 7]
+  (Paste verbatim.)
+
+
+[TODO PARAGRAPH 8]
+  (Paste verbatim. Add or remove numbered paragraphs above as
+  needed to match the letter's actual structure. Update the-letter.html
+  to add/remove `<span class="redactable">` slots accordingly.)
+
+
+============================================================
+UNREDACTED — closing + signature block
+============================================================
+
+[TODO CLOSING — e.g. "Sincerely,"]
+
+Dan Haley
+Chief Legal Officer
+Flock Group, Inc.
+
+
+============================================================
+END OF SCAFFOLD
+============================================================
