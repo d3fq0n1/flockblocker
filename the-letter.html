@@ -88,10 +88,29 @@
   }
   .letter-head,
   .letter-recipient,
-  .letter-signature {
+  .letter-signature,
+  .letter-service,
+  .letter-service-proof,
+  .letter-re {
     white-space: pre-line;
     color: var(--white);
   }
+  .letter-head {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .letter-service,
+  .letter-service-proof {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+  .letter-recipient { font-size: 0.86rem; }
+  .letter-recipient .emails { color: var(--text-mid); word-break: break-word; }
   .letter-date,
   .letter-salutation,
   .letter-closing { color: var(--white); }
@@ -99,10 +118,6 @@
   .letter-block:last-child { margin-bottom: 0; }
   .letter-body p { margin-bottom: 1.4rem; }
   .letter-body p:last-child { margin-bottom: 0; }
-  .letter-todo {
-    color: var(--amber);
-    font-style: normal;
-  }
 
   /* ---------- Redactable spans ---------- */
   .redactable {
@@ -228,7 +243,7 @@
 
   <!-- Section 1 — Page hero -->
   <div class="page-hero">
-    <p class="page-hero-kicker">// Cease and desist · Flock Group, Inc.</p>
+    <p class="page-hero-kicker">// Cease and desist · Flock Safety</p>
     <h1 class="page-hero-title">THE LETTER</h1>
     <p class="page-hero-lead">
       Cease and desist served <time datetime="2026-04-16T15:29:00-04:00">April 16, 2026, 3:29 PM ET</time>. Published <time datetime="2026-04-28">April 28, 2026</time>.
@@ -271,37 +286,58 @@
 
     <article class="letter" aria-label="Cease and desist letter, full text">
 
-      <div class="letter-block letter-head">[TODO LETTERHEAD — paste from legal/cease-and-desist-2026-04-16.txt]</div>
+      <div class="letter-block letter-head">FLOCK SAFETY</div>
 
       <div class="letter-block letter-date">April 16, 2026</div>
 
-      <div class="letter-block letter-recipient">[TODO RECIPIENT — paste from legal/cease-and-desist-2026-04-16.txt]</div>
+      <div class="letter-block letter-service">VIA CERTIFIED MAIL AND EMAIL</div>
 
-      <div class="letter-block letter-salutation">[TODO SALUTATION — paste from legal/cease-and-desist-2026-04-16.txt]</div>
+      <div class="letter-block letter-recipient">Blake Clark
+605 Lincoln Street
+Mauston, WI 53948
 
-      <div class="letter-block letter-body">
-        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span><span class="letter-todo">[TODO PARAGRAPH 1 — paste from legal/cease-and-desist-2026-04-16.txt]</span></span></p>
+<span class="emails"><strong>EMAIL:</strong> ultima_blake@hotmail.com; communistwithagun@gmail.com; omni_blake@hotmail.com; blake.pirateking@gmail.com; blakepirateking@gmail.com; ultima_blake@dell.com; communistwithagun@mail.com; ultima_blake@gmail.com</span></div>
 
-        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span><span class="letter-todo">[TODO PARAGRAPH 2 — paste from legal/cease-and-desist-2026-04-16.txt]</span></span></p>
+      <div class="letter-block letter-re"><strong>RE:</strong> Demand for Immediate Cessation of Defamatory and False Online Publications Related to the Website &ldquo;flockblocker.org&rdquo;</div>
 
-        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span><span class="letter-todo">[TODO PARAGRAPH 3 — paste from legal/cease-and-desist-2026-04-16.txt]</span></span></p>
+      <div class="letter-block letter-salutation">Mr. Clark,</div>
 
-        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span><span class="letter-todo">[TODO PARAGRAPH 4 — paste from legal/cease-and-desist-2026-04-16.txt]</span></span></p>
+      <div class="letter-body">
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>I write concerning your unauthorized and unlawful creation, ownership, and operation of the website &ldquo;flockblocker.org&rdquo; (the &ldquo;Website&rdquo;). In addition to numerous false, misleading, and/or defamatory representations about Flock Safety and its technologies, operations, and personnel, this Website presently contains demonstrably false, misleading, and defamatory statements regarding a specific Flock employee at https://flockblocker.org/wall-of-shame.html.</span></p>
 
-        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span><span class="letter-todo">[TODO PARAGRAPH 5 — paste from legal/cease-and-desist-2026-04-16.txt]</span></span></p>
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>Flock hereby demands that you immediately cease and desist all unlawful activities described herein, specifically:</span></p>
 
-        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span><span class="letter-todo">[TODO PARAGRAPH 6 — paste from legal/cease-and-desist-2026-04-16.txt]</span></span></p>
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>1. IMMEDIATELY taking down, de-indexing, and permanently deleting all defamatory and false content on the Website &ldquo;flockblocker.org,&rdquo; and on all associated social media accounts, mirror sites, and archived versions.</span></p>
 
-        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span><span class="letter-todo">[TODO PARAGRAPH 7 — paste from legal/cease-and-desist-2026-04-16.txt]</span></span></p>
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>2. IMMEDIATELY removing all false, misleading, and defamatory content concerning the Flock employee Randy Gluck, and any other Flock personnel or the company itself, from all online platforms, including but not limited to any remaining websites, social media, forums, and discussion boards.</span></p>
 
-        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span><span class="letter-todo">[TODO PARAGRAPH 8 — paste from legal/cease-and-desist-2026-04-16.txt]</span></span></p>
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>3. IMMEDIATELY providing written confirmation within seven (7) calendar days of the date of this Notice that you have complied with all of the demands set forth herein.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>The content published on &ldquo;flockblocker.org&rdquo; contains statements of fact concerning the Flock employee that are patently false and untrue. Under Wisconsin law and common law principles, these statements are defamatory <em>per se</em>, causing irreparable harm to the employee&rsquo;s professional and personal reputation, and resulting in ongoing damages to Mr. Gluck and to Flock.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>Defamation consists of a statement that is published to a third party, is false, and tends to harm the reputation of the individual (<em>See Torgerson v. Journal/Sentinel, Inc.</em>, 210 Wis. 2d 525 (1997)). Given that the inflammatory and false statements made on your Website pertain directly to the employee&rsquo;s professional and personal conduct and integrity, they constitute defamation <em>per se</em>, meaning falsity and damages are presumed.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>Your publication of these statements demonstrates a malicious intent or, at minimum, a reckless disregard for the truth, and is not excused or validated by your citation to equally false assertions by others.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>Your failure to immediately comply with the demands set forth above will leave Flock with no alternative but to pursue all available legal remedies against you, including, but not limited to:</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>1. Filing a lawsuit for defamation and related torts in the appropriate federal or Wisconsin state court.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>2. Seeking a temporary restraining order and permanent injunction to compel the immediate removal of the content and the shutdown of the Website, as provided under Rule 65 of the Federal Rules of Civil Procedure or corresponding Wisconsin Rules.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>3. Seeking monetary damages, which include actual damages, punitive damages for malicious conduct, and recovery of all attorneys&rsquo; fees and costs incurred in enforcing Flock&rsquo;s rights.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>This letter is not an exhaustive statement of Flock&rsquo;s rights and remedies, all of which are expressly reserved.</span></p>
+
+        <p><span class="redactable" tabindex="0" role="button" aria-label="Redacted text — activate to reveal" aria-live="polite"><span class="sr-only">The following content is redacted by design. Activate to reveal: </span>We trust that you will give this matter the immediate attention it requires and comply fully with these demands to avoid further legal action.</span></p>
       </div>
 
-      <div class="letter-block letter-closing">[TODO CLOSING — paste from legal/cease-and-desist-2026-04-16.txt]</div>
+      <div class="letter-block letter-closing">Sincerely,</div>
 
       <div class="letter-block letter-signature">Dan Haley
-Chief Legal Officer
-Flock Group, Inc.</div>
+Chief Legal Officer</div>
+
+      <div class="letter-block letter-service-proof"><strong>Proof of Service:</strong> This Notice was sent via USPS Certified Mail, Return Receipt Requested, and via email on April 16, 2026.</div>
 
     </article>
   </div>
@@ -314,7 +350,7 @@ Flock Group, Inc.</div>
     <h2 class="section-title">Service and Status</h2>
     <p>The letter was served on <time datetime="2026-04-16">April 16, 2026</time> to eight email addresses associated with the operator and by certified mail. The seven-day takedown deadline stated in the letter expired on <time datetime="2026-04-23">April 23, 2026</time>. No litigation has been filed as of <time datetime="2026-04-28">April 28, 2026</time>.</p>
     <p>The letter is a unilateral communication from corporate counsel to a private citizen. It is not subject to confidentiality absent a separate agreement.</p>
-    <p><a href="legal/cease-and-desist-2026-04-16.pdf">Download cease-and-desist-2026-04-16.pdf</a></p>
+    <p><a href="flockdocs/CEASE%20AND%20DESIST_Flockblocker.pdf">Download CEASE AND DESIST_Flockblocker.pdf</a></p>
   </div>
 
   <hr>
