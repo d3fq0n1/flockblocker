@@ -65,6 +65,7 @@ flockblocker/
 ├── optical/                # IR interference & retroreflective material research
 ├── distribution/           # Bumper sticker designs & distribution strategy
 ├── legal/                  # FOIA templates, contract analysis, C&D transcription
+│   └── coordination/       # Email PDF exhibits cited from the-coordination.html
 ├── flockdocs/              # Primary-source documents (C&D PDF, contracts, FOIA productions)
 ├── prompts/                # System prompts for Gemini Nano on-device intelligence
 ├── screenshots/            # Media assets
@@ -75,10 +76,13 @@ flockblocker/
 ├── 404.html                # Custom 404 page
 ├── eyesonme-data.json      # Station fleet data (3 stations)
 ├── eyesonme-subjects.json  # Accountability subject profiles (8 subjects)
+├── coordination-emails.json    # Email exhibit timeline data (drip-fed via status flips)
+├── coordination-productions.json  # Open records production chain data
 ├── submit.html             # Story submission form
 ├── stories.html            # Approved user stories (geography-grouped)
 ├── evidence.html           # Public record contract & chief's response
 ├── the-letter.html         # April 16 cease-and-desist as redaction-with-reveal performance
+├── the-coordination.html   # Flock-City email record, JSON-driven drip-fed timeline
 ├── wall-of-shame.html      # Documented LPR-network misuse cases
 ├── birdstrike.html         # "Project BIRDSTRIKE" municipal research template
 ├── harms.html              # Catalog of Flock harms + censorship record + money flow (merged)
@@ -212,7 +216,36 @@ Cease-and-desist letter served by Flock Safety on April 16, 2026, published Apri
 
 **Not in nav.** The page is reachable from the homepage "Recent" section only, matching the existing out-of-nav pattern (`harms.html`, `doctrine.html`, `stories.html`, `submit.html`).
 
-### 11. Public Information Pages
+### 11. The Coordination (`the-coordination.html`)
+
+JSON-driven timeline of Flock Safety ↔ City of Mauston email correspondence sourced from open records productions under Wis. Stat. § 19.35. Day 2 of the staggered three-page rollout. Day 1 (`the-letter.html`) is the signal; this page is the substance.
+
+**Component behavior:**
+- Page chrome (header, footer, nav) is identical to other site pages. Out of nav, like `the-letter.html`.
+- Section 3 (email timeline) renders entirely from `coordination-emails.json` via vanilla `fetch().then()` — same loader pattern as `eyesonme.html`. Inline TOC built from the same data; deep-link anchors via `id="entry-<id>"`.
+- Section 4 (production chain) renders from `coordination-productions.json`.
+- Each entry has `status: "published"` or `status: "forthcoming"`. Forthcoming entries render as opacity-0.55 placeholder cards with a `[ PENDING PUBLICATION ]` exhibit-slot label and a single `Pending publication.` body line — no passages, attachments, or source footer.
+- Display order = JSON array order (chronological by authoring; operator-controlled tie-breaking for same-day entries).
+- Render-failure path: each fetch's `.catch()` injects an inline `.render-error` line so the section degrades visibly instead of silently.
+- `<noscript>` block in Section 3 explains the page requires JavaScript and points readers at `legal/coordination/` for the raw PDFs.
+
+**Drip-feed workflow** (lives in `coordination-emails.json`'s `operator_workflow` field and in `legal/coordination/README.md`):
+1. Place email PDF at `legal/coordination/YYYY-MM-DD-shortname.pdf`.
+2. Open `coordination-emails.json`, find entry by `id`.
+3. Flip `status` from `forthcoming` to `published`; fill in `sender`, `recipients`, `subject`, `time`, `passages`, `attachments`, `source`.
+4. Commit with message `Publish coordination entry: <id>`. Push.
+
+No HTML edits, no JS edits, no CSS edits per drop. JSON + PDF only.
+
+**Editorial register:** Inverse of `the-letter.html`. Page contains zero editorializing prose; documents speak. No adjectives describing Flock or city personnel. No exclamation marks. No mention of K9 fund / Buehlman estate / journal entries / fiduciary breach — that material is Day 3.
+
+**Source artifacts seeded at launch:**
+- One `published` entry: Gautam Ratnam (Account Executive, Flock Group, Inc.) → Daron J. Haugh + Michael Zilisch, CC Mike Wahl + Tina Maharath, April 9, 2026, 13:10 CT, Exhibit B, attaching `Flock talking points.pdf`. Two passages quoted verbatim. Source PDF placeholder at `legal/coordination/2026-04-09-gautam-talking-points.pdf` — operator drops in.
+- Three `forthcoming` entries (April 16, April 16, April 17) seeded as placeholders.
+
+**Cross-link from `the-letter.html`:** Section 5 ("What's next") of the Day 1 page now links the phrase "open records production" to this page. Single-paragraph, single-anchor edit; no copy added.
+
+### 12. Public Information Pages
 
 Static HTML pages documenting surveillance harms, municipal defections, FOIA templates, the "Project BIRDSTRIKE" distributed research framework, evidence/contracts, funding analysis, censorship documentation, and personnel dossiers.
 
@@ -332,6 +365,10 @@ wrangler deploy
 - Deterrence doctrine footer present on every HTML page site-wide
 - `[ DETERRENCE DOCTRINE ]` header link present on every HTML page
 - All pages link to `eyesonme.html` and `doctrine.html` in both desktop and mobile navigation
-- Pages outside the standardized nav: `harms.html`, `doctrine.html`, `stories.html`, `submit.html`, `the-letter.html`, `404.html` — reachable from the homepage or contextual links only
+- Pages outside the standardized nav: `harms.html`, `doctrine.html`, `stories.html`, `submit.html`, `the-letter.html`, `the-coordination.html`, `404.html` — reachable from the homepage or contextual links only
 - Redaction component: `.redactable` spans with click/focus reveal, 4-second auto-conceal, IntersectionObserver scroll-conceal, `prefers-reduced-motion` honored; `[ REVEAL ALL ]` / `[ CONCEAL ALL ]` controls override per-element behavior. Used only on `the-letter.html`.
 - Editorial tone is clinical and procedural across the site — `the-letter.html` is the sole exception, where the joke lives in the design rather than the prose
+- JSON-driven page rendering: `eyesonme.html` (stations + subjects), `the-coordination.html` (email exhibits + productions). Pattern is `fetch('X.json').then(r => r.json()).then(render).catch(fail)` with inline-string `innerHTML` building. Page-specific styles inline in `<style>`; no shared `assets/js/` directory exists.
+- `the-coordination.html` drip-feed: to publish a `forthcoming` entry, drop the PDF at `legal/coordination/YYYY-MM-DD-shortname.pdf` and flip `status` to `published` in `coordination-emails.json` with sender/recipients/subject/passages/attachments filled in. JSON + PDF, no HTML/JS edits.
+- Coordination entry status values: `published`, `forthcoming`
+- Coordination same-day ordering: JSON array order is presentation order (loader does not re-sort); operator authors the array chronologically and breaks same-day ties by intent

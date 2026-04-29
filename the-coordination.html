@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Coordination — flockblocker.org</title>
+<meta name="description" content="Documented coordination between Flock Safety and the City of Mauston, Wisconsin, in writing, on city email channels, before and during the April 16, 2026 cease-and-desist served on the operator of this site.">
+<meta property="og:title" content="The Coordination — flockblocker.org">
+<meta property="og:description" content="Documented coordination between Flock Safety and the City of Mauston, Wisconsin, in writing, on city email channels, before and during the April 16, 2026 cease-and-desist served on the operator of this site.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="chief-response.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  /* ---------- Page layout ---------- */
+  .coordination-page { max-width: 980px; margin: 0 auto; }
+  .coordination-page .section { padding: 4rem 2.5rem; }
+
+  /* ---------- Frame (Section 2) ---------- */
+  .frame p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 1.4rem;
+    max-width: 760px;
+  }
+  .frame p:last-child { margin-bottom: 0; }
+  .frame a {
+    color: var(--accent);
+    border-bottom: 1px solid rgba(200,240,74,0.3);
+    transition: border-color 0.2s;
+  }
+  .frame a:hover { border-color: var(--accent); }
+
+  /* ---------- Email timeline (Section 3) ---------- */
+  .timeline-noscript {
+    background: var(--surface2);
+    border-left: 3px solid var(--amber);
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+  .timeline-noscript a { color: var(--accent); border-bottom: 1px solid rgba(200,240,74,0.3); }
+
+  .email-toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .email-toc-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .email-toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+  }
+  .email-toc-list li {
+    background: var(--surface);
+    padding: 0.6rem 0.85rem;
+  }
+  .email-toc-list a {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    transition: color 0.2s;
+  }
+  .email-toc-list a:hover { color: var(--accent); }
+  .email-toc-date { color: var(--white); }
+  .email-toc-status {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .email-toc-status.published { color: var(--accent); }
+  .email-toc-status.forthcoming { color: var(--amber); }
+
+  .email-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem 2.25rem;
+    margin-bottom: 1.5rem;
+    scroll-margin-top: 80px;
+  }
+  .email-card:last-child { margin-bottom: 0; }
+  .email-card[data-status="forthcoming"] {
+    opacity: 0.55;
+    background: var(--surface2);
+  }
+
+  .email-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .email-card-heading {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .email-card-heading time { color: var(--white); }
+  .email-time {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-mid);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+  }
+  .email-exhibit {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .email-card[data-status="forthcoming"] .email-exhibit { color: var(--text-dim); }
+
+  .email-meta {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0.5rem 1.25rem;
+    margin: 0 0 1.75rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .email-meta dt {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding-top: 0.3rem;
+  }
+  .email-meta dd { margin: 0; color: var(--text); }
+  .email-party { display: block; margin-bottom: 0.25rem; }
+  .email-party:last-child { margin-bottom: 0; }
+  .email-party-name { color: var(--white); font-weight: 500; }
+  .email-party-meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-mid);
+    margin-left: 0.4rem;
+  }
+  .email-subject {
+    font-weight: 500;
+    color: var(--white);
+  }
+
+  .email-passages { margin-bottom: 1.5rem; }
+  .email-passages blockquote {
+    border-left: 4px solid var(--accent);
+    background: rgba(200,240,74,0.04);
+    padding: 1rem 1.25rem;
+    margin: 0 0 0.75rem 0;
+    font-size: 0.96rem;
+    line-height: 1.85;
+    color: var(--text);
+    quotes: "\201C" "\201D";
+  }
+  .email-passages blockquote:last-child { margin-bottom: 0; }
+  .email-passages blockquote::before { content: open-quote; color: var(--accent); margin-right: 0.15rem; }
+  .email-passages blockquote::after { content: close-quote; color: var(--accent); margin-left: 0.15rem; }
+  .email-cite {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-mid);
+    font-style: normal;
+    margin-top: 0.6rem;
+    letter-spacing: 0.04em;
+  }
+
+  .email-attachments {
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+  }
+  .email-attachments-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem 0;
+  }
+  .email-attachments ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .email-attachments li {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+  .email-attachments a {
+    color: var(--accent);
+    border-bottom: 1px solid rgba(200,240,74,0.3);
+  }
+  .email-attachments a:hover { border-color: var(--accent); }
+  .email-attachments .pending {
+    color: var(--text-dim);
+    font-style: normal;
+  }
+
+  .email-source {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.04em;
+  }
+  .email-source a {
+    color: var(--text-mid);
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .email-source a:hover { color: var(--accent); border-color: rgba(200,240,74,0.4); }
+
+  .email-pending-body {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* ---------- Productions (Section 4) ---------- */
+  .productions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .production-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem 1.75rem;
+  }
+  .production-date {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .production-label {
+    font-size: 1rem;
+    color: var(--white);
+    line-height: 1.55;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+  .production-meta {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+  .production-meta:last-child { margin-bottom: 0; }
+  .production-meta a {
+    color: var(--accent);
+    border-bottom: 1px solid rgba(200,240,74,0.3);
+  }
+  .production-meta .pending { color: var(--text-dim); }
+
+  /* ---------- What's documented elsewhere (Section 5) ---------- */
+  .whats-elsewhere p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text);
+    max-width: 760px;
+    margin-bottom: 1.4rem;
+  }
+  .whats-elsewhere .signoff {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- Render-error fallback ---------- */
+  .render-error {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--red);
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--red);
+    background: rgba(240,90,74,0.06);
+  }
+
+  @media (max-width: 900px) {
+    .coordination-page .section { padding: 3rem 1.5rem; }
+    .email-card { padding: 1.5rem 1.5rem; }
+    .email-meta { grid-template-columns: 1fr; gap: 0.25rem 0; }
+    .email-meta dt { padding-top: 0.6rem; }
+    .email-toc-list a { grid-template-columns: 90px 1fr; }
+    .email-toc-status { grid-column: 2; }
+  }
+  @media (max-width: 480px) {
+    .coordination-page .section { padding: 2.5rem 1rem; }
+    .email-card { padding: 1.25rem 1.1rem; }
+    .email-card-heading { font-size: 1.3rem; }
+    .email-passages blockquote { padding: 0.85rem 1rem; font-size: 0.88rem; }
+    .production-card { padding: 1.25rem 1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme">EYESONME</a>
+    <a href="index.html" class="header-link">Home</a>
+    <a href="evidence.html" class="header-link evidence">Evidence</a>
+    <a href="wall-of-shame.html" class="header-link">Wall of Shame</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="who.html" class="header-link">Who</a>
+    <a href="birdstrike.html" class="header-link">BirdStrike</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
+    <span class="live-badge"><span id="countdown"></span></span>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="eyesonme.html">EYESONME</a>
+  <a href="doctrine.html">Deterrence Doctrine</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="wall-of-shame.html">Wall of Shame</a>
+  <a href="rebellion.html">Rebellion</a>
+  <a href="who.html">Who's Responsible</a>
+  <a href="birdstrike.html">BirdStrike</a>
+  <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
+</nav>
+
+<div class="coordination-page">
+
+  <!-- Section 1 — Page hero -->
+  <div class="page-hero">
+    <p class="page-hero-kicker accent">// Open records · City of Mauston · Wis. Stat. § 19.35</p>
+    <h1 class="page-hero-title">THE COORDINATION</h1>
+    <p class="page-hero-lead">
+      Published <time datetime="2026-04-29">April 29, 2026</time>. Updated as additional records are released.
+    </p>
+  </div>
+
+  <hr>
+
+  <!-- Section 2 — Frame -->
+  <div class="section frame" id="frame">
+    <p class="section-tag">Frame</p>
+    <h2 class="section-title">What This Page Documents</h2>
+    <p>On <time datetime="2026-04-16">April 16, 2026</time>, Flock Safety's Chief Legal Officer served a <a href="the-letter.html">cease-and-desist letter</a> on the operator of this site. The letter demanded takedown of flockblocker.org within seven calendar days, citing defamation per se under Wisconsin law.</p>
+    <p>On <time datetime="2026-04-23">April 23, 2026</time>, the City of Mauston produced records in response to the operator's request under Wis. Stat. § 19.35. The records included communications between Flock Safety personnel and City of Mauston personnel, dated before, during, and after the cease-and-desist period. The records were produced by the City Administrator and were not obtained through any other channel.</p>
+    <p>This page documents those communications in chronological order. Each entry below cites its source: the city records production, the date of release, and the original email PDF as produced. Additional entries will be added as further records are released.</p>
+  </div>
+
+  <hr>
+
+  <!-- Section 3 — Email timeline -->
+  <div class="section" id="timeline">
+    <p class="section-tag">03 — Email timeline</p>
+    <h2 class="section-title">In Chronological Order</h2>
+
+    <noscript>
+      <div class="timeline-noscript">
+        This page renders email exhibits from a JSON data file using JavaScript. With JavaScript disabled, the timeline does not display. The original PDFs are linked from <a href="legal/coordination/">/legal/coordination/</a> as the operator places them. A static HTML fallback may follow.
+      </div>
+    </noscript>
+
+    <nav class="email-toc" aria-label="Table of contents">
+      <p class="email-toc-label">Index</p>
+      <ul class="email-toc-list" id="email-toc"></ul>
+    </nav>
+
+    <div id="email-timeline"></div>
+  </div>
+
+  <hr>
+
+  <!-- Section 4 — Source documentation -->
+  <div class="section" id="productions">
+    <p class="section-tag">04 — Source documentation</p>
+    <h2 class="section-title">Production Chain</h2>
+    <p class="page-hero-lead" style="font-size:1rem;max-width:720px;">Each entry above is sourced to one of the open records productions listed below. A reader who wants to verify the emails came from the City of Mauston, not from a leak, can follow the production chain.</p>
+    <div class="productions-list" id="productions-list"></div>
+  </div>
+
+  <hr>
+
+  <!-- Section 5 — What's documented elsewhere -->
+  <div class="section whats-elsewhere" id="elsewhere">
+    <p class="section-tag">05 — What's documented elsewhere</p>
+    <h2 class="section-title">Scope of This Page</h2>
+    <p>This page covers Flock-City coordination only. A separate page covering the City of Mauston's procurement, authorization, and fiduciary record will follow on a continuing schedule. <time datetime="2026-04-29">April 29, 2026</time>.</p>
+    <p class="signoff">Updates dated as published. — flockblocker.org</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">
+    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
+    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a> · <time datetime="2026-04-29">2026-04-29</time>
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+<script>
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
+</script>
+
+<script>
+/* Live-badge countdown — same logic as other pages so the header behaves identically. */
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    if(!el) return;
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      var daysRemaining = Math.ceil(diff/86400000);
+      el.textContent = 'T-'+daysRemaining+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
+<script>
+/* Email timeline renderer.
+   - Fetches coordination-emails.json
+   - Renders an inline TOC (anchor links per entry) and one card per entry
+   - Cards differ by status: 'published' (full content) vs. 'forthcoming' (placeholder)
+   - Display order = JSON array order (operator-controlled, chronological by authoring) */
+(function(){
+  function esc(s){
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+  function isPending(s){
+    return typeof s === 'string' && s.indexOf('TODO') !== -1;
+  }
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fmtDate(iso){
+    if (!iso) return '';
+    var p = iso.split('-');
+    if (p.length < 3) return iso;
+    return MONTHS[parseInt(p[1],10)-1] + ' ' + parseInt(p[2],10) + ', ' + p[0];
+  }
+  function fmtDateShort(iso){
+    if (!iso) return '';
+    var p = iso.split('-');
+    if (p.length < 3) return iso;
+    return MONTHS[parseInt(p[1],10)-1] + ' ' + parseInt(p[2],10);
+  }
+
+  function renderParty(p){
+    if (!p) return '<span class="email-party-meta">—</span>';
+    var meta = [];
+    if (p.title) meta.push(p.title);
+    if (p.organization) meta.push(p.organization);
+    var metaHtml = meta.length
+      ? '<span class="email-party-meta">— ' + esc(meta.join(', ')) + '</span>'
+      : '';
+    return '<span class="email-party"><span class="email-party-name">' + esc(p.name) + '</span>' + metaHtml + '</span>';
+  }
+  function renderParties(arr){
+    if (!arr || !arr.length) return '<span class="email-party-meta">—</span>';
+    return arr.map(renderParty).join('');
+  }
+
+  function renderPublishedCard(e){
+    var pdfPath = (e.source && e.source.pdf_path) || '';
+    var pdfPathOk = pdfPath && !isPending(pdfPath);
+    var subjectText = (e.subject && !isPending(e.subject)) ? e.subject : '[Subject pending]';
+
+    var citeBits = [];
+    if (e.sender && e.sender.name) citeBits.push(e.sender.name);
+    if (e.sender && e.sender.organization) citeBits.push(e.sender.organization);
+    citeBits.push(fmtDate(e.date) + (e.time ? ' · ' + e.time : ''));
+    var citation = citeBits.join(', ');
+
+    var passages = (e.passages || []).map(function(p){
+      var citeAttr = pdfPathOk ? ' cite="' + esc(pdfPath) + '"' : '';
+      return '<blockquote' + citeAttr + '>' + esc(p) + '</blockquote>';
+    }).join('');
+
+    var attachmentsHtml = '';
+    if (e.attachments && e.attachments.length) {
+      var items = e.attachments.map(function(a){
+        var label = a.name || 'Attachment';
+        if (a.filename && !isPending(a.filename)) {
+          var path = 'legal/coordination/' + a.filename;
+          return '<li><a href="' + esc(path) + '" aria-label="Download ' + esc(label) + ' (PDF)">' + esc(label) + '</a></li>';
+        }
+        return '<li>' + esc(label) + ' <span class="pending">— pending placement</span></li>';
+      }).join('');
+      attachmentsHtml = '<div class="email-attachments"><p class="email-attachments-label">Attachments</p><ul>' + items + '</ul></div>';
+    }
+
+    var srcParts = [];
+    if (e.source && e.source.production_label) srcParts.push(esc(e.source.production_label));
+    if (e.source && e.source.exhibit_id) srcParts.push('Exhibit ' + esc(e.source.exhibit_id));
+    var srcLink = pdfPathOk
+      ? ' · <a href="' + esc(pdfPath) + '" aria-label="Download original email exhibit (PDF)">Original PDF</a>'
+      : ' · <span class="pending">Original PDF: pending placement</span>';
+    var sourceHtml = '<footer class="email-source">' + srcParts.join(' · ') + srcLink + '</footer>';
+
+    var exhibit = (e.source && e.source.exhibit_id) ? 'Exhibit ' + esc(e.source.exhibit_id) : '';
+
+    return ''
+      + '<header class="email-card-head">'
+      +   '<h3 class="email-card-heading"><time datetime="' + esc(e.date) + '">' + esc(fmtDate(e.date)) + '</time>'
+      +   (e.time ? '<span class="email-time">' + esc(e.time) + '</span>' : '')
+      +   '</h3>'
+      +   (exhibit ? '<p class="email-exhibit">' + exhibit + '</p>' : '')
+      + '</header>'
+      + '<dl class="email-meta">'
+      +   '<dt>From</dt><dd>' + renderParty(e.sender) + '</dd>'
+      +   '<dt>To</dt><dd>' + renderParties(e.recipients && e.recipients.to) + '</dd>'
+      +   ((e.recipients && e.recipients.cc && e.recipients.cc.length) ? '<dt>CC</dt><dd>' + renderParties(e.recipients.cc) + '</dd>' : '')
+      +   '<dt>Subject</dt><dd class="email-subject">' + esc(subjectText) + '</dd>'
+      + '</dl>'
+      + '<div class="email-passages">' + passages + '<cite class="email-cite">— ' + esc(citation) + '</cite></div>'
+      + attachmentsHtml
+      + sourceHtml;
+  }
+
+  function renderForthcomingCard(e){
+    return ''
+      + '<header class="email-card-head">'
+      +   '<h3 class="email-card-heading"><time datetime="' + esc(e.date) + '">' + esc(fmtDate(e.date)) + '</time></h3>'
+      +   '<p class="email-exhibit">[ PENDING PUBLICATION ]</p>'
+      + '</header>'
+      + '<p class="email-pending-body">Pending publication.</p>';
+  }
+
+  function renderTOC(entries){
+    var toc = document.getElementById('email-toc');
+    if (!toc) return;
+    toc.innerHTML = entries.map(function(e){
+      var statusClass = e.status === 'published' ? 'published' : 'forthcoming';
+      var statusText = e.status === 'published' ? 'Published' : 'Forthcoming';
+      var midText = (e.status === 'published' && e.sender && e.sender.name)
+        ? e.sender.name
+        : 'Pending publication';
+      return '<li><a href="#entry-' + esc(e.id) + '">'
+        +   '<span class="email-toc-date">' + esc(fmtDateShort(e.date)) + '</span>'
+        +   '<span>' + esc(midText) + '</span>'
+        +   '<span class="email-toc-status ' + statusClass + '">' + statusText + '</span>'
+        + '</a></li>';
+    }).join('');
+  }
+
+  function render(data){
+    var container = document.getElementById('email-timeline');
+    if (!container) return;
+    var entries = (data && data.entries) || [];
+    if (!entries.length) {
+      container.innerHTML = '<p class="render-error">No coordination entries available.</p>';
+      return;
+    }
+    renderTOC(entries);
+    container.innerHTML = entries.map(function(e){
+      var status = e.status === 'published' ? 'published' : 'forthcoming';
+      var ariaLabel = status === 'forthcoming'
+        ? 'Forthcoming entry, pending publication.'
+        : 'Email exhibit ' + ((e.source && e.source.exhibit_id) ? e.source.exhibit_id + ' ' : '') + 'dated ' + e.date;
+      var inner = status === 'published' ? renderPublishedCard(e) : renderForthcomingCard(e);
+      return '<article class="email-card" id="entry-' + esc(e.id) + '" data-status="' + status + '" aria-label="' + esc(ariaLabel) + '">' + inner + '</article>';
+    }).join('');
+  }
+
+  function fail(err){
+    if (err) console.warn('coordination-emails.json failed to load:', err);
+    var container = document.getElementById('email-timeline');
+    if (container) container.innerHTML = '<p class="render-error">Content failed to load. Reload the page or check back shortly.</p>';
+  }
+
+  if (window.fetch) {
+    fetch('coordination-emails.json').then(function(r){ return r.json(); }).then(render).catch(fail);
+  } else {
+    fail();
+  }
+})();
+</script>
+
+<script>
+/* Productions renderer — Section 4. */
+(function(){
+  function esc(s){
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+  function isPending(s){
+    return typeof s === 'string' && s.indexOf('TODO') !== -1;
+  }
+  function render(data){
+    var container = document.getElementById('productions-list');
+    if (!container) return;
+    var prods = (data && data.productions) || [];
+    if (!prods.length) {
+      container.innerHTML = '<p class="render-error">No productions available.</p>';
+      return;
+    }
+    container.innerHTML = prods.map(function(p){
+      var reqLine = isPending(p.request)
+        ? '<p class="production-meta"><span class="pending">Records request: pending publication.</span></p>'
+        : (p.request ? '<p class="production-meta">Records request: ' + esc(p.request) + '</p>' : '');
+      var coverLine;
+      if (p.cover_letter_pdf && !isPending(p.cover_letter_pdf)) {
+        coverLine = '<p class="production-meta">Cover letter: <a href="' + esc(p.cover_letter_pdf) + '" aria-label="Download production cover letter (PDF)">Download (PDF)</a></p>';
+      } else {
+        coverLine = '<p class="production-meta"><span class="pending">Cover letter: pending placement.</span></p>';
+      }
+      return '<article class="production-card" aria-label="Open records production dated ' + esc(p.date) + '">'
+        + '<p class="production-date"><time datetime="' + esc(p.date) + '">' + esc(p.date) + '</time></p>'
+        + '<p class="production-label">' + esc(p.label) + '</p>'
+        + reqLine
+        + coverLine
+        + '</article>';
+    }).join('');
+  }
+  function fail(err){
+    if (err) console.warn('coordination-productions.json failed to load:', err);
+    var container = document.getElementById('productions-list');
+    if (container) container.innerHTML = '<p class="render-error">Production list failed to load.</p>';
+  }
+  if (window.fetch) {
+    fetch('coordination-productions.json').then(function(r){ return r.json(); }).then(render).catch(fail);
+  } else {
+    fail();
+  }
+})();
+</script>
+
+</body>
+</html>
