@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bouquet — flockblocker.org</title>
+<meta name="description" content="Documented procurement, authorization, and fiduciary failures by the City of Mauston, Wisconsin, in the acquisition and operation of Flock Safety automated license plate readers. Sourced from the city's own records production.">
+<meta property="og:title" content="The Bouquet — flockblocker.org">
+<meta property="og:description" content="Documented procurement, authorization, and fiduciary failures by the City of Mauston, Wisconsin, in the acquisition and operation of Flock Safety automated license plate readers. Sourced from the city's own records production.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="chief-response.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Epilogue:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  /* ---------- Page layout ---------- */
+  .bouquet-page { max-width: 1000px; margin: 0 auto; }
+  .bouquet-page .section { padding: 4rem 2.5rem; }
+
+  /* ---------- Frame (Section 2) ---------- */
+  .frame p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 1.4rem;
+    max-width: 760px;
+  }
+  .frame p:last-child { margin-bottom: 0; }
+  .frame a {
+    color: var(--accent);
+    border-bottom: 1px solid rgba(200,240,74,0.3);
+    transition: border-color 0.2s;
+  }
+  .frame a:hover { border-color: var(--accent); }
+
+  /* ---------- Findings noscript ---------- */
+  .timeline-noscript {
+    background: var(--surface2);
+    border-left: 3px solid var(--amber);
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+  .timeline-noscript a { color: var(--accent); border-bottom: 1px solid rgba(200,240,74,0.3); }
+
+  /* ---------- Category filter ---------- */
+  .finding-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+  }
+  .finding-filter-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    align-self: center;
+    margin-right: 0.5rem;
+  }
+  .finding-filter button {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.85rem;
+    background: transparent;
+    color: var(--text-mid);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+  .finding-filter button:hover { color: var(--white); border-color: var(--text-mid); }
+  .finding-filter button[aria-pressed="true"] {
+    color: var(--bg);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* ---------- TOC ---------- */
+  .finding-toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .finding-toc-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .finding-toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+  }
+  .finding-toc-list li { background: var(--surface); padding: 0.55rem 0.85rem; }
+  .finding-toc-list a {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    transition: color 0.2s;
+  }
+  .finding-toc-list a:hover { color: var(--accent); }
+  .finding-toc-num { color: var(--white); }
+  .finding-toc-cat {
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ---------- Finding cards ---------- */
+  .finding-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem 2.25rem;
+    margin-bottom: 1.5rem;
+    scroll-margin-top: 80px;
+  }
+  .finding-card:last-child { margin-bottom: 0; }
+  .finding-card[hidden] { display: none; }
+
+  .finding-card-head {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 0.75rem 1rem;
+    align-items: baseline;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+  .finding-number {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0;
+    grid-column: 1;
+  }
+  .finding-category {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.55rem;
+    border: 1px solid;
+    grid-column: 2;
+    align-self: baseline;
+    background: var(--surface2);
+  }
+  .finding-category[data-category="procurement"] { color: var(--amber); border-color: rgba(240,168,74,0.4); }
+  .finding-category[data-category="fiduciary"]   { color: #d6a06b; border-color: rgba(214,160,107,0.45); }
+  .finding-category[data-category="process"]     { color: var(--text-mid); border-color: rgba(136,136,160,0.45); }
+  .finding-category[data-category="disclosure"]  { color: #4ac9c9; border-color: rgba(74,201,201,0.4); }
+  .finding-category[data-category="contractual"] { color: #b09cd9; border-color: rgba(176,156,217,0.4); }
+
+  .finding-title {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.45rem;
+    color: var(--white);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin: 0;
+    grid-column: 1 / -1;
+  }
+
+  .finding-summary {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text);
+    margin: 0 0 1.75rem 0;
+  }
+  .finding-summary strong { color: var(--white); font-weight: 500; }
+
+  .finding-statutes {
+    margin: 0 0 1.75rem 0;
+    padding: 1rem 1.25rem;
+    background: var(--surface2);
+    border-left: 3px solid var(--text-mid);
+  }
+  .finding-statutes-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: 0 0 0.6rem 0;
+  }
+  .finding-statutes-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .finding-statute {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--white);
+    font-style: normal;
+    margin-right: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .finding-statute-note {
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+
+  .finding-docs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .finding-doc {
+    padding-left: 1rem;
+    border-left: 2px solid var(--border);
+  }
+  .finding-doc-label {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    margin: 0 0 0.6rem 0;
+    line-height: 1.55;
+  }
+  .finding-doc blockquote {
+    border-left: 4px solid var(--accent);
+    background: rgba(200,240,74,0.04);
+    padding: 0.85rem 1.1rem;
+    margin: 0 0 0.6rem 0;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text);
+    quotes: "\201C" "\201D";
+  }
+  .finding-doc blockquote::before { content: open-quote; color: var(--accent); margin-right: 0.15rem; }
+  .finding-doc blockquote::after { content: close-quote; color: var(--accent); margin-left: 0.15rem; }
+  .finding-doc-link {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    color: var(--text-mid);
+    margin: 0;
+  }
+  .finding-doc-link a {
+    color: var(--accent);
+    border-bottom: 1px solid rgba(200,240,74,0.3);
+  }
+  .finding-doc-link a:hover { border-color: var(--accent); }
+  .finding-doc-link .pending {
+    color: var(--text-dim);
+    font-style: normal;
+  }
+
+  .finding-footer {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .finding-footer a {
+    color: var(--text-mid);
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .finding-footer a:hover { color: var(--accent); border-color: rgba(200,240,74,0.4); }
+  .finding-footer-section { display: block; margin-bottom: 0.25rem; }
+  .finding-footer-section:last-child { margin-bottom: 0; }
+  .finding-footer-section strong {
+    color: var(--text-mid);
+    font-weight: 500;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.68rem;
+    margin-right: 0.4rem;
+  }
+
+  /* ---------- Sources (Section 4) ---------- */
+  .sources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .source-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem 1.75rem;
+  }
+  .source-card[data-kind="probate"] { border-left: 3px solid #b09cd9; }
+  .source-card[data-kind="city-production"] { border-left: 3px solid var(--amber); }
+  .source-date {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .source-label {
+    font-size: 1rem;
+    color: var(--white);
+    line-height: 1.55;
+    margin-bottom: 0.65rem;
+    font-weight: 500;
+  }
+  .source-meta {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+  .source-meta:last-child { margin-bottom: 0; }
+  .source-meta a {
+    color: var(--accent);
+    border-bottom: 1px solid rgba(200,240,74,0.3);
+  }
+  .source-meta .pending { color: var(--text-dim); }
+
+  /* ---------- What's documented elsewhere ---------- */
+  .whats-elsewhere p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text);
+    max-width: 760px;
+    margin-bottom: 1.4rem;
+  }
+  .whats-elsewhere a {
+    color: var(--accent);
+    border-bottom: 1px solid rgba(200,240,74,0.3);
+  }
+  .whats-elsewhere a:hover { border-color: var(--accent); }
+  .whats-elsewhere .signoff {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- Render-error fallback ---------- */
+  .render-error {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--red);
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--red);
+    background: rgba(240,90,74,0.06);
+  }
+
+  @media (max-width: 900px) {
+    .bouquet-page .section { padding: 3rem 1.5rem; }
+    .finding-card { padding: 1.5rem 1.5rem; }
+    .finding-card-head { grid-template-columns: auto 1fr; }
+    .finding-number { grid-column: 1; }
+    .finding-category { grid-column: 2; justify-self: end; }
+    .finding-title { grid-column: 1 / -1; }
+    .finding-toc-list a { grid-template-columns: 50px 1fr; }
+    .finding-toc-cat { grid-column: 2; }
+  }
+  @media (max-width: 480px) {
+    .bouquet-page .section { padding: 2.5rem 1rem; }
+    .finding-card { padding: 1.25rem 1.1rem; }
+    .finding-title { font-size: 1.15rem; }
+    .finding-summary { font-size: 0.95rem; }
+    .source-card { padding: 1.25rem 1.1rem; }
+    .finding-doc { padding-left: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FLOCK<em>BLOCKER</em></a>
+  <div class="header-right">
+    <a href="doctrine.html" class="doctrine-link">[ DETERRENCE DOCTRINE ]</a>
+    <a href="eyesonme.html" class="header-link eyesonme">EYESONME</a>
+    <a href="index.html" class="header-link">Home</a>
+    <a href="evidence.html" class="header-link evidence">Evidence</a>
+    <a href="wall-of-shame.html" class="header-link">Wall of Shame</a>
+    <a href="rebellion.html" class="header-link">Rebellion</a>
+    <a href="who.html" class="header-link">Who</a>
+    <a href="birdstrike.html" class="header-link">BirdStrike</a>
+    <a href="https://github.com/d3fq0n1/flockblocker" target="_blank" class="header-link">GitHub ↗</a>
+    <span class="live-badge"><span id="countdown"></span></span>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="eyesonme.html">EYESONME</a>
+  <a href="doctrine.html">Deterrence Doctrine</a>
+  <a href="evidence.html">Evidence</a>
+  <a href="wall-of-shame.html">Wall of Shame</a>
+  <a href="rebellion.html">Rebellion</a>
+  <a href="who.html">Who's Responsible</a>
+  <a href="birdstrike.html">BirdStrike</a>
+  <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">GitHub</a>
+</nav>
+
+<div class="bouquet-page">
+
+  <!-- Section 1 — Page hero -->
+  <div class="page-hero">
+    <p class="page-hero-kicker amber">// Municipal record · City of Mauston · public productions</p>
+    <h1 class="page-hero-title">THE BOUQUET</h1>
+    <p class="page-hero-lead">
+      Published <time datetime="2026-04-30">April 30, 2026</time>. Sourced from the City of Mauston's own records productions.
+    </p>
+  </div>
+
+  <hr>
+
+  <!-- Section 2 — Frame -->
+  <div class="section frame" id="frame">
+    <p class="section-tag">Frame</p>
+    <h2 class="section-title">What This Page Documents</h2>
+    <p>On <time datetime="2026-03-19">March 19, 2026</time>, the operator filed a formal demand letter and a Wis. Stat. § 19.35 open records request with the City of Mauston, naming specific officials and requesting all records relating to the Flock Safety contract. The City produced records in three releases: <time datetime="2026-04-20">April 20</time>, <time datetime="2026-04-23">April 23</time>, and <time datetime="2026-04-27">April 27, 2026</time>.</p>
+    <p>This page documents twelve findings drawn from those productions, the executed contract, and the public probate record of the Estate of Glenn T. Buehlman (Juneau County Case No. 2022PR000027). Each finding is sourced to a primary document. Where a finding rests on a Wisconsin statute or municipal accounting standard, the statute is cited.</p>
+    <p>This page documents municipal conduct only. A separate page documents Flock Safety's coordination with city officials. (See <a href="the-coordination.html">the-coordination.html</a>.) Both pages are based on the same documentary record, produced by the City Administrator in response to lawful records requests.</p>
+  </div>
+
+  <hr>
+
+  <!-- Section 3 — Findings -->
+  <div class="section" id="findings">
+    <p class="section-tag">03 — Findings</p>
+    <h2 class="section-title">Twelve, In Order</h2>
+
+    <noscript>
+      <div class="timeline-noscript">
+        This page renders findings from a JSON data file using JavaScript. With JavaScript disabled, the findings list does not display. The seeded findings are documented in <a href="bouquet-findings.json">bouquet-findings.json</a>; exhibits are linked from <a href="legal/bouquet/">/legal/bouquet/</a> as the operator places them. A static HTML fallback may follow.
+      </div>
+    </noscript>
+
+    <div class="finding-filter" role="group" aria-label="Filter findings by category" id="finding-filter"></div>
+
+    <nav class="finding-toc" aria-label="Findings table of contents">
+      <p class="finding-toc-label">Index</p>
+      <ul class="finding-toc-list" id="finding-toc"></ul>
+    </nav>
+
+    <div id="finding-list"></div>
+  </div>
+
+  <hr>
+
+  <!-- Section 4 — Source documentation -->
+  <div class="section" id="sources">
+    <p class="section-tag">04 — Source documentation</p>
+    <h2 class="section-title">Production Chain</h2>
+    <p class="page-hero-lead" style="font-size:1rem;max-width:760px;">Each finding above is sourced to one of the productions or court records listed below. Provenance is the entire game on this page. A reader who wants to verify any finding can trace it from the finding to the document to the source production to the underlying records request or court filing.</p>
+    <div class="sources-list" id="bouquet-sources"></div>
+  </div>
+
+  <hr>
+
+  <!-- Section 5 — What's documented elsewhere -->
+  <div class="section whats-elsewhere" id="elsewhere">
+    <p class="section-tag">05 — What's documented elsewhere</p>
+    <h2 class="section-title">Scope of This Page</h2>
+    <p>This page covers municipal conduct only. The Flock-side coordination record is on <a href="the-coordination.html">the-coordination.html</a>. The cease-and-desist served by Flock on <time datetime="2026-04-16">April 16, 2026</time> is on <a href="the-letter.html">the-letter.html</a>. <time datetime="2026-04-30">April 30, 2026</time>.</p>
+    <p class="signoff">Updates dated as published. — flockblocker.org</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">
+    Any interference with this operation, its operator, or any extension of this work will be treated as aggression and met with documented, legal, nonviolent asymmetric escalation. This was stated publicly. In advance. On purpose.<br>
+    <a href="doctrine.html">→ Full doctrine</a> · <a href="https://github.com/d3fq0n1/flockblocker" target="_blank">github.com/d3fq0n1/flockblocker</a> · <time datetime="2026-04-30">2026-04-30</time>
+  </div>
+  <div class="footer-right">FLOCKBLOCKER — 2026</div>
+</footer>
+
+<script>
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('active');
+}));
+</script>
+
+<script>
+/* Live-badge countdown — same logic as other pages so the header behaves identically. */
+(function(){
+  var deadline = new Date('2026-04-18T00:00:00-05:00').getTime();
+  var el = document.getElementById('countdown');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    if(!el) return;
+    var now = Date.now();
+    var diff = deadline - now;
+    if(diff > 0){
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      var daysRemaining = Math.ceil(diff/86400000);
+      el.textContent = 'T-'+daysRemaining+'D '+pad(h)+'H '+pad(m)+'M '+pad(s)+'S';
+    } else {
+      diff = Math.abs(diff);
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      el.textContent = 'OVERDUE '+d+'D '+pad(h)+'H '+pad(m)+'M';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
+<script>
+/* Findings renderer.
+   - Fetches bouquet-findings.json
+   - Builds inline TOC + category filter + finding cards
+   - Mirrors Day 2 (the-coordination.html) coding style: vanilla JS IIFE,
+     esc()/isPending() helpers, innerHTML string building. */
+(function(){
+  function esc(s){
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+  function isPending(s){
+    return typeof s === 'string' && s.indexOf('TODO') !== -1;
+  }
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  var CATEGORY_LABEL = {
+    procurement: 'Procurement',
+    fiduciary: 'Fiduciary',
+    process: 'Process',
+    disclosure: 'Disclosure',
+    contractual: 'Contractual'
+  };
+  function catLabel(k){ return CATEGORY_LABEL[k] || (k ? k.charAt(0).toUpperCase() + k.slice(1) : ''); }
+
+  /* ---------- Render: statute list ---------- */
+  function renderStatutes(list){
+    if (!list || !list.length) return '';
+    var items = list.map(function(s){
+      var noteHtml = s.note ? '<span class="finding-statute-note"> — ' + esc(s.note) + '</span>' : '';
+      return '<li><cite class="finding-statute" data-citation="' + esc(s.citation) + '">' + esc(s.citation) + '</cite>' + noteHtml + '</li>';
+    }).join('');
+    return '<aside class="finding-statutes" aria-label="Statutes and authorities cited">'
+      + '<p class="finding-statutes-label">Cited</p>'
+      + '<ul class="finding-statutes-list">' + items + '</ul>'
+      + '</aside>';
+  }
+
+  /* ---------- Render: a single document block ---------- */
+  function renderDocument(d){
+    var label = '<p class="finding-doc-label">' + esc(d.label || 'Document') + '</p>';
+
+    var blockquote = '';
+    if (d.quoted_passage) {
+      var citeAttr = (d.path && !isPending(d.path)) ? ' cite="' + esc(d.path) + '"' : '';
+      blockquote = '<blockquote' + citeAttr + '>' + esc(d.quoted_passage) + '</blockquote>';
+    }
+
+    var linkLine = '';
+    if (d.path && !isPending(d.path)) {
+      var linkLabel = d.filename && !isPending(d.filename) ? d.filename : 'Download (PDF)';
+      linkLine = '<p class="finding-doc-link"><a href="' + esc(d.path) + '" aria-label="Download exhibit: ' + esc(d.label || 'document') + ' (PDF)">' + esc(linkLabel) + '</a></p>';
+    } else if (d.path === null && (!d.filename || isPending(d.filename))) {
+      linkLine = '<p class="finding-doc-link"><span class="pending">Document referenced; no PDF placement.</span></p>';
+    } else {
+      linkLine = '<p class="finding-doc-link"><span class="pending">PDF: pending placement.</span></p>';
+    }
+
+    return '<div class="finding-doc">' + label + blockquote + linkLine + '</div>';
+  }
+
+  /* ---------- Render: see_also footer ---------- */
+  function renderSeeAlso(arr){
+    if (!arr || !arr.length) return '';
+    var refs = arr.map(function(r){
+      if (r.kind === 'finding') {
+        var num = r.ref.replace(/^finding-0?(\d+).*$/, '$1');
+        return '<a href="#' + esc(r.ref) + '">Finding ' + esc(pad(parseInt(num,10))) + '</a>';
+      }
+      if (r.kind === 'page') {
+        var label = r.label || r.ref;
+        return '<a href="' + esc(r.ref) + '">' + esc(label) + '</a>';
+      }
+      return esc(r.ref || '');
+    }).join(' · ');
+    return '<span class="finding-footer-section"><strong>See also</strong>' + refs + '</span>';
+  }
+
+  /* ---------- Render: source-production line in footer ---------- */
+  function inferProductionFromDocs(docs){
+    /* Pull a hint about which production the documents came from based on
+       their labels. Pure heuristic; loader does not assert facts not in JSON. */
+    if (!docs) return '';
+    var dates = [];
+    docs.forEach(function(d){
+      if (!d.label) return;
+      var m = d.label.match(/(April|March|July) \d{1,2},? \d{4}/);
+      if (m) dates.push(m[0]);
+    });
+    if (!dates.length) return '';
+    var unique = [];
+    dates.forEach(function(x){ if (unique.indexOf(x) === -1) unique.push(x); });
+    return unique.join(', ');
+  }
+
+  /* ---------- Render: full finding card ---------- */
+  function renderFindingCard(f){
+    var titleId = 'title-' + f.id;
+    var num = pad(f.number);
+
+    var head = '<header class="finding-card-head">'
+      + '<p class="finding-number">Finding ' + esc(num) + '</p>'
+      + '<span class="finding-category" data-category="' + esc(f.category) + '">' + esc(catLabel(f.category)) + '</span>'
+      + '<h3 class="finding-title" id="' + esc(titleId) + '">' + esc(f.title) + '</h3>'
+      + '</header>';
+
+    var summary = '<p class="finding-summary">' + esc(f.summary) + '</p>';
+    var statutes = renderStatutes(f.statutes_cited);
+    var docs = '';
+    if (f.documents && f.documents.length) {
+      docs = '<div class="finding-docs">' + f.documents.map(renderDocument).join('') + '</div>';
+    }
+
+    var footerBits = [];
+    var dates = inferProductionFromDocs(f.documents);
+    if (dates) {
+      footerBits.push('<span class="finding-footer-section"><strong>Document dates</strong>' + esc(dates) + '</span>');
+    }
+    var seeAlso = renderSeeAlso(f.see_also);
+    if (seeAlso) footerBits.push(seeAlso);
+    var footer = footerBits.length
+      ? '<footer class="finding-footer">' + footerBits.join('') + '</footer>'
+      : '';
+
+    return head + summary + statutes + docs + footer;
+  }
+
+  /* ---------- TOC ---------- */
+  function renderTOC(findings){
+    var toc = document.getElementById('finding-toc');
+    if (!toc) return;
+    toc.innerHTML = findings.map(function(f){
+      return '<li><a href="#' + esc(f.id) + '">'
+        + '<span class="finding-toc-num">' + esc(pad(f.number)) + '</span>'
+        + '<span>' + esc(f.title) + '</span>'
+        + '<span class="finding-toc-cat">' + esc(catLabel(f.category)) + '</span>'
+        + '</a></li>';
+    }).join('');
+  }
+
+  /* ---------- Category filter ---------- */
+  function renderFilter(findings){
+    var bar = document.getElementById('finding-filter');
+    if (!bar) return;
+    var cats = [];
+    findings.forEach(function(f){ if (cats.indexOf(f.category) === -1) cats.push(f.category); });
+
+    var label = '<p class="finding-filter-label">Filter</p>';
+    var allBtn = '<button type="button" data-filter="all" aria-pressed="true">All (' + findings.length + ')</button>';
+    var catBtns = cats.map(function(c){
+      var n = findings.filter(function(f){ return f.category === c; }).length;
+      return '<button type="button" data-filter="' + esc(c) + '" aria-pressed="false">' + esc(catLabel(c)) + ' (' + n + ')</button>';
+    }).join('');
+    bar.innerHTML = label + allBtn + catBtns;
+
+    bar.querySelectorAll('button').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var filter = btn.getAttribute('data-filter');
+        bar.querySelectorAll('button').forEach(function(b){
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        });
+        document.querySelectorAll('.finding-card').forEach(function(card){
+          var cat = card.getAttribute('data-category');
+          if (filter === 'all' || cat === filter) {
+            card.removeAttribute('hidden');
+          } else {
+            card.setAttribute('hidden', '');
+          }
+        });
+      });
+    });
+  }
+
+  /* ---------- Top-level render ---------- */
+  function render(data){
+    var container = document.getElementById('finding-list');
+    if (!container) return;
+    var findings = (data && data.findings) || [];
+    if (!findings.length) {
+      container.innerHTML = '<p class="render-error">No findings available.</p>';
+      return;
+    }
+
+    findings.sort(function(a, b){ return (a.number || 0) - (b.number || 0); });
+
+    renderTOC(findings);
+    renderFilter(findings);
+
+    container.innerHTML = findings.map(function(f){
+      var titleId = 'title-' + f.id;
+      var status = f.status === 'forthcoming' ? 'forthcoming' : 'published';
+      if (status === 'forthcoming') {
+        return '<article class="finding-card" id="' + esc(f.id) + '" data-category="' + esc(f.category || '') + '" aria-labelledby="' + esc(titleId) + '">'
+          + '<header class="finding-card-head">'
+          +   '<p class="finding-number">Finding ' + esc(pad(f.number)) + '</p>'
+          +   (f.category ? '<span class="finding-category" data-category="' + esc(f.category) + '">' + esc(catLabel(f.category)) + '</span>' : '')
+          +   '<h3 class="finding-title" id="' + esc(titleId) + '">' + esc(f.title || '[Title pending]') + '</h3>'
+          + '</header>'
+          + '<p class="finding-summary"><span class="pending">Pending publication.</span></p>'
+          + '</article>';
+      }
+      return '<article class="finding-card" id="' + esc(f.id) + '" data-category="' + esc(f.category) + '" aria-labelledby="' + esc(titleId) + '">'
+        + renderFindingCard(f)
+        + '</article>';
+    }).join('');
+  }
+
+  function fail(err){
+    if (err) console.warn('bouquet-findings.json failed to load:', err);
+    var container = document.getElementById('finding-list');
+    if (container) container.innerHTML = '<p class="render-error">Findings failed to load. Reload the page or check back shortly.</p>';
+  }
+
+  if (window.fetch) {
+    fetch('bouquet-findings.json').then(function(r){ return r.json(); }).then(render).catch(fail);
+  } else {
+    fail();
+  }
+})();
+</script>
+
+<script>
+/* Sources renderer — Section 4. */
+(function(){
+  function esc(s){
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+  function isPending(s){
+    return typeof s === 'string' && s.indexOf('TODO') !== -1;
+  }
+  function render(data){
+    var container = document.getElementById('bouquet-sources');
+    if (!container) return;
+    var sources = (data && data.sources) || [];
+    if (!sources.length) {
+      container.innerHTML = '<p class="render-error">No sources available.</p>';
+      return;
+    }
+    container.innerHTML = sources.map(function(s){
+      var dateLine = s.date
+        ? '<p class="source-date"><time datetime="' + esc(s.date) + '">' + esc(s.date) + '</time></p>'
+        : (s.kind === 'probate'
+            ? '<p class="source-date">Public probate record</p>'
+            : '');
+      var label = '<p class="source-label">' + esc(s.label) + '</p>';
+      var requestLine = '';
+      if (s.request) {
+        requestLine = isPending(s.request)
+          ? '<p class="source-meta"><span class="pending">Records request: pending publication.</span></p>'
+          : '<p class="source-meta">Records request: ' + esc(s.request) + '</p>';
+      }
+      var coverLine = '';
+      if (s.cover_letter_pdf && !isPending(s.cover_letter_pdf)) {
+        coverLine = '<p class="source-meta">Cover letter: <a href="' + esc(s.cover_letter_pdf) + '" aria-label="Download production cover letter (PDF)">Download (PDF)</a></p>';
+      } else if (s.kind === 'city-production') {
+        coverLine = '<p class="source-meta"><span class="pending">Cover letter: pending placement.</span></p>';
+      }
+      return '<article class="source-card" data-kind="' + esc(s.kind || '') + '" aria-label="' + esc(s.label) + '">'
+        + dateLine + label + requestLine + coverLine
+        + '</article>';
+    }).join('');
+  }
+  function fail(err){
+    if (err) console.warn('bouquet-sources.json failed to load:', err);
+    var container = document.getElementById('bouquet-sources');
+    if (container) container.innerHTML = '<p class="render-error">Source list failed to load.</p>';
+  }
+  if (window.fetch) {
+    fetch('bouquet-sources.json').then(function(r){ return r.json(); }).then(render).catch(fail);
+  } else {
+    fail();
+  }
+})();
+</script>
+
+</body>
+</html>

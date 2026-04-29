@@ -1,0 +1,37 @@
+{
+  "last_updated": "2026-04-30",
+  "sources": [
+    {
+      "id": "mauston-2026-04-20",
+      "kind": "city-production",
+      "date": "2026-04-20",
+      "label": "City of Mauston, Initial open records production, April 20, 2026",
+      "request": "[TODO operator: paste request text or link to the Wis. Stat. § 19.35 request that produced this release]",
+      "cover_letter_pdf": null
+    },
+    {
+      "id": "mauston-2026-04-23",
+      "kind": "city-production",
+      "date": "2026-04-23",
+      "label": "City of Mauston, Supplemental open records production, April 23, 2026",
+      "request": "[TODO operator: paste supplemental request text or link]",
+      "cover_letter_pdf": null
+    },
+    {
+      "id": "mauston-2026-04-27",
+      "kind": "city-production",
+      "date": "2026-04-27",
+      "label": "City of Mauston, Supplemental open records production, April 27, 2026",
+      "request": "[TODO operator: paste supplemental request text or link]",
+      "cover_letter_pdf": null
+    },
+    {
+      "id": "buehlman-probate-2022PR000027",
+      "kind": "probate",
+      "date": null,
+      "label": "Estate of Glenn T. Buehlman, Juneau County Case No. 2022PR000027, public probate record",
+      "request": null,
+      "cover_letter_pdf": null
+    }
+  ]
+}
