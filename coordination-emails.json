@@ -1,0 +1,92 @@
+{
+  "last_updated": "2026-04-29",
+  "operator_workflow": "To publish a forthcoming entry: change status to 'published'; fill in sender, recipients, subject, time, passages, attachments; place the PDF at the path in source.pdf_path; update source.production_date and source.production_label if changed; commit with message 'Publish coordination entry: <id>'.",
+  "entries": [
+    {
+      "id": "gautam-2026-04-09",
+      "date": "2026-04-09",
+      "time": "13:10 CT",
+      "sender": {
+        "name": "Gautam Ratnam",
+        "title": "Account Executive",
+        "organization": "Flock Group, Inc."
+      },
+      "recipients": {
+        "to": [
+          { "name": "Daron J. Haugh", "title": "City Administrator", "organization": "City of Mauston" },
+          { "name": "Michael Zilisch", "title": "Chief of Police", "organization": "Mauston Police Department" }
+        ],
+        "cc": [
+          { "name": "Mike Wahl", "title": "[TODO role — operator to verify]", "organization": "Flock Group, Inc." },
+          { "name": "Tina Maharath", "title": "Public Affairs", "organization": "Flock Group, Inc." }
+        ]
+      },
+      "subject": "[TODO operator: paste exact subject line from PDF]",
+      "passages": [
+        "Below are our official responses to the key issues that your constituent raised. This should help craft a response.",
+        "I've also attached a document that provides FOIA guidance."
+      ],
+      "attachments": [
+        { "name": "Flock talking points.pdf", "filename": "[TODO operator: filename as attached]" }
+      ],
+      "source": {
+        "production_date": "2026-04-23",
+        "production_label": "City of Mauston open records production, dated April 23, 2026, supplemental release",
+        "exhibit_id": "B",
+        "pdf_path": "legal/coordination/2026-04-09-gautam-talking-points.pdf"
+      },
+      "status": "published"
+    },
+    {
+      "id": "gautam-2026-04-16",
+      "date": "2026-04-16",
+      "time": null,
+      "sender": null,
+      "recipients": null,
+      "subject": null,
+      "passages": [],
+      "attachments": [],
+      "source": {
+        "production_date": null,
+        "production_label": null,
+        "exhibit_id": null,
+        "pdf_path": null
+      },
+      "status": "forthcoming"
+    },
+    {
+      "id": "tajik-2026-04-16-foia",
+      "date": "2026-04-16",
+      "time": null,
+      "sender": null,
+      "recipients": null,
+      "subject": null,
+      "passages": [],
+      "attachments": [],
+      "source": {
+        "production_date": null,
+        "production_label": null,
+        "exhibit_id": null,
+        "pdf_path": null
+      },
+      "status": "forthcoming"
+    },
+    {
+      "id": "maharath-2026-04-17",
+      "date": "2026-04-17",
+      "time": null,
+      "sender": null,
+      "recipients": null,
+      "subject": null,
+      "passages": [],
+      "attachments": [],
+      "source": {
+        "production_date": null,
+        "production_label": null,
+        "exhibit_id": null,
+        "pdf_path": null
+      },
+      "status": "forthcoming"
+    }
+  ]
+}

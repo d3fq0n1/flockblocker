@@ -65,7 +65,9 @@ flockblocker/
 ├── optical/                # IR interference & retroreflective material research
 ├── distribution/           # Bumper sticker designs & distribution strategy
 ├── legal/                  # FOIA templates, contract analysis, C&D transcription
-├── flockdocs/              # Primary-source documents (C&D PDF, contracts, FOIA productions)
+│   ├── coordination/       # Email PDF exhibits cited from the-coordination.html
+│   └── bouquet/            # Exhibit PDFs cited from the-bouquet.html
+├── flockdocs/              # Primary-source documents (C&D PDF, contracts, journal entries, FOIA productions)
 ├── prompts/                # System prompts for Gemini Nano on-device intelligence
 ├── screenshots/            # Media assets
 │
@@ -75,10 +77,16 @@ flockblocker/
 ├── 404.html                # Custom 404 page
 ├── eyesonme-data.json      # Station fleet data (3 stations)
 ├── eyesonme-subjects.json  # Accountability subject profiles (8 subjects)
+├── coordination-emails.json    # Email exhibit timeline data (drip-fed via status flips)
+├── coordination-productions.json  # Open records production chain data
+├── bouquet-findings.json   # Twelve municipal-record findings (procurement / fiduciary / process / disclosure / contractual)
+├── bouquet-sources.json    # Production chain + Buehlman probate source list
 ├── submit.html             # Story submission form
 ├── stories.html            # Approved user stories (geography-grouped)
 ├── evidence.html           # Public record contract & chief's response
 ├── the-letter.html         # April 16 cease-and-desist as redaction-with-reveal performance
+├── the-coordination.html   # Flock-City email record, JSON-driven drip-fed timeline
+├── the-bouquet.html        # Twelve findings on city procurement and fiduciary record, JSON-driven
 ├── wall-of-shame.html      # Documented LPR-network misuse cases
 ├── birdstrike.html         # "Project BIRDSTRIKE" municipal research template
 ├── harms.html              # Catalog of Flock harms + censorship record + money flow (merged)
@@ -212,7 +220,73 @@ Cease-and-desist letter served by Flock Safety on April 16, 2026, published Apri
 
 **Not in nav.** The page is reachable from the homepage "Recent" section only, matching the existing out-of-nav pattern (`harms.html`, `doctrine.html`, `stories.html`, `submit.html`).
 
-### 11. Public Information Pages
+### 11. The Coordination (`the-coordination.html`)
+
+JSON-driven timeline of Flock Safety ↔ City of Mauston email correspondence sourced from open records productions under Wis. Stat. § 19.35. Day 2 of the staggered three-page rollout. Day 1 (`the-letter.html`) is the signal; this page is the substance.
+
+**Component behavior:**
+- Page chrome (header, footer, nav) is identical to other site pages. Out of nav, like `the-letter.html`.
+- Section 3 (email timeline) renders entirely from `coordination-emails.json` via vanilla `fetch().then()` — same loader pattern as `eyesonme.html`. Inline TOC built from the same data; deep-link anchors via `id="entry-<id>"`.
+- Section 4 (production chain) renders from `coordination-productions.json`.
+- Each entry has `status: "published"` or `status: "forthcoming"`. Forthcoming entries render as opacity-0.55 placeholder cards with a `[ PENDING PUBLICATION ]` exhibit-slot label and a single `Pending publication.` body line — no passages, attachments, or source footer.
+- Display order = JSON array order (chronological by authoring; operator-controlled tie-breaking for same-day entries).
+- Render-failure path: each fetch's `.catch()` injects an inline `.render-error` line so the section degrades visibly instead of silently.
+- `<noscript>` block in Section 3 explains the page requires JavaScript and points readers at `legal/coordination/` for the raw PDFs.
+
+**Drip-feed workflow** (lives in `coordination-emails.json`'s `operator_workflow` field and in `legal/coordination/README.md`):
+1. Place email PDF at `legal/coordination/YYYY-MM-DD-shortname.pdf`.
+2. Open `coordination-emails.json`, find entry by `id`.
+3. Flip `status` from `forthcoming` to `published`; fill in `sender`, `recipients`, `subject`, `time`, `passages`, `attachments`, `source`.
+4. Commit with message `Publish coordination entry: <id>`. Push.
+
+No HTML edits, no JS edits, no CSS edits per drop. JSON + PDF only.
+
+**Editorial register:** Inverse of `the-letter.html`. Page contains zero editorializing prose; documents speak. No adjectives describing Flock or city personnel. No exclamation marks. No mention of K9 fund / Buehlman estate / journal entries / fiduciary breach — that material is Day 3.
+
+**Source artifacts seeded at launch:**
+- One `published` entry: Gautam Ratnam (Account Executive, Flock Group, Inc.) → Daron J. Haugh + Michael Zilisch, CC Mike Wahl + Tina Maharath, April 9, 2026, 13:10 CT, Exhibit B, attaching `Flock talking points.pdf`. Two passages quoted verbatim. Source PDF placeholder at `legal/coordination/2026-04-09-gautam-talking-points.pdf` — operator drops in.
+- Three `forthcoming` entries (April 16, April 16, April 17) seeded as placeholders.
+
+**Cross-link from `the-letter.html`:** Section 5 ("What's next") of the Day 1 page now links the phrase "open records production" to this page. Single-paragraph, single-anchor edit; no copy added.
+
+### 12. The Bouquet (`the-bouquet.html`)
+
+JSON-driven page documenting twelve findings on the City of Mauston's procurement, authorization, and fiduciary record around its Flock Safety contract. Day 3 of the staggered three-page rollout. Day 1 (`the-letter.html`) is the signal; Day 2 (`the-coordination.html`) is the Flock-side substance; Day 3 is the city-side substance.
+
+**Component behavior:**
+- Page chrome (header, footer, nav) is identical to other pages. Out of nav.
+- Section 3 renders entirely from `bouquet-findings.json` via vanilla `fetch().then()` — same loader pattern as `eyesonme.html` and `the-coordination.html`.
+- Each finding renders as a card with: number, category badge, title, summary, statutes-cited block (where present), per-document blocks (label + optional blockquote with `cite=path` + download link or pending-placement marker), and a footer with see-also cross-references.
+- Inline TOC built from the same data; deep-link anchors via `id="finding-N-slug"`.
+- Category filter at top of Section 3: five buttons (`procurement`, `fiduciary`, `process`, `disclosure`, `contractual`) plus `All` reset, `aria-pressed` state, JS-driven `[hidden]` toggling on cards. No-JS = all visible.
+- Section 4 (production chain + Buehlman probate) renders from `bouquet-sources.json`. `kind` field differentiates `city-production` (amber left border) from `probate` (lavender left border).
+- Render-failure path: each fetch's `.catch()` injects an inline `.render-error` line.
+- `<noscript>` block points readers at `bouquet-findings.json` and `legal/bouquet/`.
+
+**Not drip-fed.** Unlike Day 2, all twelve findings are seeded as `status: "published"` at launch. Every finding rests on documents already produced by the city or already in the public probate record. Future updates are document additions to `documents` arrays (see operator workflow below), not status flips.
+
+**Operator workflow** (also stored in `bouquet-findings.json`'s `operator_workflow` field and in `legal/bouquet/README.md`):
+- Add finding: append to `findings` with the next sequential number; fill `summary`, `statutes_cited`, `documents`; place exhibit PDFs at `documents[].path`; commit `Add finding <N>: <title>`.
+- Update finding: append to the entry's `documents` array (do not renumber); commit `Update finding <N>: <reason>`.
+
+No HTML / JS / CSS edits per drop.
+
+**Editorial register:** Same clinical posture as Day 2, with one stricter rule. The page asserts no legal conclusions. Statutes are cited; the record is stated; the reader concludes. No "embezzlement," "breach," "violation," "misappropriation," "corruption," or "fiduciary breach" language anywhere on the page. Phrasing pattern: "Wis. Stat. § X requires Y. The record shows Z."
+
+**Source artifacts:**
+- City of Mauston productions: April 20, April 23, and April 27, 2026 (three releases).
+- Buehlman probate record: Juneau County Case No. 2022PR000027.
+- Documents already in repo: `Flock Executed Agreement - Signed.pdf`, `Response to Clark, Blake.pdf`, `flockdocs/JE-24-015.pdf`, `flockdocs/JE-24-016.pdf`.
+- Documents pending operator placement: see `legal/bouquet/README.md` for the full table.
+
+**Cross-links:**
+- `the-letter.html` Section 5 now links the phrase "analysis of municipal procurement and fiduciary process" to this page (the existing "open records production" → coordination anchor stays).
+- `the-coordination.html` Section 5 links the phrase "procurement, authorization, and fiduciary record" to this page.
+- This page's Section 5 links back to both `the-coordination.html` and `the-letter.html`.
+
+**Pre-existing site content overlap.** Several findings are partially anticipated by older pages (`evidence.html` references Sgt. Brandon Arenz, the Section 5.3 disclosure issue, the estate-donation funding claim, and the council-authorization gap; `who.html` carries the Sgt. Arenz dossier). Those pages were intentionally left untouched in the Day 3 build. The bouquet is the consolidated, sourced version; older surface-level mentions remain as their own historical record.
+
+### 13. Public Information Pages
 
 Static HTML pages documenting surveillance harms, municipal defections, FOIA templates, the "Project BIRDSTRIKE" distributed research framework, evidence/contracts, funding analysis, censorship documentation, and personnel dossiers.
 
@@ -332,6 +406,14 @@ wrangler deploy
 - Deterrence doctrine footer present on every HTML page site-wide
 - `[ DETERRENCE DOCTRINE ]` header link present on every HTML page
 - All pages link to `eyesonme.html` and `doctrine.html` in both desktop and mobile navigation
-- Pages outside the standardized nav: `harms.html`, `doctrine.html`, `stories.html`, `submit.html`, `the-letter.html`, `404.html` — reachable from the homepage or contextual links only
+- Pages outside the standardized nav: `harms.html`, `doctrine.html`, `stories.html`, `submit.html`, `the-letter.html`, `the-coordination.html`, `the-bouquet.html`, `404.html` — reachable from the homepage or contextual links only
 - Redaction component: `.redactable` spans with click/focus reveal, 4-second auto-conceal, IntersectionObserver scroll-conceal, `prefers-reduced-motion` honored; `[ REVEAL ALL ]` / `[ CONCEAL ALL ]` controls override per-element behavior. Used only on `the-letter.html`.
 - Editorial tone is clinical and procedural across the site — `the-letter.html` is the sole exception, where the joke lives in the design rather than the prose
+- JSON-driven page rendering: `eyesonme.html` (stations + subjects), `the-coordination.html` (email exhibits + productions), `the-bouquet.html` (findings + sources). Pattern is `fetch('X.json').then(r => r.json()).then(render).catch(fail)` with inline-string `innerHTML` building. Page-specific styles inline in `<style>`; no shared `assets/js/` directory exists.
+- `the-coordination.html` drip-feed: to publish a `forthcoming` entry, drop the PDF at `legal/coordination/YYYY-MM-DD-shortname.pdf` and flip `status` to `published` in `coordination-emails.json` with sender/recipients/subject/passages/attachments filled in. JSON + PDF, no HTML/JS edits.
+- Coordination entry status values: `published`, `forthcoming`
+- Coordination same-day ordering: JSON array order is presentation order (loader does not re-sort); operator authors the array chronologically and breaks same-day ties by intent
+- Bouquet finding categories: `procurement`, `fiduciary`, `process`, `disclosure`, `contractual` — used for grouping, the inline TOC, the category filter, and the muted-hue category badge palette. No bright reds; the page is documentary, not alarmist.
+- Bouquet finding status values: `published`, `forthcoming` (forthcoming reserved for placeholder findings; all twelve seeded at launch are `published`)
+- `the-bouquet.html` does not use status flips for ongoing publication. Updates land as new `documents` entries appended to existing finding cards (`Update finding <N>: <reason>`) or as new findings appended to the array (`Add finding <N>: <title>`). Findings are not renumbered.
+- `the-bouquet.html` asserts no legal conclusions. The page cites statutes, states the record, and lets the reader assess. Phrasing pattern: "Wis. Stat. § X requires Y. The record shows Z." Words deliberately avoided on this page: "embezzlement," "breach," "violation," "misappropriation," "corruption," "fiduciary breach."

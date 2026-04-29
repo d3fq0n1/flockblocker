@@ -1,0 +1,371 @@
+{
+  "last_updated": "2026-04-30",
+  "operator_workflow": "To add a finding: append to 'findings' with the next sequential number; fill summary, statutes_cited, documents; place exhibit PDFs at documents[].path; commit 'Add finding <N>: <title>'. To update an existing finding: append to documents (do not renumber); commit 'Update finding <N>: <reason>'.",
+  "findings": [
+    {
+      "id": "finding-01-no-council-authorization",
+      "number": 1,
+      "category": "procurement",
+      "title": "Flock contract executed without City Council authorization",
+      "summary": "The City Administrator confirmed in writing, on April 20 and again on April 27, 2026, that he does not recall the Flock contract being discussed at City Council. The City has produced no resolution, motion, or supporting record indicating Council authorization. The Police Chief executed the original contract under his sole signature.",
+      "statutes_cited": [
+        { "citation": "Wis. Stat. § 62.11(5)", "note": "Vests legislative authority in the City Council" },
+        { "citation": "Wis. Stat. § 62.15", "note": "Public works contracts and procurement" }
+      ],
+      "documents": [
+        {
+          "label": "City Administrator response, April 20, 2026",
+          "filename": "Response to Clark, Blake.pdf",
+          "path": "Response to Clark, Blake.pdf",
+          "quoted_passage": "I'm not certain whether this matter ever appeared on a City Council agenda."
+        },
+        {
+          "label": "City Administrator response, April 27, 2026",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2026-04-27-haugh-response.pdf",
+          "quoted_passage": "I don't recall specifically this being discussed at Council."
+        },
+        {
+          "label": "Executed Flock Master Services Agreement (signed by Chief Zilisch only)",
+          "filename": "Flock Executed Agreement - Signed.pdf",
+          "path": "Flock Executed Agreement - Signed.pdf",
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [],
+      "status": "published"
+    },
+    {
+      "id": "finding-02-k9-fund-reclassification",
+      "number": 2,
+      "category": "fiduciary",
+      "title": "Reclassification of donor-restricted charitable funds",
+      "summary": "On March 13, 2024, the City Administrator and the Police Chief jointly signed a $10,000 withdrawal slip from a city CD titled \"Estate Donation & K9.\" Journal entry JE-24-015 reclassified the funds into the General Equipment Replacement Fund (Account 405-00-11103-000-132) on the same date. The funds originated from the Estate of Glenn T. Buehlman (Juneau County Case No. 2022PR000027), which distributed $402,899.92 to the Mauston Police Department as a named beneficiary. The estate's Schedule K-1 (Form 1041) for tax year 2022 identifies Mauston Police Department, EIN 39-6005521, as the beneficiary.",
+      "statutes_cited": [
+        { "citation": "Wis. Stat. § 112.10", "note": "Uniform Prudent Management of Institutional Funds Act" },
+        { "citation": "Common-law charitable trust doctrine", "note": "Donor-restricted charitable funds may not be redirected from the donor's stated purpose without cy pres or similar judicial process" }
+      ],
+      "documents": [
+        {
+          "label": "Journal entry JE-24-015 — reclassification of $10,000 from K9 CD to General Equipment Replacement Fund",
+          "filename": "JE-24-015.pdf",
+          "path": "flockdocs/JE-24-015.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Certificate of Deposit withdrawal slip dated March 13, 2024 (signed Daron Haugh, Chief Zilisch)",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2024-03-13-k9-cd-withdrawal-slip.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Bank of Mauston transaction screenshots — March 13, 2024 withdrawal",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2024-03-13-bom-transaction-screenshots.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Buehlman estate accounting — Schedule M",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2022PR000027-schedule-m.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Buehlman estate accounting — Schedule O",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2022PR000027-schedule-o.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Schedule K-1 (Form 1041), tax year 2022 — beneficiary: Mauston Police Department, EIN 39-6005521",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2022PR000027-k1-form-1041.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Curran Law Office cover letter dated July 5, 2023",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2023-07-05-curran-cover-letter.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Estate Receipt PR-1815 dated July 10, 2023",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2023-07-10-estate-receipt-pr-1815.pdf",
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [
+        { "kind": "finding", "ref": "finding-03-no-governing-instrument" },
+        { "kind": "finding", "ref": "finding-11-authorization-record-is-two-signatures" }
+      ],
+      "status": "published"
+    },
+    {
+      "id": "finding-03-no-governing-instrument",
+      "number": 3,
+      "category": "fiduciary",
+      "title": "Absence of governing instrument for the K9 CD",
+      "summary": "The City Administrator confirmed in writing on April 27, 2026 that the City has no internal Council resolution, donor agreement, or governing instrument codifying the donor's restrictions on the K9 CD beyond the estate paperwork received from Curran Law Office. The CD's account name in the city's chart of accounts (\"K9 CD – Flex & Donation,\" Account 100-00-11600-000-001) and on the bank's records (\"Estate Donation & K9\") establishes the restriction. The city accepted the donation, named the account after its restrictions, and adopted no internal governing instrument.",
+      "statutes_cited": [],
+      "documents": [
+        {
+          "label": "City Administrator response, April 27, 2026",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2026-04-27-haugh-response.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Journal entry JE-24-016 — Bank Account Interest JE, March 2024",
+          "filename": "JE-24-016.pdf",
+          "path": "flockdocs/JE-24-016.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Buehlman estate accounting — restrictions stated in estate paperwork received from Curran Law Office",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2023-07-05-curran-cover-letter.pdf",
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [
+        { "kind": "finding", "ref": "finding-02-k9-fund-reclassification" }
+      ],
+      "status": "published"
+    },
+    {
+      "id": "finding-04-wrong-document-produced-first",
+      "number": 4,
+      "category": "procurement",
+      "title": "Wrong contract document produced first",
+      "summary": "On April 7, 2026, the Police Chief produced an unsigned $50,200 quote for 8 cameras in response to the operator's request for the executed Flock agreement. Eight days later, on April 15, 2026, the City corrected the production by providing a January 2024 amendment for 2 cameras at $6,300. The City Administrator characterized the initial production as \"unintentional.\"",
+      "statutes_cited": [],
+      "documents": [
+        {
+          "label": "April 7, 2026 production — unsigned $50,200 quote for 8 cameras (later admitted to be a quote, not the contract)",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2026-04-07-zilisch-wrong-document.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "April 15, 2026 corrected production — January 2024 amendment for 2 cameras at $6,300",
+          "filename": "Flock Executed Agreement - Signed.pdf",
+          "path": "Flock Executed Agreement - Signed.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "City Administrator letter, April 15, 2026 — characterizes the initial production as \"unintentional\"",
+          "filename": "Response to Clark, Blake.pdf",
+          "path": "Response to Clark, Blake.pdf",
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [],
+      "status": "published"
+    },
+    {
+      "id": "finding-05-pre-deployment-data-sharing",
+      "number": 5,
+      "category": "disclosure",
+      "title": "Pre-deployment data-sharing agreement",
+      "summary": "On April 22, 2022 — approximately a year and a half before any Flock camera was installed in Mauston — the Police Chief signed a Flock data-sharing agreement, joining Mauston Police Department to Flock's national lookup network as a consumer of other agencies' data. The public was not notified before, during, or after this agreement was executed.",
+      "statutes_cited": [],
+      "documents": [
+        {
+          "label": "Zilisch email of April 22, 2022",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2022-04-22-zilisch-data-sharing.pdf",
+          "quoted_passage": "I signed the shared Data for having access."
+        },
+        {
+          "label": "Flock data-sharing agreement, April 22, 2022 (if produced)",
+          "filename": "[TODO operator to add — if not produced, leave path null]",
+          "path": "legal/bouquet/2022-04-22-flock-data-sharing-agreement.pdf",
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [],
+      "status": "published"
+    },
+    {
+      "id": "finding-06-section-5-3-disclosure-rights",
+      "number": 6,
+      "category": "contractual",
+      "title": "Section 5.3 of the Flock contract reserves independent disclosure rights to Flock",
+      "summary": "Section 5.3 of the executed Flock Master Services Agreement reserves to Flock the right to disclose Mauston Police Department's data to law enforcement, government authorities, and third parties on Flock's \"good faith belief,\" without notice to or consent from MPD. The City Administrator and the Police Chief have publicly stated that \"MPD controls all sharing.\" The contract Section 5.3 contradicts that statement.",
+      "statutes_cited": [],
+      "documents": [
+        {
+          "label": "Flock Master Services Agreement, Section 5.3",
+          "filename": "Flock Executed Agreement - Signed.pdf",
+          "path": "Flock Executed Agreement - Signed.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Public city statement(s) asserting MPD control of sharing",
+          "filename": "[TODO operator to add — citation to the public statement]",
+          "path": null,
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [
+        { "kind": "finding", "ref": "finding-07-section-9-1-liability-waiver" }
+      ],
+      "status": "published"
+    },
+    {
+      "id": "finding-07-section-9-1-liability-waiver",
+      "number": 7,
+      "category": "contractual",
+      "title": "Section 9.1 liability waiver",
+      "summary": "Section 9.1 of the executed Flock Master Services Agreement waives the City's remedies for breach, system failure, and corrupt or inaccurate data. The City accepted these terms by executing the agreement.",
+      "statutes_cited": [],
+      "documents": [
+        {
+          "label": "Flock Master Services Agreement, Section 9.1",
+          "filename": "Flock Executed Agreement - Signed.pdf",
+          "path": "Flock Executed Agreement - Signed.pdf",
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [
+        { "kind": "finding", "ref": "finding-06-section-5-3-disclosure-rights" }
+      ],
+      "status": "published"
+    },
+    {
+      "id": "finding-08-flock-drafted-talking-points",
+      "number": 8,
+      "category": "disclosure",
+      "title": "City accepted Flock-drafted talking points and used them in its public response",
+      "summary": "On April 9, 2026, Flock's Account Executive transmitted to the City Administrator and the Police Chief a set of pre-drafted \"official responses to the key issues that your constituent raised,\" along with FOIA guidance. On April 15, 2026, the City Administrator's letter to the operator used those Flock-drafted talking points in substantially the form Flock provided.",
+      "statutes_cited": [],
+      "documents": [
+        {
+          "label": "Gautam Ratnam email of April 9, 2026 (Exhibit B from City of Mauston supplemental production, April 23, 2026)",
+          "filename": "2026-04-09-gautam-talking-points.pdf",
+          "path": "legal/coordination/2026-04-09-gautam-talking-points.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "City Administrator letter to operator, April 15, 2026",
+          "filename": "Response to Clark, Blake.pdf",
+          "path": "Response to Clark, Blake.pdf",
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [
+        { "kind": "page", "ref": "the-coordination.html", "label": "Underlying email record" },
+        { "kind": "finding", "ref": "finding-09-drafts-exemption" }
+      ],
+      "status": "published"
+    },
+    {
+      "id": "finding-09-drafts-exemption",
+      "number": 9,
+      "category": "disclosure",
+      "title": "City asserts drafts exemption to withhold vendor communications",
+      "summary": "In response to the operator's supplemental records request of April 23, 2026, the City Administrator on April 27, 2026 invoked the drafts exemption (Wis. Stat. § 19.32(2)) and attorney-client privilege to withhold internal communications regarding the City's response to the operator's inquiries. The drafts exemption, under Journal Times v. Police & Fire Commissioners, 2015 WI 56, applies only to materials prepared for the originator's personal use that have not entered the institutional workflow. The Flock-drafted talking points were transmitted across institutional lines and used in the City's official response.",
+      "statutes_cited": [
+        { "citation": "Wis. Stat. § 19.32(2)", "note": "Defines 'record' for purposes of the open records law; drafts exemption" },
+        { "citation": "Wis. Stat. § 19.35", "note": "Right of access to public records" },
+        { "citation": "Journal Times v. Police & Fire Commissioners, 2015 WI 56", "note": "Drafts exemption limited to materials for the originator's personal use that have not entered the institutional workflow" }
+      ],
+      "documents": [
+        {
+          "label": "City Administrator response, April 27, 2026",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2026-04-27-haugh-response.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Operator's supplemental records request, April 23, 2026",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2026-04-23-supplemental-request.pdf",
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [
+        { "kind": "finding", "ref": "finding-08-flock-drafted-talking-points" }
+      ],
+      "status": "published"
+    },
+    {
+      "id": "finding-10-electronic-delivery-refused",
+      "number": 10,
+      "category": "process",
+      "title": "City refuses electronic delivery of public records",
+      "summary": "In the April 27, 2026 response, the City Administrator refused to accept records delivery via encrypted electronic link, citing \"IT security infrastructure reasons.\" The City offered physical pickup at City Hall or paid mail delivery via flash drive at $7.99 per drive plus postage.",
+      "statutes_cited": [
+        { "citation": "Wis. Stat. § 19.35(1)(b)", "note": "Form in which records are made available" }
+      ],
+      "documents": [
+        {
+          "label": "City Administrator response, April 27, 2026",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2026-04-27-haugh-response.pdf",
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [],
+      "status": "published"
+    },
+    {
+      "id": "finding-11-authorization-record-is-two-signatures",
+      "number": 11,
+      "category": "fiduciary",
+      "title": "Authorization record for the $10,000 K9 reclassification consists of two signatures on a withdrawal slip",
+      "summary": "In the April 27, 2026 response, the City Administrator confirmed that no Council resolution, no written justification memo, and no separate authorization record exists for the March 13, 2024 reclassification of $10,000 from the K9 CD. The authorization record is the joint signatures of the City Administrator and the Police Chief on the CD withdrawal slip.",
+      "statutes_cited": [],
+      "documents": [
+        {
+          "label": "City Administrator response, April 27, 2026",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2026-04-27-haugh-response.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "Certificate of Deposit withdrawal slip dated March 13, 2024 (signed Daron Haugh, Chief Zilisch)",
+          "filename": "[TODO operator to add]",
+          "path": "legal/bouquet/2024-03-13-k9-cd-withdrawal-slip.pdf",
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [
+        { "kind": "finding", "ref": "finding-02-k9-fund-reclassification" },
+        { "kind": "finding", "ref": "finding-01-no-council-authorization" }
+      ],
+      "status": "published"
+    },
+    {
+      "id": "finding-12-arenz-not-on-public-list",
+      "number": 12,
+      "category": "disclosure",
+      "title": "Sgt. Brandon Arenz designated as Flock contact, not on any public-facing list",
+      "summary": "The executed Flock Master Services Agreement designates \"Sgt. Brandon Arenz, MS106@MAUSTON.COM\" as the city's primary contact for the Flock relationship. Sgt. Arenz does not appear on any public-facing contact list for the Flock program, the city website, or any city council document published since the contract's execution. Public inquiries about the Flock program have been routed to the Chief and the City Administrator.",
+      "statutes_cited": [],
+      "documents": [
+        {
+          "label": "Flock Master Services Agreement — primary contact section",
+          "filename": "Flock Executed Agreement - Signed.pdf",
+          "path": "Flock Executed Agreement - Signed.pdf",
+          "quoted_passage": null
+        },
+        {
+          "label": "City of Mauston website public-facing contact list",
+          "filename": null,
+          "path": null,
+          "quoted_passage": null
+        },
+        {
+          "label": "City council documents published since contract execution",
+          "filename": null,
+          "path": null,
+          "quoted_passage": null
+        }
+      ],
+      "see_also": [],
+      "status": "published"
+    }
+  ]
+}
